@@ -23,7 +23,14 @@ namespace Universal_Log_Viewer.UI
         {
             frmLogTypesManager fmLoadLogType = new frmLogTypesManager();
             fmLoadLogType.ShowDialog(this);
+            CLogType CurrentLogType = null;
+            if (cmbLogTypes.SelectedItem is CLogType)
+                CurrentLogType = (cmbLogTypes.SelectedItem as CLogType);
             CLogTypeManager.oInstance.UpdateList(cmbLogTypes.Items);
+            if (CurrentLogType != null)
+                foreach (var NewLogType in cmbLogTypes.Items)
+                    if ((NewLogType is CLogType) && ((NewLogType as CLogType).LogName == CurrentLogType.LogName))
+                        cmbLogTypes.SelectedItem = NewLogType;
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
