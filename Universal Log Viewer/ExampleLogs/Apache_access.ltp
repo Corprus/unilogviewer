@@ -1,0 +1,111 @@
+[Log File]
+Name = "Apache HTTP Access Log"
+Author = "Konstantin Lebedev"
+Version = "1.2"
+RootBlock = "Main"
+
+[Main]
+Name = "Log Body"
+Type = "Block"
+StartCondition = ""
+EndCondition = ""
+ChildStringTypes = "ApacheString"
+
+[ApacheString]
+Name = "Apache Usual Access String"
+Type = "String"
+TitleType = "Source"
+UseSeparator = 1
+Separator = " "
+Condition = "EmptyCondition"
+ChildValueTypes = "IP,RFC1413,UserId,Time,GMT,Command,CommandOptions,Protocol,ReturnedStatus,ResponseSize,UsualValue"
+
+[IP]
+Type = "Value"
+Name = "Remote IP"
+Condition = "EmptyCondition"
+
+[RFC1413]
+Type = "Value"
+Name = "RFC1413 Identity"
+Condition = "EmptyCondition"
+
+[UserId]
+Type = "Value"
+Name = "User ID"
+Condition = "EmptyCondition"
+
+[RFC1413]
+Type = "Value"
+Name = "RFC1413 Identity"
+Condition = "EmptyCondition"
+
+[Time]
+Type = "Value"
+Name = "Date & Time"
+Condition = "TimeCondition"
+IncludeConditions = 0
+
+[TimeCondition]
+Type = "Condition"
+Name = "TimeCondition"
+StartsWith = "["
+
+[GMT]
+Type = "Value"
+Name = "GMT Zone"
+Condition = "GMTCondition"
+IncludeConditions = 0
+
+[GMTCondition]
+Type = "Condition"
+Name = "GMTCondition"
+StartsWith = ""
+EndsWith = "]"
+
+[Command]
+Type = "Value"
+Name = "Command"
+Condition = "CommandCondition"
+IncludeConditions = 0
+
+[CommandCondition]
+Type = "Condition"
+Name = "CommandCondition"
+StartsWith = """
+
+[CommandOptions]
+Type = "Value"
+Name = "Command Options"
+Condition = "EmptyCondition"
+
+[Protocol]
+Type = "Value"
+Name = "Protocol"
+Condition = "ProtocolCondition"
+IncludeConditions = 0
+
+[ProtocolCondition]
+Type = "Condition"
+Name = "ProtocolCondition"
+StartsWith = ""
+EndsWith = """
+
+[ReturnedStatus]
+Type = "Value"
+Name = "Returned Status"
+Condition = "EmptyCondition"
+
+[ResponseSize]
+Type = "Value"
+Name = "Response Size"
+Condition = "EmptyCondition"
+
+[UsualValue]
+Type = "Value"
+Name = "Value"
+Condition = "EmptyCondition"
+
+[EmptyCondition]
+Type = "Condition"
+
