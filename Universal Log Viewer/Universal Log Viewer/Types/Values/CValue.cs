@@ -44,7 +44,7 @@ namespace Universal_Log_Viewer.Types.Values
             if ((this.Type.Condition.StartsWith == Consts.EMPTY_SYMBOL) && (this.Type.Condition.EndsWith == Consts.EMPTY_SYMBOL))
                 PreParsedValue = ParsedString;
             else if ((this.Type.Condition.StartsWith == Consts.EMPTY_SYMBOL) && (iEnd > -1))
-                PreParsedValue = ParsedString.Substring(0, iEnd);
+                PreParsedValue = ParsedString.Substring(0, iEnd + this.Type.Condition.EndsWith.Length);
             else if ((this.Type.Condition.EndsWith == Consts.EMPTY_SYMBOL) && (iStart > -1))
                 PreParsedValue = ParsedString.Substring(iStart, ParsedString.Length - iEnd);
             else if ((iStart > -1) && (iEnd > -1) && (iEnd - iStart > 0))
