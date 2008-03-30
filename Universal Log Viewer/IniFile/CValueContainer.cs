@@ -46,7 +46,31 @@ namespace IniFile
                 if (PlainResult == "")
                     return new string[0];
                 else
-                    return PlainResult.Split(Consts.ARRAY_SEPARATOR);
+                {
+                    string[] Result = PlainResult.Split(Consts.ARRAY_SEPARATOR);
+                    for (int i=0; i< Result.Length; i++)
+                        Result[i] = Result[i].Trim();
+                    return Result;
+
+                }
+            }
+        }
+        public string[] this[string ValueName, bool Trim]
+        {
+            get
+            {
+                string PlainResult = base[ValueName];
+                if (PlainResult == "")
+                    return new string[0];
+                else
+                {
+                    string[] Result = PlainResult.Split(Consts.ARRAY_SEPARATOR);
+                    for (int i = 0; i < Result.Length; i++)
+                        if (Trim)//Случай сепаратора
+                            Result[i] = Result[i].Trim();
+                    return Result;
+
+                }
             }
         }
     }

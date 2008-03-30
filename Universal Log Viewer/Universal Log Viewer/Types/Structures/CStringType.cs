@@ -37,7 +37,7 @@ namespace Universal_Log_Viewer.Types.Structures
             UseSeparator = (IniSection.Values[INI_KEY_USE_SEPARATOR] == "1");
             if (IniSection.Values[INI_KEY_SEPARATOR].Length > 0)
             {
-                string[] SeparatorArray = IniSection.ArrayValues[INI_KEY_SEPARATOR];
+                string[] SeparatorArray = IniSection.ArrayValues[INI_KEY_SEPARATOR, false];
                 List<char> SeparatorList = new List<char>();
                 foreach (string SeparatorString in SeparatorArray)
                     SeparatorList.Add(SeparatorString[0]);
