@@ -1,0 +1,44 @@
+[Log File]
+Name = "SubBlocks Test"
+RootBlock = "Main"
+
+[Main]
+Name = "Main"
+Title = "Main Block"
+Type = "Block"
+StartCondition = "BlockStartCondition"
+EndCondition = "BlockEndCondition"
+ChildBlockTypes = "SubBlockType"
+
+[SubBlockType]
+Name = "SubBlockType"
+Title = "Sub Block"
+Type = "Block"
+ChildStringTypes = "SubStringType"
+StartCondition = "SubBlockStartCondition"
+EndCondition = "SubBlockEndCondition"
+
+[SubStringType]
+Type = "String"
+Condition = "EmptyCondition"
+
+[BlockStartCondition]
+Type = "Condition"
+StartsWith = "Start"
+
+[BlockEndCondition]
+Type = "Condition"
+StartsWith = "End"
+
+[SubBlockStartCondition]
+Type = "Condition"
+StartsWith = "SubBlockStart"
+
+[SubBlockEndCondition]
+Type = "Condition"
+StartsWith = "SubBlockEnd"
+
+[EmptyCondition]
+Type = "Condition"
+
+

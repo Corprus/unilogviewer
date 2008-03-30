@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Universal Log Viewer", "Universal Log Viewer\Universal Log Viewer.csproj", "{DD766EDF-B7FB-4643-AE46-2D9E39F60780}"
+	ProjectSection(ProjectDependencies) = postProject
+		{931AB029-5A5F-4328-9934-E4A8EEF437CE} = {931AB029-5A5F-4328-9934-E4A8EEF437CE}
+	EndProjectSection
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Universal Log Viewer Installer", "Universal Log Viewer Installer\Universal Log Viewer Installer.vdproj", "{6C0DED83-B328-4183-8870-E5A9C27B96BC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IniFile", "IniFile\IniFile.csproj", "{931AB029-5A5F-4328-9934-E4A8EEF437CE}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Universal Log Viewer Sources", "Universal Log Viewer Sources\Universal Log Viewer Sources.vdproj", "{14DA7BE6-1012-4775-9152-3EC34BEE923B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DD766EDF-B7FB-4643-AE46-2D9E39F60780}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD766EDF-B7FB-4643-AE46-2D9E39F60780}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD766EDF-B7FB-4643-AE46-2D9E39F60780}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD766EDF-B7FB-4643-AE46-2D9E39F60780}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C0DED83-B328-4183-8870-E5A9C27B96BC}.Debug|Any CPU.ActiveCfg = Debug
+		{6C0DED83-B328-4183-8870-E5A9C27B96BC}.Release|Any CPU.ActiveCfg = Release
+		{6C0DED83-B328-4183-8870-E5A9C27B96BC}.Release|Any CPU.Build.0 = Release
+		{931AB029-5A5F-4328-9934-E4A8EEF437CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{931AB029-5A5F-4328-9934-E4A8EEF437CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{931AB029-5A5F-4328-9934-E4A8EEF437CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{931AB029-5A5F-4328-9934-E4A8EEF437CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14DA7BE6-1012-4775-9152-3EC34BEE923B}.Debug|Any CPU.ActiveCfg = Debug
+		{14DA7BE6-1012-4775-9152-3EC34BEE923B}.Release|Any CPU.ActiveCfg = Release
+		{14DA7BE6-1012-4775-9152-3EC34BEE923B}.Release|Any CPU.Build.0 = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

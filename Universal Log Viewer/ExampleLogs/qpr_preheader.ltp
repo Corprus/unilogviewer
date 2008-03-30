@@ -1,0 +1,139 @@
+[Log File]
+Name = "QPR Log (Pre-Header)"
+RootBlock = "Main"
+
+[Main]
+Name = "Main"
+Title = "Main Block"
+Type = "Block"
+StartCondition = "LogCondition"
+EndCondition = ""
+ChildBlockTypes = "Body"
+
+[HEADER]
+Name = "HEADER"
+Title = "Log Header"
+Type = "Block"
+ChildStringTypes = "SubStringType"
+StartCondition = "TIMECond"
+EndCondition = "TIMECond"
+Style = "Invisible"
+
+[Body]
+Name = "Body"
+Title = "Log body"
+Type = "Block"
+ChildBlockTypes = "StackTrace"
+ChildStringTypes = "FATALType,ErrorType,SubStringType"
+StartCondition = ""
+EndCondition = ""
+
+[StackTrace]
+Name = "StackTrace"
+Title = "Stack Trace"
+Type = "Block"
+ChildStringTypes = "StackTraceStringType"
+StartCondition = "StackTraceStart"
+EndCondition = "StackTraceEnd"
+Style = "StackTraceHeaderStyle"
+
+[StackTraceStringType]
+Type = "String"
+ChildValueTypes = "ValueType"
+Separator = "	,|"
+UseSeparator = "1"
+Condition = "EmptyCondition"
+TitleType = Value
+TitleValueIndex = 11
+
+[ErrorType]
+Type = "String"
+ChildValueTypes = "ValueType"
+Separator = "	,|"
+UseSeparator = "1"
+Condition = "ErrorCondition"
+TitleType = Value
+TitleValueIndex = 6
+Style = "ErrorStyle"
+
+[FATALType]
+Type = "String"
+ChildValueTypes = "ValueType"
+Separator = "	,|"
+UseSeparator = "1"
+Condition = "FATALCondition"
+TitleType = Value
+TitleValueIndex = 6
+Style = "FATALStyle"
+
+
+[SubStringType]
+Type = "String"
+ChildValueTypes = "ValueType"
+Separator = "	,|"
+UseSeparator = "1"
+Condition = "EmptyCondition"
+TitleType = Value
+TitleValueIndex = 6
+
+[ValueType]
+Name = "Value"
+Type = "Value"
+IncludeConditions = "1"
+Condition = "EmptyCondition"
+
+
+[LogCondition]
+Type = "Condition"
+Name = "Time Condition"
+Contain = ":"
+
+[BlockEndCondition]
+Type = "Condition"
+StartsWith = "End"
+
+[StackTraceStart]
+Type = "Condition"
+Contain = "Stack Trace"
+
+[StackTraceEnd]
+Type = "Condition"
+Exclude = "Stack Trace"
+
+[SubBlockEndCondition]
+Type = "Condition"
+StartsWith = "SubBlockEnd"
+
+[EmptyCondition]
+Type = "Condition"
+
+[Invisible]
+Type = "Style"
+Visible = 0
+
+[StackTraceHeaderStyle]
+Type = "Style"
+Visible = 1
+Color = "Blue"
+Bold = 1
+
+[FATALCondition]
+Type = "Condition"
+Contain = "FATAL"
+
+[FATALStyle]
+Type = "Style"
+Visible = 1
+Color = "Red"
+Bold = 1
+
+[ErrorCondition]
+Type = "Condition"
+Contain = "Error"
+
+[ErrorStyle]
+Type = "Style"
+Visible = 1
+Color = "Red"
+Bold = 0
+
