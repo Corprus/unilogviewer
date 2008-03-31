@@ -1,0 +1,59 @@
+<h1>Log Type Format Description</h1>
+Log type filename should have *.ltp extension. This is not absolute requirement (yet).<br>
+
+Supported log type ini file settings:
+<ol>
+<li>[Log File] Section should be present and should contain these parameters:
+<ol>
+ <li>RootBlock  - root block type name
+ <li>LogName - log title
+ <li>Author - log type ini file author
+ <li>Version - log type ini file version
+</ol>
+
+<li> Other structures:
+<ol>
+ <li>Common variables (for all types)
+ <ol>
+  <li> Name - Type name
+  <li> Title - title of this log element
+  <li> Type - log element type
+  <li> TitleType - the type of this element's hown title (in present, this is only working with String). Field can take values:
+        (Title, Value, Source). Title (default) - log element's type title is shown, Value - value of one of the children, Source - source parsed string
+  <li> Style - link to style type used in this element
+ </ol>
+ <li> Block
+ <ol>
+  <li> StartCondition, EndCondition - conditions of ending and starting the block
+  <li>ChildBlockTypes - CSV field, describing children (in the type's tree) of block type
+  <li> ChildStringTypes - CSV field, describing String type children
+  </ol>
+ <li>String
+ <ol>
+  <li> Condition - string condition (which is used to determine if current string belongs to this type of strings)
+  <li> UseSeparator - bool (default 0), determining if separatos algorithm or auto parsing to values if used
+  <li> Separator - CSV, array of possible separator symbols
+  <li> ChildValueTypes - CSV, possible value types
+  </ol>
+  <li> Value
+  <ol>
+  <li> Condition - Condition, by which we can determine if this value type is placed in current string and if yes - where.
+  <li> IncludeConditions - bool, default 1, condition if border condtiions is included in final value
+  <li> ValueType - (not used by this moment)
+  </ol>  
+ <li> Condition
+ <ol>
+  <li> StartsWith - start condition (which string should start the current value)
+  <li> EndsWith - end condition
+  <li> Contain - CSV, strings which should be contained in this value
+  <li> Exclude - CSV, strings which should NOT be contained in this value
+ </ol> 
+ <li> Style
+ <ol> 
+  <li> Visible - bool, default 1, determine if this element is visible in final tree
+  <li> Bold - bool, default 0, if thislines should be bold in final tree
+  <li> Color - color NAME of this element, default black
+  </ol>
+  </ol>
+</ol>
+  

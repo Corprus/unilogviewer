@@ -1,0 +1,42 @@
+Log Type Format Description
+Log type filename should have *.ltp extension. This is not absolute requirement (yet).
+Supported log type ini file settings:
+
+1. [Log File] Section should be present and should contain these parameters:
+ 1.1 RootBlock  - root block type name
+ 1.2 LogName - log title
+ 1.3 Author - log type ini file author
+ 1.4 Version - log type ini file version
+
+2. Other structures:
+ 2.1 Common variables (for all types)
+  2.1.1 Name - Type name
+  2.1.2 Title - title of this log element
+  2.1.3 Type - log element type
+  2.1.4 TitleType - the type of this element's hown title (in present, this is only working with String). Field can take values:
+        (Title, Value, Source). Title (default) - log element's type title is shown, Value - value of one of the children, Source - source parsed string
+  2.1.5 Style - link to style type used in this element
+ 2.2 Block
+  2.2.1 StartCondition, EndCondition - conditions of ending and starting the block
+  2.2.2 ChildBlockTypes - CSV field, describing children (in the type's tree) of block type
+  2.2.3 ChildStringTypes - CSV field, describing String type children
+ 2.3 String
+  2.3.1 Condition - string condition (which is used to determine if current string belongs to this type of strings)
+  2.3.2 UseSeparator - bool (default 0), determining if separatos algorithm or auto parsing to values if used
+  2.3.3 Separator - CSV, array of possible separator symbols
+  2.3.4 ChildValueTypes - CSV, possible value types
+ 2.4 Value
+  2.4.1 Condition - Condition, by which we can determine if this value type is placed in current string and if yes - where.
+  2.4.2 IncludeConditions - bool, default 1, condition if border condtiions is included in final value
+  2.4.3 ValueType - (not used by this moment)
+ 2.5 Condition
+  2.5.1 StartsWith - start condition (which string should start the current value)
+  2.5.2 EndsWith - end condition
+  2.5.3 Contain - CSV, strings which should be contained in this value
+  2.5.4 Exclude - CSV, strings which should NOT be contained in this value
+ 2.6 Style
+  2.6.1 Visible - bool, default 1, determine if this element is visible in final tree
+  2.6.2 Bold - bool, default 0, if thislines should be bold in final tree
+  2.6.3 Color - color NAME of this element, default black
+
+  

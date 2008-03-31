@@ -63,13 +63,25 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_B7DFACCD3838BAD221EA100C642093FD"
-        "OwnerKey" = "8:_51CD82D27AF042DAA744A4015FE5484A"
+        "MsmKey" = "8:_C56107CC6397415B9EF30C095BBAC650"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_C56107CC6397415B9EF30C095BBAC650"
+        "MsmKey" = "8:_D37EB7D09CC44BCCA7BFF66D9F4C1AB3"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_E4891C0FF0DA4455A3353D39AE833B94"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_F7C1B3CA53E5459384DF99DB37927B8F"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -77,12 +89,6 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_51CD82D27AF042DAA744A4015FE5484A"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_B7DFACCD3838BAD221EA100C642093FD"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -330,23 +336,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_B7DFACCD3838BAD221EA100C642093FD"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C56107CC6397415B9EF30C095BBAC650"
             {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:IniFile, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_B7DFACCD3838BAD221EA100C642093FD"
-                    {
-                    "Name" = "8:IniFile.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:IniFile.dll"
-            "TargetName" = "8:"
+            "SourcePath" = "8:..\\ExampleLogs\\WASLog.txt"
+            "TargetName" = "8:WASLog.txt"
             "Tag" = "8:"
-            "Folder" = "8:_036B832087074A2892673AE84B9968D2"
+            "Folder" = "8:_AE5558E1953644C1BCB98697045E3AA7"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -358,15 +353,55 @@
             "PackageAs" = "3:1"
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C56107CC6397415B9EF30C095BBAC650"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D37EB7D09CC44BCCA7BFF66D9F4C1AB3"
             {
-            "SourcePath" = "8:..\\ExampleLogs\\WASLog.txt"
-            "TargetName" = "8:WASLog.txt"
+            "SourcePath" = "8:..\\Docs\\LogIniFormat.html"
+            "TargetName" = "8:LogIniFormat.html"
             "Tag" = "8:"
-            "Folder" = "8:_AE5558E1953644C1BCB98697045E3AA7"
+            "Folder" = "8:_1BF93DFFCDE445E198B1B2078928BEF6"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E4891C0FF0DA4455A3353D39AE833B94"
+            {
+            "SourcePath" = "8:..\\Docs\\LogIniFormat_Eng.txt"
+            "TargetName" = "8:LogIniFormat_Eng.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_1BF93DFFCDE445E198B1B2078928BEF6"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F7C1B3CA53E5459384DF99DB37927B8F"
+            {
+            "SourcePath" = "8:..\\Docs\\LogIniFormat_Eng.html"
+            "TargetName" = "8:LogIniFormat_Eng.html"
+            "Tag" = "8:"
+            "Folder" = "8:_1BF93DFFCDE445E198B1B2078928BEF6"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1177,7 +1212,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_51CD82D27AF042DAA744A4015FE5484A"
             {
-            "SourcePath" = "8:..\\Universal Log Viewer\\obj\\Release\\Universal Log Viewer.exe"
+            "SourcePath" = "8:..\\Universal Log Viewer\\obj\\Debug\\Universal Log Viewer.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_036B832087074A2892673AE84B9968D2"
