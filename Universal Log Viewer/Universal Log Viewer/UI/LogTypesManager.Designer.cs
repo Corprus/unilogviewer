@@ -141,6 +141,7 @@
             this.lbxLogTypes.Name = "lbxLogTypes";
             this.lbxLogTypes.Size = new System.Drawing.Size(180, 368);
             this.lbxLogTypes.TabIndex = 3;
+            this.lbxLogTypes.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lbxLogTypes_MouseDoubleClick);
             this.lbxLogTypes.SelectedValueChanged += new System.EventHandler(this.lbxLogTypes_SelectedValueChanged);
             // 
             // btnClose

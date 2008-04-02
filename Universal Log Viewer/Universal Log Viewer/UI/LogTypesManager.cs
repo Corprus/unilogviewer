@@ -84,5 +84,12 @@ namespace Universal_Log_Viewer.UI
             InitElements(true);
         }
 
+        private void lbxLogTypes_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (lbxLogTypes.SelectedItem is CLogType)
+                (lbxLogTypes.SelectedItem as CLogType).ExternalOpen();
+
+        }
+
     }
 }

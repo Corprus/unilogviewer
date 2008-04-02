@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Universal_Log_Viewer.Common;
 using Universal_Log_Viewer.Common.IniFile;
+using Universal_Log_Viewer.Types.Managers;
 
 namespace Universal_Log_Viewer.Types.Structures
 {
@@ -15,7 +16,7 @@ namespace Universal_Log_Viewer.Types.Structures
         const string KEY_VERSION = "Version";
         public string LogName { get; private set; }
         public string Author { get; private set; }
-        public string Version { get; private set; }
+        public string Version { get; private set; }        
         public LogTypeContainer<CCondition> Conditions;
         public LogTypeContainer<CValueType> ValueTypes;
         public LogTypeContainer<CStringType> StringTypes;
@@ -74,6 +75,20 @@ namespace Universal_Log_Viewer.Types.Structures
         public override string ToString() 
         {
             return LogName;
+        }
+        public void ExternalOpen()
+        {
+            if (CIniSettingsManager.UseExternalOpen)
+            {
+                System.Diagnostics.Process batch = new System.Diagnostics.Process();
+                batch.StartInfo.FileName = CIniSettingsManager.OpenLogTypeCommand;
+                batch.StartInfo.WorkingDirectory = CIniSettingsManager.LogTypesFolder;
+                batch.StartInfo.Arguments = this.LogIniFile.FileName;
+                batch.Start();
+                batch.WaitForExit();
+            }
+                
+
         }
 
 
