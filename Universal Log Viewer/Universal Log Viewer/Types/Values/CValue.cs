@@ -48,7 +48,7 @@ namespace Universal_Log_Viewer.Types.Values
             else if ((this.Type.Condition.EndsWith == Consts.EMPTY_SYMBOL) && (iStart > -1))
                 PreParsedValue = ParsedString.Substring(iStart, ParsedString.Length - iEnd);
             else if ((iStart > -1) && (iEnd > -1) && (iEnd - iStart > 0))
-                PreParsedValue = ParsedString.Substring(iStart, (iEnd - iStart));
+                PreParsedValue = ParsedString.Substring(iStart, (iEnd - iStart + 1));
             else
                 return PreParsedValue;
             if (this.Type.Condition.IsCorrect(PreParsedValue))
@@ -63,12 +63,13 @@ namespace Universal_Log_Viewer.Types.Values
             else
                 return Consts.EMPTY_SYMBOL;
         }
+        //¬џ–≈«ј“№(!!!) »з большой строки то что мы отпарсили
         public string CutSourceString(string SourceString)
         {
             if ((Value != Consts.EMPTY_SYMBOL) && (SourceString.Contains(Value)))
             {
                 int iStart = SourceString.IndexOf(Value);
-                return SourceString.Substring(iStart, Value.Length);
+                return (SourceString.Substring(0, iStart) + SourceString.Substring(iStart + Value.Length, SourceString.Length - (iStart + Value.Length)));
             }
             else
                 return Consts.EMPTY_SYMBOL;
