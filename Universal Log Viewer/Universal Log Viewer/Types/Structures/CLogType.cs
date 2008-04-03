@@ -85,7 +85,6 @@ namespace Universal_Log_Viewer.Types.Structures
                 batch.StartInfo.WorkingDirectory = CIniSettingsManager.LogTypesFolder;
                 batch.StartInfo.Arguments = this.LogIniFile.FileName;
                 batch.Start();
-                batch.WaitForExit();
             }
                 
 
