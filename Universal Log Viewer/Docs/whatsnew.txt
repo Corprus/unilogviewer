@@ -1,0 +1,22 @@
+Universal Log Viewer What's New
+
+Alpha 2(version 0.2.0)
++LTP file types editing can be set up in Log Types managers item double-click
++Old log type (if present) is automaticly reched after closing log type manager
++Apache Access&error log types support
++English documentation
++new Trim options For style type in LTP files
++What's new
++new field in ltp-manager: Path-to ltp File (full file name)
+*Lot's of minor changes to make autoparsing work correctly
+-Incorrect file path when importing file type
+-Spaces in CSV are not supported (now they are trimmed in all field except for separator field)
+-Error when parsing with non-epmty EndsWith tag
+
+Alpha 1 (version 0.1.6)
+*First public version
+
+Legend:
++New feaqtures
+-Bug fixed
+*other
