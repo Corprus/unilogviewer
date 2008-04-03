@@ -58,10 +58,10 @@ namespace Universal_Log_Viewer.Types.Managers
             if (TypesList == null)
                 TypesList = new List<CLogType>();
             bool bHasSameName = false;
-            CLogType oNewType = new CLogType(LogTypeIniFileName);
+            
             foreach (CLogType oType in TypesList)
             {
-                if (oType.LogName == oNewType.LogName)
+                if (oType.LogName == LogTypeIniFileName)
                     bHasSameName = true;
             }
             bool bAddType = true;
@@ -69,8 +69,7 @@ namespace Universal_Log_Viewer.Types.Managers
                bAddType = (MessageBox.Show(Consts.ASK_ADD_LOG_TYPE_WITH_SAME_NAME, Consts.HEADER_SAME_LOG_TYPE_PRESENT, MessageBoxButtons.YesNo) == DialogResult.Yes);
 
             if (bAddType)
-            {
-                AddLogType(oNewType);
+            {                
                 string LogFileIniFileNameWithoutFolders = LogTypeIniFileName.Substring(LogTypeIniFileName.LastIndexOf("\\") + 1, LogTypeIniFileName.Length - LogTypeIniFileName.LastIndexOf("\\") - 1);
                 string sNewFileName = LogFileIniFileNameWithoutFolders;
 
@@ -85,7 +84,10 @@ namespace Universal_Log_Viewer.Types.Managers
                         i++;
                     }
                 }
-                File.Copy(LogTypeIniFileName, CIniSettingsManager.LogTypesFolder + "\\" +  sNewFileName);
+                sNewFileName = CIniSettingsManager.LogTypesFolder + "\\" +  sNewFileName;
+                File.Copy(LogTypeIniFileName, sNewFileName);
+                CLogType oNewType = new CLogType(sNewFileName);
+                AddLogType(oNewType);
             }
         }
 
