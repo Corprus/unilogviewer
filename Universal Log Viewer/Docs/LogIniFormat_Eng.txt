@@ -38,5 +38,6 @@ Supported log type ini file settings:
   2.6.1 Visible - bool, default 1, determine if this element is visible in final tree
   2.6.2 Bold - bool, default 0, if thislines should be bold in final tree
   2.6.3 Color - color NAME of this element, default black
+  2.6.4 Trim - default 0, if set to 1 then value is space-trimmed
 
   
