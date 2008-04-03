@@ -35,6 +35,7 @@ IncludeConditions = 0
 Type = "Value"
 Name = "Header"
 Condition = "ConditionColon"
+Style = "Trim"
 
 [Value]
 Type = "Value"
