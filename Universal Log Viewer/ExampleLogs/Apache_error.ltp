@@ -9,21 +9,22 @@ Name = "Log Body"
 Type = "Block"
 StartCondition = ""
 EndCondition = ""
-ChildStringTypes = "ApacheString"
+ChildStringTypes = "ApacheStringWarn, ApacheStringDefault"
 
-[ApacheString]
+[ApacheStringDefault]
 Name = "Apache Usual Access String"
 Type = "String"
 TitleType = "Source"
 UseSeparator = 0
 Condition = "EmptyCondition"
+Style = "StyleDefault"
 ChildValueTypes = "Time,TypeR,Header,Value"
 
 [Time]
 Type = "Value"
 Name = "Date & Time"
 Condition = "TimeCondition"
-IncludeConditions = 1
+IncludeConditions = 0
 
 [TypeR]
 Type = "Value"
@@ -43,24 +44,38 @@ Name = "Value"
 Condition = "EmptyCondition"
 Style = "Trim"
 
+[ApacheStringWarn]
+Name = "Apache Usual Access String"
+Type = "String"
+TitleType = "Source"
+UseSeparator = 0
+Condition = "WarnCondition"
+Style = "StyleWarn"
+ChildValueTypes = "Time,TypeR,Value"
+
 [TimeCondition]
 Type = "Condition"
 Name = "TimeCondition"
 StartsWith = "["
 EndsWith = "]"
-Exclude = "notice"
 
 [NoticeCondition]
 Type = "Condition"
 Name = "NoticeCondition"
 StartsWith = "["
 EndsWith = "]"
-Contain = "notice"
+
 
 [ConditionColon]
 Type = "Condition"
 Name = "ConditionColon"
 EndsWith = ":"
+
+[WarnCondition]
+Type = "Condition"
+Name = "TimeCondition"
+StartsWith = "["
+Contain = "[warn]"
 
 [Trim]
 Type = "Style"
@@ -69,4 +84,15 @@ Trim = 1
 
 [EmptyCondition]
 Type = "Condition"
+
+[StyleWarn]
+Type = "Style"
+Visible = 1
+Color = "Green"
+Bold = 0
+
+[StyleDefault]
+Type = "Style"
+Visible = 1
+Bold = 0
 
