@@ -1,7 +1,7 @@
 [Log File]
 Name = "Apache HTTP Error Log"
-Author = "Konstantin Lebedev & war-npu3pak"
-Version = "1.0"
+Author = "war-npu3pak"
+Version = "1.1"
 RootBlock = "Main"
 
 [Main]
@@ -40,6 +40,7 @@ Condition = "ConditionColon"
 Type = "Value"
 Name = "Value"
 Condition = "EmptyCondition"
+Style = "Trim"
 
 [TimeCondition]
 Type = "Condition"
@@ -59,6 +60,11 @@ Contain = "notice"
 Type = "Condition"
 Name = "ConditionColon"
 EndsWith = ":"
+
+[Trim]
+Type = "Style"
+Name = "Trim"
+Trim = 1
 
 [EmptyCondition]
 Type = "Condition"
