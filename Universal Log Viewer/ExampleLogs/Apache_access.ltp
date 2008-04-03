@@ -1,7 +1,7 @@
 [Log File]
 Name = "Apache HTTP Access Log"
-Author = "Konstantin Lebedev & war-npu3pak"
-Version = "2.0"
+Author = "Konstantin Lebedev"
+Version = "1.3"
 RootBlock = "Main"
 
 [Main]
@@ -15,50 +15,96 @@ ChildStringTypes = "ApacheString"
 Name = "Apache Usual Access String"
 Type = "String"
 TitleType = "Source"
-UseSeparator = 0
+UseSeparator = 1
+Separator = " "
 Condition = "EmptyCondition"
-ChildValueTypes = "Time,TypeR,Header,Value"
+ChildValueTypes = "IP,RFC1413,UserId,Time,GMT,Command,CommandOptions,Protocol,ReturnedStatus,ResponseSize,UsualValue"
+
+[IP]
+Type = "Value"
+Name = "Remote IP"
+Condition = "EmptyCondition"
+
+[RFC1413]
+Type = "Value"
+Name = "RFC1413 Identity"
+Condition = "EmptyCondition"
+
+[UserId]
+Type = "Value"
+Name = "User ID"
+Condition = "EmptyCondition"
+
+[RFC1413]
+Type = "Value"
+Name = "RFC1413 Identity"
+Condition = "EmptyCondition"
 
 [Time]
 Type = "Value"
 Name = "Date & Time"
 Condition = "TimeCondition"
-IncludeConditions = 1
-
-[TypeR]
-Type = "Value"
-Name = "Type"
-Condition = "NoticeCondition"
 IncludeConditions = 0
-
-[Header]
-Type = "Value"
-Name = "Header"
-Condition = "ConditionColon"
-
-[Value]
-Type = "Value"
-Name = "Value"
-Condition = "EmptyCondition"
 
 [TimeCondition]
 Type = "Condition"
 Name = "TimeCondition"
 StartsWith = "["
-EndsWith = "]"
-Exclude = "notice"
 
-[NoticeCondition]
-Type = "Condition"
-Name = "NoticeCondition"
-StartsWith = "["
-EndsWith = "]"
-Contain = "notice"
+[GMT]
+Type = "Value"
+Name = "GMT Zone"
+Condition = "GMTCondition"
+IncludeConditions = 0
 
-[ConditionColon]
+[GMTCondition]
 Type = "Condition"
-Name = "ConditionColon"
-EndsWith = ":"
+Name = "GMTCondition"
+StartsWith = ""
+EndsWith = "]"
+
+[Command]
+Type = "Value"
+Name = "Command"
+Condition = "CommandCondition"
+IncludeConditions = 0
+
+[CommandCondition]
+Type = "Condition"
+Name = "CommandCondition"
+StartsWith = """
+
+[CommandOptions]
+Type = "Value"
+Name = "Command Options"
+Condition = "EmptyCondition"
+
+[Protocol]
+Type = "Value"
+Name = "Protocol"
+Condition = "ProtocolCondition"
+IncludeConditions = 0
+
+[ProtocolCondition]
+Type = "Condition"
+Name = "ProtocolCondition"
+StartsWith = ""
+EndsWith = """
+
+[ReturnedStatus]
+Type = "Value"
+Name = "Returned Status"
+Condition = "EmptyCondition"
+
+[ResponseSize]
+Type = "Value"
+Name = "Response Size"
+Condition = "EmptyCondition"
+
+[UsualValue]
+Type = "Value"
+Name = "Value"
+Condition = "EmptyCondition"
 
 [EmptyCondition]
 Type = "Condition"

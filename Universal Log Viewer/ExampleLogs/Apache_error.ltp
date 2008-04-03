@@ -1,0 +1,65 @@
+[Log File]
+Name = "Apache HTTP Error Log"
+Author = "Konstantin Lebedev & war-npu3pak"
+Version = "1.0"
+RootBlock = "Main"
+
+[Main]
+Name = "Log Body"
+Type = "Block"
+StartCondition = ""
+EndCondition = ""
+ChildStringTypes = "ApacheString"
+
+[ApacheString]
+Name = "Apache Usual Access String"
+Type = "String"
+TitleType = "Source"
+UseSeparator = 0
+Condition = "EmptyCondition"
+ChildValueTypes = "Time,TypeR,Header,Value"
+
+[Time]
+Type = "Value"
+Name = "Date & Time"
+Condition = "TimeCondition"
+IncludeConditions = 1
+
+[TypeR]
+Type = "Value"
+Name = "Type"
+Condition = "NoticeCondition"
+IncludeConditions = 0
+
+[Header]
+Type = "Value"
+Name = "Header"
+Condition = "ConditionColon"
+
+[Value]
+Type = "Value"
+Name = "Value"
+Condition = "EmptyCondition"
+
+[TimeCondition]
+Type = "Condition"
+Name = "TimeCondition"
+StartsWith = "["
+EndsWith = "]"
+Exclude = "notice"
+
+[NoticeCondition]
+Type = "Condition"
+Name = "NoticeCondition"
+StartsWith = "["
+EndsWith = "]"
+Contain = "notice"
+
+[ConditionColon]
+Type = "Condition"
+Name = "ConditionColon"
+EndsWith = ":"
+
+[EmptyCondition]
+Type = "Condition"
+
