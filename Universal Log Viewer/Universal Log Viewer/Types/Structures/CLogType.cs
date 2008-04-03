@@ -33,6 +33,7 @@ namespace Universal_Log_Viewer.Types.Structures
             Result = @"{\rtf1\ansi \b " + LogName + @" \b0" + NEW_LINE;
             Result += "Author:" + TAB_SYMBOL + Author + NEW_LINE;
             Result += "Version:" + TAB_SYMBOL + Version + NEW_LINE;
+            Result += "File Path:" + TAB_SYMBOL + LogIniFile.FileName.Replace("\\","\\\\") + NEW_LINE;
             Result += "Last Modified:" + TAB_SYMBOL + System.IO.File.GetLastWriteTime(LogIniFile.FileName) + NEW_LINE;
             Result += @"}";
             return Result;
