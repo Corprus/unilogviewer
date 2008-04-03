@@ -58,6 +58,7 @@ namespace Universal_Log_Viewer.UI
                         LogTab.Text = dlgOpenLog.FileName + " (" + oLog.Type.LogName + ")";
                         TreeView LogTreeView = new TreeView();
                         LogTreeView.Dock = DockStyle.Fill;
+                        LogTreeView.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TreeView_KeyPress);
                         LogTab.Controls.Add(LogTreeView);
                         LogTab.ContextMenuStrip = cntTabPopup;
                         LogTreeView.Nodes.Add(oLog.TreeNode);
@@ -80,6 +81,15 @@ namespace Universal_Log_Viewer.UI
         private void closeTabToolStripMenuItem_Click(object sender, EventArgs e)
         {
             tabLogs.TabPages.Remove(tabLogs.SelectedTab);
+        }
+
+        private void TreeView_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (tabLogs.SelectedIndex > -1)
+                if (e.KeyChar == 3)
+                    Clipboard.SetText(((TreeView)sender).SelectedNode.Text); 
+         
+
         }
     }
 }
