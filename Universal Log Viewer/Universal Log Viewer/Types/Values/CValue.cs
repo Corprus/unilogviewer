@@ -69,7 +69,13 @@ namespace Universal_Log_Viewer.Types.Values
             if ((Value != Consts.EMPTY_SYMBOL) && (SourceString.Contains(Value)))
             {
                 int iStart = SourceString.IndexOf(Value);
-                return (SourceString.Substring(0, iStart) + SourceString.Substring(iStart + Value.Length, SourceString.Length - (iStart + Value.Length)));
+                int iEnd = iStart + Value.Length;
+                if (!(this.Type.IncludeConditions)) //≈сли не включаем граничные услови€ в значение - то еще не факт что мы не должны их вырезјть
+                {
+                    iStart -= this.Type.Condition.StartsWith.Length;
+                    iEnd += this.Type.Condition.EndsWith.Length;
+                }
+                return (SourceString.Substring(0, iStart) + SourceString.Substring(iEnd, SourceString.Length - iEnd));
             }
             else
                 return Consts.EMPTY_SYMBOL;
