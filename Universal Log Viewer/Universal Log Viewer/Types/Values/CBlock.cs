@@ -48,7 +48,11 @@ namespace Universal_Log_Viewer.Types.Values
             TreeNode Result = null;
             if (this.Type.Style.Visible)
             {
-                Result = new TreeNode(this.Type.Title);
+                string RealValue = this.Type.Title;
+                if (this.Type.Style.Trim)
+                    RealValue = RealValue.Trim();
+
+                Result = new TreeNode(RealValue);
                 Result.BeginEdit();
                 Result.ForeColor = this.Type.Style.Color;
                 if (Result.NodeFont == null)

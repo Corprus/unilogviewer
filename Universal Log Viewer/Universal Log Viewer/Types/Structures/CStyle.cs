@@ -13,8 +13,10 @@ namespace Universal_Log_Viewer.Types.Structures
         const string KEY_BOLD = "Bold";
         const string KEY_VISIBLE = "Visible";
         const string KEY_COLOR = "Color";
+        const string KEY_TRIM = "Trim";
         public bool Visible { get; private set; }
         public bool Bold { get; private set; }
+        public bool Trim { get; private set; }
         public Color Color { get; private set; }
         public CStyle(CLogType LogType, CLogIniSection Section)
             : base(LogType, Section)
@@ -29,6 +31,7 @@ namespace Universal_Log_Viewer.Types.Structures
         {
             base.ReInit(LogType, Section);
             Bold = (IniSection.Values[KEY_BOLD] == "1");
+            Trim = (IniSection.Values[KEY_TRIM] != "0");
             Visible = (IniSection.Values[KEY_VISIBLE] != "0");
             try
             {                
@@ -39,11 +42,12 @@ namespace Universal_Log_Viewer.Types.Structures
                 Color = Color.Black;
             }
         }
-        public CStyle(bool Bold, Color Color, bool Visible)
+        public CStyle(bool Bold, Color Color, bool Visible, bool Trim)
         {
             this.Bold = Bold;
             this.Color = Color;
             this.Visible = Visible;
+            this.Trim = Trim;
         }
     }
 }

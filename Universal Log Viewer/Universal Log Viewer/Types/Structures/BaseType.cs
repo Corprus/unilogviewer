@@ -42,7 +42,7 @@ namespace Universal_Log_Viewer.Types.Structures
             if (ParentLogType != null) //То есть это и есть лог тайп
                 Style = ParentLogType.Styles[IniSection.Values[KEY_STYLE]];
             if (Style == null)
-                Style = new CStyle(false, System.Drawing.Color.Black, true);
+                Style = new CStyle(false, System.Drawing.Color.Black, true, false);
             try
             {
                 TitleType = (TitleTypes)Enum.Parse(typeof(TitleTypes), IniSection.Values[KEY_TITLE_TYPE], false);

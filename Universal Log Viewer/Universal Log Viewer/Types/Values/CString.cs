@@ -40,6 +40,8 @@ namespace Universal_Log_Viewer.Types.Values
                         }
                     default: NodeTitle = this.Type.Title; break;
                 }
+                if (this.Type.Style.Trim)
+                    NodeTitle = NodeTitle.Trim();
                 Result = new TreeNode(NodeTitle);
                 Result.BeginEdit();
                 Result.ForeColor = this.Type.Style.Color;

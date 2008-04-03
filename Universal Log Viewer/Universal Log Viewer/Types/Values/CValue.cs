@@ -19,8 +19,11 @@ namespace Universal_Log_Viewer.Types.Values
             TreeNode Result = null;
             if (this.Type.Style.Visible)
             {
-                Result = new TreeNode(this.Type.Name + ":" + this.Value);
-                Result.BeginEdit();
+                string RealValue = Value;
+                if (this.Type.Style.Trim)
+                    RealValue = RealValue.Trim();
+                Result = new TreeNode(this.Type.Name + ": " + RealValue);
+                Result.BeginEdit();                
                 Result.ForeColor = this.Type.Style.Color;
                 if (Result.NodeFont == null)
                     Result.NodeFont = new System.Drawing.Font(System.Drawing.FontFamily.GenericSansSerif, 8);
