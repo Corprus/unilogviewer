@@ -85,11 +85,12 @@ namespace Universal_Log_Viewer.UI
 
         private void TreeView_KeyPress(object sender, KeyPressEventArgs e)
         {
+            if (!(sender is TreeView))
+                return;
+
             if (tabLogs.SelectedIndex > -1)
                 if (e.KeyChar == 3)
-                    Clipboard.SetText(((TreeView)sender).SelectedNode.Text); 
-         
-
+                    Clipboard.SetText(((TreeView)sender).SelectedNode.Text);         
         }
     }
 }
