@@ -39,19 +39,22 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pnlLog = new System.Windows.Forms.Panel();
-            this.tabLogs = new System.Windows.Forms.TabControl();
             this.cntTabPopup = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.closeTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pnlToolBar = new System.Windows.Forms.Panel();
+            this.dlgOpenLog = new System.Windows.Forms.OpenFileDialog();
+            this.splitMain = new System.Windows.Forms.SplitContainer();
+            this.tabLogs = new System.Windows.Forms.TabControl();
+            this.memoValue = new System.Windows.Forms.RichTextBox();
+            this.pnlButtons = new System.Windows.Forms.Panel();
             this.cmbLogTypes = new System.Windows.Forms.ComboBox();
             this.btnLoadLog = new System.Windows.Forms.Button();
             this.btnLoadLogTypes = new System.Windows.Forms.Button();
-            this.dlgOpenLog = new System.Windows.Forms.OpenFileDialog();
             this.mnuMain.SuspendLayout();
-            this.pnlLog.SuspendLayout();
             this.cntTabPopup.SuspendLayout();
-            this.pnlToolBar.SuspendLayout();
+            this.splitMain.Panel1.SuspendLayout();
+            this.splitMain.Panel2.SuspendLayout();
+            this.splitMain.SuspendLayout();
+            this.pnlButtons.SuspendLayout();
             this.SuspendLayout();
             // 
             // BottomToolStripPanel
@@ -98,7 +101,7 @@
             this.helpToolStripMenuItem});
             this.mnuMain.Location = new System.Drawing.Point(0, 0);
             this.mnuMain.Name = "mnuMain";
-            this.mnuMain.Size = new System.Drawing.Size(499, 24);
+            this.mnuMain.Size = new System.Drawing.Size(627, 24);
             this.mnuMain.TabIndex = 0;
             // 
             // fileToolStripMenuItem
@@ -131,25 +134,6 @@
             this.aboutToolStripMenuItem.Text = "&About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
-            // pnlLog
-            // 
-            this.pnlLog.Controls.Add(this.tabLogs);
-            this.pnlLog.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlLog.Location = new System.Drawing.Point(0, 24);
-            this.pnlLog.Name = "pnlLog";
-            this.pnlLog.Size = new System.Drawing.Size(330, 512);
-            this.pnlLog.TabIndex = 0;
-            // 
-            // tabLogs
-            // 
-            this.tabLogs.ContextMenuStrip = this.cntTabPopup;
-            this.tabLogs.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabLogs.Location = new System.Drawing.Point(0, 0);
-            this.tabLogs.Name = "tabLogs";
-            this.tabLogs.SelectedIndex = 0;
-            this.tabLogs.Size = new System.Drawing.Size(330, 512);
-            this.tabLogs.TabIndex = 1;
-            // 
             // cntTabPopup
             // 
             this.cntTabPopup.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -164,43 +148,95 @@
             this.closeTabToolStripMenuItem.Text = "Close Tab";
             this.closeTabToolStripMenuItem.Click += new System.EventHandler(this.closeTabToolStripMenuItem_Click);
             // 
-            // pnlToolBar
+            // splitMain
             // 
-            this.pnlToolBar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlToolBar.Controls.Add(this.cmbLogTypes);
-            this.pnlToolBar.Controls.Add(this.btnLoadLog);
-            this.pnlToolBar.Controls.Add(this.btnLoadLogTypes);
-            this.pnlToolBar.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlToolBar.Location = new System.Drawing.Point(330, 24);
-            this.pnlToolBar.Name = "pnlToolBar";
-            this.pnlToolBar.Size = new System.Drawing.Size(169, 512);
-            this.pnlToolBar.TabIndex = 1;
+            this.splitMain.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.splitMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitMain.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
+            this.splitMain.Location = new System.Drawing.Point(0, 24);
+            this.splitMain.MinimumSize = new System.Drawing.Size(404, 200);
+            this.splitMain.Name = "splitMain";
+            // 
+            // splitMain.Panel1
+            // 
+            this.splitMain.Panel1.Controls.Add(this.tabLogs);
+            this.splitMain.Panel1MinSize = 200;
+            // 
+            // splitMain.Panel2
+            // 
+            this.splitMain.Panel2.AutoScroll = true;
+            this.splitMain.Panel2.Controls.Add(this.memoValue);
+            this.splitMain.Panel2.Controls.Add(this.pnlButtons);
+            this.splitMain.Panel2MinSize = 200;
+            this.splitMain.Size = new System.Drawing.Size(627, 445);
+            this.splitMain.SplitterDistance = 423;
+            this.splitMain.TabIndex = 1;
+            // 
+            // tabLogs
+            // 
+            this.tabLogs.ContextMenuStrip = this.cntTabPopup;
+            this.tabLogs.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabLogs.Location = new System.Drawing.Point(0, 0);
+            this.tabLogs.Name = "tabLogs";
+            this.tabLogs.SelectedIndex = 0;
+            this.tabLogs.Size = new System.Drawing.Size(421, 443);
+            this.tabLogs.TabIndex = 6;
+            // 
+            // memoValue
+            // 
+            this.memoValue.BackColor = System.Drawing.SystemColors.Control;
+            this.memoValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.memoValue.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.memoValue.Location = new System.Drawing.Point(0, 150);
+            this.memoValue.Name = "memoValue";
+            this.memoValue.Size = new System.Drawing.Size(198, 293);
+            this.memoValue.TabIndex = 6;
+            this.memoValue.Text = "";
+            this.memoValue.Visible = false;
+            // 
+            // pnlButtons
+            // 
+            this.pnlButtons.Controls.Add(this.cmbLogTypes);
+            this.pnlButtons.Controls.Add(this.btnLoadLog);
+            this.pnlButtons.Controls.Add(this.btnLoadLogTypes);
+            this.pnlButtons.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlButtons.Location = new System.Drawing.Point(0, 0);
+            this.pnlButtons.MinimumSize = new System.Drawing.Size(200, 150);
+            this.pnlButtons.Name = "pnlButtons";
+            this.pnlButtons.Size = new System.Drawing.Size(200, 150);
+            this.pnlButtons.TabIndex = 7;
             // 
             // cmbLogTypes
             // 
+            this.cmbLogTypes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbLogTypes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbLogTypes.FormattingEnabled = true;
-            this.cmbLogTypes.Location = new System.Drawing.Point(24, 15);
+            this.cmbLogTypes.Location = new System.Drawing.Point(16, 31);
             this.cmbLogTypes.Name = "cmbLogTypes";
-            this.cmbLogTypes.Size = new System.Drawing.Size(132, 21);
-            this.cmbLogTypes.TabIndex = 2;
+            this.cmbLogTypes.Size = new System.Drawing.Size(172, 21);
+            this.cmbLogTypes.TabIndex = 5;
             // 
             // btnLoadLog
             // 
-            this.btnLoadLog.Location = new System.Drawing.Point(33, 101);
+            this.btnLoadLog.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnLoadLog.Location = new System.Drawing.Point(16, 89);
             this.btnLoadLog.Name = "btnLoadLog";
-            this.btnLoadLog.Size = new System.Drawing.Size(108, 23);
-            this.btnLoadLog.TabIndex = 1;
+            this.btnLoadLog.Size = new System.Drawing.Size(172, 23);
+            this.btnLoadLog.TabIndex = 4;
             this.btnLoadLog.Text = "Load Log";
             this.btnLoadLog.UseVisualStyleBackColor = true;
             this.btnLoadLog.Click += new System.EventHandler(this.btnLoadLog_Click);
             // 
             // btnLoadLogTypes
             // 
-            this.btnLoadLogTypes.Location = new System.Drawing.Point(30, 44);
+            this.btnLoadLogTypes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnLoadLogTypes.Location = new System.Drawing.Point(16, 60);
             this.btnLoadLogTypes.Name = "btnLoadLogTypes";
-            this.btnLoadLogTypes.Size = new System.Drawing.Size(111, 23);
-            this.btnLoadLogTypes.TabIndex = 0;
+            this.btnLoadLogTypes.Size = new System.Drawing.Size(172, 23);
+            this.btnLoadLogTypes.TabIndex = 3;
             this.btnLoadLogTypes.Text = "Log Types Manager";
             this.btnLoadLogTypes.UseVisualStyleBackColor = true;
             this.btnLoadLogTypes.Click += new System.EventHandler(this.btnLoadLogTypes_Click);
@@ -209,19 +245,21 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(499, 536);
-            this.Controls.Add(this.pnlLog);
-            this.Controls.Add(this.pnlToolBar);
+            this.ClientSize = new System.Drawing.Size(627, 469);
+            this.Controls.Add(this.splitMain);
             this.Controls.Add(this.mnuMain);
             this.MainMenuStrip = this.mnuMain;
+            this.MinimumSize = new System.Drawing.Size(410, 250);
             this.Name = "MainForm";
             this.Text = "MainForm";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.mnuMain.ResumeLayout(false);
             this.mnuMain.PerformLayout();
-            this.pnlLog.ResumeLayout(false);
             this.cntTabPopup.ResumeLayout(false);
-            this.pnlToolBar.ResumeLayout(false);
+            this.splitMain.Panel1.ResumeLayout(false);
+            this.splitMain.Panel2.ResumeLayout(false);
+            this.splitMain.ResumeLayout(false);
+            this.pnlButtons.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -239,15 +277,16 @@
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
-        private System.Windows.Forms.Panel pnlLog;
-        private System.Windows.Forms.Panel pnlToolBar;
-        private System.Windows.Forms.Button btnLoadLogTypes;
-        private System.Windows.Forms.Button btnLoadLog;
         private System.Windows.Forms.OpenFileDialog dlgOpenLog;
-        private System.Windows.Forms.ComboBox cmbLogTypes;
-        private System.Windows.Forms.TabControl tabLogs;
         private System.Windows.Forms.ContextMenuStrip cntTabPopup;
         private System.Windows.Forms.ToolStripMenuItem closeTabToolStripMenuItem;
+        private System.Windows.Forms.SplitContainer splitMain;
+        private System.Windows.Forms.RichTextBox memoValue;
+        private System.Windows.Forms.Panel pnlButtons;
+        private System.Windows.Forms.ComboBox cmbLogTypes;
+        private System.Windows.Forms.Button btnLoadLog;
+        private System.Windows.Forms.Button btnLoadLogTypes;
+        private System.Windows.Forms.TabControl tabLogs;
 
     }
 }
