@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
 using Universal_Log_Viewer.Types.Structures;
+using Universal_Log_Viewer.Types.Managers;
 
 
 namespace Universal_Log_Viewer.Types.Values
@@ -40,8 +41,8 @@ namespace Universal_Log_Viewer.Types.Values
             _TreeNodeValueString = NodeTitle;
             TreeNode Result = base.GetTreeNode();
             foreach (CValue ResultValue in ChildElements)
-                if (ResultValue.Type.Style.Visible)
-                    Result.Nodes.Add(ResultValue.TreeNode);
+                if ((!(CIniSettingsManager.ShowValueMemo)) && (ResultValue.Type.Style.Visible))
+                        Result.Nodes.Add(ResultValue.TreeNode);
             return Result;
         }
 
@@ -98,6 +99,14 @@ namespace Universal_Log_Viewer.Types.Values
         {
             this.Value = Source;
             this.Type = StringType;
-        }        
+        }
+        public string[] GetValues()
+        {
+            List<string> Result = new List<string>();
+            Result.Add("Contents of " + this.Type.Title);
+            foreach (CValue ChildValue in ChildElements)
+                Result.Add(ChildValue.Type.Name + ": " + ChildValue.Value);
+            return Result.ToArray();
+        }
     }
 }

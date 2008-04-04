@@ -39,6 +39,8 @@ namespace Universal_Log_Viewer.Types.Structures
             IniSection = Section;
             Name = IniSection.Values[Consts.KEY_NAME];
             Title = IniSection.Values[KEY_TITLE];
+            if (Title == "")
+                Title = Name;
             if (ParentLogType != null) //То есть это и есть лог тайп
                 Style = ParentLogType.Styles[IniSection.Values[KEY_STYLE]];
             if (Style == null)

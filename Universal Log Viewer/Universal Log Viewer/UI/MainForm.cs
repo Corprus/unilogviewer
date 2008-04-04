@@ -59,6 +59,8 @@ namespace Universal_Log_Viewer.UI
                         TreeView LogTreeView = new TreeView();
                         LogTreeView.Dock = DockStyle.Fill;
                         LogTreeView.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TreeView_KeyPress);
+                        LogTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.LogTreeViewSelectedItemChanged);
+                             
                         LogTab.Controls.Add(LogTreeView);
                         LogTab.ContextMenuStrip = cntTabPopup;
                         LogTreeView.Nodes.Add(oLog.TreeNode);
@@ -91,6 +93,23 @@ namespace Universal_Log_Viewer.UI
             if (tabLogs.SelectedIndex > -1)
                 if (e.KeyChar == 3)
                     Clipboard.SetText(((TreeView)sender).SelectedNode.Text);         
+        }
+        private void LogTreeViewSelectedItemChanged(object sender, EventArgs e)
+        {
+            if ((CIniSettingsManager.ShowValueMemo) && (sender is TreeView))
+            {
+                TreeView Tree = (sender as TreeView);
+                if (Tree.SelectedNode.Tag is CString)
+                {
+                    memoValue.Visible = true;
+                    memoValue.Lines = (Tree.SelectedNode.Tag as CString).GetValues();
+                }
+                else
+                {
+                    memoValue.Visible = false;
+                }
+
+            }
         }
     }
 }
