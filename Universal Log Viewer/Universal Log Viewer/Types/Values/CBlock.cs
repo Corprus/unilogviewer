@@ -45,36 +45,20 @@ namespace Universal_Log_Viewer.Types.Values
         }
         protected override TreeNode GetTreeNode()
         {
-            TreeNode Result = null;
-            if (this.Type.Style.Visible)
+            _TreeNodeValueString = this.Type.Title;
+            TreeNode Result = base.GetTreeNode();
+            List<Object> ChildList = new List<Object>();
+            foreach (CString ChildString in ChildStrings)
+                ChildList.Add(ChildString);
+            foreach (CBlock ChildBlock in ChildElements)
+                ChildList.Add(ChildBlock);
+            ChildList.Sort(CompareChilds);
+            foreach (Object Obj in ChildList)
             {
-                string RealValue = this.Type.Title;
-                if (this.Type.Style.Trim)
-                    RealValue = RealValue.Trim();
-
-                Result = new TreeNode(RealValue);
-                Result.BeginEdit();
-                Result.ForeColor = this.Type.Style.Color;
-                if (Result.NodeFont == null)
-                    Result.NodeFont = new System.Drawing.Font(System.Drawing.FontFamily.GenericSansSerif, 8);
-                if (this.Type.Style.Bold)
-                    Result.NodeFont = new System.Drawing.Font(Result.NodeFont, System.Drawing.FontStyle.Bold);
-                List<Object> ChildList = new List<Object>();
-                foreach (CString ChildString in ChildStrings)
-                    ChildList.Add(ChildString);
-                foreach (CBlock ChildBlock in ChildElements)
-                    ChildList.Add(ChildBlock);
-                ChildList.Sort(CompareChilds);
-                foreach (Object Obj in ChildList)
-                {
-                    if ((Obj is CBlock) && ((Obj as CBlock).Type.Style.Visible))
-                        Result.Nodes.Add((Obj as CBlock).TreeNode);
-                    if ((Obj is CString) && ((Obj as CString).Type.Style.Visible))
-                        Result.Nodes.Add((Obj as CString).TreeNode);
-
-
-                }
-                Result.EndEdit(false);
+                if ((Obj is CBlock) && ((Obj as CBlock).Type.Style.Visible))
+                    Result.Nodes.Add((Obj as CBlock).TreeNode);
+                if ((Obj is CString) && ((Obj as CString).Type.Style.Visible))
+                    Result.Nodes.Add((Obj as CString).TreeNode);
             }
             return Result;
         }

@@ -15,48 +15,36 @@ namespace Universal_Log_Viewer.Types.Values
         public int StartIndex;
         protected override TreeNode GetTreeNode()
         {
-            TreeNode Result = null;
-            if (this.Type.Style.Visible)
+            string NodeTitle;
+            switch (this.Type.TitleType)
             {
-                string NodeTitle;
-                switch (this.Type.TitleType)
-                {
-                    case CBaseType.TitleTypes.Title : NodeTitle = this.Type.Title; break;
-                    case CBaseType.TitleTypes.Source : NodeTitle = this.Source; break;
-                    case CBaseType.TitleTypes.Value:
+                case CBaseType.TitleTypes.Title: NodeTitle = this.Type.Title; break;
+                case CBaseType.TitleTypes.Source: NodeTitle = this.Source; break;
+                case CBaseType.TitleTypes.Value:
+                    {
+                        CValue TitleElement = null;
+                        if (ChildElements.Count > this.Type.TitleValueIndex)
                         {
-                            CValue TitleElement = null;
-                            if (ChildElements.Count > this.Type.TitleValueIndex)
-                            {
-                                TitleElement = ChildElements[this.Type.TitleValueIndex];
-                                if ((this.Type.TitleValueType != "") && (TitleElement.Type.Name != this.Type.TitleValueType))
-                                    TitleElement = null;
-                            }
-                            if (TitleElement == null)
-                                NodeTitle = this.Type.Title;
-                            else
-                                NodeTitle = TitleElement.Value;
-                            break;
+                            TitleElement = ChildElements[this.Type.TitleValueIndex];
+                            if ((this.Type.TitleValueType != "") && (TitleElement.Type.Name != this.Type.TitleValueType))
+                                TitleElement = null;
                         }
-                    default: NodeTitle = this.Type.Title; break;
-                }
-                if (this.Type.Style.Trim)
-                    NodeTitle = NodeTitle.Trim();
-                Result = new TreeNode(NodeTitle);
-                Result.BeginEdit();
-                Result.ForeColor = this.Type.Style.Color;
-                if (Result.NodeFont == null)
-                    Result.NodeFont = new System.Drawing.Font(System.Drawing.FontFamily.GenericSansSerif, 8);
-
-                if (this.Type.Style.Bold)
-                    Result.NodeFont = new System.Drawing.Font(Result.NodeFont, System.Drawing.FontStyle.Bold);
-                foreach (CValue ResultValue in ChildElements)
-                    if (ResultValue.Type.Style.Visible)
-                        Result.Nodes.Add(ResultValue.TreeNode);
-                Result.EndEdit(false);
+                        if (TitleElement == null)
+                            NodeTitle = this.Type.Title;
+                        else
+                            NodeTitle = TitleElement.Value;
+                        break;
+                    }
+                default: NodeTitle = this.Type.Title; break;
             }
+            _TreeNodeValueString = NodeTitle;
+            TreeNode Result = base.GetTreeNode();
+            foreach (CValue ResultValue in ChildElements)
+                if (ResultValue.Type.Style.Visible)
+                    Result.Nodes.Add(ResultValue.TreeNode);
             return Result;
         }
+
         List<CValue> ProcessString()
         {
             bool bStringProcessed = false;

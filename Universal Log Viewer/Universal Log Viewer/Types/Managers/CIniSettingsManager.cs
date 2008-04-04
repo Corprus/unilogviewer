@@ -14,7 +14,9 @@ namespace Universal_Log_Viewer.Types.Managers
         const string SECTION_PATHS = "Paths";
         const string KEY_LOG_TYPES_SUBFOLDER = "LogTypesSubFolder";
         const string SECTION_LOG_TYPES = "Log Types";
-        const string KEY_OPEN_COMMAND = "OpenCommand";        
+        const string KEY_OPEN_COMMAND = "OpenCommand";
+        const string SECTION_VISUAL = "Visual";
+        const string KEY_SHOW_VALUE_MEMO = "ShowValueMemo";
 
         static CAutoSavedIniFile IniFile;
         public static string LogTypesFolder
@@ -38,7 +40,17 @@ namespace Universal_Log_Viewer.Types.Managers
             }
         }
         public static bool UseExternalOpen { get { return (OpenLogTypeCommand != ""); } }
-        
+        public static bool ShowValueMemo
+        {
+            get
+            {
+                if (IniFile != null)
+                    return ((IniFile.IniReadValue(SECTION_VISUAL, KEY_SHOW_VALUE_MEMO) == "1"));
+                else
+                    return false;
+            }
+        }
+
         public static void InitIniFile()
         {
             IniFile = new CAutoSavedIniFile(Application.StartupPath + "\\" + Consts.SETTINGS_INI_FILE_NAME);

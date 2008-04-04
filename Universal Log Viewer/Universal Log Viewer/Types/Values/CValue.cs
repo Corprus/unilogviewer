@@ -16,24 +16,8 @@ namespace Universal_Log_Viewer.Types.Values
         }
         protected override TreeNode GetTreeNode()
         {
-            TreeNode Result = null;
-            if (this.Type.Style.Visible)
-            {
-                string RealValue = Value;
-                if (this.Type.Style.Trim)
-                    RealValue = RealValue.Trim();
-                Result = new TreeNode(this.Type.Name + ": " + RealValue);
-                Result.BeginEdit();                
-                Result.ForeColor = this.Type.Style.Color;
-                if (Result.NodeFont == null)
-                    Result.NodeFont = new System.Drawing.Font(System.Drawing.FontFamily.GenericSansSerif, 8);
-
-                if (this.Type.Style.Bold)
-                    Result.NodeFont = new System.Drawing.Font(Result.NodeFont, System.Drawing.FontStyle.Bold);
-                Result.EndEdit(false);
-
-            }
-            return Result;
+            _TreeNodeValueString = this.Type.Name + ": " + Value;
+            return base.GetTreeNode();
         }
         public override void Parse()
         {            
