@@ -51,12 +51,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_50553B74330B978EF3BBF70FF78AA919"
-        "OwnerKey" = "8:_51CD82D27AF042DAA744A4015FE5484A"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_51CD82D27AF042DAA744A4015FE5484A"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -93,6 +87,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_D8A006AAC2619BF0FC534A6805757FF3"
+        "OwnerKey" = "8:_51CD82D27AF042DAA744A4015FE5484A"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_E3338E32C37749C9B34BB891887E8608"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -112,7 +112,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_50553B74330B978EF3BBF70FF78AA919"
+        "OwnerKey" = "8:_D8A006AAC2619BF0FC534A6805757FF3"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -368,37 +368,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_50553B74330B978EF3BBF70FF78AA919"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:IniFile, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_50553B74330B978EF3BBF70FF78AA919"
-                    {
-                    "Name" = "8:IniFile.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:IniFile.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_036B832087074A2892673AE84B9968D2"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8D73FE12E36B445CB8CA3298E0C3E073"
             {
             "SourcePath" = "8:..\\Docs\\whatsnew.txt"
@@ -497,6 +466,37 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_D8A006AAC2619BF0FC534A6805757FF3"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:IniFile, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_D8A006AAC2619BF0FC534A6805757FF3"
+                    {
+                    "Name" = "8:IniFile.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:IniFile.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_036B832087074A2892673AE84B9968D2"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E3338E32C37749C9B34BB891887E8608"
@@ -667,6 +667,28 @@
                     }
                 }
             }
+            "{1525181F-901A-416C-8A58-119130FE478E}:_FC3B8390D676472FAA7ABCF8BE4DB59B"
+            {
+            "Name" = "8:#1915"
+            "AlwaysCreate" = "11:FALSE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Property" = "8:AppDataFolder"
+                "Folders"
+                {
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_F555DB4535844D868BB12739B44F5C76"
+                    {
+                    "Name" = "8:Universal Log Viewer"
+                    "AlwaysCreate" = "11:FALSE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_D853415F5FD34668B126E51F8C4B3D79"
+                        "Folders"
+                        {
+                        }
+                    }
+                }
+            }
         }
         "LaunchCondition"
         {
@@ -684,7 +706,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Universal Log Viewer"
         "ProductCode" = "8:{213D38F1-F0CB-4F39-B033-F62822891DEA}"
-        "PackageCode" = "8:{1C6999B9-2319-4B2C-8E1C-DF22E494B454}"
+        "PackageCode" = "8:{D074D921-0344-4BF3-BE5C-B51EA9C7B2D8}"
         "UpgradeCode" = "8:{000228C9-C61B-498C-AD72-5A38430F719A}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
@@ -1596,15 +1618,15 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_25F92AAEC35C4AC4B070F479EAEFDF99"
             {
-            "SourcePath" = "8:..\\InstallerClasses\\obj\\Debug\\InstallerClasses.dll"
+            "SourcePath" = "8:..\\InstallerClasses\\obj\\Release\\InstallerClasses.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
-            "Folder" = "8:_036B832087074A2892673AE84B9968D2"
+            "Folder" = "8:_F555DB4535844D868BB12739B44F5C76"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
             "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
+            "Hidden" = "11:TRUE"
             "System" = "11:FALSE"
             "Permanent" = "11:FALSE"
             "SharedLegacy" = "11:FALSE"
@@ -1652,7 +1674,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_51CD82D27AF042DAA744A4015FE5484A"
             {
-            "SourcePath" = "8:..\\Universal Log Viewer\\obj\\Debug\\Universal Log Viewer.exe"
+            "SourcePath" = "8:..\\Universal Log Viewer\\obj\\Release\\Universal Log Viewer.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_036B832087074A2892673AE84B9968D2"
