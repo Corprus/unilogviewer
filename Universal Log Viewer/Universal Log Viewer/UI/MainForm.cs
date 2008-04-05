@@ -111,5 +111,17 @@ namespace Universal_Log_Viewer.UI
 
             }
         }
+
+        private void mnuHelpFile_Click(object sender, EventArgs e)
+        {
+            Help.ShowHelp(this, hlpUniLogViewer.HelpNamespace);
+        }
+
+        private void mnuHelpIndex_Click(object sender, EventArgs e)
+        {
+            Help.ShowHelpIndex(this, hlpUniLogViewer.HelpNamespace);
+        }
+
+
     }
 }

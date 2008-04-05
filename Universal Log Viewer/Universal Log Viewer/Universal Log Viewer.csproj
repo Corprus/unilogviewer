@@ -51,6 +51,8 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -169,6 +171,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Common\svn.version" />
+    <None Include="Help\En\unilogviewer.chm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="logviewer.ini">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

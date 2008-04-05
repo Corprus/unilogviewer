@@ -1,0 +1,14 @@
+[OPTIONS]
+Compatibility=1.1 or later
+Compiled file=unilogviewer.chm
+Contents file=Table of Contents.hhc
+Display compile progress=No
+Index file=Index.hhk
+Language=0x409 Английский (США)
+
+
+[FILES]
+LogIniFormat_Eng.html
+
+[INFOTYPES]
+

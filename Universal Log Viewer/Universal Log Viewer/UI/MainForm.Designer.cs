@@ -38,6 +38,8 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuHelpFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuHelpIndex = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cntTabPopup = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.closeTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,6 +51,7 @@
             this.cmbLogTypes = new System.Windows.Forms.ComboBox();
             this.btnLoadLog = new System.Windows.Forms.Button();
             this.btnLoadLogTypes = new System.Windows.Forms.Button();
+            this.hlpUniLogViewer = new System.Windows.Forms.HelpProvider();
             this.mnuMain.SuspendLayout();
             this.cntTabPopup.SuspendLayout();
             this.splitMain.Panel1.SuspendLayout();
@@ -122,15 +125,31 @@
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuHelpFile,
+            this.mnuHelpIndex,
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
             this.helpToolStripMenuItem.Text = "&Help";
             // 
+            // mnuHelpFile
+            // 
+            this.mnuHelpFile.Name = "mnuHelpFile";
+            this.mnuHelpFile.Size = new System.Drawing.Size(126, 22);
+            this.mnuHelpFile.Text = "Help";
+            this.mnuHelpFile.Click += new System.EventHandler(this.mnuHelpFile_Click);
+            // 
+            // mnuHelpIndex
+            // 
+            this.mnuHelpIndex.Name = "mnuHelpIndex";
+            this.mnuHelpIndex.Size = new System.Drawing.Size(126, 22);
+            this.mnuHelpIndex.Text = "Help Index";
+            this.mnuHelpIndex.Click += new System.EventHandler(this.mnuHelpIndex_Click);
+            // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.aboutToolStripMenuItem.Text = "&About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -241,6 +260,10 @@
             this.btnLoadLogTypes.UseVisualStyleBackColor = true;
             this.btnLoadLogTypes.Click += new System.EventHandler(this.btnLoadLogTypes_Click);
             // 
+            // hlpUniLogViewer
+            // 
+            this.hlpUniLogViewer.HelpNamespace = "./Help/En/unilogviewer.chm";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -287,6 +310,9 @@
         private System.Windows.Forms.Button btnLoadLog;
         private System.Windows.Forms.Button btnLoadLogTypes;
         private System.Windows.Forms.TabControl tabLogs;
+        internal System.Windows.Forms.HelpProvider hlpUniLogViewer;
+        private System.Windows.Forms.ToolStripMenuItem mnuHelpFile;
+        private System.Windows.Forms.ToolStripMenuItem mnuHelpIndex;
 
     }
 }
