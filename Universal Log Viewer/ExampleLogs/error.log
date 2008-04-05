@@ -1,0 +1,122 @@
+httpd.exe: Could not reliably determine the server's fully qualified domain name, using 192.168.1.33 for ServerName
+[Tue Mar 25 09:23:02 2008] [notice] Apache/2.2.8 (Win32) SVN/1.4.6 PHP/5.2.5 DAV/2 configured -- resuming normal operations
+[Tue Mar 25 09:23:02 2008] [notice] Server built: Jan 18 2008 00:37:19
+[Tue Mar 25 09:23:02 2008] [notice] Parent: Created child process 2460
+httpd.exe: Could not reliably determine the server's fully qualified domain name, using 192.168.1.33 for ServerName
+httpd.exe: Could not reliably determine the server's fully qualified domain name, using 192.168.1.33 for ServerName
+[Tue Mar 25 09:23:02 2008] [notice] Child 2460: Child process is running
+[Tue Mar 25 09:23:02 2008] [notice] Child 2460: Acquired the start mutex.
+[Tue Mar 25 09:23:02 2008] [notice] Child 2460: Starting 64 worker threads.
+[Tue Mar 25 09:23:02 2008] [notice] Child 2460: Starting thread to listen on port 80.
+httpd.exe: Could not reliably determine the server's fully qualified domain name, using 192.168.1.33 for ServerName
+[Tue Mar 25 19:21:30 2008] [warn] pid file C:/Program Files/Apache Software Foundation/Apache2.2/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Tue Mar 25 19:21:30 2008] [notice] Apache/2.2.8 (Win32) SVN/1.4.6 PHP/5.2.5 DAV/2 configured -- resuming normal operations
+[Tue Mar 25 19:21:30 2008] [notice] Server built: Jan 18 2008 00:37:19
+[Tue Mar 25 19:21:30 2008] [notice] Parent: Created child process 3104
+httpd.exe: Could not reliably determine the server's fully qualified domain name, using 192.168.1.33 for ServerName
+httpd.exe: Could not reliably determine the server's fully qualified domain name, using 192.168.1.33 for ServerName
+[Tue Mar 25 19:21:30 2008] [notice] Child 3104: Child process is running
+[Tue Mar 25 19:21:30 2008] [notice] Child 3104: Acquired the start mutex.
+[Tue Mar 25 19:21:30 2008] [notice] Child 3104: Starting 64 worker threads.
+[Tue Mar 25 19:21:30 2008] [notice] Child 3104: Starting thread to listen on port 80.
+httpd.exe: Could not reliably determine the server's fully qualified domain name, using 192.168.1.33 for ServerName
+[Wed Mar 26 08:52:45 2008] [warn] pid file C:/Program Files/Apache Software Foundation/Apache2.2/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Wed Mar 26 08:52:49 2008] [notice] Apache/2.2.8 (Win32) SVN/1.4.6 PHP/5.2.5 DAV/2 configured -- resuming normal operations
+[Wed Mar 26 08:52:49 2008] [notice] Server built: Jan 18 2008 00:37:19
+[Wed Mar 26 08:52:49 2008] [notice] Parent: Created child process 2676
+httpd.exe: Could not reliably determine the server's fully qualified domain name, using 192.168.1.33 for ServerName
+httpd.exe: Could not reliably determine the server's fully qualified domain name, using 192.168.1.33 for ServerName
+[Wed Mar 26 08:52:51 2008] [notice] Child 2676: Child process is running
+[Wed Mar 26 08:52:51 2008] [notice] Child 2676: Acquired the start mutex.
+[Wed Mar 26 08:52:51 2008] [notice] Child 2676: Starting 64 worker threads.
+[Wed Mar 26 08:52:51 2008] [notice] Child 2676: Starting thread to listen on port 80.
+httpd.exe: Could not reliably determine the server's fully qualified domain name, using 192.168.1.33 for ServerName
+[Wed Mar 26 18:22:18 2008] [warn] pid file C:/Program Files/Apache Software Foundation/Apache2.2/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Wed Mar 26 18:22:21 2008] [notice] Apache/2.2.8 (Win32) SVN/1.4.6 PHP/5.2.5 DAV/2 configured -- resuming normal operations
+[Wed Mar 26 18:22:21 2008] [notice] Server built: Jan 18 2008 00:37:19
+[Wed Mar 26 18:22:21 2008] [notice] Parent: Created child process 2616
+httpd.exe: Could not reliably determine the server's fully qualified domain name, using 192.168.1.33 for ServerName
+httpd.exe: Could not reliably determine the server's fully qualified domain name, using 192.168.1.33 for ServerName
+[Wed Mar 26 18:22:23 2008] [notice] Child 2616: Child process is running
+[Wed Mar 26 18:22:23 2008] [notice] Child 2616: Acquired the start mutex.
+[Wed Mar 26 18:22:23 2008] [notice] Child 2616: Starting 64 worker threads.
+[Wed Mar 26 18:22:23 2008] [notice] Child 2616: Starting thread to listen on port 80.
+httpd.exe: Could not reliably determine the server's fully qualified domain name, using 192.168.1.33 for ServerName
+[Thu Mar 27 08:08:37 2008] [warn] pid file C:/Program Files/Apache Software Foundation/Apache2.2/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Thu Mar 27 08:08:40 2008] [notice] Apache/2.2.8 (Win32) SVN/1.4.6 PHP/5.2.5 DAV/2 configured -- resuming normal operations
+[Thu Mar 27 08:08:40 2008] [notice] Server built: Jan 18 2008 00:37:19
+[Thu Mar 27 08:08:40 2008] [notice] Parent: Created child process 2608
+httpd.exe: Could not reliably determine the server's fully qualified domain name, using 192.168.1.33 for ServerName
+httpd.exe: Could not reliably determine the server's fully qualified domain name, using 192.168.1.33 for ServerName
+[Thu Mar 27 08:08:48 2008] [notice] Child 2608: Child process is running
+[Thu Mar 27 08:08:48 2008] [notice] Child 2608: Acquired the start mutex.
+[Thu Mar 27 08:08:48 2008] [notice] Child 2608: Starting 64 worker threads.
+[Thu Mar 27 08:08:48 2008] [notice] Child 2608: Starting thread to listen on port 80.
+httpd.exe: Could not reliably determine the server's fully qualified domain name, using 192.168.1.33 for ServerName
+[Thu Mar 27 18:03:14 2008] [warn] pid file C:/Program Files/Apache Software Foundation/Apache2.2/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Thu Mar 27 18:03:17 2008] [notice] Apache/2.2.8 (Win32) SVN/1.4.6 PHP/5.2.5 DAV/2 configured -- resuming normal operations
+[Thu Mar 27 18:03:17 2008] [notice] Server built: Jan 18 2008 00:37:19
+[Thu Mar 27 18:03:17 2008] [notice] Parent: Created child process 2728
+httpd.exe: Could not reliably determine the server's fully qualified domain name, using 192.168.1.33 for ServerName
+httpd.exe: Could not reliably determine the server's fully qualified domain name, using 192.168.1.33 for ServerName
+[Thu Mar 27 18:03:19 2008] [notice] Child 2728: Child process is running
+[Thu Mar 27 18:03:19 2008] [notice] Child 2728: Acquired the start mutex.
+[Thu Mar 27 18:03:19 2008] [notice] Child 2728: Starting 64 worker threads.
+[Thu Mar 27 18:03:19 2008] [notice] Child 2728: Starting thread to listen on port 80.
+httpd.exe: Could not reliably determine the server's fully qualified domain name, using 192.168.1.33 for ServerName
+[Thu Mar 27 18:52:36 2008] [warn] pid file C:/Program Files/Apache Software Foundation/Apache2.2/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Thu Mar 27 18:52:38 2008] [notice] Apache/2.2.8 (Win32) SVN/1.4.6 PHP/5.2.5 DAV/2 configured -- resuming normal operations
+[Thu Mar 27 18:52:38 2008] [notice] Server built: Jan 18 2008 00:37:19
+[Thu Mar 27 18:52:38 2008] [notice] Parent: Created child process 2492
+httpd.exe: Could not reliably determine the server's fully qualified domain name, using 192.168.1.33 for ServerName
+httpd.exe: Could not reliably determine the server's fully qualified domain name, using 192.168.1.33 for ServerName
+[Thu Mar 27 18:52:48 2008] [notice] Child 2492: Child process is running
+[Thu Mar 27 18:52:48 2008] [notice] Child 2492: Acquired the start mutex.
+[Thu Mar 27 18:52:48 2008] [notice] Child 2492: Starting 64 worker threads.
+[Thu Mar 27 18:52:48 2008] [notice] Child 2492: Starting thread to listen on port 80.
+httpd.exe: Could not reliably determine the server's fully qualified domain name, using 192.168.1.33 for ServerName
+[Fri Mar 28 08:09:37 2008] [warn] pid file C:/Program Files/Apache Software Foundation/Apache2.2/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Fri Mar 28 08:09:40 2008] [notice] Apache/2.2.8 (Win32) SVN/1.4.6 PHP/5.2.5 DAV/2 configured -- resuming normal operations
+[Fri Mar 28 08:09:40 2008] [notice] Server built: Jan 18 2008 00:37:19
+[Fri Mar 28 08:09:40 2008] [notice] Parent: Created child process 2448
+httpd.exe: Could not reliably determine the server's fully qualified domain name, using 192.168.1.33 for ServerName
+httpd.exe: Could not reliably determine the server's fully qualified domain name, using 192.168.1.33 for ServerName
+[Fri Mar 28 08:09:45 2008] [notice] Child 2448: Child process is running
+[Fri Mar 28 08:09:45 2008] [notice] Child 2448: Acquired the start mutex.
+[Fri Mar 28 08:09:45 2008] [notice] Child 2448: Starting 64 worker threads.
+[Fri Mar 28 08:09:45 2008] [notice] Child 2448: Starting thread to listen on port 80.
+httpd.exe: Could not reliably determine the server's fully qualified domain name, using 192.168.1.33 for ServerName
+[Fri Mar 28 20:01:45 2008] [warn] pid file C:/Program Files/Apache Software Foundation/Apache2.2/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Fri Mar 28 20:01:48 2008] [notice] Apache/2.2.8 (Win32) SVN/1.4.6 PHP/5.2.5 DAV/2 configured -- resuming normal operations
+[Fri Mar 28 20:01:48 2008] [notice] Server built: Jan 18 2008 00:37:19
+[Fri Mar 28 20:01:48 2008] [notice] Parent: Created child process 2640
+httpd.exe: Could not reliably determine the server's fully qualified domain name, using 192.168.1.33 for ServerName
+httpd.exe: Could not reliably determine the server's fully qualified domain name, using 192.168.1.33 for ServerName
+[Fri Mar 28 20:01:59 2008] [notice] Child 2640: Child process is running
+[Fri Mar 28 20:01:59 2008] [notice] Child 2640: Acquired the start mutex.
+[Fri Mar 28 20:01:59 2008] [notice] Child 2640: Starting 64 worker threads.
+[Fri Mar 28 20:01:59 2008] [notice] Child 2640: Starting thread to listen on port 80.
+httpd.exe: Could not reliably determine the server's fully qualified domain name, using 192.168.1.33 for ServerName
+[Sat Mar 29 10:16:37 2008] [warn] pid file C:/Program Files/Apache Software Foundation/Apache2.2/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Sat Mar 29 10:16:39 2008] [notice] Apache/2.2.8 (Win32) SVN/1.4.6 PHP/5.2.5 DAV/2 configured -- resuming normal operations
+[Sat Mar 29 10:16:39 2008] [notice] Server built: Jan 18 2008 00:37:19
+[Sat Mar 29 10:16:39 2008] [notice] Parent: Created child process 2440
+httpd.exe: Could not reliably determine the server's fully qualified domain name, using 192.168.1.33 for ServerName
+httpd.exe: Could not reliably determine the server's fully qualified domain name, using 192.168.1.33 for ServerName
+[Sat Mar 29 10:16:45 2008] [notice] Child 2440: Child process is running
+[Sat Mar 29 10:16:45 2008] [notice] Child 2440: Acquired the start mutex.
+[Sat Mar 29 10:16:45 2008] [notice] Child 2440: Starting 64 worker threads.
+[Sat Mar 29 10:16:45 2008] [notice] Child 2440: Starting thread to listen on port 80.
+[Sat Mar 29 14:16:05 2008] [error] [client 192.168.1.34] Could not CHECKOUT resource /svn/repos/!svn/ver/41/Universal Log Viewer Installer.  [409, #0]
+[Sat Mar 29 14:16:05 2008] [error] [client 192.168.1.34] The version resource does not correspond to the resource within the transaction.  Either the requested version resource is out of date (needs to be updated), or the requested version resource is newer than the transaction root (restart the commit).  [409, #160024]
+httpd.exe: Could not reliably determine the server's fully qualified domain name, using 192.168.1.33 for ServerName
+[Sun Mar 30 09:23:09 2008] [warn] pid file C:/Program Files/Apache Software Foundation/Apache2.2/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Sun Mar 30 09:23:10 2008] [notice] Apache/2.2.8 (Win32) SVN/1.4.6 PHP/5.2.5 DAV/2 configured -- resuming normal operations
+[Sun Mar 30 09:23:10 2008] [notice] Server built: Jan 18 2008 00:37:19
+[Sun Mar 30 09:23:10 2008] [notice] Parent: Created child process 2484
+httpd.exe: Could not reliably determine the server's fully qualified domain name, using 192.168.1.33 for ServerName
+httpd.exe: Could not reliably determine the server's fully qualified domain name, using 192.168.1.33 for ServerName
+[Sun Mar 30 09:23:23 2008] [notice] Child 2484: Child process is running
+[Sun Mar 30 09:23:23 2008] [notice] Child 2484: Acquired the start mutex.
+[Sun Mar 30 09:23:23 2008] [notice] Child 2484: Starting 64 worker threads.
+[Sun Mar 30 09:23:23 2008] [notice] Child 2484: Starting thread to listen on port 80.
