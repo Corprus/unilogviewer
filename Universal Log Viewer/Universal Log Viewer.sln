@@ -1,4 +1,3 @@
-﻿
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Universal Log Viewer", "Universal Log Viewer\Universal Log Viewer.csproj", "{DD766EDF-B7FB-4643-AE46-2D9E39F60780}"
@@ -11,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IniFile", "IniFile\IniFile.csproj", "{931AB029-5A5F-4328-9934-E4A8EEF437CE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstallerClasses", "InstallerClasses\InstallerClasses.csproj", "{9FCBF9A0-05B6-4775-A3E9-5BBD0CCF5C4B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogWriterLib", "LogWriterLib\LogWriterLib.csproj", "{F01B6F3D-C463-4BA4-AA6A-1B6FB1FC720A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +34,10 @@ Global
 		{9FCBF9A0-05B6-4775-A3E9-5BBD0CCF5C4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9FCBF9A0-05B6-4775-A3E9-5BBD0CCF5C4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9FCBF9A0-05B6-4775-A3E9-5BBD0CCF5C4B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F01B6F3D-C463-4BA4-AA6A-1B6FB1FC720A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F01B6F3D-C463-4BA4-AA6A-1B6FB1FC720A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F01B6F3D-C463-4BA4-AA6A-1B6FB1FC720A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F01B6F3D-C463-4BA4-AA6A-1B6FB1FC720A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
