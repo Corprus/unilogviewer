@@ -184,6 +184,10 @@
       <Project>{931AB029-5A5F-4328-9934-E4A8EEF437CE}</Project>
       <Name>IniFile</Name>
     </ProjectReference>
+    <ProjectReference Include="..\LogWriterLib\LogWriterLib.csproj">
+      <Project>{F01B6F3D-C463-4BA4-AA6A-1B6FB1FC720A}</Project>
+      <Name>LogWriterLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
