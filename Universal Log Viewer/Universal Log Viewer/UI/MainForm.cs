@@ -17,11 +17,6 @@ namespace Universal_Log_Viewer.UI
         public MainForm()
         {
             InitializeComponent();
-            LogWriterLib.LogWriter LW = new LogWriterLib.LogWriter("c:\\TEMP.txt");
-            LW.WriteLog(LogWriterLib.LogWriter.TypeLogMessage.LMT_FATAL, "PREVED");
-            LW.WriteLog(LogWriterLib.LogWriter.TypeLogMessage.LMT_ERROR, "PREVED");
-            LW.WriteLog(LogWriterLib.LogWriter.TypeLogMessage.LMT_INFORM, "PREVED");
-            LW.WriteLog(LogWriterLib.LogWriter.TypeLogMessage.LMT_WARN, "PREVED");
         }
 
         private void btnLoadLogTypes_Click(object sender, EventArgs e)
