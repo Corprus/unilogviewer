@@ -17,20 +17,22 @@ namespace LogWriting
         private String sLogSeparator = "\t";        
         private String[] aTypeMessages = { "ERROR", "FATAL", "WARN", "INFORM" };
 
-        public LogWriter(String vsFileName, out LWErrorCode riResultCode)
+        public LWErrorCode lwCreateResultCode {get ; private set;}
+
+        public LogWriter(String vsFileName)
         {
-            riResultCode = LWErrorCode.EC_SUCCESS;
+            lwCreateResultCode = LWErrorCode.EC_SUCCESS;
             var s = Directory.GetParent(vsFileName);
             if (!s.Exists)
             {
                 try
                 {
                     s.Create();
-                    riResultCode = LWErrorCode.EC_DIRECTORY_CREATED;
+                    lwCreateResultCode = LWErrorCode.EC_DIRECTORY_CREATED;
                 }
                 catch (Exception)
                 {
-                    riResultCode = LWErrorCode.EC_ERROR;
+                    lwCreateResultCode = LWErrorCode.EC_ERROR;
                     return;
                 }
             }
@@ -41,19 +43,19 @@ namespace LogWriting
             }
             catch (System.IO.PathTooLongException)
             {
-                riResultCode = LWErrorCode.EC_PATH_TOO_LONG;
+                lwCreateResultCode = LWErrorCode.EC_PATH_TOO_LONG;
                 return;
             }
             catch (Exception)
             {
-                riResultCode = LWErrorCode.EC_ERROR;
+                lwCreateResultCode = LWErrorCode.EC_ERROR;
                 return;
             }           
         }
 
         ~LogWriter()
         {
-            
+            _oTextWriter.Dispose();
         }
 
 
