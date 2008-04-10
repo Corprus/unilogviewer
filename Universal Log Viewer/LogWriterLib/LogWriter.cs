@@ -14,7 +14,7 @@ namespace LogWriting
     public class LogWriter : IDisposable
     {
         private TextWriter _oTextWriter;
-        private String sLogSeparator = "\t";        
+        private const String sLogSeparator = "\t";        
         private String[] aTypeMessages = { "ERROR", "FATAL", "WARN", "INFORM" };
 
         public LWErrorCode ErrorResultCode {get ; private set;}
