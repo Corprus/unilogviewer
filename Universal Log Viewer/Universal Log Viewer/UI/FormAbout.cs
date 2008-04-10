@@ -6,9 +6,9 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using Universal_Log_Viewer.Common;
+using UniversalLogViewer.Common;
 
-namespace Universal_Log_Viewer.UI
+namespace UniversalLogViewer.UI
 {
     public partial class FormAbout : Form
     {

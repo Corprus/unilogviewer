@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Universal_Log_Viewer.Common;
-using IniFile;
+using UniversalLogViewer.Common;
+using IniFiles;
 using System.Windows.Forms;
 
-namespace Universal_Log_Viewer.Types.Managers
+namespace UniversalLogViewer.Types.Managers
 {
-    public static class CIniSettingsManager
+    public static class IniSettingsManager
     {
 
         const string SECTION_PATHS = "Paths";
@@ -18,13 +18,13 @@ namespace Universal_Log_Viewer.Types.Managers
         const string SECTION_VISUAL = "Visual";
         const string KEY_SHOW_VALUE_MEMO = "ShowValueMemo";
 
-        static CAutoSavedIniFile IniFile;
+        static AutoSavedIniFile IniFile;
         public static string LogTypesFolder
         {
             get
             {
                 if (IniFile != null)
-                    return Application.StartupPath + "\\" + IniFile.IniReadValue(SECTION_PATHS, KEY_LOG_TYPES_SUBFOLDER);
+                    return Application.StartupPath + "\\" + IniFile.ReadValue(SECTION_PATHS, KEY_LOG_TYPES_SUBFOLDER);
                 else
                     return Application.StartupPath;
             }
@@ -34,7 +34,7 @@ namespace Universal_Log_Viewer.Types.Managers
             get
             {
                 if (IniFile != null)
-                    return IniFile.IniReadValue(SECTION_LOG_TYPES, KEY_OPEN_COMMAND);
+                    return IniFile.ReadValue(SECTION_LOG_TYPES, KEY_OPEN_COMMAND);
                 else
                     return "";
             }
@@ -45,15 +45,15 @@ namespace Universal_Log_Viewer.Types.Managers
             get
             {
                 if (IniFile != null)
-                    return ((IniFile.IniReadValue(SECTION_VISUAL, KEY_SHOW_VALUE_MEMO) == "1"));
+                    return ((IniFile.ReadValue(SECTION_VISUAL, KEY_SHOW_VALUE_MEMO) == "1"));
                 else
                     return false;
             }
         }
 
-        public static void InitIniFile()
+        public static void InitFile()
         {
-            IniFile = new CAutoSavedIniFile(Application.StartupPath + "\\" + Consts.SETTINGS_INI_FILE_NAME);
+            IniFile = new AutoSavedIniFile(Application.StartupPath + "\\" + Consts.SETTINGS_INI_FILE_NAME);
         }
 
 

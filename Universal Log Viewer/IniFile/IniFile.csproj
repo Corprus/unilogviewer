@@ -8,10 +8,12 @@
     <ProjectGuid>{931AB029-5A5F-4328-9934-E4A8EEF437CE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>IniFile</RootNamespace>
+    <RootNamespace>IniFiles</RootNamespace>
     <AssemblyName>IniFile</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>UniLogViewer.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -33,15 +35,21 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CAutoSavedIniFile.cs" />
-    <Compile Include="CIniFile.cs" />
-    <Compile Include="CIniSection.cs" />
+    <Compile Include="AutoSavedIniFile.cs" />
+    <Compile Include="IniFile.cs" />
+    <Compile Include="IniSection.cs" />
     <Compile Include="Consts.cs" />
-    <Compile Include="CSectionContainer.cs" />
-    <Compile Include="CValueContainer.cs" />
+    <Compile Include="NativeMethods.cs" />
+    <Compile Include="SectionCollection.cs" />
+    <Compile Include="ValueContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UniLogViewer.pfx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

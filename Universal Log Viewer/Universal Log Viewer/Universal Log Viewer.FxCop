@@ -1,0 +1,1932 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FxCopProject Version="1.36" Name="My FxCop Project">
+ <ProjectOptions>
+  <SharedProject>True</SharedProject>
+  <Stylesheet Apply="False">c:\program files\microsoft fxcop 1.36\Xml\FxCopReport.xsl</Stylesheet>
+  <SaveMessages>
+   <Project Status="Active, Excluded" NewOnly="False" />
+   <Report Status="Active" NewOnly="False" />
+  </SaveMessages>
+  <ProjectFile Compress="True" DefaultTargetCheck="True" DefaultRuleCheck="True" SaveByRuleGroup="" Deterministic="True" />
+  <EnableMultithreadedLoad>True</EnableMultithreadedLoad>
+  <EnableMultithreadedAnalysis>True</EnableMultithreadedAnalysis>
+  <SourceLookup>True</SourceLookup>
+  <AnalysisExceptionsThreshold>10</AnalysisExceptionsThreshold>
+  <RuleExceptionsThreshold>1</RuleExceptionsThreshold>
+  <Spelling Locale="en-US" />
+  <OverrideRuleVisibilities>False</OverrideRuleVisibilities>
+  <CustomDictionaries SearchFxCopDir="True" SearchUserProfile="True" SearchProjectDir="True" />
+  <SearchGlobalAssemblyCache>False</SearchGlobalAssemblyCache>
+  <DeadlockDetectionTimeout>120</DeadlockDetectionTimeout>
+  <IgnoreGeneratedCode>False</IgnoreGeneratedCode>
+ </ProjectOptions>
+ <Targets>
+  <Target Name="$(ProjectDir)/bin/Debug/IniFile.dll" Analyze="True" AnalyzeAllChildren="True" />
+  <Target Name="$(ProjectDir)/bin/Debug/LogWriterLib.dll" Analyze="True" AnalyzeAllChildren="True" />
+  <Target Name="$(ProjectDir)/bin/Debug/Universal Log Viewer.exe" Analyze="True" AnalyzeAllChildren="True" />
+ </Targets>
+ <Rules>
+  <RuleFiles>
+   <RuleFile Name="$(FxCopDir)\Rules\DesignRules.dll" Enabled="True" AllRulesEnabled="False">
+    <Rule Name="AbstractTypesShouldNotHaveConstructors" Enabled="True" />
+    <Rule Name="AssembliesShouldHaveValidStrongNames" Enabled="True" />
+    <Rule Name="AvoidEmptyInterfaces" Enabled="True" />
+    <Rule Name="AvoidExcessiveParametersOnGenericTypes" Enabled="True" />
+    <Rule Name="AvoidNamespacesWithFewTypes" Enabled="True" />
+    <Rule Name="AvoidOutParameters" Enabled="True" />
+    <Rule Name="CollectionsShouldImplementGenericInterface" Enabled="True" />
+    <Rule Name="ConsiderPassingBaseTypesAsParameters" Enabled="True" />
+    <Rule Name="DeclareEventHandlersCorrectly" Enabled="True" />
+    <Rule Name="DeclareTypesInNamespaces" Enabled="True" />
+    <Rule Name="DefaultParametersShouldNotBeUsed" Enabled="True" />
+    <Rule Name="DefineAccessorsForAttributeArguments" Enabled="True" />
+    <Rule Name="DoNotCatchGeneralExceptionTypes" Enabled="True" />
+    <Rule Name="DoNotDeclareProtectedMembersInSealedTypes" Enabled="True" />
+    <Rule Name="DoNotDeclareStaticMembersOnGenericTypes" Enabled="True" />
+    <Rule Name="DoNotDeclareVirtualMembersInSealedTypes" Enabled="True" />
+    <Rule Name="DoNotDeclareVisibleInstanceFields" Enabled="True" />
+    <Rule Name="DoNotHideBaseClassMethods" Enabled="True" />
+    <Rule Name="DoNotNestGenericTypesInMemberSignatures" Enabled="True" />
+    <Rule Name="DoNotOverloadOperatorEqualsOnReferenceTypes" Enabled="True" />
+    <Rule Name="DoNotPassTypesByReference" Enabled="True" />
+    <Rule Name="DoNotRaiseExceptionsInUnexpectedLocations" Enabled="True" />
+    <Rule Name="EnumeratorsShouldBeStronglyTyped" Enabled="True" />
+    <Rule Name="EnumsShouldHaveZeroValue" Enabled="True" />
+    <Rule Name="EnumStorageShouldBeInt32" Enabled="True" />
+    <Rule Name="ExceptionsShouldBePublic" Enabled="True" />
+    <Rule Name="GenericMethodsShouldProvideTypeParameter" Enabled="True" />
+    <Rule Name="ICollectionImplementationsHaveStronglyTypedMembers" Enabled="True" />
+    <Rule Name="ImplementIDisposableCorrectly" Enabled="True" />
+    <Rule Name="ImplementStandardExceptionConstructors" Enabled="True" />
+    <Rule Name="IndexersShouldNotBeMultidimensional" Enabled="True" />
+    <Rule Name="InterfaceMethodsShouldBeCallableByChildTypes" Enabled="True" />
+    <Rule Name="ListsAreStronglyTyped" Enabled="True" />
+    <Rule Name="MarkAssembliesWithAssemblyVersion" Enabled="True" />
+    <Rule Name="MarkAssembliesWithClsCompliant" Enabled="True" />
+    <Rule Name="MarkAssembliesWithComVisible" Enabled="True" />
+    <Rule Name="MarkAttributesWithAttributeUsage" Enabled="True" />
+    <Rule Name="MarkEnumsWithFlags" Enabled="True" />
+    <Rule Name="MembersShouldNotExposeCertainConcreteTypes" Enabled="True" />
+    <Rule Name="MovePInvokesToNativeMethodsClass" Enabled="True" />
+    <Rule Name="NestedTypesShouldNotBeVisible" Enabled="True" />
+    <Rule Name="OverloadOperatorEqualsOnOverloadingAddAndSubtract" Enabled="True" />
+    <Rule Name="OverrideMethodsOnComparableTypes" Enabled="True" />
+    <Rule Name="PropertiesShouldNotBeWriteOnly" Enabled="True" />
+    <Rule Name="ProvideObsoleteAttributeMessage" Enabled="True" />
+    <Rule Name="ReplaceRepetitiveArgumentsWithParamsArray" Enabled="True" />
+    <Rule Name="StaticHolderTypesShouldBeSealed" Enabled="True" />
+    <Rule Name="StaticHolderTypesShouldNotHaveConstructors" Enabled="True" />
+    <Rule Name="StringUriOverloadsCallSystemUriOverloads" Enabled="True" />
+    <Rule Name="TypesShouldNotExtendCertainBaseTypes" Enabled="True" />
+    <Rule Name="TypesThatOwnDisposableFieldsShouldBeDisposable" Enabled="True" />
+    <Rule Name="TypesThatOwnNativeResourcesShouldBeDisposable" Enabled="True" />
+    <Rule Name="UriParametersShouldNotBeStrings" Enabled="True" />
+    <Rule Name="UriPropertiesShouldNotBeStrings" Enabled="True" />
+    <Rule Name="UriReturnValuesShouldNotBeStrings" Enabled="True" />
+    <Rule Name="UseEventsWhereAppropriate" Enabled="True" />
+    <Rule Name="UseGenericEventHandlerInstances" Enabled="True" />
+    <Rule Name="UseGenericsWhereAppropriate" Enabled="True" />
+    <Rule Name="UseIntegralOrStringArgumentForIndexers" Enabled="True" />
+    <Rule Name="UsePropertiesWhereAppropriate" Enabled="True" />
+   </RuleFile>
+   <RuleFile Name="$(FxCopDir)\Rules\GlobalizationRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\InteroperabilityRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\MobilityRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\NamingRules.dll" Enabled="True" AllRulesEnabled="False">
+    <Rule Name="CompoundWordsShouldBeCasedCorrectly" Enabled="True" />
+    <Rule Name="DoNotNameEnumValuesReserved" Enabled="True" />
+    <Rule Name="DoNotPrefixEnumValuesWithTypeName" Enabled="True" />
+    <Rule Name="EventsShouldNotHaveBeforeOrAfterPrefix" Enabled="True" />
+    <Rule Name="FlagsEnumsShouldHavePluralNames" Enabled="True" />
+    <Rule Name="IdentifiersShouldBeSpelledCorrectly" Enabled="True" />
+    <Rule Name="IdentifiersShouldDifferByMoreThanCase" Enabled="True" />
+    <Rule Name="IdentifiersShouldHaveCorrectPrefix" Enabled="True" />
+    <Rule Name="IdentifiersShouldHaveCorrectSuffix" Enabled="True" />
+    <Rule Name="IdentifiersShouldNotContainTypeNames" Enabled="True" />
+    <Rule Name="IdentifiersShouldNotHaveIncorrectPrefix" Enabled="True" />
+    <Rule Name="IdentifiersShouldNotHaveIncorrectSuffix" Enabled="True" />
+    <Rule Name="IdentifiersShouldNotMatchKeywords" Enabled="True" />
+    <Rule Name="OnlyFlagsEnumsShouldHavePluralNames" Enabled="True" />
+    <Rule Name="ParameterNamesShouldMatchBaseDeclaration" Enabled="True" />
+    <Rule Name="ParameterNamesShouldNotMatchMemberNames" Enabled="True" />
+    <Rule Name="PropertyNamesShouldNotMatchGetMethods" Enabled="True" />
+    <Rule Name="ResourceStringCompoundWordsShouldBeCasedCorrectly" Enabled="True" />
+    <Rule Name="ResourceStringsShouldBeSpelledCorrectly" Enabled="True" />
+    <Rule Name="TypeNamesShouldNotMatchNamespaces" Enabled="True" />
+    <Rule Name="UsePreferredTerms" Enabled="True" />
+   </RuleFile>
+   <RuleFile Name="$(FxCopDir)\Rules\PerformanceRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\PortabilityRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\SecurityRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\UsageRules.dll" Enabled="True" AllRulesEnabled="False">
+    <Rule Name="AttributeStringLiteralsShouldParseCorrectly" Enabled="True" />
+    <Rule Name="CallBaseClassMethodsOnISerializableTypes" Enabled="True" />
+    <Rule Name="CallGCSuppressFinalizeCorrectly" Enabled="True" />
+    <Rule Name="CollectionPropertiesShouldBeReadOnly" Enabled="True" />
+    <Rule Name="DisposableFieldsShouldBeDisposed" Enabled="True" />
+    <Rule Name="DisposableTypesShouldDeclareFinalizer" Enabled="True" />
+    <Rule Name="DoNotDecreaseInheritedMemberVisibility" Enabled="True" />
+    <Rule Name="DoNotIgnoreMethodResults" Enabled="True" />
+    <Rule Name="DoNotMarkEnumsWithFlags" Enabled="True" />
+    <Rule Name="DoNotMarkServicedComponentsWithWebMethod" Enabled="True" />
+    <Rule Name="DoNotRaiseExceptionsInExceptionClauses" Enabled="True" />
+    <Rule Name="DoNotRaiseReservedExceptionTypes" Enabled="True" />
+    <Rule Name="DoNotShipUnreleasedResourceFormats" Enabled="True" />
+    <Rule Name="FinalizersShouldBeProtected" Enabled="True" />
+    <Rule Name="FinalizersShouldCallBaseClassFinalizer" Enabled="True" />
+    <Rule Name="ImplementISerializableCorrectly" Enabled="True" />
+    <Rule Name="ImplementSerializationConstructors" Enabled="True" />
+    <Rule Name="ImplementSerializationMethodsCorrectly" Enabled="True" />
+    <Rule Name="InitializeValueTypeStaticFieldsInline" Enabled="True" />
+    <Rule Name="InstantiateArgumentExceptionsCorrectly" Enabled="True" />
+    <Rule Name="MarkAllNonSerializableFields" Enabled="True" />
+    <Rule Name="MarkISerializableTypesWithSerializable" Enabled="True" />
+    <Rule Name="MarkWindowsFormsEntryPointsWithStaThread" Enabled="True" />
+    <Rule Name="MembersShouldDifferByMoreThanReturnType" Enabled="True" />
+    <Rule Name="NonConstantFieldsShouldNotBeVisible" Enabled="True" />
+    <Rule Name="OperationsShouldNotOverflow" Enabled="True" />
+    <Rule Name="OperatorOverloadsHaveNamedAlternates" Enabled="True" />
+    <Rule Name="OperatorsShouldHaveSymmetricalOverloads" Enabled="True" />
+    <Rule Name="OverloadOperatorEqualsOnOverridingValueTypeEquals" Enabled="True" />
+    <Rule Name="OverrideEqualsOnOverloadingOperatorEquals" Enabled="True" />
+    <Rule Name="OverrideGetHashCodeOnOverridingEquals" Enabled="True" />
+    <Rule Name="PassSystemUriObjectsInsteadOfStrings" Enabled="True" />
+    <Rule Name="ProvideDeserializationMethodsForOptionalFields" Enabled="True" />
+    <Rule Name="RethrowToPreserveStackDetails" Enabled="True" />
+    <Rule Name="ReviewUnusedParameters" Enabled="True" />
+    <Rule Name="TestForNaNCorrectly" Enabled="True" />
+    <Rule Name="UseManagedEquivalentsOfWin32Api" Enabled="True" />
+    <Rule Name="UseParamsForVariableArguments" Enabled="True" />
+   </RuleFile>
+  </RuleFiles>
+  <Groups />
+  <Settings />
+ </Rules>
+ <FxCopReport Version="1.36">
+  <Namespaces>
+   <Namespace Name="IniFile">
+    <Messages>
+     <Message Id="Ini" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2008-04-08 12:07:02Z">
+      <Issue Name="Namespace">
+       <Item>Ini</Item>
+       <Item>IniFile</Item>
+      </Issue>
+     </Message>
+    </Messages>
+   </Namespace>
+   <Namespace Name="UniversalLogViewer.Common.IniFile">
+    <Messages>
+     <Message Id="Ini" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2008-04-08 12:18:28Z">
+      <Issue Name="Namespace">
+       <Item>Ini</Item>
+       <Item>UniversalLogViewer.Common.IniFile</Item>
+      </Issue>
+     </Message>
+    </Messages>
+   </Namespace>
+  </Namespaces>
+  <Targets>
+   <Target Name="$(ProjectDir)/bin/Debug/IniFile.dll">
+    <Modules>
+     <Module Name="inifile.dll">
+      <Messages>
+       <Message TypeName="AssembliesShouldHaveValidStrongNames" Category="Microsoft.Design" CheckId="CA2210" Created="2008-04-08 12:07:02Z">
+        <Issue Name="NoStrongName">
+         <Item>'IniFile.dll'</Item>
+        </Issue>
+       </Message>
+       <Message Id="Ini" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2008-04-08 12:07:02Z">
+        <Issue Name="Assembly">
+         <Item>Ini</Item>
+         <Item>'IniFile.dll'</Item>
+        </Issue>
+       </Message>
+       <Message TypeName="MarkAssembliesWithClsCompliant" Category="Microsoft.Design" CheckId="CA1014" Created="2008-04-08 12:07:02Z">
+        <Issue>
+         <Item>'IniFile.dll'</Item>
+        </Issue>
+       </Message>
+      </Messages>
+      <Namespaces>
+       <Namespace Name="IniFile">
+        <Types>
+         <Type Name="CArrayValueContainer">
+          <Messages>
+           <Message TypeName="IdentifiersShouldNotHaveIncorrectPrefix" Category="Microsoft.Naming" CheckId="CA1722" Created="2008-04-08 12:07:02Z">
+            <Issue>
+             <Item>'CArrayValueContainer'</Item>
+            </Issue>
+           </Message>
+          </Messages>
+          <Members>
+           <Member Name="#.ctor(IniFile.CIniSection)">
+            <Messages>
+             <Message Id="Ini" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2008-04-08 12:07:02Z">
+              <Issue Name="MemberParameter">
+               <Item>'CArrayValueContainer.CArrayValueContainer(CIniSection)'</Item>
+               <Item>Ini</Item>
+               <Item>'IniSection'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#.ctor(IniFile.CIniSection,System.Boolean)">
+            <Messages>
+             <Message Id="Ini" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2008-04-08 12:07:02Z">
+              <Issue Name="MemberParameter">
+               <Item>'CArrayValueContainer.CArrayValueContainer(CIniSection, bool)'</Item>
+               <Item>Ini</Item>
+               <Item>'IniSection'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Item[System.String,System.Boolean]">
+            <Messages>
+             <Message TypeName="IndexersShouldNotBeMultidimensional" Category="Microsoft.Design" CheckId="CA1023" Created="2008-04-08 12:07:02Z">
+              <Issue>
+               <Item>'CArrayValueContainer.this[string, bool]'</Item>
+              </Issue>
+             </Message>
+             <Message TypeName="PropertiesShouldNotReturnArrays" Category="Microsoft.Performance" CheckId="CA1819" Created="2008-04-08 12:07:02Z">
+              <Issue>
+               <Item>'CArrayValueContainer.this[string, bool]'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+            <Accessors>
+             <Accessor Name="#get_Item(System.String,System.Boolean)">
+              <Messages>
+               <Message TypeName="TestForEmptyStringsUsingStringLength" Category="Microsoft.Performance" CheckId="CA1820" Created="2008-04-08 12:07:02Z">
+                <Issue Name="IsNullOrEmpty">
+                 <Item>'string.operator ==(string, string)'</Item>
+                 <Item>'CArrayValueContainer.this.get(string, bool)'</Item>
+                </Issue>
+               </Message>
+              </Messages>
+             </Accessor>
+            </Accessors>
+           </Member>
+           <Member Name="#Item[System.String]">
+            <Messages>
+             <Message TypeName="PropertiesShouldNotReturnArrays" Category="Microsoft.Performance" CheckId="CA1819" Created="2008-04-08 12:07:02Z">
+              <Issue>
+               <Item>'CArrayValueContainer.this[string]'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+            <Accessors>
+             <Accessor Name="#get_Item(System.String)">
+              <Messages>
+               <Message TypeName="TestForEmptyStringsUsingStringLength" Category="Microsoft.Performance" CheckId="CA1820" Created="2008-04-08 12:07:02Z">
+                <Issue Name="IsNullOrEmpty">
+                 <Item>'string.operator ==(string, string)'</Item>
+                 <Item>'CArrayValueContainer.this.get(string)'</Item>
+                </Issue>
+               </Message>
+              </Messages>
+             </Accessor>
+            </Accessors>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="CAutoSavedIniFile">
+          <Messages>
+           <Message Id="Ini" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2008-04-08 12:07:02Z">
+            <Issue Name="Type">
+             <Item>Ini</Item>
+             <Item>'CAutoSavedIniFile'</Item>
+            </Issue>
+           </Message>
+           <Message TypeName="IdentifiersShouldNotHaveIncorrectPrefix" Category="Microsoft.Naming" CheckId="CA1722" Created="2008-04-08 12:07:02Z">
+            <Issue>
+             <Item>'CAutoSavedIniFile'</Item>
+            </Issue>
+           </Message>
+          </Messages>
+          <Members>
+           <Member Name="#IniReadValue(System.String,System.String)">
+            <Messages>
+             <Message TypeName="TestForEmptyStringsUsingStringLength" Category="Microsoft.Performance" CheckId="CA1820" Created="2008-04-08 12:07:02Z">
+              <Issue Name="IsNullOrEmpty">
+               <Item>'string.operator ==(string, string)'</Item>
+               <Item>'CAutoSavedIniFile.IniReadValue(string, string)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="CIniFile">
+          <Messages>
+           <Message Id="Ini" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2008-04-08 12:07:02Z">
+            <Issue Name="Type">
+             <Item>Ini</Item>
+             <Item>'CIniFile'</Item>
+            </Issue>
+           </Message>
+           <Message TypeName="IdentifiersShouldNotHaveIncorrectPrefix" Category="Microsoft.Naming" CheckId="CA1722" Created="2008-04-08 12:07:02Z">
+            <Issue>
+             <Item>'CIniFile'</Item>
+            </Issue>
+           </Message>
+          </Messages>
+          <Members>
+           <Member Name="#GetPrivateProfileSectionNamesA(System.Byte[],System.UInt32,System.String)">
+            <Messages>
+             <Message TypeName="MovePInvokesToNativeMethodsClass" Category="Microsoft.Design" CheckId="CA1060" Created="2008-04-08 12:07:02Z">
+              <Issue>
+               <Item>'CIniFile.GetPrivateProfileSectionNamesA(byte[], uint, string)'</Item>
+              </Issue>
+             </Message>
+             <Message Id="2" TypeName="SpecifyMarshalingForPInvokeStringArguments" Category="Microsoft.Globalization" CheckId="CA2101" Created="2008-04-08 12:07:02Z">
+              <Issue Name="ParameterImplicitAnsi">
+               <Item>'lpFileName'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#GetPrivateProfileString(System.String,System.String,System.String,System.Text.StringBuilder,System.Int32,System.String)">
+            <Messages>
+             <Message TypeName="MovePInvokesToNativeMethodsClass" Category="Microsoft.Design" CheckId="CA1060" Created="2008-04-08 12:07:02Z">
+              <Issue>
+               <Item>'CIniFile.GetPrivateProfileString(string, string, string, StringBuilder, int, string)'</Item>
+              </Issue>
+             </Message>
+             <Message Id="0" TypeName="SpecifyMarshalingForPInvokeStringArguments" Category="Microsoft.Globalization" CheckId="CA2101" Created="2008-04-08 12:07:02Z">
+              <Issue Name="ParameterImplicitAnsi">
+               <Item>'section'</Item>
+              </Issue>
+             </Message>
+             <Message Id="1" TypeName="SpecifyMarshalingForPInvokeStringArguments" Category="Microsoft.Globalization" CheckId="CA2101" Created="2008-04-08 12:07:02Z">
+              <Issue Name="ParameterImplicitAnsi">
+               <Item>'key'</Item>
+              </Issue>
+             </Message>
+             <Message Id="2" TypeName="SpecifyMarshalingForPInvokeStringArguments" Category="Microsoft.Globalization" CheckId="CA2101" Created="2008-04-08 12:07:02Z">
+              <Issue Name="ParameterImplicitAnsi">
+               <Item>'def'</Item>
+              </Issue>
+             </Message>
+             <Message Id="3" TypeName="SpecifyMarshalingForPInvokeStringArguments" Category="Microsoft.Globalization" CheckId="CA2101" Created="2008-04-08 12:07:02Z">
+              <Issue Name="ParameterImplicitAnsi">
+               <Item>'retVal'</Item>
+              </Issue>
+             </Message>
+             <Message Id="5" TypeName="SpecifyMarshalingForPInvokeStringArguments" Category="Microsoft.Globalization" CheckId="CA2101" Created="2008-04-08 12:07:02Z">
+              <Issue Name="ParameterImplicitAnsi">
+               <Item>'filePath'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#IniReadValue(System.String,System.String)">
+            <Messages>
+             <Message Id="Ini" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2008-04-08 12:07:02Z">
+              <Issue Name="Member">
+               <Item>Ini</Item>
+               <Item>'CIniFile.IniReadValue(string, string)'</Item>
+              </Issue>
+             </Message>
+             <Message Id="i" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Created="2008-04-08 12:07:02Z">
+              <Issue>
+               <Item>'CIniFile.IniReadValue(string, string)'</Item>
+               <Item>'i'</Item>
+               <Item>'int'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#IniWriteValue(System.String,System.String,System.String)">
+            <Messages>
+             <Message Id="Ini" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2008-04-08 12:07:02Z">
+              <Issue Name="Member">
+               <Item>Ini</Item>
+               <Item>'CIniFile.IniWriteValue(string, string, string)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#path">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Created="2008-04-08 12:07:02Z">
+              <Issue>
+               <Item>'CIniFile.path'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#SectionNames">
+            <Messages>
+             <Message TypeName="PropertiesShouldNotReturnArrays" Category="Microsoft.Performance" CheckId="CA1819" Created="2008-04-08 12:07:02Z">
+              <Issue>
+               <Item>'CIniFile.SectionNames'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#WritePrivateProfileString(System.String,System.String,System.String,System.String)">
+            <Messages>
+             <Message TypeName="MovePInvokesToNativeMethodsClass" Category="Microsoft.Design" CheckId="CA1060" Created="2008-04-08 12:07:02Z">
+              <Issue>
+               <Item>'CIniFile.WritePrivateProfileString(string, string, string, string)'</Item>
+              </Issue>
+             </Message>
+             <Message Id="return" TypeName="PInvokeDeclarationsShouldBePortable" Category="Microsoft.Portability" CheckId="CA1901" Created="2008-04-08 12:07:02Z" FixCategory="NonBreaking">
+              <Issue Name="Return">
+               <Item>'CIniFile.WritePrivateProfileString(string, string, string, string)'</Item>
+               <Item>8</Item>
+               <Item>32-bit</Item>
+               <Item>4</Item>
+               <Item>'long'</Item>
+              </Issue>
+              <Issue Name="Return">
+               <Item>'CIniFile.WritePrivateProfileString(string, string, string, string)'</Item>
+               <Item>8</Item>
+               <Item>64-bit</Item>
+               <Item>4</Item>
+               <Item>'long'</Item>
+              </Issue>
+             </Message>
+             <Message Id="0" TypeName="SpecifyMarshalingForPInvokeStringArguments" Category="Microsoft.Globalization" CheckId="CA2101" Created="2008-04-08 12:07:02Z">
+              <Issue Name="ParameterImplicitAnsi">
+               <Item>'section'</Item>
+              </Issue>
+             </Message>
+             <Message Id="1" TypeName="SpecifyMarshalingForPInvokeStringArguments" Category="Microsoft.Globalization" CheckId="CA2101" Created="2008-04-08 12:07:02Z">
+              <Issue Name="ParameterImplicitAnsi">
+               <Item>'key'</Item>
+              </Issue>
+             </Message>
+             <Message Id="2" TypeName="SpecifyMarshalingForPInvokeStringArguments" Category="Microsoft.Globalization" CheckId="CA2101" Created="2008-04-08 12:07:02Z">
+              <Issue Name="ParameterImplicitAnsi">
+               <Item>'val'</Item>
+              </Issue>
+             </Message>
+             <Message Id="3" TypeName="SpecifyMarshalingForPInvokeStringArguments" Category="Microsoft.Globalization" CheckId="CA2101" Created="2008-04-08 12:07:02Z">
+              <Issue Name="ParameterImplicitAnsi">
+               <Item>'filePath'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="CIniSection">
+          <Messages>
+           <Message Id="Ini" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2008-04-08 12:07:02Z">
+            <Issue Name="Type">
+             <Item>Ini</Item>
+             <Item>'CIniSection'</Item>
+            </Issue>
+           </Message>
+           <Message TypeName="IdentifiersShouldNotHaveIncorrectPrefix" Category="Microsoft.Naming" CheckId="CA1722" Created="2008-04-08 12:07:02Z">
+            <Issue>
+             <Item>'CIniSection'</Item>
+            </Issue>
+           </Message>
+          </Messages>
+          <Members>
+           <Member Name="#.ctor(IniFile.CIniFile,System.String)">
+            <Messages>
+             <Message Id="Ini" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2008-04-08 12:07:02Z">
+              <Issue Name="MemberParameter">
+               <Item>'CIniSection.CIniSection(CIniFile, string)'</Item>
+               <Item>Ini</Item>
+               <Item>'vIniFile'</Item>
+              </Issue>
+             </Message>
+             <Message Id="v" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2008-04-08 12:07:02Z">
+              <Issue Name="MemberParameter">
+               <Item>'CIniSection.CIniSection(CIniFile, string)'</Item>
+               <Item>v</Item>
+               <Item>'vIniFile'</Item>
+              </Issue>
+              <Issue Name="MemberParameter">
+               <Item>'CIniSection.CIniSection(CIniFile, string)'</Item>
+               <Item>v</Item>
+               <Item>'vSectionName'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#IniFile">
+            <Messages>
+             <Message Id="Ini" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2008-04-08 12:07:02Z">
+              <Issue Name="Member">
+               <Item>Ini</Item>
+               <Item>'CIniSection.IniFile'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="Consts">
+          <Messages>
+           <Message Id="Consts" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2008-04-08 12:07:02Z">
+            <Issue Name="Type">
+             <Item>Consts</Item>
+             <Item>'Consts'</Item>
+            </Issue>
+           </Message>
+          </Messages>
+         </Type>
+         <Type Name="CSectionContainer`1">
+          <Messages>
+           <Message TypeName="IdentifiersShouldHaveCorrectSuffix" Category="Microsoft.Naming" CheckId="CA1710" Created="2008-04-08 12:07:02Z">
+            <Issue>
+             <Item>'CSectionContainer&lt;T&gt;'</Item>
+             <Item>Collection</Item>
+            </Issue>
+           </Message>
+           <Message TypeName="IdentifiersShouldNotHaveIncorrectPrefix" Category="Microsoft.Naming" CheckId="CA1722" Created="2008-04-08 12:07:02Z">
+            <Issue>
+             <Item>'CSectionContainer&lt;T&gt;'</Item>
+            </Issue>
+           </Message>
+          </Messages>
+         </Type>
+         <Type Name="CValueContainer">
+          <Messages>
+           <Message TypeName="IdentifiersShouldNotHaveIncorrectPrefix" Category="Microsoft.Naming" CheckId="CA1722" Created="2008-04-08 12:07:02Z">
+            <Issue>
+             <Item>'CValueContainer'</Item>
+            </Issue>
+           </Message>
+          </Messages>
+          <Members>
+           <Member Name="#.ctor(IniFile.CIniSection)">
+            <Messages>
+             <Message TypeName="DoNotInitializeUnnecessarily" Category="Microsoft.Performance" CheckId="CA1805" Created="2008-04-08 12:07:02Z">
+              <Issue>
+               <Item>'CValueContainer.CValueContainer(CIniSection)'</Item>
+               <Item>'CValueContainer.AutoCreateValues'</Item>
+               <Item>'bool'</Item>
+               <Item>false</Item>
+              </Issue>
+             </Message>
+             <Message Id="Ini" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2008-04-08 12:07:02Z">
+              <Issue Name="MemberParameter">
+               <Item>'CValueContainer.CValueContainer(CIniSection)'</Item>
+               <Item>Ini</Item>
+               <Item>'IniSection'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#.ctor(IniFile.CIniSection,System.Boolean)">
+            <Messages>
+             <Message Id="Ini" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2008-04-08 12:07:02Z">
+              <Issue Name="MemberParameter">
+               <Item>'CValueContainer.CValueContainer(CIniSection, bool)'</Item>
+               <Item>Ini</Item>
+               <Item>'IniSection'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Item[System.String]">
+            <Accessors>
+             <Accessor Name="#get_Item(System.String)">
+              <Messages>
+               <Message TypeName="TestForEmptyStringsUsingStringLength" Category="Microsoft.Performance" CheckId="CA1820" Created="2008-04-08 12:07:02Z">
+                <Issue Name="IsNullOrEmpty">
+                 <Item>'string.operator ==(string, string)'</Item>
+                 <Item>'CValueContainer.this.get(string)'</Item>
+                </Issue>
+               </Message>
+              </Messages>
+             </Accessor>
+            </Accessors>
+           </Member>
+          </Members>
+         </Type>
+        </Types>
+       </Namespace>
+      </Namespaces>
+     </Module>
+    </Modules>
+   </Target>
+   <Target Name="$(ProjectDir)/bin/Debug/LogWriterLib.dll">
+    <Modules>
+     <Module Name="logwriterlib.dll">
+      <Messages>
+       <Message TypeName="AssembliesShouldHaveValidStrongNames" Category="Microsoft.Design" CheckId="CA2210" Created="2008-04-08 12:07:02Z">
+        <Issue Name="NoStrongName">
+         <Item>'LogWriterLib.dll'</Item>
+        </Issue>
+       </Message>
+       <Message TypeName="MarkAssembliesWithClsCompliant" Category="Microsoft.Design" CheckId="CA1014" Created="2008-04-08 12:07:02Z">
+        <Issue>
+         <Item>'LogWriterLib.dll'</Item>
+        </Issue>
+       </Message>
+      </Messages>
+      <Namespaces>
+       <Namespace Name="LogWriterLib">
+        <Types>
+         <Type Name="LogWriter">
+          <Messages>
+           <Message TypeName="TypesThatOwnDisposableFieldsShouldBeDisposable" Category="Microsoft.Design" CheckId="CA1001" Created="2008-04-08 12:07:02Z" FixCategory="DependsOnFix">
+            <Issue Name="DependsOnFix">
+             <Item>'LogWriter'</Item>
+             <Item>'StreamWriter'</Item>
+            </Issue>
+           </Message>
+          </Messages>
+          <Members>
+           <Member Name="#Finalize()">
+            <Messages>
+             <Message TypeName="RemoveEmptyFinalizers" Category="Microsoft.Performance" CheckId="CA1821" Created="2008-04-08 12:07:02Z">
+              <Issue>
+               <Item>'LogWriter'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#WriteLog(LogWriterLib.LogWriter+TypeLogMessage,System.String)">
+            <Messages>
+             <Message Id="System.Convert.ToString(System.DateTime)" TypeName="SpecifyIFormatProvider" Category="Microsoft.Globalization" CheckId="CA1305" Created="2008-04-08 12:07:02Z">
+              <Issue>
+               <Item>'Convert.ToString(DateTime)'</Item>
+               <Item>'LogWriter.WriteLog(LogWriter.TypeLogMessage, string)'</Item>
+               <Item>'Convert.ToString(DateTime, IFormatProvider)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="LogWriter+TypeLogMessage">
+          <Messages>
+           <Message TypeName="NestedTypesShouldNotBeVisible" Category="Microsoft.Design" CheckId="CA1034" Created="2008-04-08 12:07:02Z">
+            <Issue>
+             <Item>'LogWriter.TypeLogMessage'</Item>
+            </Issue>
+           </Message>
+          </Messages>
+         </Type>
+        </Types>
+       </Namespace>
+      </Namespaces>
+     </Module>
+    </Modules>
+   </Target>
+   <Target Name="$(ProjectDir)/bin/Debug/Universal Log Viewer.exe">
+    <Modules>
+     <Module Name="universal log viewer.exe">
+      <Messages>
+       <Message TypeName="AssembliesShouldHaveValidStrongNames" Category="Microsoft.Design" CheckId="CA2210" Created="2008-04-08 12:00:40Z">
+        <Issue Name="NoStrongName">
+         <Item>'Universal Log Viewer.exe'</Item>
+        </Issue>
+       </Message>
+       <Message TypeName="MarkAssembliesWithClsCompliant" Category="Microsoft.Design" CheckId="CA1014" Created="2008-04-08 12:00:40Z">
+        <Issue>
+         <Item>'Universal Log Viewer.exe'</Item>
+        </Issue>
+       </Message>
+      </Messages>
+      <Namespaces>
+       <Namespace Name="UniversalLogViewer">
+        <Types>
+         <Type Name="Consts">
+          <Messages>
+           <Message Id="Consts" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2008-04-08 12:18:28Z">
+            <Issue Name="Type">
+             <Item>Consts</Item>
+             <Item>'Consts'</Item>
+            </Issue>
+           </Message>
+          </Messages>
+         </Type>
+        </Types>
+       </Namespace>
+       <Namespace Name="UniversalLogViewer.Common">
+        <Types>
+         <Type Name="LogTypeCollection`1">
+          <Members>
+           <Member Name="#.ctor(UniversalLogViewer.Types.Structures.LogType)">
+            <Messages>
+             <Message Id="o" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2008-04-08 12:57:34Z">
+              <Issue Name="MemberParameter">
+               <Item>'LogTypeCollection&lt;T&gt;.LogTypeCollection(LogType)'</Item>
+               <Item>o</Item>
+               <Item>'oLogType'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#AddType(UniversalLogViewer.Common.IniFile.CLogIniSection)">
+            <Messages>
+             <Message TypeName="ConsiderPassingBaseTypesAsParameters" Category="Microsoft.Design" CheckId="CA1011" Created="2008-04-08 12:41:28Z">
+              <Issue>
+               <Item>'Section'</Item>
+               <Item>'LogTypeCollection&lt;T&gt;.AddType(CLogIniSection)'</Item>
+               <Item>'CLogIniSection'</Item>
+               <Item>'CIniSection'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="Types">
+          <Messages>
+           <Message TypeName="StaticHolderTypesShouldNotHaveConstructors" Category="Microsoft.Design" CheckId="CA1053" Created="2008-04-08 13:24:30Z">
+            <Issue>
+             <Item>'Types'</Item>
+            </Issue>
+           </Message>
+           <Message TypeName="TypeNamesShouldNotMatchNamespaces" Category="Microsoft.Naming" CheckId="CA1724" Created="2008-04-08 13:24:30Z">
+            <Issue>
+             <Item>'Types'</Item>
+             <Item>UniversalLogViewer.Types.Managers</Item>
+            </Issue>
+           </Message>
+          </Messages>
+         </Type>
+         <Type Name="Types+TitleTypes">
+          <Messages>
+           <Message TypeName="NestedTypesShouldNotBeVisible" Category="Microsoft.Design" CheckId="CA1034" Created="2008-04-08 13:24:30Z">
+            <Issue>
+             <Item>'Types.TitleTypes'</Item>
+            </Issue>
+           </Message>
+           <Message TypeName="OnlyFlagsEnumsShouldHavePluralNames" Category="Microsoft.Naming" CheckId="CA1717" Created="2008-04-08 13:24:30Z">
+            <Issue>
+             <Item>'Types.TitleTypes'</Item>
+            </Issue>
+           </Message>
+          </Messages>
+         </Type>
+        </Types>
+       </Namespace>
+       <Namespace Name="UniversalLogViewer.Common.IniFile">
+        <Types>
+         <Type Name="CLogIniFile">
+          <Messages>
+           <Message Id="CLog" TypeName="CompoundWordsShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1702" Created="2008-04-08 12:18:28Z">
+            <Issue Name="TypeShouldBeDiscreteTerm">
+             <Item>CLog</Item>
+             <Item>'CLogIniFile'</Item>
+             <Item>Clog</Item>
+            </Issue>
+           </Message>
+           <Message Id="Ini" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2008-04-08 12:18:28Z">
+            <Issue Name="Type">
+             <Item>Ini</Item>
+             <Item>'CLogIniFile'</Item>
+            </Issue>
+           </Message>
+           <Message TypeName="IdentifiersShouldNotHaveIncorrectPrefix" Category="Microsoft.Naming" CheckId="CA1722" Created="2008-04-08 12:18:28Z">
+            <Issue>
+             <Item>'CLogIniFile'</Item>
+            </Issue>
+           </Message>
+          </Messages>
+          <Members>
+           <Member Name="#Sections">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Created="2008-04-08 12:18:28Z">
+              <Issue>
+               <Item>'CLogIniFile.Sections'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="CLogIniSection">
+          <Messages>
+           <Message Id="CLog" TypeName="CompoundWordsShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1702" Created="2008-04-08 12:18:28Z">
+            <Issue Name="TypeShouldBeDiscreteTerm">
+             <Item>CLog</Item>
+             <Item>'CLogIniSection'</Item>
+             <Item>Clog</Item>
+            </Issue>
+           </Message>
+           <Message Id="Ini" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2008-04-08 12:18:28Z">
+            <Issue Name="Type">
+             <Item>Ini</Item>
+             <Item>'CLogIniSection'</Item>
+            </Issue>
+           </Message>
+           <Message TypeName="IdentifiersShouldNotHaveIncorrectPrefix" Category="Microsoft.Naming" CheckId="CA1722" Created="2008-04-08 12:18:28Z">
+            <Issue>
+             <Item>'CLogIniSection'</Item>
+            </Issue>
+           </Message>
+          </Messages>
+          <Members>
+           <Member Name="#.ctor(UniversalLogViewer.Common.IniFile.CLogIniFile,System.String)">
+            <Messages>
+             <Message Id="Ini" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2008-04-08 12:18:28Z">
+              <Issue Name="MemberParameter">
+               <Item>'CLogIniSection.CLogIniSection(CLogIniFile, string)'</Item>
+               <Item>Ini</Item>
+               <Item>'vIniFile'</Item>
+              </Issue>
+             </Message>
+             <Message Id="v" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2008-04-08 12:18:28Z">
+              <Issue Name="MemberParameter">
+               <Item>'CLogIniSection.CLogIniSection(CLogIniFile, string)'</Item>
+               <Item>v</Item>
+               <Item>'vIniFile'</Item>
+              </Issue>
+              <Issue Name="MemberParameter">
+               <Item>'CLogIniSection.CLogIniSection(CLogIniFile, string)'</Item>
+               <Item>v</Item>
+               <Item>'vSectionName'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+        </Types>
+       </Namespace>
+       <Namespace Name="UniversalLogViewer.Types.Managers">
+        <Types>
+         <Type Name="CIniSettingsManager">
+          <Messages>
+           <Message Id="Ini" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2008-04-08 12:18:28Z">
+            <Issue Name="Type">
+             <Item>Ini</Item>
+             <Item>'CIniSettingsManager'</Item>
+            </Issue>
+           </Message>
+           <Message TypeName="IdentifiersShouldNotHaveIncorrectPrefix" Category="Microsoft.Naming" CheckId="CA1722" Created="2008-04-08 12:18:28Z">
+            <Issue>
+             <Item>'CIniSettingsManager'</Item>
+            </Issue>
+           </Message>
+          </Messages>
+          <Members>
+           <Member Name="#InitIniFile()">
+            <Messages>
+             <Message Id="Ini" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2008-04-08 12:18:28Z">
+              <Issue Name="Member">
+               <Item>Ini</Item>
+               <Item>'CIniSettingsManager.InitIniFile()'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#UseExternalOpen">
+            <Accessors>
+             <Accessor Name="#get_UseExternalOpen()">
+              <Messages>
+               <Message TypeName="TestForEmptyStringsUsingStringLength" Category="Microsoft.Performance" CheckId="CA1820" Created="2008-04-08 12:18:28Z">
+                <Issue Name="IsNullOrEmpty">
+                 <Item>'string.operator !=(string, string)'</Item>
+                 <Item>'CIniSettingsManager.UseExternalOpen.get()'</Item>
+                </Issue>
+               </Message>
+              </Messages>
+             </Accessor>
+            </Accessors>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="CLogTypeManager">
+          <Messages>
+           <Message Id="CLog" TypeName="CompoundWordsShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1702" Created="2008-04-08 12:18:28Z">
+            <Issue Name="TypeShouldBeDiscreteTerm">
+             <Item>CLog</Item>
+             <Item>'CLogTypeManager'</Item>
+             <Item>Clog</Item>
+            </Issue>
+           </Message>
+           <Message TypeName="IdentifiersShouldNotHaveIncorrectPrefix" Category="Microsoft.Naming" CheckId="CA1722" Created="2008-04-08 12:18:28Z">
+            <Issue>
+             <Item>'CLogTypeManager'</Item>
+            </Issue>
+           </Message>
+          </Messages>
+          <Members>
+           <Member Name="#AddLogType(System.String)">
+            <Messages>
+             <Message Id="Ini" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2008-04-08 12:18:28Z">
+              <Issue Name="MemberParameter">
+               <Item>'CLogTypeManager.AddLogType(string)'</Item>
+               <Item>Ini</Item>
+               <Item>'LogTypeIniFileName'</Item>
+              </Issue>
+             </Message>
+             <Message Id="System.Int32.ToString" TypeName="SpecifyIFormatProvider" Category="Microsoft.Globalization" CheckId="CA1305" Created="2008-04-08 12:18:28Z">
+              <Issue>
+               <Item>'int.ToString()'</Item>
+               <Item>'CLogTypeManager.AddLogType(string)'</Item>
+               <Item>'int.ToString(IFormatProvider)'</Item>
+              </Issue>
+             </Message>
+             <Message TypeName="SpecifyMessageBoxOptions" Category="Microsoft.Globalization" CheckId="CA1300" Created="2008-04-08 12:18:28Z">
+              <Issue>
+               <Item>'CLogTypeManager.AddLogType(string)'</Item>
+              </Issue>
+             </Message>
+             <Message Id="System.String.LastIndexOf(System.String)" TypeName="SpecifyStringComparison" Category="Microsoft.Globalization" CheckId="CA1307" Created="2008-04-08 12:18:28Z">
+              <Issue>
+               <Item>'CLogTypeManager.AddLogType(string)'</Item>
+               <Item>'string.LastIndexOf(string)'</Item>
+               <Item>'string.LastIndexOf(string, StringComparison)'</Item>
+              </Issue>
+              <Issue>
+               <Item>'CLogTypeManager.AddLogType(string)'</Item>
+               <Item>'string.LastIndexOf(string)'</Item>
+               <Item>'string.LastIndexOf(string, StringComparison)'</Item>
+              </Issue>
+              <Issue>
+               <Item>'CLogTypeManager.AddLogType(string)'</Item>
+               <Item>'string.LastIndexOf(string)'</Item>
+               <Item>'string.LastIndexOf(string, StringComparison)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+        </Types>
+       </Namespace>
+       <Namespace Name="UniversalLogViewer.Types.Structures">
+        <Types>
+         <Type Name="BaseType">
+          <Messages>
+           <Message TypeName="AbstractTypesShouldNotHaveConstructors" Category="Microsoft.Design" CheckId="CA1012" Created="2008-04-08 12:41:28Z">
+            <Issue>
+             <Item>'BaseType'</Item>
+            </Issue>
+           </Message>
+          </Messages>
+          <Members>
+           <Member Name="#IniSection">
+            <Messages>
+             <Message Id="Ini" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2008-04-08 12:41:28Z">
+              <Issue Name="Member">
+               <Item>Ini</Item>
+               <Item>'BaseType.IniSection'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#ReInit(UniversalLogViewer.Types.Structures.LogType,UniversalLogViewer.Common.IniFile.CLogIniSection)">
+            <Messages>
+             <Message TypeName="TestForEmptyStringsUsingStringLength" Category="Microsoft.Performance" CheckId="CA1820" Created="2008-04-08 12:57:34Z">
+              <Issue Name="IsNullOrEmpty">
+               <Item>'string.operator ==(string, string)'</Item>
+               <Item>'BaseType.ReInit(LogType, CLogIniSection)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="BlockType">
+          <Members>
+           <Member Name="#.ctor(UniversalLogViewer.Types.Structures.LogType,UniversalLogViewer.Common.IniFile.CLogIniSection)">
+            <Messages>
+             <Message Id="Ini" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2008-04-08 12:57:34Z">
+              <Issue Name="MemberParameter">
+               <Item>'BlockType.BlockType(LogType, CLogIniSection)'</Item>
+               <Item>Ini</Item>
+               <Item>'IniSection'</Item>
+              </Issue>
+             </Message>
+             <Message Id="v" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2008-04-08 12:57:34Z">
+              <Issue Name="MemberParameter">
+               <Item>'BlockType.BlockType(LogType, CLogIniSection)'</Item>
+               <Item>v</Item>
+               <Item>'vLogType'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="ConditionType">
+          <Members>
+           <Member Name="#.ctor(UniversalLogViewer.Types.Structures.LogType,UniversalLogViewer.Common.IniFile.CLogIniSection)">
+            <Messages>
+             <Message Id="Ini" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2008-04-08 12:57:34Z">
+              <Issue Name="MemberParameter">
+               <Item>'ConditionType.ConditionType(LogType, CLogIniSection)'</Item>
+               <Item>Ini</Item>
+               <Item>'IniSection'</Item>
+              </Issue>
+             </Message>
+             <Message Id="v" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2008-04-08 12:57:34Z">
+              <Issue Name="MemberParameter">
+               <Item>'ConditionType.ConditionType(LogType, CLogIniSection)'</Item>
+               <Item>v</Item>
+               <Item>'vLogType'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Contain">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Created="2008-04-08 12:57:34Z">
+              <Issue>
+               <Item>'ConditionType.Contain'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#EndsWith">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Created="2008-04-08 12:57:34Z">
+              <Issue>
+               <Item>'ConditionType.EndsWith'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Exclude">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Created="2008-04-08 12:57:34Z">
+              <Issue>
+               <Item>'ConditionType.Exclude'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#IsCorrect(System.String)">
+            <Messages>
+             <Message Id="System.String.EndsWith(System.String)" TypeName="SpecifyStringComparison" Category="Microsoft.Globalization" CheckId="CA1307" Created="2008-04-08 12:57:34Z">
+              <Issue>
+               <Item>'ConditionType.IsCorrect(string)'</Item>
+               <Item>'string.EndsWith(string)'</Item>
+               <Item>'string.EndsWith(string, StringComparison)'</Item>
+              </Issue>
+             </Message>
+             <Message Id="System.String.StartsWith(System.String)" TypeName="SpecifyStringComparison" Category="Microsoft.Globalization" CheckId="CA1307" Created="2008-04-08 12:57:34Z">
+              <Issue>
+               <Item>'ConditionType.IsCorrect(string)'</Item>
+               <Item>'string.StartsWith(string)'</Item>
+               <Item>'string.StartsWith(string, StringComparison)'</Item>
+              </Issue>
+             </Message>
+             <Message TypeName="TestForEmptyStringsUsingStringLength" Category="Microsoft.Performance" CheckId="CA1820" Created="2008-04-08 12:57:34Z">
+              <Issue Name="IsNullOrEmpty">
+               <Item>'string.operator !=(string, string)'</Item>
+               <Item>'ConditionType.IsCorrect(string)'</Item>
+              </Issue>
+              <Issue Name="IsNullOrEmpty">
+               <Item>'string.operator !=(string, string)'</Item>
+               <Item>'ConditionType.IsCorrect(string)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#ReInit(UniversalLogViewer.Types.Structures.LogType,UniversalLogViewer.Common.IniFile.CLogIniSection)">
+            <Messages>
+             <Message Id="0#" TypeName="ParameterNamesShouldMatchBaseDeclaration" Category="Microsoft.Naming" CheckId="CA1725" Created="2008-04-08 12:57:34Z">
+              <Issue>
+               <Item>'ConditionType.ReInit(LogType, CLogIniSection)'</Item>
+               <Item>'vLogType'</Item>
+               <Item>'LogType'</Item>
+               <Item>'BaseType.ReInit(LogType, CLogIniSection)'</Item>
+              </Issue>
+             </Message>
+             <Message Id="1#" TypeName="ParameterNamesShouldMatchBaseDeclaration" Category="Microsoft.Naming" CheckId="CA1725" Created="2008-04-08 12:57:34Z">
+              <Issue>
+               <Item>'ConditionType.ReInit(LogType, CLogIniSection)'</Item>
+               <Item>'IniSection'</Item>
+               <Item>'Section'</Item>
+               <Item>'BaseType.ReInit(LogType, CLogIniSection)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#StartsWith">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Created="2008-04-08 12:57:34Z">
+              <Issue>
+               <Item>'ConditionType.StartsWith'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="LogType">
+          <Members>
+           <Member Name="#.ctor(System.String)">
+            <Messages>
+             <Message Id="Ini" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2008-04-08 12:57:34Z">
+              <Issue Name="MemberParameter">
+               <Item>'LogType.LogType(string)'</Item>
+               <Item>Ini</Item>
+               <Item>'IniFileName'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#BlockTypes">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Created="2008-04-08 12:57:34Z">
+              <Issue>
+               <Item>'LogType.BlockTypes'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Conditions">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Created="2008-04-08 12:57:34Z">
+              <Issue>
+               <Item>'LogType.Conditions'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#ExternalOpen()">
+            <Messages>
+             <Message TypeName="DoNotIndirectlyExposeMethodsWithLinkDemands" Category="Microsoft.Security" CheckId="CA2122" Created="2008-04-08 12:57:34Z">
+              <Issue>
+               <Item>'LogType.ExternalOpen()'</Item>
+               <Item>'Process.Start()'</Item>
+               <Item>&#xD;&#xA;   -&gt;'LogType.ExternalOpen()'&#xD;&#xA;   -&gt;'LogType.ExternalOpen()'</Item>
+              </Issue>
+              <Issue>
+               <Item>'LogType.ExternalOpen()'</Item>
+               <Item>'Process.StartInfo.get()'</Item>
+               <Item>&#xD;&#xA;   -&gt;'LogType.ExternalOpen()'&#xD;&#xA;   -&gt;'LogType.ExternalOpen()'</Item>
+              </Issue>
+              <Issue>
+               <Item>'LogType.ExternalOpen()'</Item>
+               <Item>'ProcessStartInfo.Arguments.set(string)'</Item>
+               <Item>&#xD;&#xA;   -&gt;'LogType.ExternalOpen()'&#xD;&#xA;   -&gt;'LogType.ExternalOpen()'</Item>
+              </Issue>
+              <Issue>
+               <Item>'LogType.ExternalOpen()'</Item>
+               <Item>'ProcessStartInfo.FileName.set(string)'</Item>
+               <Item>&#xD;&#xA;   -&gt;'LogType.ExternalOpen()'&#xD;&#xA;   -&gt;'LogType.ExternalOpen()'</Item>
+              </Issue>
+              <Issue>
+               <Item>'LogType.ExternalOpen()'</Item>
+               <Item>'ProcessStartInfo.WorkingDirectory.set(string)'</Item>
+               <Item>&#xD;&#xA;   -&gt;'LogType.ExternalOpen()'&#xD;&#xA;   -&gt;'LogType.ExternalOpen()'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#GetRTFDescription()">
+            <Messages>
+             <Message TypeName="UsePropertiesWhereAppropriate" Category="Microsoft.Design" CheckId="CA1024" Created="2008-04-08 12:57:34Z">
+              <Issue Certainty="50">
+               <Item>'LogType.GetRTFDescription()'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#LogIniFile">
+            <Messages>
+             <Message Id="Ini" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2008-04-08 12:57:34Z">
+              <Issue Name="Member">
+               <Item>Ini</Item>
+               <Item>'LogType.LogIniFile'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#ReInit(System.String)">
+            <Messages>
+             <Message Id="Ini" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2008-04-08 12:57:34Z">
+              <Issue Name="MemberParameter">
+               <Item>'LogType.ReInit(string)'</Item>
+               <Item>Ini</Item>
+               <Item>'IniFileName'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#StringTypes">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Created="2008-04-08 12:57:34Z">
+              <Issue>
+               <Item>'LogType.StringTypes'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Styles">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Created="2008-04-08 12:57:34Z">
+              <Issue>
+               <Item>'LogType.Styles'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#ValueTypes">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Created="2008-04-08 12:57:34Z">
+              <Issue>
+               <Item>'LogType.ValueTypes'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="StringType">
+          <Members>
+           <Member Name="#ChildTypes">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Created="2008-04-08 12:41:28Z">
+              <Issue>
+               <Item>'StringType.ChildTypes'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Condition">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Created="2008-04-08 12:41:28Z">
+              <Issue>
+               <Item>'StringType.Condition'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Separator">
+            <Messages>
+             <Message TypeName="PropertiesShouldNotReturnArrays" Category="Microsoft.Performance" CheckId="CA1819" Created="2008-04-08 12:41:28Z">
+              <Issue>
+               <Item>'StringType.Separator'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="StyleType">
+          <Members>
+           <Member Name="#ReInit(UniversalLogViewer.Types.Structures.LogType,UniversalLogViewer.Common.IniFile.CLogIniSection)">
+            <Messages>
+             <Message TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031" Created="2008-04-08 12:57:34Z">
+              <Issue>
+               <Item>'StyleType.ReInit(LogType, CLogIniSection)'</Item>
+               <Item>'Exception'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="ValuesType">
+          <Members>
+           <Member Name="#.ctor(UniversalLogViewer.Types.Structures.LogType,UniversalLogViewer.Common.IniFile.CLogIniSection)">
+            <Messages>
+             <Message Id="Ini" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2008-04-08 12:57:34Z">
+              <Issue Name="MemberParameter">
+               <Item>'ValuesType.ValuesType(LogType, CLogIniSection)'</Item>
+               <Item>Ini</Item>
+               <Item>'IniSection'</Item>
+              </Issue>
+             </Message>
+             <Message Id="v" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2008-04-08 12:57:34Z">
+              <Issue Name="MemberParameter">
+               <Item>'ValuesType.ValuesType(LogType, CLogIniSection)'</Item>
+               <Item>v</Item>
+               <Item>'vLogType'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#ReInit(UniversalLogViewer.Types.Structures.LogType,UniversalLogViewer.Common.IniFile.CLogIniSection)">
+            <Messages>
+             <Message Id="0#" TypeName="ParameterNamesShouldMatchBaseDeclaration" Category="Microsoft.Naming" CheckId="CA1725" Created="2008-04-08 12:57:34Z">
+              <Issue>
+               <Item>'ValuesType.ReInit(LogType, CLogIniSection)'</Item>
+               <Item>'vLogType'</Item>
+               <Item>'LogType'</Item>
+               <Item>'BaseType.ReInit(LogType, CLogIniSection)'</Item>
+              </Issue>
+             </Message>
+             <Message Id="1#" TypeName="ParameterNamesShouldMatchBaseDeclaration" Category="Microsoft.Naming" CheckId="CA1725" Created="2008-04-08 12:57:34Z">
+              <Issue>
+               <Item>'ValuesType.ReInit(LogType, CLogIniSection)'</Item>
+               <Item>'IniSection'</Item>
+               <Item>'Section'</Item>
+               <Item>'BaseType.ReInit(LogType, CLogIniSection)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Type">
+            <Messages>
+             <Message TypeName="PropertyNamesShouldNotMatchGetMethods" Category="Microsoft.Naming" CheckId="CA1721" Created="2008-04-08 12:41:28Z" FixCategory="NonBreaking">
+              <Issue Name="BaseType">
+               <Item>'ValuesType.Type'</Item>
+               <Item>'object.GetType()'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+        </Types>
+       </Namespace>
+       <Namespace Name="UniversalLogViewer.Types.Values">
+        <Types>
+         <Type Name="BaseValueType">
+          <Members>
+           <Member Name="#_TreeNodeValueString">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Created="2008-04-08 13:26:49Z">
+              <Issue>
+               <Item>'BaseValueType._TreeNodeValueString'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#GetTreeNode()">
+            <Messages>
+             <Message TypeName="UsePropertiesWhereAppropriate" Category="Microsoft.Design" CheckId="CA1024" Created="2008-04-08 13:26:49Z">
+              <Issue>
+               <Item>'BaseValueType.GetTreeNode()'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#TreeNode">
+            <Messages>
+             <Message TypeName="PropertyNamesShouldNotMatchGetMethods" Category="Microsoft.Naming" CheckId="CA1721" Created="2008-04-08 13:26:49Z" FixCategory="NonBreaking">
+              <Issue Name="SameType">
+               <Item>'BaseValueType.TreeNode'</Item>
+               <Item>'BaseValueType.GetTreeNode()'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Type">
+            <Messages>
+             <Message TypeName="PropertyNamesShouldNotMatchGetMethods" Category="Microsoft.Naming" CheckId="CA1721" Created="2008-04-08 13:26:49Z" FixCategory="NonBreaking">
+              <Issue Name="BaseType">
+               <Item>'BaseValueType.Type'</Item>
+               <Item>'object.GetType()'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="CBaseStringsValueCollection`1">
+          <Messages>
+           <Message TypeName="AbstractTypesShouldNotHaveConstructors" Category="Microsoft.Design" CheckId="CA1012" Created="2008-04-08 13:26:49Z">
+            <Issue>
+             <Item>'CBaseStringsValueCollection&lt;T&gt;'</Item>
+            </Issue>
+           </Message>
+           <Message TypeName="IdentifiersShouldNotHaveIncorrectPrefix" Category="Microsoft.Naming" CheckId="CA1722" Created="2008-04-08 13:26:49Z">
+            <Issue>
+             <Item>'CBaseStringsValueCollection&lt;T&gt;'</Item>
+            </Issue>
+           </Message>
+          </Messages>
+          <Members>
+           <Member Name="#ChildElements">
+            <Messages>
+             <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Created="2008-04-08 13:26:49Z">
+              <Issue>
+               <Item>'CBaseStringsValueCollection&lt;T&gt;.ChildElements'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Source">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Created="2008-04-08 13:26:49Z">
+              <Issue>
+               <Item>'CBaseStringsValueCollection&lt;T&gt;.Source'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Value">
+            <Messages>
+             <Message TypeName="PropertiesShouldNotReturnArrays" Category="Microsoft.Performance" CheckId="CA1819" Created="2008-04-08 13:26:49Z">
+              <Issue>
+               <Item>'CBaseStringsValueCollection&lt;T&gt;.Value'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="CBaseStringValueCollection`1">
+          <Messages>
+           <Message TypeName="AbstractTypesShouldNotHaveConstructors" Category="Microsoft.Design" CheckId="CA1012" Created="2008-04-08 13:26:49Z">
+            <Issue>
+             <Item>'CBaseStringValueCollection&lt;T&gt;'</Item>
+            </Issue>
+           </Message>
+           <Message TypeName="IdentifiersShouldNotHaveIncorrectPrefix" Category="Microsoft.Naming" CheckId="CA1722" Created="2008-04-08 13:26:49Z">
+            <Issue>
+             <Item>'CBaseStringValueCollection&lt;T&gt;'</Item>
+            </Issue>
+           </Message>
+          </Messages>
+          <Members>
+           <Member Name="#ChildElements">
+            <Messages>
+             <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Created="2008-04-08 13:26:49Z">
+              <Issue>
+               <Item>'CBaseStringValueCollection&lt;T&gt;.ChildElements'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Source">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Created="2008-04-08 13:26:49Z">
+              <Issue>
+               <Item>'CBaseStringValueCollection&lt;T&gt;.Source'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="CBlock">
+          <Messages>
+           <Message TypeName="IdentifiersShouldHaveCorrectSuffix" Category="Microsoft.Naming" CheckId="CA1710" Created="2008-04-08 12:18:28Z">
+            <Issue>
+             <Item>'CBlock'</Item>
+             <Item>Collection</Item>
+            </Issue>
+           </Message>
+           <Message TypeName="IdentifiersShouldNotHaveIncorrectPrefix" Category="Microsoft.Naming" CheckId="CA1722" Created="2008-04-08 12:18:28Z">
+            <Issue>
+             <Item>'CBlock'</Item>
+            </Issue>
+           </Message>
+          </Messages>
+          <Members>
+           <Member Name="#CutSourceString">
+            <Messages>
+             <Message TypeName="PropertiesShouldNotReturnArrays" Category="Microsoft.Performance" CheckId="CA1819" Created="2008-04-08 12:18:28Z">
+              <Issue>
+               <Item>'CBlock.CutSourceString'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#GetTreeNode()">
+            <Messages>
+             <Message TypeName="DoNotCastUnnecessarily" Category="Microsoft.Performance" CheckId="CA1800" Created="2008-04-08 12:18:28Z">
+              <Issue Name="Local">
+               <Item>'Obj'</Item>
+               <Item>'CBlock'</Item>
+               <Item>'CBlock.GetTreeNode()'</Item>
+               <Item>isint</Item>
+              </Issue>
+              <Issue Name="Local">
+               <Item>'Obj'</Item>
+               <Item>'CBlock'</Item>
+               <Item>'CBlock.GetTreeNode()'</Item>
+               <Item>isint</Item>
+              </Issue>
+              <Issue Name="Local">
+               <Item>'Obj'</Item>
+               <Item>'CString'</Item>
+               <Item>'CBlock.GetTreeNode()'</Item>
+               <Item>isint</Item>
+              </Issue>
+              <Issue Name="Local">
+               <Item>'Obj'</Item>
+               <Item>'CString'</Item>
+               <Item>'CBlock.GetTreeNode()'</Item>
+               <Item>isint</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#StartIndex">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Created="2008-04-08 12:18:28Z">
+              <Issue>
+               <Item>'CBlock.StartIndex'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Type">
+            <Messages>
+             <Message TypeName="PropertyNamesShouldNotMatchGetMethods" Category="Microsoft.Naming" CheckId="CA1721" Created="2008-04-08 12:18:28Z" FixCategory="NonBreaking">
+              <Issue Name="BaseType">
+               <Item>'CBlock.Type'</Item>
+               <Item>'object.GetType()'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+            <Accessors>
+             <Accessor Name="#set_Type(UniversalLogViewer.Types.Structures.BlockType)">
+              <Messages>
+               <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Created="2008-04-08 12:57:34Z">
+                <Issue>
+                 <Item>'CBlock.Type.set(BlockType)'</Item>
+                </Issue>
+               </Message>
+              </Messages>
+             </Accessor>
+            </Accessors>
+           </Member>
+           <Member Name="#Value">
+            <Messages>
+             <Message TypeName="PropertiesShouldNotReturnArrays" Category="Microsoft.Performance" CheckId="CA1819" Created="2008-04-08 12:18:28Z">
+              <Issue>
+               <Item>'CBlock.Value'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+            <Accessors>
+             <Accessor Name="#set_Value(System.String[])">
+              <Messages>
+               <Message TypeName="DoNotDecreaseInheritedMemberVisibility" Category="Microsoft.Usage" CheckId="CA2222" Created="2008-04-08 12:18:28Z">
+                <Issue>
+                 <Item>'CBlock.Value.set(string[])'</Item>
+                 <Item>'CBaseStringsValueCollection&lt;CBlock&gt;'</Item>
+                </Issue>
+               </Message>
+              </Messages>
+             </Accessor>
+            </Accessors>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="CString">
+          <Messages>
+           <Message TypeName="IdentifiersShouldHaveCorrectSuffix" Category="Microsoft.Naming" CheckId="CA1710" Created="2008-04-08 12:18:28Z">
+            <Issue>
+             <Item>'CString'</Item>
+             <Item>Collection</Item>
+            </Issue>
+           </Message>
+           <Message TypeName="IdentifiersShouldNotHaveIncorrectPrefix" Category="Microsoft.Naming" CheckId="CA1722" Created="2008-04-08 12:18:28Z">
+            <Issue>
+             <Item>'CString'</Item>
+            </Issue>
+           </Message>
+          </Messages>
+          <Members>
+           <Member Name="#GetTreeNode()">
+            <Messages>
+             <Message TypeName="TestForEmptyStringsUsingStringLength" Category="Microsoft.Performance" CheckId="CA1820" Created="2008-04-08 12:18:28Z">
+              <Issue Name="IsNullOrEmpty">
+               <Item>'string.operator !=(string, string)'</Item>
+               <Item>'CString.GetTreeNode()'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#ProcessString()">
+            <Messages>
+             <Message TypeName="TestForEmptyStringsUsingStringLength" Category="Microsoft.Performance" CheckId="CA1820" Created="2008-04-08 12:18:28Z">
+              <Issue Name="IsNullOrEmpty">
+               <Item>'string.operator !=(string, string)'</Item>
+               <Item>'CString.ProcessString()'</Item>
+              </Issue>
+              <Issue Name="IsNullOrEmpty">
+               <Item>'string.operator !=(string, string)'</Item>
+               <Item>'CString.ProcessString()'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#StartIndex">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Created="2008-04-08 12:18:28Z">
+              <Issue>
+               <Item>'CString.StartIndex'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Type">
+            <Messages>
+             <Message TypeName="PropertyNamesShouldNotMatchGetMethods" Category="Microsoft.Naming" CheckId="CA1721" Created="2008-04-08 12:18:28Z" FixCategory="NonBreaking">
+              <Issue Name="BaseType">
+               <Item>'CString.Type'</Item>
+               <Item>'object.GetType()'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="CValue">
+          <Messages>
+           <Message TypeName="IdentifiersShouldHaveCorrectSuffix" Category="Microsoft.Naming" CheckId="CA1710" Created="2008-04-08 12:18:28Z">
+            <Issue>
+             <Item>'CValue'</Item>
+             <Item>Collection</Item>
+            </Issue>
+           </Message>
+           <Message TypeName="IdentifiersShouldNotHaveIncorrectPrefix" Category="Microsoft.Naming" CheckId="CA1722" Created="2008-04-08 12:18:28Z">
+            <Issue>
+             <Item>'CValue'</Item>
+            </Issue>
+           </Message>
+          </Messages>
+          <Members>
+           <Member Name="#CutSourceString(System.String)">
+            <Messages>
+             <Message Id="string" TypeName="IdentifiersShouldNotContainTypeNames" Category="Microsoft.Naming" CheckId="CA1720" Created="2008-04-08 12:18:28Z">
+              <Issue Name="LanguageIndependentMemberParameter">
+               <Item>'CValue.CutSourceString(string)'</Item>
+               <Item>String</Item>
+               <Item>'SourceString'</Item>
+              </Issue>
+             </Message>
+             <Message Id="System.String.IndexOf(System.String)" TypeName="SpecifyStringComparison" Category="Microsoft.Globalization" CheckId="CA1307" Created="2008-04-08 12:18:28Z">
+              <Issue>
+               <Item>'CValue.CutSourceString(string)'</Item>
+               <Item>'string.IndexOf(string)'</Item>
+               <Item>'string.IndexOf(string, StringComparison)'</Item>
+              </Issue>
+             </Message>
+             <Message TypeName="TestForEmptyStringsUsingStringLength" Category="Microsoft.Performance" CheckId="CA1820" Created="2008-04-08 12:18:28Z">
+              <Issue Name="IsNullOrEmpty">
+               <Item>'string.operator !=(string, string)'</Item>
+               <Item>'CValue.CutSourceString(string)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#GetValue(System.String)">
+            <Messages>
+             <Message Id="string" TypeName="IdentifiersShouldNotContainTypeNames" Category="Microsoft.Naming" CheckId="CA1720" Created="2008-04-08 12:18:28Z">
+              <Issue Name="LanguageIndependentMemberParameter">
+               <Item>'CValue.GetValue(string)'</Item>
+               <Item>String</Item>
+               <Item>'ParsedString'</Item>
+              </Issue>
+             </Message>
+             <Message Id="System.String.IndexOf(System.String)" TypeName="SpecifyStringComparison" Category="Microsoft.Globalization" CheckId="CA1307" Created="2008-04-08 12:18:28Z">
+              <Issue>
+               <Item>'CValue.GetValue(string)'</Item>
+               <Item>'string.IndexOf(string)'</Item>
+               <Item>'string.IndexOf(string, StringComparison)'</Item>
+              </Issue>
+              <Issue>
+               <Item>'CValue.GetValue(string)'</Item>
+               <Item>'string.IndexOf(string)'</Item>
+               <Item>'string.IndexOf(string, StringComparison)'</Item>
+              </Issue>
+             </Message>
+             <Message TypeName="TestForEmptyStringsUsingStringLength" Category="Microsoft.Performance" CheckId="CA1820" Created="2008-04-08 12:18:28Z">
+              <Issue Name="IsNullOrEmpty">
+               <Item>'string.operator ==(string, string)'</Item>
+               <Item>'CValue.GetValue(string)'</Item>
+              </Issue>
+              <Issue Name="IsNullOrEmpty">
+               <Item>'string.operator ==(string, string)'</Item>
+               <Item>'CValue.GetValue(string)'</Item>
+              </Issue>
+              <Issue Name="IsNullOrEmpty">
+               <Item>'string.operator ==(string, string)'</Item>
+               <Item>'CValue.GetValue(string)'</Item>
+              </Issue>
+              <Issue Name="IsNullOrEmpty">
+               <Item>'string.operator ==(string, string)'</Item>
+               <Item>'CValue.GetValue(string)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Type">
+            <Messages>
+             <Message TypeName="PropertyNamesShouldNotMatchGetMethods" Category="Microsoft.Naming" CheckId="CA1721" Created="2008-04-08 12:18:28Z" FixCategory="NonBreaking">
+              <Issue Name="BaseType">
+               <Item>'CValue.Type'</Item>
+               <Item>'object.GetType()'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+            <Accessors>
+             <Accessor Name="#set_Type(UniversalLogViewer.Types.Structures.ValuesType)">
+              <Messages>
+               <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Created="2008-04-08 12:41:28Z">
+                <Issue>
+                 <Item>'CValue.Type.set(ValuesType)'</Item>
+                </Issue>
+               </Message>
+              </Messages>
+             </Accessor>
+            </Accessors>
+           </Member>
+          </Members>
+         </Type>
+        </Types>
+       </Namespace>
+       <Namespace Name="UniversalLogViewer.UI">
+        <Types>
+         <Type Name="frmLogTypesManager">
+          <Messages>
+           <Message Id="frm" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2008-04-08 12:52:39Z">
+            <Issue Name="Type">
+             <Item>frm</Item>
+             <Item>'frmLogTypesManager'</Item>
+            </Issue>
+           </Message>
+          </Messages>
+          <Members>
+           <Member Name="#btnDelete_Click(System.Object,System.EventArgs)">
+            <Messages>
+             <Message TypeName="SpecifyMessageBoxOptions" Category="Microsoft.Globalization" CheckId="CA1300" Created="2008-04-08 12:52:39Z">
+              <Issue>
+               <Item>'frmLogTypesManager.btnDelete_Click(object, EventArgs)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#button3_Click(System.Object,System.EventArgs)">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Created="2008-04-08 12:52:39Z">
+              <Issue>
+               <Item>'frmLogTypesManager.button3_Click(object, EventArgs)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="MainForm">
+          <Members>
+           <Member Name="#btnLoadLog_Click(System.Object,System.EventArgs)">
+            <Messages>
+             <Message TypeName="SpecifyMessageBoxOptions" Category="Microsoft.Globalization" CheckId="CA1300" Created="2008-04-08 12:18:28Z">
+              <Issue>
+               <Item>'MainForm.btnLoadLog_Click(object, EventArgs)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#btnLoadLogTypes_Click(System.Object,System.EventArgs)">
+            <Messages>
+             <Message TypeName="DoNotCastUnnecessarily" Category="Microsoft.Performance" CheckId="CA1800" Created="2008-04-08 12:18:28Z">
+              <Issue Name="Local">
+               <Item>'NewLogType'</Item>
+               <Item>'LogType'</Item>
+               <Item>'MainForm.btnLoadLogTypes_Click(object, EventArgs)'</Item>
+               <Item>isint</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#LogTreeViewSelectedItemChanged(System.Object,System.EventArgs)">
+            <Messages>
+             <Message TypeName="DoNotCastUnnecessarily" Category="Microsoft.Performance" CheckId="CA1800" Created="2008-04-08 12:18:28Z">
+              <Issue Name="Parameter">
+               <Item>'sender'</Item>
+               <Item>'TreeView'</Item>
+               <Item>'MainForm.LogTreeViewSelectedItemChanged(object, EventArgs)'</Item>
+               <Item>isint</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#TreeView_KeyPress(System.Object,System.Windows.Forms.KeyPressEventArgs)">
+            <Messages>
+             <Message TypeName="DoNotCastUnnecessarily" Category="Microsoft.Performance" CheckId="CA1800" Created="2008-04-08 12:18:28Z">
+              <Issue Name="Parameter">
+               <Item>'sender'</Item>
+               <Item>'TreeView'</Item>
+               <Item>'MainForm.TreeView_KeyPress(object, KeyPressEventArgs)'</Item>
+               <Item>castclass</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+        </Types>
+       </Namespace>
+      </Namespaces>
+     </Module>
+    </Modules>
+   </Target>
+  </Targets>
+  <Rules>
+   <Rule TypeName="AbstractTypesShouldNotHaveConstructors" Category="Microsoft.Design" CheckId="CA1012">
+    <Resolution Name="Default">Change the accessibility of all public constructors in {0} to protected.</Resolution>
+   </Rule>
+   <Rule TypeName="AssembliesShouldHaveValidStrongNames" Category="Microsoft.Design" CheckId="CA2210">
+    <Resolution Name="NoStrongName">Sign {0} with a strong name key.</Resolution>
+   </Rule>
+   <Rule TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811">
+    <Resolution Name="Default">{0} appears to have no upstream public or protected callers.</Resolution>
+   </Rule>
+   <Rule TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227">
+    <Resolution Name="Default">Change {0} to be read-only by removing the property setter.</Resolution>
+   </Rule>
+   <Rule TypeName="CompoundWordsShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1702">
+    <Resolution Name="TypeShouldBeDiscreteTerm">The compound word '{0}' in type name {1} exists as a discrete term. If your usage is intended to be single word, case it as '{2}'.</Resolution>
+   </Rule>
+   <Rule TypeName="ConsiderPassingBaseTypesAsParameters" Category="Microsoft.Design" CheckId="CA1011">
+    <Resolution Name="Default">Consider changing the type of parameter {0} in {1} from {2} to its base type {3}. This method appears to only require base class members in its implementation. Suppress this violation if there is a compelling reason to require the more derived type in the method signature.</Resolution>
+   </Rule>
+   <Rule TypeName="DoNotCastUnnecessarily" Category="Microsoft.Performance" CheckId="CA1800">
+    <Resolution Name="Local">{0}, a variable, is cast to type {1} multiple times in method {2}. Cache the result of the 'as' operator or direct cast in order to eliminate the redundant {3} instruction.</Resolution>
+    <Resolution Name="Parameter">{0}, a parameter, is cast to type {1} multiple times in method {2}. Cache the result of the 'as' operator or direct cast in order to eliminate the redundant {3} instruction.</Resolution>
+   </Rule>
+   <Rule TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031">
+    <Resolution Name="Default">Modify {0} to catch a more specific exception than {1} or rethrow the exception.</Resolution>
+   </Rule>
+   <Rule TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051">
+    <Resolution Name="Default">Because field {0} is visible outside of its declaring type, change its accessibility to private and add a property, with the same accessibility as the field has currently, to provide access to it.</Resolution>
+   </Rule>
+   <Rule TypeName="DoNotDecreaseInheritedMemberVisibility" Category="Microsoft.Usage" CheckId="CA2222">
+    <Resolution Name="Default">Make {0} non-private, mark it as final, or seal its declaring type. This method was originally defined in base class {1}.</Resolution>
+   </Rule>
+   <Rule TypeName="DoNotIndirectlyExposeMethodsWithLinkDemands" Category="Microsoft.Security" CheckId="CA2122">
+    <Resolution Name="Default">{0} calls into {1} which has a LinkDemand. By making this call, {1} is indirectly exposed to user code. Review the following call stack that might expose a way to circumvent security protection: {2}</Resolution>
+   </Rule>
+   <Rule TypeName="DoNotInitializeUnnecessarily" Category="Microsoft.Performance" CheckId="CA1805">
+    <Resolution Name="Default">{0} initializes field {1} of type {2} to {3}. Remove this initialization because it will be done automatically by the runtime.</Resolution>
+   </Rule>
+   <Rule TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704">
+    <Resolution Name="Assembly">Correct the spelling of '{0}' in assembly name {1}.</Resolution>
+    <Resolution Name="Member">Correct the spelling of '{0}' in member name {1} or remove it entirely if it represents any sort of Hungarian notation.</Resolution>
+    <Resolution Name="MemberParameter">In method {0}, correct the spelling of '{1}' in parameter name {2} or remove it entirely if it represents any sort of Hungarian notation.</Resolution>
+    <Resolution Name="Namespace">Correct the spelling of '{0}' in namespace name '{1}'.</Resolution>
+    <Resolution Name="Type">Correct the spelling of '{0}' in type name {1}.</Resolution>
+   </Rule>
+   <Rule TypeName="IdentifiersShouldHaveCorrectSuffix" Category="Microsoft.Naming" CheckId="CA1710">
+    <Resolution Name="Default">Rename {0} to end in '{1}'.</Resolution>
+   </Rule>
+   <Rule TypeName="IdentifiersShouldNotContainTypeNames" Category="Microsoft.Naming" CheckId="CA1720">
+    <Resolution Name="LanguageIndependentMemberParameter">In member {0}, consider replacing the data type identifier '{1}' in parameter name {2} with a more generic term, such as 'value'.</Resolution>
+   </Rule>
+   <Rule TypeName="IdentifiersShouldNotHaveIncorrectPrefix" Category="Microsoft.Naming" CheckId="CA1722">
+    <Resolution Name="Default">Remove the leading 'C' from type name {0}.</Resolution>
+   </Rule>
+   <Rule TypeName="IndexersShouldNotBeMultidimensional" Category="Microsoft.Design" CheckId="CA1023">
+    <Resolution Name="Default">Redesign indexer {0} to use a single string or integer value as its index.</Resolution>
+   </Rule>
+   <Rule TypeName="MarkAssembliesWithClsCompliant" Category="Microsoft.Design" CheckId="CA1014">
+    <Resolution Name="Default">Mark {0} with CLSCompliant(true) because it exposes externally visible types.</Resolution>
+   </Rule>
+   <Rule TypeName="MovePInvokesToNativeMethodsClass" Category="Microsoft.Design" CheckId="CA1060">
+    <Resolution Name="Default">Because it is a P/Invoke method, {0} should be defined in a class named NativeMethods, SafeNativeMethods, or UnsafeNativeMethods.</Resolution>
+   </Rule>
+   <Rule TypeName="NestedTypesShouldNotBeVisible" Category="Microsoft.Design" CheckId="CA1034">
+    <Resolution Name="Default">Do not nest type {0}. Alternatively, change its accessibility so that it is not externally visible.</Resolution>
+   </Rule>
+   <Rule TypeName="OnlyFlagsEnumsShouldHavePluralNames" Category="Microsoft.Naming" CheckId="CA1717">
+    <Resolution Name="Default">If the name {0} is plural, change it to its singular form.</Resolution>
+   </Rule>
+   <Rule TypeName="PInvokeDeclarationsShouldBePortable" Category="Microsoft.Portability" CheckId="CA1901">
+    <Resolution Name="Return">As it is declared in your code, the return type of P/Invoke {0} will be {1} bytes wide on {2} platforms. This is not correct, as the actual native declaration of this API indicates it should be {3} bytes wide on {2} platforms. Consult the MSDN Platform SDK documentation for help determining what data type should be used instead of {4}.</Resolution>
+   </Rule>
+   <Rule TypeName="ParameterNamesShouldMatchBaseDeclaration" Category="Microsoft.Naming" CheckId="CA1725">
+    <Resolution Name="Default">In member {0}, change parameter name {1} to {2} in order to match the identifier as it has been declared in {3}.</Resolution>
+   </Rule>
+   <Rule TypeName="PropertiesShouldNotReturnArrays" Category="Microsoft.Performance" CheckId="CA1819">
+    <Resolution Name="Default">Change {0} to return a collection or make it a method.</Resolution>
+   </Rule>
+   <Rule TypeName="PropertyNamesShouldNotMatchGetMethods" Category="Microsoft.Naming" CheckId="CA1721">
+    <Resolution Name="BaseType">The property name {0} is confusing given the existence of inherited method {1}. Rename or remove this property.</Resolution>
+    <Resolution Name="SameType">The property name {0} is confusing given the existence of method {1}. Rename or remove one of these members.</Resolution>
+   </Rule>
+   <Rule TypeName="RemoveEmptyFinalizers" Category="Microsoft.Performance" CheckId="CA1821">
+    <Resolution Name="Default">{0} implements a finalizer that only calls conditionally emitted methods or the base type finalizer. Remove the finalizer or ensure that it is only conditionally compiled into the assembly. If this violation occurs against a finalizer that is entirely wrapped in a conditionally-emitted block of code, suppress this message.</Resolution>
+   </Rule>
+   <Rule TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804">
+    <Resolution Name="Default">{0} declares a variable, {1}, of type {2}, which is never used or is only assigned to. Use this variable or remove it.</Resolution>
+   </Rule>
+   <Rule TypeName="SpecifyIFormatProvider" Category="Microsoft.Globalization" CheckId="CA1305">
+    <Resolution Name="Default">Because the behavior of {0} could vary based on the current user's locale settings, replace this call in {1} with a call to {2}. If the result of {2} will be displayed to the user, specify 'CultureInfo.CurrentCulture' as the 'IFormatProvider' parameter. Otherwise, if the result will be stored and accessed by software, such as when it is persisted to disk or to a database, specify 'CultureInfo.InvariantCulture'.</Resolution>
+   </Rule>
+   <Rule TypeName="SpecifyMarshalingForPInvokeStringArguments" Category="Microsoft.Globalization" CheckId="CA2101">
+    <Resolution Name="ParameterImplicitAnsi">To reduce security risk, marshal parameter {0} as Unicode, by setting DllImport.CharSet to CharSet.Unicode, or by explicitly marshaling the parameter as UnmanagedType.LPWStr. If you need to marshal this string as ANSI or system-dependent, specify MarshalAs explicitly, and set BestFitMapping=false; for added security, also set ThrowOnUnmappableChar=true.</Resolution>
+   </Rule>
+   <Rule TypeName="SpecifyMessageBoxOptions" Category="Microsoft.Globalization" CheckId="CA1300">
+    <Resolution Name="Default">Change {0} to call the MessageBox.Show overload that specifies MessageBoxOptions, and make sure to set MessageBoxOptions.RightAlign and MessageBoxOptions.RtlReading if RightToLeft is set to RightToLeft.Yes on the parent control.</Resolution>
+   </Rule>
+   <Rule TypeName="SpecifyStringComparison" Category="Microsoft.Globalization" CheckId="CA1307">
+    <Resolution Name="Default">{0} makes a call to {1} that does not explicitly provide a StringComparison. This should be replaced with a call to {2}.</Resolution>
+   </Rule>
+   <Rule TypeName="StaticHolderTypesShouldNotHaveConstructors" Category="Microsoft.Design" CheckId="CA1053">
+    <Resolution Name="Default">Remove the public constructors from {0}.</Resolution>
+   </Rule>
+   <Rule TypeName="TestForEmptyStringsUsingStringLength" Category="Microsoft.Performance" CheckId="CA1820">
+    <Resolution Name="IsNullOrEmpty">Replace the call to {0} in {1} with a call to 'String.IsNullOrEmpty'.</Resolution>
+   </Rule>
+   <Rule TypeName="TypeNamesShouldNotMatchNamespaces" Category="Microsoft.Naming" CheckId="CA1724">
+    <Resolution Name="Default">The type name {0} conflicts in whole or in part with the namespace name '{1}'. Change either name to eliminate the conflict.</Resolution>
+   </Rule>
+   <Rule TypeName="TypesThatOwnDisposableFieldsShouldBeDisposable" Category="Microsoft.Design" CheckId="CA1001">
+    <Resolution Name="DependsOnFix">Implement IDisposable on {0} because it creates members of the following IDisposable types: {1}. If {0} has previously shipped, adding new members that implement IDisposable to this type is considered a breaking change to existing consumers.</Resolution>
+   </Rule>
+   <Rule TypeName="UsePropertiesWhereAppropriate" Category="Microsoft.Design" CheckId="CA1024">
+    <Resolution Name="Default">Change {0} to a property if appropriate.</Resolution>
+   </Rule>
+  </Rules>
+ </FxCopReport>
+</FxCopProject>

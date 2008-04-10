@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using Universal_Log_Viewer.UI;
-using Universal_Log_Viewer.Types.Managers;
+using UniversalLogViewer.UI;
+using UniversalLogViewer.Types.Managers;
 
-namespace Universal_Log_Viewer
+[assembly:CLSCompliant(true)]
+namespace UniversalLogViewer
 {
     static class Program
     {
@@ -16,7 +17,7 @@ namespace Universal_Log_Viewer
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            CIniSettingsManager.InitIniFile();
+            IniSettingsManager.InitFile();
             Application.Run(new MainForm());
         }
     }

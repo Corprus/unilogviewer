@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 
+[assembly: CLSCompliant(true)]
 namespace LogWriter
 {
     public enum LWErrorCodes { EC_PATH_TOO_LONG = -2, EC_ERROR = -1, EC_SUCCESS = 0, EC_DIRECTORY_CREATED = 1 }

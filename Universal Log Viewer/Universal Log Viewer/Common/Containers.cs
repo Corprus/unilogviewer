@@ -1,22 +1,22 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Universal_Log_Viewer.Types.Structures;
-using Universal_Log_Viewer.Common.IniFile;
+using UniversalLogViewer.Types.Structures;
+using UniversalLogViewer.Common.IniFiles;
 
-namespace Universal_Log_Viewer.Common
+namespace UniversalLogViewer.Common
 {
-    public class LogTypeContainer<T> : IEnumerable<T>
-        where T : CBaseType, new()
+    public class LogTypeCollection<T> : IEnumerable<T>
+        where T : BaseType, new()
 
     {
         List<T> _TypeList;
 
-        CLogType LogType;
-        public LogTypeContainer(CLogType oLogType)
+        LogType LogType;
+        public LogTypeCollection(LogType LogType)
         {
             _TypeList = new List<T>();
-            LogType = oLogType;
+            this.LogType = LogType;
         }
         public T this[string Name]
         {
@@ -27,10 +27,10 @@ namespace Universal_Log_Viewer.Common
                         return ClassDef;
                 
                 //Если в списке не найден элемент - пытаемся прочитать...                               
-                if (LogType.LogIniFile.Sections[Name] != null)
+                if (LogType.LogTypeFile.Sections[Name] != null)
                 {
                     T NewElement = new T();
-                    NewElement.ReInit(LogType, LogType.LogIniFile.Sections[Name]);
+                    NewElement.ReInit(LogType, LogType.LogTypeFile.Sections[Name]);
                     _TypeList.Add(NewElement);
                     return NewElement;
                 }
@@ -52,7 +52,7 @@ namespace Universal_Log_Viewer.Common
             T Type = this[SectionName];
             return (Type != null);
         }
-        public bool AddType(CLogIniSection Section)
+        public bool AddType(LogIniSection Section)
         {
             T Type = this[Section.SectionName];
             return (Type != null);

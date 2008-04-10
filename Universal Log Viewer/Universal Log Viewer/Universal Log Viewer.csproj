@@ -7,7 +7,7 @@
     <ProjectGuid>{DD766EDF-B7FB-4643-AE46-2D9E39F60780}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Universal_Log_Viewer</RootNamespace>
+    <RootNamespace>UniversalLogViewer</RootNamespace>
     <AssemblyName>Universal Log Viewer</AssemblyName>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -16,7 +16,7 @@
     <OldToolsVersion>2.0</OldToolsVersion>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <IsWebBootstrapper>true</IsWebBootstrapper>
-    <StartupObject>Universal_Log_Viewer.Program</StartupObject>
+    <StartupObject>UniversalLogViewer.Program</StartupObject>
     <PublishUrl>http://localhost/Universal Log Viewer/</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Web</InstallFrom>
@@ -34,6 +34,8 @@
     <ApplicationVersion>0.1.5.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>UniLogViewer.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -75,22 +77,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\FileReader.cs" />
+    <Compile Include="Common\Types.cs" />
     <Compile Include="Common\Utilities.cs" />
-    <Compile Include="Types\Managers\CIniSettingsManager.cs" />
-    <Compile Include="Types\Managers\CLogTypeManager.cs" />
+    <Compile Include="Types\Managers\IniSettingsManager.cs" />
+    <Compile Include="Types\Managers\LogTypeManager.cs" />
     <Compile Include="Types\Structures\BaseType.cs">
     </Compile>
-    <Compile Include="Types\Structures\CStyle.cs" />
-    <Compile Include="Types\Values\CBaseValueType.cs" />
-    <Compile Include="Types\Values\CBlock.cs" />
-    <Compile Include="Types\Structures\CCondition.cs" />
-    <Compile Include="Types\Values\CLog.cs" />
-    <Compile Include="Common\IniFile\CLogIniFile.cs" />
-    <Compile Include="Types\Structures\CLogType.cs" />
+    <Compile Include="Types\Structures\StyleType.cs" />
+    <Compile Include="Types\Values\BaseValue.cs" />
+    <Compile Include="Types\Values\BlockValue.cs" />
+    <Compile Include="Types\Structures\ConditionType.cs" />
+    <Compile Include="Types\Values\Log.cs" />
+    <Compile Include="Common\IniFile\LogIniFile.cs" />
+    <Compile Include="Types\Structures\LogType.cs" />
     <Compile Include="Common\Consts.cs" />
     <Compile Include="Common\Containers.cs" />
-    <Compile Include="Types\Values\CString.cs" />
-    <Compile Include="Types\Values\CValue.cs" />
+    <Compile Include="Types\Values\StringValue.cs" />
+    <Compile Include="Types\Values\Value.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -125,9 +128,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Types\Structures\CBlockType.cs" />
-    <Compile Include="Types\Structures\CStringType.cs" />
-    <Compile Include="Types\Structures\CValueType.cs" />
+    <Compile Include="Types\Structures\BlockType.cs" />
+    <Compile Include="Types\Structures\StringType.cs" />
+    <Compile Include="Types\Structures\ValuesType.cs" />
     <Compile Include="UI\FormAbout.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -178,6 +181,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Resources\_common_svn.version.txt" />
+    <None Include="UniLogViewer.pfx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IniFile\IniFile.csproj">

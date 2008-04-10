@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Universal_Log_Viewer
+namespace UniversalLogViewer
 {
     public static class Consts
     {

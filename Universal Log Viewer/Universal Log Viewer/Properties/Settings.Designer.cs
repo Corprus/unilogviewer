@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Universal_Log_Viewer.Properties {
+namespace UniversalLogViewer.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

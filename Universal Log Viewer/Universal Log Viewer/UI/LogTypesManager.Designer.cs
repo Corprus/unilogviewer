@@ -1,6 +1,6 @@
-﻿namespace Universal_Log_Viewer.UI
+﻿namespace UniversalLogViewer.UI
 {
-    partial class frmLogTypesManager
+    partial class LogTypesManagerForm
     {
         /// <summary>
         /// Required designer variable.
@@ -168,7 +168,7 @@
             this.pnkToolbox.Size = new System.Drawing.Size(525, 47);
             this.pnkToolbox.TabIndex = 2;
             // 
-            // frmLogTypesManager
+            // LogTypesManagerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -177,7 +177,7 @@
             this.Controls.Add(pnlLoadLogType);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.pnkToolbox);
-            this.Name = "frmLogTypesManager";
+            this.Name = "LogTypesManagerForm";
             this.Text = "Log Types Manager";
             pnlLoadLogType.ResumeLayout(false);
             gbxLogTypeDescription.ResumeLayout(false);

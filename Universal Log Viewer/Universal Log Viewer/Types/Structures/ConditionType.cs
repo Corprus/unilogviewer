@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Universal_Log_Viewer.Types.Structures;
-using Universal_Log_Viewer.Common.IniFile;
+using UniversalLogViewer.Types.Structures;
+using UniversalLogViewer.Common.IniFiles;
 
-namespace Universal_Log_Viewer.Types.Structures
+namespace UniversalLogViewer.Types.Structures
 {    
-    public class CCondition : CBaseType
+    public class ConditionType : BaseType
     {
 
         public const string INI_TYPE_NAME = "Condition";
@@ -15,10 +15,10 @@ namespace Universal_Log_Viewer.Types.Structures
         const string KEY_CONTAIN = "Contain";
         const string KEY_EXCLUDE = "Exclude";
 
-        public string StartsWith;
-        public string EndsWith;
-        public List<string> Contain;
-        public List<string> Exclude;
+        public string StartsWith { get; private set; }
+        public string EndsWith { get; private set; }
+        public List<string> Contain { get; private set; }
+        public List<string> Exclude { get; private set; }
         public bool IsCorrect(string Value)
         {
             //Проверка на старт
@@ -37,30 +37,30 @@ namespace Universal_Log_Viewer.Types.Structures
                     return false;
             return true;
          }        
-        void FInit(string vStartsWith, string vEndsWith, string[] arContain, string[] arExclude)
+        void FInit(string StartsWith, string EndsWith, string[] Contain, string[] Exclude)
         {            
-            StartsWith = vStartsWith;
-            EndsWith = vEndsWith;
-            Contain = new List<string>();
-            Contain.AddRange(arContain);
-            Exclude = new List<string>();
-            Exclude.AddRange(arExclude);
+            this.StartsWith = StartsWith;
+            this.EndsWith = EndsWith;
+            this.Contain = new List<string>();
+            this.Contain.AddRange(Contain);
+            this.Exclude = new List<string>();
+            this.Exclude.AddRange(Exclude);
         }
-        public CCondition(CLogType vLogType, CLogIniSection IniSection)
-            : base(vLogType, IniSection)
+        public ConditionType(LogType LogType, LogIniSection Section)
+            : base(LogType, Section)
         {
         }
-        public override void ReInit(CLogType vLogType, CLogIniSection IniSection)
+        public override void ReInit(LogType LogType, LogIniSection Section)
         {
-            base.ReInit(vLogType, IniSection);
+            base.ReInit(LogType, Section);
             FInit(
-                IniSection.Values[KEY_STARTS_WITH],
-                IniSection.Values[KEY_ENDS_WITH],
-                IniSection.ArrayValues[KEY_CONTAIN],
-                IniSection.ArrayValues[KEY_EXCLUDE]);
+                Section.Values[KEY_STARTS_WITH],
+                Section.Values[KEY_ENDS_WITH],
+                Section.ArrayValues[KEY_CONTAIN],
+                Section.ArrayValues[KEY_EXCLUDE]);
 
         }
-        public CCondition()
+        public ConditionType()
             : base ()
         {
         }

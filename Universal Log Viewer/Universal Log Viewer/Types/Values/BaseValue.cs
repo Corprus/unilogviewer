@@ -4,30 +4,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using Universal_Log_Viewer.Types.Structures;
+using UniversalLogViewer.Types.Structures;
 
-namespace Universal_Log_Viewer.Types.Values
+namespace UniversalLogViewer.Types.Values
 {
-    public abstract class CBaseValueType
+    public abstract class BaseValue
     {
-        protected string _TreeNodeValueString;
-        protected CBaseType Type { get; set; }
+        protected string TreeNodeValueString { get; set; }
+        public BaseType StructureType { get; protected set; }
         public TreeNode TreeNode { get { return GetTreeNode(); } }
         protected virtual TreeNode GetTreeNode()
         {
             TreeNode Result = null;
-            if (this.Type.Style.Visible)
+            if (this.StructureType.Style.Visible)
             {
-                string RealValue = _TreeNodeValueString;
-                if (this.Type.Style.Trim)
+                string RealValue = TreeNodeValueString;
+                if (this.StructureType.Style.Trim)
                     RealValue = RealValue.Trim();
-                Result = new TreeNode(_TreeNodeValueString);
+                Result = new TreeNode(TreeNodeValueString);
                 Result.BeginEdit();
                 Result.Tag = this;
-                Result.ForeColor = this.Type.Style.Color;
+                Result.ForeColor = this.StructureType.Style.Color;
                 if (Result.NodeFont == null)
                     Result.NodeFont = new System.Drawing.Font(System.Drawing.FontFamily.GenericSansSerif, 8);
-                if (this.Type.Style.Bold)
+                if (this.StructureType.Style.Bold)
                     Result.NodeFont = new System.Drawing.Font(Result.NodeFont, System.Drawing.FontStyle.Bold);
                 Result.EndEdit(false);
 
@@ -35,18 +35,18 @@ namespace Universal_Log_Viewer.Types.Values
             return Result;
         }
         public abstract void Parse();
-        protected CBaseValueType(CBaseType Type)
+        protected BaseValue(BaseType Type)
         {
-            this.Type = Type;
+            this.StructureType = Type;
         }
     }
-    public abstract class CBaseStringValueType<T> : CBaseValueType, IEnumerable<T>
-        where T : CBaseStringValueType<T>
+    public abstract class BaseStringValueCollection<T> : BaseValue, IEnumerable<T>
+        where T : BaseStringValueCollection<T>
     {
         public string Value { get; protected set; }
-        protected string Source;
-        protected List<T> ChildElements { get; set; }
-        public CBaseStringValueType(CBaseType Type, string Source)
+        protected string Source { get; private set; }
+        protected List<T> ChildElements { get; private set; }
+        protected BaseStringValueCollection(BaseType Type, string Source)
             : base(Type)
         {
             this.Source = Source;
@@ -64,13 +64,13 @@ namespace Universal_Log_Viewer.Types.Values
             return this.GetEnumerator();
         }
     }
-        public abstract class CBaseStringsValueType<T> : CBaseValueType,  IEnumerable<T>
-        where T : CBaseStringsValueType<T>
+        public abstract class BaseStringsValueCollection<T> : BaseValue,  IEnumerable<T>
+        where T : BaseStringsValueCollection<T>
     {
         public string[] Value { get; protected set; }
-        protected string[] Source;
-        protected List<T> ChildElements { get; set; }
-        public CBaseStringsValueType(CBaseType Type, string[] Source)
+        protected string[] Source { get; private set; }
+        protected List<T> ChildElements { get; private set; }
+        protected BaseStringsValueCollection(BaseType Type, string[] Source)
             :base(Type)
         {
             this.Source = Source;

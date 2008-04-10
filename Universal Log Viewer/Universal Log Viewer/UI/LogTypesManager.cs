@@ -5,14 +5,14 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using Universal_Log_Viewer.Types.Structures;
-using Universal_Log_Viewer.Types.Managers;
+using UniversalLogViewer.Types.Structures;
+using UniversalLogViewer.Types.Managers;
 
-namespace Universal_Log_Viewer.UI
+namespace UniversalLogViewer.UI
 {
-    public partial class frmLogTypesManager : Form
+    public partial class LogTypesManagerForm : Form
     {
-        public frmLogTypesManager()
+        public LogTypesManagerForm()
         {
             InitializeComponent();
             InitElements(true);
@@ -20,11 +20,11 @@ namespace Universal_Log_Viewer.UI
         void InitElements(bool UpdateList)
         {
             if (UpdateList)
-                CLogTypeManager.oInstance.UpdateList(lbxLogTypes.Items);
-            btnReInit.Enabled = (lbxLogTypes.SelectedItem is CLogType);
-            btnDelete.Enabled = (lbxLogTypes.SelectedItem is CLogType);
-            if (lbxLogTypes.SelectedItem is CLogType)
-                memoLogDescription.Rtf = (lbxLogTypes.SelectedItem as CLogType).GetRTFDescription();
+                LogTypeManager.oInstance.UpdateList(lbxLogTypes.Items);
+            btnReInit.Enabled = (lbxLogTypes.SelectedItem is LogType);
+            btnDelete.Enabled = (lbxLogTypes.SelectedItem is LogType);
+            if (lbxLogTypes.SelectedItem is LogType)
+                memoLogDescription.Rtf = (lbxLogTypes.SelectedItem as LogType).GetRTFDescription();
 
         }
 
@@ -38,21 +38,17 @@ namespace Universal_Log_Viewer.UI
             if (dlgOpenLogType.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 string sLogFileName = dlgOpenLogType.FileName;
-                CLogTypeManager.oInstance.AddLogType(sLogFileName);
+                LogTypeManager.oInstance.AddLogType(sLogFileName);
                 InitElements(true);
             }
 
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void btnReInit_Click(object sender, EventArgs e)
         {
-            if (lbxLogTypes.SelectedItem is CLogType)
-                (lbxLogTypes.SelectedItem as CLogType).ReInit((lbxLogTypes.SelectedItem as CLogType).LogIniFile.FileName);
+            if (lbxLogTypes.SelectedItem is LogType)
+                (lbxLogTypes.SelectedItem as LogType).ReInit((lbxLogTypes.SelectedItem as LogType).LogTypeFile.FileName);
         }
 
         private void lbxLogTypes_SelectedValueChanged(object sender, EventArgs e)
@@ -62,15 +58,15 @@ namespace Universal_Log_Viewer.UI
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (lbxLogTypes.SelectedItem is CLogType)
+            if (lbxLogTypes.SelectedItem is LogType)
             {
                 if (MessageBox.Show( Consts.TEXT_DELETE_LOG_TYPE, Consts.HEADER_DELETE_LOG_TYPE, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
-                    CLogType DeletedLogType = (lbxLogTypes.SelectedItem as CLogType);
-                    int DeletedIndexInManager = CLogTypeManager.oInstance.TypesList.IndexOf(DeletedLogType);
-                    string DeletedFileName = DeletedLogType.LogIniFile.FileName;
+                    LogType DeletedLogType = (lbxLogTypes.SelectedItem as LogType);
+                    int DeletedIndexInManager = LogTypeManager.oInstance.TypesList.IndexOf(DeletedLogType);
+                    string DeletedFileName = DeletedLogType.LogTypeFile.FileName;
                     System.IO.File.Delete(DeletedFileName);
-                    CLogTypeManager.oInstance.TypesList.RemoveAt(DeletedIndexInManager);
+                    LogTypeManager.oInstance.TypesList.RemoveAt(DeletedIndexInManager);
                     InitElements(true);
                 }
             }
@@ -80,14 +76,14 @@ namespace Universal_Log_Viewer.UI
 
         private void btnReInitAll_Click(object sender, EventArgs e)
         {
-            CLogTypeManager.ReInit();
+            LogTypeManager.ReInit();
             InitElements(true);
         }
 
         private void lbxLogTypes_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            if (lbxLogTypes.SelectedItem is CLogType)
-                (lbxLogTypes.SelectedItem as CLogType).ExternalOpen();
+            if (lbxLogTypes.SelectedItem is LogType)
+                (lbxLogTypes.SelectedItem as LogType).ExternalOpen();
 
         }
 

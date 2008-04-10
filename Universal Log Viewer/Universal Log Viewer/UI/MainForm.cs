@@ -6,11 +6,11 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using Universal_Log_Viewer.Types.Values;
-using Universal_Log_Viewer.Types.Structures;
-using Universal_Log_Viewer.Types.Managers;
+using UniversalLogViewer.Types.Values;
+using UniversalLogViewer.Types.Structures;
+using UniversalLogViewer.Types.Managers;
 
-namespace Universal_Log_Viewer.UI
+namespace UniversalLogViewer.UI
 {
     public partial class MainForm : Form
     {
@@ -21,16 +21,17 @@ namespace Universal_Log_Viewer.UI
 
         private void btnLoadLogTypes_Click(object sender, EventArgs e)
         {
-            frmLogTypesManager fmLoadLogType = new frmLogTypesManager();
+            LogTypesManagerForm fmLoadLogType = new LogTypesManagerForm();
             fmLoadLogType.ShowDialog(this);
-            CLogType CurrentLogType = null;
-            if (cmbLogTypes.SelectedItem is CLogType)
-                CurrentLogType = (cmbLogTypes.SelectedItem as CLogType);
-            CLogTypeManager.oInstance.UpdateList(cmbLogTypes.Items);
+            var CurrentLogType = cmbLogTypes.SelectedItem as LogType;
+            LogTypeManager.oInstance.UpdateList(cmbLogTypes.Items);
             if (CurrentLogType != null)
-                foreach (var NewLogType in cmbLogTypes.Items)
-                    if ((NewLogType is CLogType) && ((NewLogType as CLogType).LogName == CurrentLogType.LogName))
+                foreach (var CurrentItem in cmbLogTypes.Items)
+                {
+                    var NewLogType = CurrentItem as LogType;
+                    if ((NewLogType != null) && (NewLogType.LogName == CurrentLogType.LogName))
                         cmbLogTypes.SelectedItem = NewLogType;
+                }
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -49,13 +50,13 @@ namespace Universal_Log_Viewer.UI
             if (dlgOpenLog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 string sLogFileName = dlgOpenLog.FileName;
-                if (CLogTypeManager.oInstance.TypesList.Count > 0)
+                if (LogTypeManager.oInstance.TypesList.Count > 0)
                 {
-                    if ((cmbLogTypes.SelectedIndex != -1)&&(cmbLogTypes.Items[cmbLogTypes.SelectedIndex] is CLogType))
+                    if ((cmbLogTypes.SelectedIndex != -1)&&(cmbLogTypes.Items[cmbLogTypes.SelectedIndex] is LogType))
                     {
-                        CLog oLog = new CLog((cmbLogTypes.Items[cmbLogTypes.SelectedIndex] as CLogType), sLogFileName);
+                        Log oLog = new Log((cmbLogTypes.Items[cmbLogTypes.SelectedIndex] as LogType), sLogFileName);
                         TabPage LogTab = new TabPage();
-                        LogTab.Text = dlgOpenLog.FileName + " (" + oLog.Type.LogName + ")";
+                        LogTab.Text = dlgOpenLog.FileName + " (" + oLog.StructureType.LogName + ")";
                         TreeView LogTreeView = new TreeView();
                         LogTreeView.Dock = DockStyle.Fill;
                         LogTreeView.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TreeView_KeyPress);
@@ -77,7 +78,7 @@ namespace Universal_Log_Viewer.UI
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            CLogTypeManager.oInstance.UpdateList(cmbLogTypes.Items);
+            LogTypeManager.oInstance.UpdateList(cmbLogTypes.Items);
         }
 
         private void closeTabToolStripMenuItem_Click(object sender, EventArgs e)
@@ -87,28 +88,27 @@ namespace Universal_Log_Viewer.UI
 
         private void TreeView_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!(sender is TreeView))
+            var Tree = sender as TreeView;
+            if (sender == null)
                 return;
 
             if (tabLogs.SelectedIndex > -1)
                 if (e.KeyChar == 3)
-                    Clipboard.SetText(((TreeView)sender).SelectedNode.Text);         
+                    Clipboard.SetText(Tree.SelectedNode.Text);         
         }
         private void LogTreeViewSelectedItemChanged(object sender, EventArgs e)
         {
-            if ((CIniSettingsManager.ShowValueMemo) && (sender is TreeView))
+            TreeView Tree = (sender as TreeView);
+            if ((IniSettingsManager.ShowValueMemo) && (Tree != null))
             {
-                TreeView Tree = (sender as TreeView);
-                if (Tree.SelectedNode.Tag is CString)
+                var StringTag = Tree.SelectedNode.Tag as StringValue;
+                if (StringTag != null)
                 {
                     memoValue.Visible = true;
-                    memoValue.Lines = (Tree.SelectedNode.Tag as CString).GetValues();
+                    memoValue.Lines = StringTag.GetValues();
                 }
                 else
-                {
                     memoValue.Visible = false;
-                }
-
             }
         }
 

@@ -1,4 +1,4 @@
-namespace IniFile
+namespace IniFiles
 {
     public static class Consts
     {

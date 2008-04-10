@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using Universal_Log_Viewer.Common;
+using UniversalLogViewer.Common;
 
-namespace Universal_Log_Viewer.Common
+namespace UniversalLogViewer.Common
 {
     public static class Utilities
     {
         public static string ProjectRevision { 
             get 
             {
-                return Universal_Log_Viewer.Properties.Resources.svn_revision;
+                return UniversalLogViewer.Properties.Resources.svn_revision;
             } 
         }
     }

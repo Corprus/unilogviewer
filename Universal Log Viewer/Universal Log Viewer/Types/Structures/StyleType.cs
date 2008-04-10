@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Drawing;
-using Universal_Log_Viewer.Common.IniFile;
+using UniversalLogViewer.Common.IniFiles;
 
-namespace Universal_Log_Viewer.Types.Structures
+namespace UniversalLogViewer.Types.Structures
 {
-    public class CStyle : CBaseType
+    public class StyleType : BaseType
     {
         public const string INI_TYPE_NAME = "Style";
         const string KEY_BOLD = "Bold";
@@ -18,31 +18,31 @@ namespace Universal_Log_Viewer.Types.Structures
         public bool Bold { get; private set; }
         public bool Trim { get; private set; }
         public Color Color { get; private set; }
-        public CStyle(CLogType LogType, CLogIniSection Section)
+        public StyleType(LogType LogType, LogIniSection Section)
             : base(LogType, Section)
         {
             ReInit(LogType, Section);
         }
 
-        public CStyle()
+        public StyleType()
         {
         }
-        public override void ReInit(CLogType LogType, CLogIniSection Section)
+        public override void ReInit(LogType LogType, LogIniSection Section)
         {
             base.ReInit(LogType, Section);
-            Bold = (IniSection.Values[KEY_BOLD] == "1");
-            Trim = (IniSection.Values[KEY_TRIM] != "0");
-            Visible = (IniSection.Values[KEY_VISIBLE] != "0");
+            Bold = (Section.Values[KEY_BOLD] == "1");
+            Trim = (Section.Values[KEY_TRIM] != "0");
+            Visible = (Section.Values[KEY_VISIBLE] != "0");
             try
             {                
-                Color = Color.FromName(IniSection.Values[KEY_COLOR]);
+                Color = Color.FromName(Section.Values[KEY_COLOR]);
             }
             catch (Exception)
             {
                 Color = Color.Black;
             }
         }
-        public CStyle(bool Bold, Color Color, bool Visible, bool Trim)
+        public StyleType(bool Bold, Color Color, bool Visible, bool Trim)
         {
             this.Bold = Bold;
             this.Color = Color;

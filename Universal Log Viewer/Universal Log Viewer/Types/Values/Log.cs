@@ -2,34 +2,34 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
-using Universal_Log_Viewer.Types.Structures;
-using Universal_Log_Viewer.Common;
+using UniversalLogViewer.Types.Structures;
+using UniversalLogViewer.Common;
 
-namespace Universal_Log_Viewer.Types.Values
+namespace UniversalLogViewer.Types.Values
 {
-    class CLog
+    class Log
     {
-        public CLogType Type { get; private set; }
+        public LogType StructureType { get; private set; }
         FileReader LogFile { get; set; }
-        CBlock RootBlock { get; set; }
+        BlockValue RootBlock { get; set; }
         public TreeNode TreeNode
         {
             get
             {                
                 TreeNode Result = RootBlock.TreeNode;
                 Result.BeginEdit();
-                Result.Text = this.Type.LogName + ":" + Result.Text;
+                Result.Text = this.StructureType.LogName + ":" + Result.Text;
                 Result.EndEdit(false);
                 return Result;
             }
         }
 
 
-        public CLog(CLogType Type, string FileName)
+        public Log(LogType Type, string FileName)
         {
-            this.Type = Type;
+            this.StructureType = Type;
             LogFile = new FileReader(FileName);
-            RootBlock = new CBlock(this.Type.RootBlockType, LogFile.ReadFile());
+            RootBlock = new BlockValue(this.StructureType.RootBlockType, LogFile.ReadFile());
         }
     }
 }

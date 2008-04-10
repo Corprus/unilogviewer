@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace Universal_Log_Viewer.Common
+namespace UniversalLogViewer.Common
 {
     class FileReader
     {

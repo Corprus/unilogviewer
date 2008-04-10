@@ -1,4 +1,4 @@
-﻿namespace Universal_Log_Viewer.UI
+﻿namespace UniversalLogViewer.UI
 {
     partial class MainForm
     {

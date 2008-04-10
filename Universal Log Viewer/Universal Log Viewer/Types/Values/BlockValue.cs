@@ -2,23 +2,22 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
-using Universal_Log_Viewer.Types.Structures;
+using UniversalLogViewer.Types.Structures;
 
-namespace Universal_Log_Viewer.Types.Values
+namespace UniversalLogViewer.Types.Values
 {
     
 
-    public class CBlock : CBaseStringsValueType<CBlock>
+    public class BlockValue : BaseStringsValueCollection<BlockValue>
     {
-        public new CBlockType Type { get { return base.Type as CBlockType; } private set { base.Type = value; } }
-        public new string[] Value { get; private set; }
+        public new BlockType StructureType { get { return base.StructureType as BlockType; }}
         public bool IsEmpty { get { return (Value.Length == 0); } }
-        public int StartIndex;
+        public int StartIndex { get; private set; }
         bool[] ProcessedStrings;
-        public List<CString> ChildStrings { get; private set; }
+        public List<StringValue> ChildStrings { get; private set; }
         public string[] CutSourceString { get; private set; }
-        static bool IsBlock(Object Obj) { return (Obj is CBlock); }
-        static bool IsString(Object Obj) { return (Obj is CString); }
+        static bool IsBlock(Object Obj) { return (Obj is BlockValue); }
+        static bool IsString(Object Obj) { return (Obj is StringValue); }
         static bool IsStringOrBlock(Object Obj) { return ((IsString(Obj)) || (IsBlock(Obj))); }
 
         private static int CompareChilds(Object a, Object b)
@@ -30,13 +29,13 @@ namespace Universal_Log_Viewer.Types.Values
             else
             {
                 if (IsString(a))
-                    StartIndexA = (a as CString).StartIndex;
+                    StartIndexA = (a as StringValue).StartIndex;
                 else //Block
-                    StartIndexA = (a as CBlock).StartIndex;
+                    StartIndexA = (a as BlockValue).StartIndex;
                 if (IsString(b))
-                    StartIndexB = (b as CString).StartIndex;
+                    StartIndexB = (b as StringValue).StartIndex;
                 else //Block
-                    StartIndexB = (b as CBlock).StartIndex;
+                    StartIndexB = (b as BlockValue).StartIndex;
                 return (StartIndexA - StartIndexB);
             }
 
@@ -45,20 +44,20 @@ namespace Universal_Log_Viewer.Types.Values
         }
         protected override TreeNode GetTreeNode()
         {
-            _TreeNodeValueString = this.Type.Title;
+            TreeNodeValueString = this.StructureType.Title;
             TreeNode Result = base.GetTreeNode();
             List<Object> ChildList = new List<Object>();
-            foreach (CString ChildString in ChildStrings)
+            foreach (StringValue ChildString in ChildStrings)
                 ChildList.Add(ChildString);
-            foreach (CBlock ChildBlock in ChildElements)
+            foreach (BlockValue ChildBlock in ChildElements)
                 ChildList.Add(ChildBlock);
             ChildList.Sort(CompareChilds);
             foreach (Object Obj in ChildList)
             {
-                if ((Obj is CBlock) && ((Obj as CBlock).Type.Style.Visible))
-                    Result.Nodes.Add((Obj as CBlock).TreeNode);
-                if ((Obj is CString) && ((Obj as CString).Type.Style.Visible))
-                    Result.Nodes.Add((Obj as CString).TreeNode);
+                var TypeObj = Obj as BaseValue;
+                if ((TypeObj != null)&&((TypeObj is BlockValue)||(TypeObj is StringValue)))
+                if  (TypeObj.StructureType.Style.Visible)
+                    Result.Nodes.Add(TypeObj.TreeNode);
             }
             return Result;
         }
@@ -73,8 +72,8 @@ namespace Universal_Log_Viewer.Types.Values
                 string CurString = SourceList[i];
                 if (!(bStartConditionDone))
                 {
-                    if (this.Type.StartCondition != null)
-                        bStartConditionDone = this.Type.StartCondition.IsCorrect(CurString);
+                    if (this.StructureType.StartCondition != null)
+                        bStartConditionDone = this.StructureType.StartCondition.IsCorrect(CurString);
                     else
                         bStartConditionDone = true;
 
@@ -87,8 +86,8 @@ namespace Universal_Log_Viewer.Types.Values
                 if ((!(bEndConditionDone)) && (bStartConditionDone))
                 {
                     Result.Add(CurString);
-                    if (this.Type.EndCondition != null)
-                        bEndConditionDone = this.Type.EndCondition.IsCorrect(CurString);
+                    if (this.StructureType.EndCondition != null)
+                        bEndConditionDone = this.StructureType.EndCondition.IsCorrect(CurString);
                 }
 
             }
@@ -97,7 +96,7 @@ namespace Universal_Log_Viewer.Types.Values
         }
         public override void Parse()
         {
-            ChildStrings = new List<CString>();
+            ChildStrings = new List<StringValue>();
             ProcessedStrings = new bool[Source.Length];
             for (int i = 0; i < ProcessedStrings.Length; i++)
                 ProcessedStrings[i] = false;
@@ -137,7 +136,7 @@ namespace Universal_Log_Viewer.Types.Values
             }
             return ProcessedStrings.Length;
         }
-        public CBlock(CBlockType Type, string[] Source)
+        public BlockValue(BlockType Type, string[] Source)
             : base(Type, Source)
         {
             
@@ -146,14 +145,14 @@ namespace Universal_Log_Viewer.Types.Values
         {
             string[] ProcessedList = Value;
             //Проверка блоков и генерация дочерних блоков (и их процесинг)
-            foreach (CBlockType oBlockType in this.Type.ChildBlockTypes)
+            foreach (BlockType oBlockType in this.StructureType.ChildBlockTypes)
             {
                 bool NoBlocksToProcess = false;
                 while (!(NoBlocksToProcess))
                 {
 
                     NoBlocksToProcess = true;
-                    CBlock NewBlock = new CBlock(oBlockType, ProcessedList);
+                    BlockValue NewBlock = new BlockValue(oBlockType, ProcessedList);
                     if (!(NewBlock.IsEmpty))
                     {
                         ProcessedList = NewBlock.CutSourceString;
@@ -166,9 +165,9 @@ namespace Universal_Log_Viewer.Types.Values
             //Проверка строк
             for (int I = 0; I < ProcessedList.Length; I++)
             {
-                foreach (CStringType oStringType in this.Type.ChildStringTypes)
+                foreach (StringType oStringType in this.StructureType.ChildStringTypes)
                 {
-                    CString NewString = new CString(oStringType, ProcessedList[I]);
+                    StringValue NewString = new StringValue(oStringType, ProcessedList[I]);
                     if (NewString.ConditionCorrect)
                     {
                         NewString.StartIndex = AddProcessedBlock(0, 1);

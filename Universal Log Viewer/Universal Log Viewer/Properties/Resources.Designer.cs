@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Universal_Log_Viewer.Properties {
+namespace UniversalLogViewer.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Universal_Log_Viewer.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Universal_Log_Viewer.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("UniversalLogViewer.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,7 +61,7 @@ namespace Universal_Log_Viewer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 24M
+        ///   Looks up a localized string similar to 35M
         ///.
         /// </summary>
         internal static string svn_revision {

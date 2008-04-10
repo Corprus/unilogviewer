@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 
-namespace IniFile
+namespace IniFiles
 {
-    public class CSectionContainer<T> : IEnumerable<T>
-        where T : CIniSection
+    public class SectionCollection<T> : IEnumerable<T>
+        where T : IniSection
     {
         public IEnumerator<T> GetEnumerator()
         {

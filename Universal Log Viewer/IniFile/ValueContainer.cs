@@ -1,18 +1,18 @@
 ﻿
-namespace IniFile
+namespace IniFiles
 {
-    public class CValueContainer
+    public class ValueContainer
     {
-        CIniSection IniSection;
+        IniSection Section;
         bool AutoCreateValues;
-        public CValueContainer(CIniSection IniSection)
+        public ValueContainer(IniSection Section)
         {
-            this.IniSection = IniSection;
+            this.Section = Section;
             this.AutoCreateValues = false;
         }
-        public CValueContainer(CIniSection IniSection, bool AutoCreateValues)
+        public ValueContainer(IniSection Section, bool AutoCreateValues)
         {
-            this.IniSection = IniSection;
+            this.Section = Section;
             this.AutoCreateValues = AutoCreateValues;
         }
 
@@ -20,21 +20,21 @@ namespace IniFile
         {
             get
             {
-                string Result = IniSection.IniFile.IniReadValue(IniSection.SectionName, ValueName);
+                string Result = Section.IniFile.ReadValue(Section.SectionName, ValueName);
                 if ((Result == "") && (AutoCreateValues))
-                    IniSection.IniFile.IniWriteValue(IniSection.SectionName, ValueName, Result);
+                    Section.IniFile.WriteValue(Section.SectionName, ValueName, Result);
                 return Result;
             }
         }
     }
-    public class CArrayValueContainer : CValueContainer
+    public class ArrayValueContainer : ValueContainer
     {
-        public CArrayValueContainer(CIniSection IniSection)
-            : base(IniSection)
+        public ArrayValueContainer(IniSection Section)
+            : base(Section)
         {
         }
-        public CArrayValueContainer(CIniSection IniSection, bool AutoCreateValues)
-            : base(IniSection, AutoCreateValues)
+        public ArrayValueContainer(IniSection Section, bool AutoCreateValues)
+            : base(Section, AutoCreateValues)
         {
         }
 
