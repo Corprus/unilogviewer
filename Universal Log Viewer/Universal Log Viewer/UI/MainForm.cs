@@ -70,7 +70,7 @@ namespace UniversalLogViewer.UI
                     }
                     else
                     {
-                        MessageBox.Show(Consts.SELECT_CORRECT_LOG_TYPE);
+                        MessageBox.Show(Consts.SELECT_CORRECT_LOG_TYPE, Consts.SELECT_CORRECT_LOG_TYPE, MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, Consts.DEFAULT_MESSAGE_BOX_OPTIONS);
                     }
                 }
             }

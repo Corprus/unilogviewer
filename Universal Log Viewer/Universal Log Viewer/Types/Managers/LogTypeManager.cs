@@ -66,11 +66,11 @@ namespace UniversalLogViewer.Types.Managers
             }
             bool bAddType = true;
             if (bHasSameName)
-               bAddType = (MessageBox.Show(Consts.ASK_ADD_LOG_TYPE_WITH_SAME_NAME, Consts.HEADER_SAME_LOG_TYPE_PRESENT, MessageBoxButtons.YesNo) == DialogResult.Yes);
+               bAddType = (MessageBox.Show(Consts.ASK_ADD_LOG_TYPE_WITH_SAME_NAME, Consts.HEADER_SAME_LOG_TYPE_PRESENT, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2, Consts.DEFAULT_MESSAGE_BOX_OPTIONS) == DialogResult.Yes);
 
             if (bAddType)
             {                
-                string LogFileIniFileNameWithoutFolders = LogTypeFileName.Substring(LogTypeFileName.LastIndexOf("\\") + 1, LogTypeFileName.Length - LogTypeFileName.LastIndexOf("\\") - 1);
+                string LogFileIniFileNameWithoutFolders = LogTypeFileName.Substring(LogTypeFileName.LastIndexOf("\\", StringComparison.Ordinal) + 1, LogTypeFileName.Length - LogTypeFileName.LastIndexOf("\\", StringComparison.Ordinal) - 1);
                 string sNewFileName = LogFileIniFileNameWithoutFolders;
 
                 if (bHasSameName)
@@ -79,7 +79,7 @@ namespace UniversalLogViewer.Types.Managers
                     int i = 0;
                     while (sLogTypes.Length > 0)
                     {
-                        sNewFileName = LogFileIniFileNameWithoutFolders.Substring(0, LogFileIniFileNameWithoutFolders.LastIndexOf(".")) + i.ToString() + "." + Consts.LOG_TYPE_EXTENSION;
+                        sNewFileName = LogFileIniFileNameWithoutFolders.Substring(0, LogFileIniFileNameWithoutFolders.LastIndexOf(".", StringComparison.Ordinal)) + i.ToString(System.Globalization.CultureInfo.InvariantCulture) + "." + Consts.LOG_TYPE_EXTENSION;
                         sLogTypes = Directory.GetFiles(IniSettingsManager.LogTypesFolder, sNewFileName);
                         i++;
                     }

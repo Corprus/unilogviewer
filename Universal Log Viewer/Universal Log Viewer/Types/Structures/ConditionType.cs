@@ -22,10 +22,10 @@ namespace UniversalLogViewer.Types.Structures
         public bool IsCorrect(string Value)
         {
             //Проверка на старт
-            if ((StartsWith != Consts.EMPTY_SYMBOL) && (!(Value.StartsWith(StartsWith))))
+            if ((StartsWith.Length != 0) && (!(Value.StartsWith(StartsWith, StringComparison.Ordinal))))
                 return false;
             //Проверка на конец
-            if ((EndsWith != Consts.EMPTY_SYMBOL) && (!(Value.EndsWith(EndsWith))))
+            if ((EndsWith.Length != 0) && (!(Value.EndsWith(EndsWith, StringComparison.Ordinal))))
                 return false;
             //Проверка на содержание
             foreach (string Condition in Contain)

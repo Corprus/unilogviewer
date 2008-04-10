@@ -14,7 +14,7 @@ namespace IniFiles
         public override string ReadValue(string Section, string Key)
         {
             string sValue = base.ReadValue(Section, Key);
-            if (sValue == "")
+            if (sValue.Length == 0)
                 WriteValue(Section, Key, sValue);
             return sValue;
         }

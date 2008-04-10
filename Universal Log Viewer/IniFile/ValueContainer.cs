@@ -4,7 +4,7 @@ namespace IniFiles
     public class ValueContainer
     {
         IniSection Section;
-        bool AutoCreateValues = false;
+        bool AutoCreateValues;
         public ValueContainer(IniSection Section)
         {
             this.Section = Section;
@@ -20,7 +20,7 @@ namespace IniFiles
             get
             {
                 string Result = Section.IniFile.ReadValue(Section.SectionName, ValueName);
-                if ((Result == "") && (AutoCreateValues))
+                if ((Result.Length == 0) && (AutoCreateValues))
                     Section.IniFile.WriteValue(Section.SectionName, ValueName, Result);
                 return Result;
             }
@@ -42,7 +42,7 @@ namespace IniFiles
             get
             {
                 string PlainResult = base[ValueName];
-                if (PlainResult == "")
+                if (PlainResult.Length == 0)
                     return new string[0];
                 else
                 {
@@ -59,7 +59,7 @@ namespace IniFiles
             get
             {
                 string PlainResult = base[ValueName];
-                if (PlainResult == "")
+                if (PlainResult.Length == 0)
                     return new string[0];
                 else
                 {

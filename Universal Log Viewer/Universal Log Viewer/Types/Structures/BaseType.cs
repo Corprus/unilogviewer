@@ -34,7 +34,7 @@ namespace UniversalLogViewer.Types.Structures
             this.Section = Section;
             Name = Section.Values[Consts.KEY_NAME];
             Title = Section.Values[KEY_TITLE];
-            if (Title == "")
+            if (Title.Length == 0)
                 Title = Name;
             if (ParentLogType != null) //То есть это и есть лог тайп
                 Style = ParentLogType.Styles[Section.Values[KEY_STYLE]];

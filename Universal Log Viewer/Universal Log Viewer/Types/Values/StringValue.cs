@@ -75,7 +75,7 @@ namespace UniversalLogViewer.Types.Values
                     else
                         UsedType = Types[i];
                     Value NewValue = new Value(UsedType, SeparatedStrings[i]);
-                    if (NewValue.Value != Consts.EMPTY_SYMBOL)
+                    if (NewValue.Value.Length != 0)
                         Values.Add(NewValue);
                 }
             }
@@ -89,7 +89,7 @@ namespace UniversalLogViewer.Types.Values
                     foreach (ValuesType VType in this.StructureType.ChildTypes)
                     {
                         Value NewValue = new Value(VType, sProcessedString);
-                        if (NewValue.Value != Consts.EMPTY_SYMBOL)
+                        if (NewValue.Value.Length != 0)
                         {
                             Values.Add(NewValue);
                             sProcessedString = NewValue.CutSource(sProcessedString);

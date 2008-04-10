@@ -29,14 +29,14 @@ namespace UniversalLogViewer.Types.Values
         }
         public string GetValue(string Parsed)
         {
-            int iStart = Parsed.IndexOf(this.StructureType.Condition.StartsWith);
-            int iEnd = Parsed.IndexOf(this.StructureType.Condition.EndsWith);
+            int iStart = Parsed.IndexOf(this.StructureType.Condition.StartsWith, StringComparison.Ordinal);
+            int iEnd = Parsed.IndexOf(this.StructureType.Condition.EndsWith, StringComparison.Ordinal);
             string PreParsedValue = Consts.EMPTY_SYMBOL;
-            if ((this.StructureType.Condition.StartsWith == Consts.EMPTY_SYMBOL) && (this.StructureType.Condition.EndsWith == Consts.EMPTY_SYMBOL))
+            if ((this.StructureType.Condition.StartsWith.Length == 0) && (this.StructureType.Condition.EndsWith.Length == 0))
                 PreParsedValue = Parsed;
-            else if ((this.StructureType.Condition.StartsWith == Consts.EMPTY_SYMBOL) && (iEnd > -1))
+            else if ((this.StructureType.Condition.StartsWith.Length == 0) && (iEnd > -1))
                 PreParsedValue = Parsed.Substring(0, iEnd + this.StructureType.Condition.EndsWith.Length);
-            else if ((this.StructureType.Condition.EndsWith == Consts.EMPTY_SYMBOL) && (iStart > -1))
+            else if ((this.StructureType.Condition.EndsWith.Length == 0) && (iStart > -1))
                 PreParsedValue = Parsed.Substring(iStart, Parsed.Length - iEnd);
             else if ((iStart > -1) && (iEnd > -1) && (iEnd - iStart > 0))
                 PreParsedValue = Parsed.Substring(iStart, (iEnd - iStart + 1));
@@ -57,9 +57,9 @@ namespace UniversalLogViewer.Types.Values
         //¬џ–≈«ј“№(!!!) »з большой строки то что мы отпарсили
         public string CutSource(string Source)
         {
-            if ((Value != Consts.EMPTY_SYMBOL) && (Source.Contains(Value)))
+            if ((Value.Length != 0) && (Source.Contains(Value)))
             {
-                int iStart = Source.IndexOf(Value);
+                int iStart = Source.IndexOf(Value, StringComparison.Ordinal);
                 int iEnd = iStart + Value.Length;
                 if (!(this.StructureType.IncludeConditions)) //≈сли не включаем граничные услови€ в значение - то еще не факт что мы не должны их вырезјть
                 {

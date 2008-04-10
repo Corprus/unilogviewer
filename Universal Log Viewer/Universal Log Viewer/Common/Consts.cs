@@ -16,6 +16,7 @@ namespace UniversalLogViewer
         public const string SELECT_CORRECT_LOG_TYPE = "Please select correct log type from the list";
         public const string TEXT_DELETE_LOG_TYPE = "Do you really want to delete log type (file will be deleted permanently)?";
         public const string HEADER_DELETE_LOG_TYPE = "Do you really want to delete?";
+        public const System.Windows.Forms.MessageBoxOptions DEFAULT_MESSAGE_BOX_OPTIONS = (System.Windows.Forms.MessageBoxOptions)0;
 
     }
 }

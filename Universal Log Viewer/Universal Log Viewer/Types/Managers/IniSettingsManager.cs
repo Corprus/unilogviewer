@@ -39,7 +39,7 @@ namespace UniversalLogViewer.Types.Managers
                     return "";
             }
         }
-        public static bool UseExternalOpen { get { return (OpenLogTypeCommand != ""); } }
+        public static bool UseExternalOpen { get { return (OpenLogTypeCommand.Length != 0); } }
         public static bool ShowValueMemo
         {
             get
