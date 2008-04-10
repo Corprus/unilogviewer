@@ -13,7 +13,7 @@ namespace IniFiles
         public static extern int GetPrivateProfileString(string section,
                  string key, string def, StringBuilder retVal,
             int size, string filePath);
-        [DllImport("kernel32.dll", CharSet = CharSet.Unicode)]
+        [DllImport("kernel32.dll", CharSet = CharSet.Ansi)]
         public static extern uint GetPrivateProfileSectionNamesA(byte[] lpszReturnBuffer,
            uint nSize, string lpFileName);
 

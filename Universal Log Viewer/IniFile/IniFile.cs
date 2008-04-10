@@ -31,7 +31,9 @@ namespace IniFiles
             int i = NativeMethods.GetPrivateProfileString(Section, Key, "", temp,
                                             255, this.FilePath);
             if (i != 0)
-                throw new System.IO.FileLoadException();
+            { }
+
+                
             return temp.ToString();
 
         }
