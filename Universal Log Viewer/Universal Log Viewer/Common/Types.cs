@@ -5,14 +5,10 @@ using System.Text;
 
 namespace UniversalLogViewer.Common
 {
-    public class Types
+    public enum TitleType
     {
-        public enum TitleTypes
-        {
-            Title = 0,
-            Value = 1,
-            Source = 2
-        }
-
+        Title = 0,
+        Value = 1,
+        Source = 2
     }
 }

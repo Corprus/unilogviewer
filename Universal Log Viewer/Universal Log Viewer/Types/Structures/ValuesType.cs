@@ -27,12 +27,12 @@ namespace UniversalLogViewer.Types.Structures
         {
         }
 
-        public override void ReInit(LogType vLogType, LogIniSection IniSection)
+        public override void ReInit(LogType LogType, LogIniSection Section)
         {
-            base.ReInit(vLogType, IniSection);
-            FInit(IniSection.Values[KEY_VALUE_TYPE],
-                (IniSection.Values[KEY_INCLUDE_CONDITIONS] == "1"),
-                (ParentLogType.Conditions[ParentLogType.LogTypeFile.Sections[IniSection.Values[KEY_CONDITION]].SectionName]));
+            base.ReInit(LogType, Section);
+            FInit(Section.Values[KEY_VALUE_TYPE],
+                (Section.Values[KEY_INCLUDE_CONDITIONS] == "1"),
+                (ParentLogType.Conditions[ParentLogType.LogTypeFile.Sections[Section.Values[KEY_CONDITION]].SectionName]));
         }
         public ValuesType()
             : base()

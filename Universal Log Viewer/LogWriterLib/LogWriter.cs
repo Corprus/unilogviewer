@@ -6,32 +6,31 @@ using System.Text;
 using System.IO;
 
 [assembly: CLSCompliant(true)]
-namespace LogWriter
+namespace LogWriting
 {
-    public enum LWErrorCodes { EC_PATH_TOO_LONG = -2, EC_ERROR = -1, EC_SUCCESS = 0, EC_DIRECTORY_CREATED = 1 }
+    public enum LWErrorCode { EC_PATH_TOO_LONG = -2, EC_ERROR = -1, EC_SUCCESS = 0, EC_DIRECTORY_CREATED = 1 }
+    public enum TypeLogMessage { LMT_ERROR = 0, LMT_FATAL = 1, LMT_WARN = 2, LMT_INFORM = 3 };
 
     public class LogWriter
     {
         private TextWriter _oTextWriter;
         private String sLogSeparator = "\t";        
-
-        public enum TypeLogMessage { LMT_ERROR=0, LMT_FATAL=1, LMT_WARN=2, LMT_INFORM=3 };
         private String[] aTypeMessages = { "ERROR", "FATAL", "WARN", "INFORM" };
 
-        public LogWriter(String vsFileName, out LWErrorCodes riResultCode)
+        public LogWriter(String vsFileName, out LWErrorCode riResultCode)
         {
-            riResultCode = LWErrorCodes.EC_SUCCESS;
+            riResultCode = LWErrorCode.EC_SUCCESS;
             var s = Directory.GetParent(vsFileName);
             if (!s.Exists)
             {
                 try
                 {
                     s.Create();
-                    riResultCode = LWErrorCodes.EC_DIRECTORY_CREATED;
+                    riResultCode = LWErrorCode.EC_DIRECTORY_CREATED;
                 }
                 catch (Exception)
                 {
-                    riResultCode = LWErrorCodes.EC_ERROR;
+                    riResultCode = LWErrorCode.EC_ERROR;
                     return;
                 }
             }
@@ -42,12 +41,12 @@ namespace LogWriter
             }
             catch (System.IO.PathTooLongException)
             {
-                riResultCode = LWErrorCodes.EC_PATH_TOO_LONG;
+                riResultCode = LWErrorCode.EC_PATH_TOO_LONG;
                 return;
             }
             catch (Exception)
             {
-                riResultCode = LWErrorCodes.EC_ERROR;
+                riResultCode = LWErrorCode.EC_ERROR;
                 return;
             }           
         }
@@ -58,7 +57,7 @@ namespace LogWriter
         }
 
 
-        public LWErrorCodes WriteLog(TypeLogMessage ventType, String vsMessage)
+        public LWErrorCode WriteLog(TypeLogMessage ventType, String vsMessage)
         {
             string sMessage = "[" + Convert.ToString(DateTime.Now) + "]" + sLogSeparator;
             sMessage += "[" + aTypeMessages[(int)ventType] + "]" + sLogSeparator + vsMessage;
@@ -69,9 +68,9 @@ namespace LogWriter
             }
             catch (Exception)
             {
-                return LWErrorCodes.EC_ERROR;
+                return LWErrorCode.EC_ERROR;
             }
-            return LWErrorCodes.EC_SUCCESS;
+            return LWErrorCode.EC_SUCCESS;
         }
 
     }

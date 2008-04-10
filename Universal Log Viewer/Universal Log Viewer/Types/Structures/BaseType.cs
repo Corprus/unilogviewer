@@ -18,7 +18,7 @@ namespace UniversalLogViewer.Types.Structures
         public string SectionName { get { return Section.SectionName; } }
         public string Title { get; private set; }
         public StyleType Style { get; private set; }
-        public Common.Types.TitleTypes TitleType { get; private set; }
+        public Common.TitleType TitleType { get; private set; }
         protected LogType ParentLogType { get; set; }
         protected BaseType(LogType LogType, LogIniSection Section)
         {
@@ -42,11 +42,11 @@ namespace UniversalLogViewer.Types.Structures
                 Style = new StyleType(false, System.Drawing.Color.Black, true, false);
             try
             {
-                TitleType = (Common.Types.TitleTypes)Enum.Parse(typeof(Common.Types.TitleTypes), Section.Values[KEY_TITLE_TYPE], false);
+                TitleType = (Common.TitleType)Enum.Parse(typeof(Common.TitleType), Section.Values[KEY_TITLE_TYPE], false);
             }
             catch (ArgumentException)
             {
-                TitleType = Common.Types.TitleTypes.Title;
+                TitleType = Common.TitleType.Title;
             }
 
         }

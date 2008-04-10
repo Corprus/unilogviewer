@@ -14,10 +14,14 @@ namespace UniversalLogViewer.Types.Values
             :base(Type, Source)
         {            
         }
-        protected override TreeNode GetTreeNode()
+        public override TreeNode TreeNode
         {
-            TreeNodeValueString = this.StructureType.Name + ": " + Value;
-            return base.GetTreeNode();
+            get
+            {
+
+                TreeNodeValueString = this.StructureType.Name + ": " + Value;
+                return base.TreeNode;
+            }
         }
         public override void Parse()
         {            

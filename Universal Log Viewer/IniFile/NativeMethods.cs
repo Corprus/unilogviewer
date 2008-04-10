@@ -6,10 +6,10 @@ namespace IniFiles
 {
     internal static class NativeMethods
     {
-        [DllImport("kernel32")]
-        public static extern IntPtr WritePrivateProfileString(string section,
+        [DllImport("kernel32", CharSet = CharSet.Unicode)]
+        public static extern int WritePrivateProfileString(string section,
             string key, string val, string filePath);
-        [DllImport("kernel32")]
+        [DllImport("kernel32", CharSet = CharSet.Unicode)]
         public static extern int GetPrivateProfileString(string section,
                  string key, string def, StringBuilder retVal,
             int size, string filePath);

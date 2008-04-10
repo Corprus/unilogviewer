@@ -24,7 +24,7 @@ namespace UniversalLogViewer.UI
             btnReInit.Enabled = (lbxLogTypes.SelectedItem is LogType);
             btnDelete.Enabled = (lbxLogTypes.SelectedItem is LogType);
             if (lbxLogTypes.SelectedItem is LogType)
-                memoLogDescription.Rtf = (lbxLogTypes.SelectedItem as LogType).GetRTFDescription();
+                memoLogDescription.Rtf = (lbxLogTypes.SelectedItem as LogType).RTFDescription;
 
         }
 

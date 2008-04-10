@@ -15,37 +15,42 @@ namespace UniversalLogViewer.Types.Values
         public new StringType StructureType { get { return (base.StructureType as StringType); } private set { base.StructureType = value; } }
         public bool ConditionCorrect { get { return this.StructureType.Condition.IsCorrect(Value); } }
         public int StartIndex { get; set; }
-        protected override TreeNode GetTreeNode()
+        public override TreeNode TreeNode
         {
-            string NodeTitle;
-            switch (this.StructureType.TitleType)
+            get
             {
-                case Common.Types.TitleTypes.Title: NodeTitle = this.StructureType.Title; break;
-                case Common.Types.TitleTypes.Source: NodeTitle = this.Source; break;
-                case Common.Types.TitleTypes.Value:
-                    {
-                        Value TitleElement = null;
-                        if (ChildElements.Count > this.StructureType.TitleValueIndex)
+
+                string NodeTitle;
+                switch (this.StructureType.TitleType)
+                {
+                    case Common.TitleType.Title: NodeTitle = this.StructureType.Title; break;
+                    case Common.TitleType.Source: NodeTitle = this.Source; break;
+                    case Common.TitleType.Value:
                         {
-                            TitleElement = ChildElements[this.StructureType.TitleValueIndex];
-                            if ((this.StructureType.TitleValueType != "") && (TitleElement.StructureType.Name != this.StructureType.TitleValueType))
-                                TitleElement = null;
+                            Value TitleElement = null;
+                            if (ChildElements.Count > this.StructureType.TitleValueIndex)
+                            {
+                                TitleElement = ChildElements[this.StructureType.TitleValueIndex];
+                                if ((this.StructureType.TitleValueType.Length > 0) && (TitleElement.StructureType.Name != this.StructureType.TitleValueType))
+                                    TitleElement = null;
+                            }
+                            if (TitleElement == null)
+                                NodeTitle = this.StructureType.Title;
+                            else
+                                NodeTitle = TitleElement.Value;
+                            break;
                         }
-                        if (TitleElement == null)
-                            NodeTitle = this.StructureType.Title;
-                        else
-                            NodeTitle = TitleElement.Value;
-                        break;
-                    }
-                default: NodeTitle = this.StructureType.Title; break;
-            }
-            TreeNodeValueString = NodeTitle;
-            TreeNode Result = base.GetTreeNode();
-            foreach (Value ResultValue in ChildElements)
-                if ((!(IniSettingsManager.ShowValueMemo)) && (ResultValue.StructureType.Style.Visible))
+                    default: NodeTitle = this.StructureType.Title; break;
+                }
+                TreeNodeValueString = NodeTitle;
+                TreeNode Result = base.TreeNode;
+                foreach (Value ResultValue in ChildElements)
+                    if ((!(IniSettingsManager.ShowValueMemo)) && (ResultValue.StructureType.Style.Visible))
                         Result.Nodes.Add(ResultValue.TreeNode);
-            return Result;
+                return Result;
+            }
         }
+    
 
         List<Value> ProcessString()
         {

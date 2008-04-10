@@ -25,18 +25,21 @@ namespace UniversalLogViewer.Types.Structures
 
         public BlockType RootBlockType { get; private set; }
         public LogIniFile LogTypeFile { get; private set; }
-        public string GetRTFDescription()
+        public string RTFDescription
         {
-            const string NEW_LINE = @"\line ";
-            const string TAB_SYMBOL = @"\tab ";
-            string Result;
-            Result = @"{\rtf1\ansi \b " + LogName + @" \b0" + NEW_LINE;
-            Result += "Author:" + TAB_SYMBOL + Author + NEW_LINE;
-            Result += "Version:" + TAB_SYMBOL + Version + NEW_LINE;
-            Result += "File Path:" + TAB_SYMBOL + LogTypeFile.FileName.Replace("\\","\\\\") + NEW_LINE;
-            Result += "Last Modified:" + TAB_SYMBOL + System.IO.File.GetLastWriteTime(LogTypeFile.FileName) + NEW_LINE;
-            Result += @"}";
-            return Result;
+            get
+            {
+                const string NEW_LINE = @"\line ";
+                const string TAB_SYMBOL = @"\tab ";
+                string Result;
+                Result = @"{\rtf1\ansi \b " + LogName + @" \b0" + NEW_LINE;
+                Result += "Author:" + TAB_SYMBOL + Author + NEW_LINE;
+                Result += "Version:" + TAB_SYMBOL + Version + NEW_LINE;
+                Result += "File Path:" + TAB_SYMBOL + LogTypeFile.FileName.Replace("\\", "\\\\") + NEW_LINE;
+                Result += "Last Modified:" + TAB_SYMBOL + System.IO.File.GetLastWriteTime(LogTypeFile.FileName) + NEW_LINE;
+                Result += @"}";
+                return Result;
+            }
         }
         public string[] GetDescription()
         {

@@ -20,7 +20,10 @@ namespace IniFiles
         }
         public void WriteValue(string Section, string Key, string Value)
         {
-            NativeMethods.WritePrivateProfileString(Section, Key, Value, this.FilePath);
+            int Result = NativeMethods.WritePrivateProfileString(Section, Key, Value, this.FilePath);
+            if (Result != 0)
+                throw new System.IO.FileLoadException();
+
         }
         public virtual string ReadValue(string Section, string Key)
         {

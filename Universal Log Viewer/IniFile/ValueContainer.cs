@@ -4,11 +4,10 @@ namespace IniFiles
     public class ValueContainer
     {
         IniSection Section;
-        bool AutoCreateValues;
+        bool AutoCreateValues = false;
         public ValueContainer(IniSection Section)
         {
             this.Section = Section;
-            this.AutoCreateValues = false;
         }
         public ValueContainer(IniSection Section, bool AutoCreateValues)
         {

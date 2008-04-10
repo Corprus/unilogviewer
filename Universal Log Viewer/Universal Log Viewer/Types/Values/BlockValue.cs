@@ -42,24 +42,27 @@ namespace UniversalLogViewer.Types.Values
             
             
         }
-        protected override TreeNode GetTreeNode()
+        public override TreeNode TreeNode
         {
-            TreeNodeValueString = this.StructureType.Title;
-            TreeNode Result = base.GetTreeNode();
-            List<Object> ChildList = new List<Object>();
-            foreach (StringValue ChildString in ChildStrings)
-                ChildList.Add(ChildString);
-            foreach (BlockValue ChildBlock in ChildElements)
-                ChildList.Add(ChildBlock);
-            ChildList.Sort(CompareChilds);
-            foreach (Object Obj in ChildList)
+            get
             {
-                var TypeObj = Obj as BaseValue;
-                if ((TypeObj != null)&&((TypeObj is BlockValue)||(TypeObj is StringValue)))
-                if  (TypeObj.StructureType.Style.Visible)
-                    Result.Nodes.Add(TypeObj.TreeNode);
+                TreeNodeValueString = this.StructureType.Title;
+                TreeNode Result = base.TreeNode;
+                List<Object> ChildList = new List<Object>();
+                foreach (StringValue ChildString in ChildStrings)
+                    ChildList.Add(ChildString);
+                foreach (BlockValue ChildBlock in ChildElements)
+                    ChildList.Add(ChildBlock);
+                ChildList.Sort(CompareChilds);
+                foreach (Object Obj in ChildList)
+                {
+                    var TypeObj = Obj as BaseValue;
+                    if ((TypeObj != null) && ((TypeObj is BlockValue) || (TypeObj is StringValue)))
+                        if (TypeObj.StructureType.Style.Visible)
+                            Result.Nodes.Add(TypeObj.TreeNode);
+                }
+                return Result;
             }
-            return Result;
         }
         string[] ParseStringList(string[] SourceList)
         {

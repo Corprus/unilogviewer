@@ -12,8 +12,32 @@ namespace UniversalLogViewer.Types.Values
     {
         protected string TreeNodeValueString { get; set; }
         public BaseType StructureType { get; protected set; }
-        public TreeNode TreeNode { get { return GetTreeNode(); } }
-        protected virtual TreeNode GetTreeNode()
+        public virtual TreeNode TreeNode 
+        { 
+            get
+            {
+                TreeNode Result = null;
+                if (this.StructureType.Style.Visible)
+                {
+                    string RealValue = TreeNodeValueString;
+                    if (this.StructureType.Style.Trim)
+                        RealValue = RealValue.Trim();
+                    Result = new TreeNode(TreeNodeValueString);
+                    Result.BeginEdit();
+                    Result.Tag = this;
+                    Result.ForeColor = this.StructureType.Style.Color;
+                    if (Result.NodeFont == null)
+                        Result.NodeFont = new System.Drawing.Font(System.Drawing.FontFamily.GenericSansSerif, 8);
+                    if (this.StructureType.Style.Bold)
+                        Result.NodeFont = new System.Drawing.Font(Result.NodeFont, System.Drawing.FontStyle.Bold);
+                    Result.EndEdit(false);
+
+                }
+                return Result;
+
+            } 
+        }
+/*        protected virtual TreeNode GetTreeNode()
         {
             TreeNode Result = null;
             if (this.StructureType.Style.Visible)
@@ -34,6 +58,7 @@ namespace UniversalLogViewer.Types.Values
             }
             return Result;
         }
+ */
         public abstract void Parse();
         protected BaseValue(BaseType Type)
         {
