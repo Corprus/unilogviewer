@@ -29,7 +29,7 @@ namespace LogWriter
                     s.Create();
                     riResultCode = LWErrorCodes.EC_DIRECTORY_CREATED;
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     riResultCode = LWErrorCodes.EC_ERROR;
                     return;
@@ -40,12 +40,12 @@ namespace LogWriter
             {
                 _oTextWriter = new StreamWriter(vsFileName, true);
             }
-            catch (System.IO.PathTooLongException e)
+            catch (System.IO.PathTooLongException)
             {
                 riResultCode = LWErrorCodes.EC_PATH_TOO_LONG;
                 return;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 riResultCode = LWErrorCodes.EC_ERROR;
                 return;
@@ -67,7 +67,7 @@ namespace LogWriter
                 _oTextWriter.WriteLine((string)sMessage);
                 _oTextWriter.Flush();
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return LWErrorCodes.EC_ERROR;
             }
