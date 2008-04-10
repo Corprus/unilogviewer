@@ -5,19 +5,50 @@ using System.Linq;
 using System.Text;
 using System.IO;
 
-namespace LogWriterLib
+namespace LogWriter
 {
-    
+    public enum LWErrorCodes { EC_PATH_TOO_LONG = -2, EC_ERROR = -1, EC_SUCCESS = 0, EC_DIRECTORY_CREATED = 1 }
+
     public class LogWriter
     {
-        TextWriter _oTextWriter;
+        private TextWriter _oTextWriter;
+        private String sLogSeparator = "\t";        
 
         public enum TypeLogMessage { LMT_ERROR=0, LMT_FATAL=1, LMT_WARN=2, LMT_INFORM=3 };
         private String[] aTypeMessages = { "ERROR", "FATAL", "WARN", "INFORM" };
 
-        public LogWriter(String vsFileName)
+        public LogWriter(String vsFileName, out LWErrorCodes riResultCode)
         {
-            _oTextWriter = new StreamWriter(vsFileName, true);
+            riResultCode = LWErrorCodes.EC_SUCCESS;
+            var s = Directory.GetParent(vsFileName);
+            if (!s.Exists)
+            {
+                try
+                {
+                    s.Create();
+                    riResultCode = LWErrorCodes.EC_DIRECTORY_CREATED;
+                }
+                catch (Exception e)
+                {
+                    riResultCode = LWErrorCodes.EC_ERROR;
+                    return;
+                }
+            }
+
+            try
+            {
+                _oTextWriter = new StreamWriter(vsFileName, true);
+            }
+            catch (System.IO.PathTooLongException e)
+            {
+                riResultCode = LWErrorCodes.EC_PATH_TOO_LONG;
+                return;
+            }
+            catch (Exception e)
+            {
+                riResultCode = LWErrorCodes.EC_ERROR;
+                return;
+            }           
         }
 
         ~LogWriter()
@@ -25,13 +56,21 @@ namespace LogWriterLib
             
         }
 
-        public int WriteLog(TypeLogMessage ventType, String vsMessage)
+
+        public LWErrorCodes WriteLog(TypeLogMessage ventType, String vsMessage)
         {
-            string sMessage = "[" + Convert.ToString(DateTime.Now) + "]\t";
-            sMessage += "[" + aTypeMessages[(int)ventType] + "]\t" + vsMessage;
-            _oTextWriter.WriteLine((string)sMessage);
-            _oTextWriter.Flush();
-            return 0;
+            string sMessage = "[" + Convert.ToString(DateTime.Now) + "]" + sLogSeparator;
+            sMessage += "[" + aTypeMessages[(int)ventType] + "]" + sLogSeparator + vsMessage;
+            try
+            {
+                _oTextWriter.WriteLine((string)sMessage);
+                _oTextWriter.Flush();
+            }
+            catch (Exception e)
+            {
+                return LWErrorCodes.EC_ERROR;
+            }
+            return LWErrorCodes.EC_SUCCESS;
         }
 
     }

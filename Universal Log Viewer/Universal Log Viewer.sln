@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IniFile", "IniFile\IniFile.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstallerClasses", "InstallerClasses\InstallerClasses.csproj", "{9FCBF9A0-05B6-4775-A3E9-5BBD0CCF5C4B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogWriterLib", "LogWriterLib\LogWriterLib.csproj", "{F01B6F3D-C463-4BA4-AA6A-1B6FB1FC720A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogWriter", "LogWriterLib\LogWriter.csproj", "{F01B6F3D-C463-4BA4-AA6A-1B6FB1FC720A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
