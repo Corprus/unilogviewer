@@ -2,9 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using IniFiles;
+using UniversalLogViewer.Common;
 
 
-namespace UniversalLogViewer.Common.IniFiles
+namespace UniversalLogViewer.IniFiles
 {
     public class LogIniFile : IniFile
     {

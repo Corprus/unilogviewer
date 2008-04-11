@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using UniversalLogViewer.UI;
 using UniversalLogViewer.Types.Managers;
+using UniversalLogViewer.Common;
 
 [assembly:CLSCompliant(true)]
 namespace UniversalLogViewer
@@ -18,7 +19,14 @@ namespace UniversalLogViewer
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             IniSettingsManager.InitFile();
-            Application.Run(new MainForm());
+            try
+            {
+                Application.Run(new MainForm());
+            }
+            catch (UniLogViewerException e)
+            {
+                System.Windows.Forms.MessageBox.Show(e.Message, "Unhandled Internal Error happened. \n Program will terminate now", MessageBoxButtons.OK,  MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, Consts.DEFAULT_MESSAGE_BOX_OPTIONS);
+            }
         }
     }
 }

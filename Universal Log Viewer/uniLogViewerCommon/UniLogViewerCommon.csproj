@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{931AB029-5A5F-4328-9934-E4A8EEF437CE}</ProjectGuid>
+    <ProjectGuid>{02042878-C16A-48D6-BD04-035C554D329F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>IniFiles</RootNamespace>
-    <AssemblyName>IniFile</AssemblyName>
+    <RootNamespace>UniversalLogViewer.Common</RootNamespace>
+    <AssemblyName>UniLogViewer.Common</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SignAssembly>true</SignAssembly>
@@ -31,30 +31,35 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Data" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AutoSavedIniFile.cs" />
-    <Compile Include="IniFile.cs" />
-    <Compile Include="IniSection.cs" />
-    <Compile Include="NativeMethods.cs" />
-    <Compile Include="SectionCollection.cs" />
-    <Compile Include="ValueContainer.cs" />
+    <Compile Include="Consts.cs" />
+    <Compile Include="Exceptions.cs" />
+    <Compile Include="FileReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="UniLogViewer.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\uniLogViewerCommon\UniLogViewerCommon.csproj">
-      <Project>{02042878-C16A-48D6-BD04-035C554D329F}</Project>
-      <Name>UniLogViewerCommon</Name>
+    <ProjectReference Include="..\LogWriterLib\LogWriter.csproj">
+      <Project>{F01B6F3D-C463-4BA4-AA6A-1B6FB1FC720A}</Project>
+      <Name>LogWriter</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

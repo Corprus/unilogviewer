@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using UniversalLogViewer.Types.Values;
 using UniversalLogViewer.Types.Structures;
 using UniversalLogViewer.Types.Managers;
+using UniversalLogViewer.Common;
 
 namespace UniversalLogViewer.UI
 {

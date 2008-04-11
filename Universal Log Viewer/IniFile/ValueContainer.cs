@@ -1,4 +1,4 @@
-﻿
+﻿using UniversalLogViewer.Common;
 namespace IniFiles
 {
     public class ValueContainer

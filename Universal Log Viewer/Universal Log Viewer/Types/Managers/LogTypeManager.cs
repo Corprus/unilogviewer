@@ -16,7 +16,6 @@ namespace UniversalLogViewer.Types.Managers
         public static void ReInit()
         {
             _oInstance = new LogTypeManager();
-
         }
 
         static LogTypeManager _oInstance;

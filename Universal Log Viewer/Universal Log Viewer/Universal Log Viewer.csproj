@@ -76,7 +76,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\FileReader.cs" />
     <Compile Include="Common\Types.cs" />
     <Compile Include="Common\Utilities.cs" />
     <Compile Include="Types\Managers\IniSettingsManager.cs" />
@@ -88,10 +87,9 @@
     <Compile Include="Types\Values\BlockValue.cs" />
     <Compile Include="Types\Structures\ConditionType.cs" />
     <Compile Include="Types\Values\Log.cs" />
-    <Compile Include="Common\IniFile\LogIniFile.cs" />
+    <Compile Include="Common\LogIniFile.cs" />
     <Compile Include="Types\Structures\LogType.cs" />
-    <Compile Include="Common\Consts.cs" />
-    <Compile Include="Common\Containers.cs" />
+    <Compile Include="Types\Managers\LogTypeCollection.cs" />
     <Compile Include="Types\Values\StringValue.cs" />
     <Compile Include="Types\Values\Value.cs" />
     <Compile Include="Program.cs" />
@@ -191,6 +189,10 @@
     <ProjectReference Include="..\LogWriterLib\LogWriter.csproj">
       <Project>{F01B6F3D-C463-4BA4-AA6A-1B6FB1FC720A}</Project>
       <Name>LogWriter</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\uniLogViewerCommon\UniLogViewerCommon.csproj">
+      <Project>{02042878-C16A-48D6-BD04-035C554D329F}</Project>
+      <Name>UniLogViewerCommon</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

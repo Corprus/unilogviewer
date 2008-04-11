@@ -2,10 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace UniversalLogViewer
+namespace UniversalLogViewer.Common
 {
     public static class Consts
     {
+        public const string ERROR_LOG_FILENAME = "unilogviewer.log";
         public const string EMPTY_SYMBOL = "";
         public const char ARRAY_SEPARATOR = ',';
         public const string KEY_NAME = "Name";

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
 using UniversalLogViewer.Types.Structures;
+using UniversalLogViewer.Common;
 
 
 namespace UniversalLogViewer.Types.Values 

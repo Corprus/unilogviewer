@@ -5,7 +5,7 @@ using System.Text;
 
 namespace UniversalLogViewer.Common
 {
-    class FileReader
+    public class FileReader
     {
 
         public string FileName { get; private set; }            
