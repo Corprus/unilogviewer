@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 
 [assembly: CLSCompliant(true)]
@@ -43,16 +44,36 @@ namespace IniFiles
 
             uint MAX_BUFFER = 32767;
             byte[] pReturnedString = new byte[MAX_BUFFER];
-            uint bytesReturned = NativeMethods.GetPrivateProfileSectionNamesA(pReturnedString, MAX_BUFFER, this.FilePath);
+            uint bytesReturned = NativeMethods.GetPrivateProfileSectionNames(pReturnedString, MAX_BUFFER, this.FilePath);
             if (bytesReturned == 0)
                 return null;
-            /*string local = Marshal.PtrToStringAnsi(pReturnedString, (int)bytesReturned);
-            Marshal.FreeCoTaskMem(pReturnedString);
-             */
             String local = System.Text.Encoding.Default.GetString(pReturnedString);
-            //use of Substring below removes terminating null for split
-            char[] SubChars = new char[] {'\0'};
-            return local.Substring(0, local.Length - 1).Split(SubChars, StringSplitOptions.RemoveEmptyEntries);
+            return FConvertUnicodeSeparatedStringsToNormalStrings(local);
+
+        }
+        string[] FConvertUnicodeSeparatedStringsToNormalStrings(string UnicodeText)
+        {
+            char SeparateChar = '\0';
+            char[] SubChars = new char[] { SeparateChar };
+            List<string> Result = new List<string>();
+            Result.Add("");
+            int j = 0;
+            for (int i = 0; i < UnicodeText.Length; i++)
+            {
+                if (UnicodeText[i] != (SeparateChar))
+                {
+                    if (Result.Count <= j)
+                        Result.Add("");
+                    Result[j] += UnicodeText[i].ToString();
+                }
+                else if ((i < UnicodeText.Length - 1) && (UnicodeText[i + 1] == (SeparateChar)))
+                {
+                    j++; i++;
+                }
+
+            }
+            return Result.ToArray();
+
 
         }
         public string[] SectionNames { get { return FSectionNames(); } }
