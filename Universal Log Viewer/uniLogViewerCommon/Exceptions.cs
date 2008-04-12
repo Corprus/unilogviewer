@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace UniversalLogViewer.Common.Exceptions
 {
-    class ExceptionLogWriter
+    public class ExceptionLogWriter
     {
         static LogWriting.LogWriter _Instance;
 
@@ -44,15 +44,22 @@ namespace UniversalLogViewer.Common.Exceptions
             WriteMessage(message);
             if (ExceptionLevel == LogWriting.TypeLogMessage.LMT_FATAL)
             {
-                System.Windows.Forms.MessageBox.Show(message, "Handled FATAL Internal Error happened. \n Program will terminate now", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, UniversalLogViewer.Common.Consts.DEFAULT_MESSAGE_BOX_OPTIONS);
+                System.Windows.Forms.MessageBox.Show(message, "FATAL Error happened. \n Program will terminate now", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, UniversalLogViewer.Common.Consts.DEFAULT_MESSAGE_BOX_OPTIONS);
                 System.Windows.Forms.Application.Exit();
             }
 
         }
+        public UniLogViewerException(Exception e)
+            :this(e.Message, e)
+        {
+        }
+
 
         public UniLogViewerException(string message, Exception e)
             : base(message, e)
         {
+            if (message.Length == 0)
+                message = e.Message;
             WriteMessage("(" + e.GetType().Name + ") " + message);
             if (ExceptionLevel == LogWriting.TypeLogMessage.LMT_FATAL)
                 System.Windows.Forms.Application.Exit();           
@@ -61,15 +68,23 @@ namespace UniversalLogViewer.Common.Exceptions
         public UniLogViewerException(string message, Exception e, bool ThrowExternal)
             : base(message, e)
         {
+            if (message.Length == 0)
+                message = e.Message;
+
             WriteMessage("(" + e.GetType().Name + ") " + message);
             if (ThrowExternal)
             {
                 if (ExceptionLevel == LogWriting.TypeLogMessage.LMT_FATAL)
-                    System.Windows.Forms.MessageBox.Show(message, "UNhandled FATAL Internal Error happened. \n Program will terminate now", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, UniversalLogViewer.Common.Consts.DEFAULT_MESSAGE_BOX_OPTIONS);
+                {
+                    System.Windows.Forms.MessageBox.Show("FATAL Error: " + e.GetType().Name, "UNhandled FATAL Internal Error " + e.GetType().Name + "happened. \n Program will terminate now \n You can see aditional error information in eror log file", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, UniversalLogViewer.Common.Consts.DEFAULT_MESSAGE_BOX_OPTIONS);
+                    WriteMessage("Stack trace: \n" + e.StackTrace);
+
+                }
                 throw e;
             }
             if (ExceptionLevel == LogWriting.TypeLogMessage.LMT_FATAL)
             {
+                WriteMessage("Stack trace: \n" + e.StackTrace);
                 System.Windows.Forms.MessageBox.Show(message, "Handled FATAL Internal Error happened. \n Program will terminate now", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, UniversalLogViewer.Common.Consts.DEFAULT_MESSAGE_BOX_OPTIONS);
                 System.Windows.Forms.Application.Exit();
             }
@@ -97,6 +112,17 @@ namespace UniversalLogViewer.Common.Exceptions
         {
         }
         public LogIniException(string message, Exception e)
+            : base(message, e)
+        {
+        }
+    }
+    public class LogTypeLoadException : UniLogViewerException
+    {
+        public LogTypeLoadException(string message)
+            : base(message)
+        {
+        }
+        public LogTypeLoadException(string message, Exception e)
             : base(message, e)
         {
         }
@@ -133,6 +159,18 @@ namespace UniversalLogViewer.Common.Exceptions
         {
         }
     }
+    public class LogIniRequiredFieldMissingException : LogIniReadException
+    {
+        public LogIniRequiredFieldMissingException(string message)
+            : base(message)
+        {
+        }
+        public LogIniRequiredFieldMissingException(string message, Exception e)
+            : base(message, e)
+        {
+        }
+    }
+
     public class LogIniSectionReadException : LogIniReadException
     {
         public LogIniSectionReadException(string message)

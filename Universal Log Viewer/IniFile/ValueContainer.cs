@@ -14,14 +14,27 @@ namespace IniFiles
             this.Section = Section;
             this.AutoCreateValues = AutoCreateValues;
         }
+        public virtual string this[string ValueName]
+        {
+            get
+            {
+                return this[false, ValueName];
+            }
+        }
 
-        public string this[string ValueName]
+        public virtual string this[bool Required, string ValueName]
         {
             get
             {
                 string Result = Section.IniFile.ReadValue(Section.SectionName, ValueName);
-                if ((Result.Length == 0) && (AutoCreateValues))
-                    Section.IniFile.WriteValue(Section.SectionName, ValueName, Result);
+                if ((Result.Length == 0))
+                {
+                    if (AutoCreateValues)
+                        Section.IniFile.WriteValue(Section.SectionName, ValueName, Result);
+                    if (Required)
+                        throw new Exceptions.IniFileRequiredFieldReadException("Cannot read required field \"" + ValueName + "\" from Section \""
+                            + Section.SectionName +"\" in " + Section.IniFile.FileName);
+                }
                 return Result;
             }
         }

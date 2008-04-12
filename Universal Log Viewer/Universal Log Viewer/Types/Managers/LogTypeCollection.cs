@@ -26,15 +26,14 @@ namespace UniversalLogViewer.Common
                 foreach (T ClassDef in _TypeList)
                     if (ClassDef.SectionName == Name)
                         return ClassDef;
-                
-                //Если в списке не найден элемент - пытаемся прочитать...                               
-                if (LogType.LogTypeFile.Sections[Name] != null)
-                {
-                    T NewElement = new T();
-                    NewElement.ReInit(LogType, LogType.LogTypeFile.Sections[Name]);
-                    _TypeList.Add(NewElement);
-                    return NewElement;
-                }
+                    //Если в списке не найден элемент - пытаемся прочитать...                               
+                    if (LogType.LogTypeFile.Sections[Name] != null)
+                    {
+                        T NewElement = new T();
+                        NewElement.ReInit(LogType, LogType.LogTypeFile.Sections[Name]);
+                        _TypeList.Add(NewElement);
+                        return NewElement;
+                    }
                 return null;
             }
         }

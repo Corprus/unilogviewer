@@ -29,11 +29,29 @@ namespace UniversalLogViewer.Types.Managers
         LogTypeManager()
         {
             TypesList = new List<LogType>();
-            if (!(Directory.Exists(IniSettingsManager.LogTypesFolder)))
-                Directory.CreateDirectory(IniSettingsManager.LogTypesFolder);            
-            string[] sLogTypes = Directory.GetFiles(IniSettingsManager.LogTypesFolder, "*." + Consts.LOG_TYPE_EXTENSION);
-            foreach (string sLogType in sLogTypes)
-                TypesList.Add(new LogType(sLogType));
+            try
+            {
+                if (!(Directory.Exists(IniSettingsManager.LogTypesFolder)))
+                   Directory.CreateDirectory(IniSettingsManager.LogTypesFolder);
+                string[] sLogTypes = Directory.GetFiles(IniSettingsManager.LogTypesFolder, "*." + Consts.LOG_TYPE_EXTENSION);
+                foreach (string sLogType in sLogTypes)
+                {
+                    try
+                    {
+                        var NewLogType = new LogType(sLogType);
+                        TypesList.Add(NewLogType);
+                    }
+                    catch (Common.Exceptions.UniLogViewerException)
+                    {
+                        Common.Exceptions.ExceptionLogWriter.Instance.WriteLog(LogWriting.TypeLogMessage.LMT_ERROR, "Cannot load log type " + sLogType);
+                    }
+                }
+            }
+            catch (System.IO.IOException)
+            {
+                throw new Common.Exceptions.UniLogViewerException("Cannot get access to Lot Types folder (" + IniSettingsManager.LogTypesFolder + ") or get it's file list");
+            }
+
         }
         public static LogTypeManager oInstance
         {

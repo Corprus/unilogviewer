@@ -33,21 +33,28 @@ namespace UniversalLogViewer.Types.Structures
         {
             ParentLogType = LogType;
             this.Section = Section;
-            Name = Section.Values[Consts.KEY_NAME];
-            Title = Section.Values[KEY_TITLE];
-            if (Title.Length == 0)
-                Title = Name;
-            if (ParentLogType != null) //То есть это и есть лог тайп
-                Style = ParentLogType.Styles[Section.Values[KEY_STYLE]];
-            if (Style == null)
-                Style = new StyleType(false, System.Drawing.Color.Black, true, false);
             try
             {
-                TitleType = (Common.TitleType)Enum.Parse(typeof(Common.TitleType), Section.Values[KEY_TITLE_TYPE], false);
+                Name = Section.Values[true, Consts.KEY_NAME];
+                Title = Section.Values[KEY_TITLE];
+                if (Title.Length == 0)
+                    Title = Name;
+                if (ParentLogType != null) //То есть это и есть лог тайп
+                    Style = ParentLogType.Styles[Section.Values[KEY_STYLE]];
+                if (Style == null)
+                    Style = new StyleType(false, System.Drawing.Color.Black, true, false);
+                try
+                {
+                    TitleType = (Common.TitleType)Enum.Parse(typeof(Common.TitleType), Section.Values[KEY_TITLE_TYPE], false);
+                }
+                catch (ArgumentException)
+                {
+                    TitleType = Common.TitleType.Title;
+                }
             }
-            catch (ArgumentException)
+            catch (IniFiles.Exceptions.IniFileRequiredFieldReadException e)
             {
-                TitleType = Common.TitleType.Title;
+                throw new Common.Exceptions.LogIniRequiredFieldMissingException("Required field missing in the log type description : " + e.Message, e); 
             }
 
         }

@@ -23,6 +23,14 @@ namespace IniFiles.Exceptions
         {
         }
     }
+    public class IniFileRequiredFieldReadException : IniFileException
+    {
+        public IniFileRequiredFieldReadException(string message)
+            : base(message)
+        {
+        }
+    }
+
     public class IniFileSectionsReadException : IniFileReadException
     {
         public IniFileSectionsReadException(string message)

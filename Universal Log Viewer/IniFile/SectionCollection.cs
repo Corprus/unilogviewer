@@ -16,7 +16,7 @@ namespace IniFiles
             return this.GetEnumerator();
         }
         List<T> _IniSections = null;
-        public virtual T this[string SectionName]
+        protected virtual T this[string SectionName, bool ThrowNonExistExceptions]
         {
             get
             {
@@ -29,14 +29,24 @@ namespace IniFiles
                 if (_IniSections.Count > 0)
                     path = _IniSections[0].IniFile.FileName;
                 else
-                throw new Exceptions.IniFileSectionsReadException("Cannot read section with name \"" + SectionName + "\" from file " + path);
+                    if (ThrowNonExistExceptions)
+                        throw new Exceptions.IniFileSectionsReadException("Cannot read section with name \"" + SectionName + "\" from file " + path);
                 return null;
+
+            }
+        }
+
+        public virtual T this[string SectionName]
+        {
+            get
+            {
+                return this[SectionName, true];
 
             }
         }
         public void AddSection(T Section)
         {
-            if (this[Section.SectionName] == null)
+            if (this[Section.SectionName, false] == null)
                 _IniSections.Add(Section);
         }
 

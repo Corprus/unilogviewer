@@ -60,15 +60,12 @@ namespace LogWriting
         }
         protected virtual void Dispose(bool DisposeUnmanaged)
         {
-            _oTextWriter.Dispose();
+            if (_oTextWriter != null)
+            {
+                _oTextWriter.Close();
+                _oTextWriter.Dispose();
+            }
         }
-
-        ~LogWriter()
-        {
-            this.Dispose(false);
-            return;
-        }
-
 
         public LWErrorCode WriteLog(TypeLogMessage ventType, String vsMessage)
         {
