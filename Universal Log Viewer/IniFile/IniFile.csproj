@@ -41,6 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoSavedIniFile.cs" />
+    <Compile Include="Consts.cs" />
+    <Compile Include="Exceptions.cs" />
     <Compile Include="IniFile.cs" />
     <Compile Include="IniSection.cs" />
     <Compile Include="NativeMethods.cs" />
@@ -50,12 +52,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="UniLogViewer.pfx" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\uniLogViewerCommon\UniLogViewerCommon.csproj">
-      <Project>{02042878-C16A-48D6-BD04-035C554D329F}</Project>
-      <Name>UniLogViewerCommon</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

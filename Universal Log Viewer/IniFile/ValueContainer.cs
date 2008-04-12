@@ -1,4 +1,4 @@
-﻿using UniversalLogViewer.Common;
+﻿
 namespace IniFiles
 {
     public class ValueContainer
@@ -46,7 +46,7 @@ namespace IniFiles
                     return new string[0];
                 else
                 {
-                    string[] Result = PlainResult.Split(Consts.ARRAY_SEPARATOR);
+                    string[] Result = PlainResult.Split(IniFiles.Common.Consts.ARRAY_SEPARATOR);
                     for (int i=0; i< Result.Length; i++)
                         Result[i] = Result[i].Trim();
                     return Result;
@@ -63,7 +63,7 @@ namespace IniFiles
                     return new string[0];
                 else
                 {
-                    string[] Result = PlainResult.Split(Consts.ARRAY_SEPARATOR);
+                    string[] Result = PlainResult.Split(Common.Consts.ARRAY_SEPARATOR);
                     for (int i = 0; i < Result.Length; i++)
                         if (Trim)//Случай сепаратора
                             Result[i] = Result[i].Trim();

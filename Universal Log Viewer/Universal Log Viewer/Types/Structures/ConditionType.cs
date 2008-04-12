@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using UniversalLogViewer.Types.Structures;
-using UniversalLogViewer.IniFiles;
+using UniversalLogViewer.LogIniFiles;
 
 namespace UniversalLogViewer.Types.Structures
 {    

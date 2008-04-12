@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Drawing;
-using UniversalLogViewer.IniFiles;
+using UniversalLogViewer.LogIniFiles;
 
 namespace UniversalLogViewer.Types.Structures
 {

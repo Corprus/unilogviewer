@@ -53,7 +53,14 @@ namespace UniversalLogViewer.Types.Managers
 
         public static void InitFile()
         {
-            IniFile = new AutoSavedIniFile(Application.StartupPath + "\\" + Consts.SETTINGS_INI_FILE_NAME);
+            try
+            {
+                IniFile = new AutoSavedIniFile(Application.StartupPath + "\\" + Consts.SETTINGS_INI_FILE_NAME);
+            }
+            catch (System.IO.IOException e)
+            {
+                throw new Common.Exceptions.LogSettingsIniException(e);
+            }
         }
 
 

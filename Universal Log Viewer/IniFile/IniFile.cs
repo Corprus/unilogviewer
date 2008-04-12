@@ -5,7 +5,6 @@ using System.Text;
 [assembly: CLSCompliant(true)]
 namespace IniFiles
 {
-
     public class IniFile
     {
 
@@ -19,12 +18,10 @@ namespace IniFiles
         {
             FilePath = INIPath;
         }
-        public void WriteValue(string Section, string Key, string Value)
+        public virtual int WriteValue(string Section, string Key, string Value)
         {
             int Result = NativeMethods.WritePrivateProfileString(Section, Key, Value, this.FilePath);
-            if (Result != 0)
-                throw new System.IO.FileLoadException();
-
+            return Result;
         }
         public virtual string ReadValue(string Section, string Key)
         {
@@ -46,7 +43,7 @@ namespace IniFiles
             byte[] pReturnedString = new byte[MAX_BUFFER];
             uint bytesReturned = NativeMethods.GetPrivateProfileSectionNames(pReturnedString, MAX_BUFFER, this.FilePath);
             if (bytesReturned == 0)
-                return null;
+                throw new Exceptions.IniFileSectionsReadException("Cannot read sections list from Ini file");
             String local = System.Text.Encoding.Default.GetString(pReturnedString);
             return FConvertUnicodeSeparatedStringsToNormalStrings(local);
 

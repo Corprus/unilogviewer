@@ -16,7 +16,7 @@ namespace IniFiles
             return this.GetEnumerator();
         }
         List<T> _IniSections = null;
-        public T this[string SectionName]
+        public virtual T this[string SectionName]
         {
             get
             {
@@ -25,7 +25,13 @@ namespace IniFiles
                 foreach (T IniSection in _IniSections)
                     if (IniSection.SectionName == SectionName)
                         return IniSection;
+                string path = "";
+                if (_IniSections.Count > 0)
+                    path = _IniSections[0].IniFile.FileName;
+                else
+                throw new Exceptions.IniFileSectionsReadException("Cannot read section with name \"" + SectionName + "\" from file " + path);
                 return null;
+
             }
         }
         public void AddSection(T Section)

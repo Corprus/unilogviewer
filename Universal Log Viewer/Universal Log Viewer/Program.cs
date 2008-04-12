@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using UniversalLogViewer.UI;
 using UniversalLogViewer.Types.Managers;
-using UniversalLogViewer.Common;
+using UniversalLogViewer.Common.Exceptions;
 
 [assembly:CLSCompliant(true)]
 namespace UniversalLogViewer
@@ -25,7 +25,12 @@ namespace UniversalLogViewer
             }
             catch (UniLogViewerException e)
             {
-                System.Windows.Forms.MessageBox.Show(e.Message, "Unhandled Internal Error happened. \n Program will terminate now", MessageBoxButtons.OK,  MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, Consts.DEFAULT_MESSAGE_BOX_OPTIONS);
+                //если мы ошибку не прибили заранее, но она не фатальная (фатальный случай прерывает приложение сразу в конструкторе исключения)
+                System.Windows.Forms.MessageBox.Show(e.Message, "Handled Critical Internal Error happened. \n Program will terminate now", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, UniversalLogViewer.Common.Consts.DEFAULT_MESSAGE_BOX_OPTIONS);
+            }
+            catch (Exception e)
+            {
+                throw new Common.Exceptions.FatalUnhandledException(e);          
             }
         }
     }

@@ -5,7 +5,7 @@ using IniFiles;
 using UniversalLogViewer.Common;
 
 
-namespace UniversalLogViewer.IniFiles
+namespace UniversalLogViewer.LogIniFiles
 {
     public class LogIniFile : IniFile
     {
@@ -14,8 +14,16 @@ namespace UniversalLogViewer.IniFiles
            : base(INIPath)
         {
             Sections = new SectionCollection<LogIniSection>();
-            foreach (string SectionName in SectionNames)
-                Sections.AddSection(new LogIniSection(this, SectionName));
+            try
+            {
+                foreach (string SectionName in SectionNames)
+                    Sections.AddSection(new LogIniSection(this, SectionName));
+            }
+            catch (IniFiles.Exceptions.IniFileSectionsReadException e)
+            {
+                throw new Common.Exceptions.LogIniSectionReadException("", e);                    
+            }
+
         }
     }
     public class LogIniSection : IniSection
