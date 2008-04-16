@@ -32,7 +32,7 @@ namespace UniversalLogViewer.Common
                         T NewElement = new T();
                         NewElement.ReInit(LogType, LogType.LogTypeFile.Sections[Name]);
                         _TypeList.Add(NewElement);
-                        return NewElement;
+                        return NewElement;                     
                     }
                 return null;
             }

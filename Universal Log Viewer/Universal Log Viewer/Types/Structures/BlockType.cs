@@ -29,7 +29,8 @@ namespace UniversalLogViewer.Types.Structures
             EndCondition = ParentLogType.Conditions[Section.Values[INI_KEY_END_CONDITION]];
             ChildBlockTypes = (ParentLogType.BlockTypes.GetList(Section.ArrayValues[INI_KEY_CHILD_BLOCK_TYPES]));
             ChildStringTypes = (ParentLogType.StringTypes.GetList(Section.ArrayValues[INI_KEY_CHILD_STRING_TYPES]));
-            throw new Common.Exceptions.LogTypeLoadException("Both ChildBLockTypes and ChildStringTypes are empty");
+            if ((ChildBlockTypes.Count == 0) && (ChildStringTypes.Count == 0))
+                throw new Common.Exceptions.LogTypeLoadException("Both ChildBLockTypes and ChildStringTypes are empty");
         }
         public BlockType()
             : base()

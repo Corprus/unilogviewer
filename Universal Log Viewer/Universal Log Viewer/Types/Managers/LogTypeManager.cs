@@ -82,12 +82,14 @@ namespace UniversalLogViewer.Types.Managers
                     bHasSameName = true;
             }
             bool bAddType = true;
+            string LogFileIniFileNameWithoutFolders = LogTypeFileName.Substring(LogTypeFileName.LastIndexOf("\\", StringComparison.Ordinal) + 1, LogTypeFileName.Length - LogTypeFileName.LastIndexOf("\\", StringComparison.Ordinal) - 1);
+            bHasSameName = (bHasSameName || (System.IO.File.Exists(IniSettingsManager.LogTypesFolder + "\\" +  LogFileIniFileNameWithoutFolders)));
+
             if (bHasSameName)
                bAddType = (MessageBox.Show(Consts.ASK_ADD_LOG_TYPE_WITH_SAME_NAME, Consts.HEADER_SAME_LOG_TYPE_PRESENT, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2, Consts.DEFAULT_MESSAGE_BOX_OPTIONS) == DialogResult.Yes);
 
             if (bAddType)
             {                
-                string LogFileIniFileNameWithoutFolders = LogTypeFileName.Substring(LogTypeFileName.LastIndexOf("\\", StringComparison.Ordinal) + 1, LogTypeFileName.Length - LogTypeFileName.LastIndexOf("\\", StringComparison.Ordinal) - 1);
                 string sNewFileName = LogFileIniFileNameWithoutFolders;
 
                 if (bHasSameName)
@@ -103,8 +105,17 @@ namespace UniversalLogViewer.Types.Managers
                 }
                 sNewFileName = IniSettingsManager.LogTypesFolder + "\\" +  sNewFileName;
                 File.Copy(LogTypeFileName, sNewFileName);
-                LogType oNewType = new LogType(sNewFileName);
-                AddLogType(oNewType);
+                try
+                {
+                    LogType oNewType = new LogType(sNewFileName);
+                    AddLogType(oNewType);
+                }
+                catch (Common.Exceptions.LogTypeLoadException e)
+                {
+                    System.Windows.Forms.MessageBox.Show(e.Message, "Cannot load load type", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, Common.Consts.DEFAULT_MESSAGE_BOX_OPTIONS);
+                }
+
+
             }
         }
 

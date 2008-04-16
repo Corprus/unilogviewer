@@ -74,7 +74,15 @@ namespace UniversalLogViewer.Types.Structures
         }
         public LogType(string FileName)
         {
-            ReInit(FileName);
+            try
+            {
+                ReInit(FileName);
+            }
+            catch (Common.Exceptions.UniLogViewerException e)
+            {
+                throw new Common.Exceptions.LogTypeLoadException("Cannot load log type from file " + FileName + "\n See description in the types load log file", e);
+            }
+
         }
         public override string ToString() 
         {
