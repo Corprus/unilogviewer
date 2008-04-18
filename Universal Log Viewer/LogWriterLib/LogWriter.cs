@@ -19,7 +19,7 @@ namespace LogWriting
 
         public LWErrorCode ErrorResultCode {get ; private set;}
 
-        public LogWriter(String vsFileName)
+        public LogWriter(String vsFileName, Boolean vbSaveOldContent)
         {
             ErrorResultCode = LWErrorCode.EC_SUCCESS;
             var s = Directory.GetParent(vsFileName);
@@ -39,7 +39,7 @@ namespace LogWriting
 
             try
             {
-                _oTextWriter = new StreamWriter(vsFileName, true);
+                _oTextWriter = new StreamWriter(vsFileName, vbSaveOldContent);
             }
             catch (System.IO.PathTooLongException)
             {
@@ -51,6 +51,12 @@ namespace LogWriting
                 ErrorResultCode = LWErrorCode.EC_ERROR;
                 return;
             }           
+        }
+
+        public LogWriter(String vsFileName)
+            :this(vsFileName, true)
+        {
+
         }
 
         public void Dispose()
