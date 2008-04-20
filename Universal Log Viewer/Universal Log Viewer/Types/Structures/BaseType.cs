@@ -54,7 +54,7 @@ namespace UniversalLogViewer.Types.Structures
             }
             catch (IniFiles.Exceptions.IniFileRequiredFieldReadException e)
             {
-                throw new Common.Exceptions.LogIniRequiredFieldMissingException("Required field missing in the log type description : " + e.Message, e); 
+                throw new Common.Exceptions.LogTypeLoadException("Required field missing in the log type description : " + e.Message, e); 
             }
 
         }

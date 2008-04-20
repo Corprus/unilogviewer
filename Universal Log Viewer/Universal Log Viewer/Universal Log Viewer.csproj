@@ -78,7 +78,6 @@
   <ItemGroup>
     <Compile Include="Common\Types.cs" />
     <Compile Include="Common\Utilities.cs" />
-    <Compile Include="Types\Managers\IniSettingsManager.cs" />
     <Compile Include="Types\Managers\LogTypeManager.cs" />
     <Compile Include="Types\Structures\BaseType.cs">
     </Compile>

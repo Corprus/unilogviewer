@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
+using UniversalLogViewer.Common.Types.Managers;
 
 namespace UniversalLogViewer.Common.Exceptions
 {
     public class ExceptionLogWriter
     {
         static LogWriting.LogWriter _Instance;
+        static LogWriting.LogWriter _InconsistenciesInstance;
 
         public static LogWriting.LogWriter Instance
         {
@@ -18,7 +20,17 @@ namespace UniversalLogViewer.Common.Exceptions
                 return _Instance;
 
             }
-        }        
+        }
+        public static LogWriting.LogWriter InconsistenciesInstance
+        {
+            get
+            {
+                if (_InconsistenciesInstance == null)
+                    _InconsistenciesInstance = new LogWriting.LogWriter(Consts.INCONSISTENCIES_LOG_FILENAME, !(IniSettingsManager.ClearOldInconsistenciesContents));
+                return _InconsistenciesInstance;
+
+            }
+        }
     }
 
 
@@ -34,8 +46,14 @@ namespace UniversalLogViewer.Common.Exceptions
         }
 
         protected virtual void WriteMessage(string message)
-        {
-            ExceptionLogWriter.Instance.WriteLog(ExceptionLevel, this.GetType().Name + message);
+        {            
+            LogTypeLoadException ExceptionConversion = this as LogTypeLoadException;
+            if ((ExceptionConversion != null)&&(IniSettingsManager.UseSeparateInconsistenciesLog))
+            {
+                ExceptionLogWriter.InconsistenciesInstance.WriteLog(ExceptionLevel, this.GetType().Name + message);
+            }
+            else
+                ExceptionLogWriter.Instance.WriteLog(ExceptionLevel, this.GetType().Name + message);
         }
         
         public UniLogViewerException(string message)

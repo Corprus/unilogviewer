@@ -52,11 +52,16 @@
     <Compile Include="Exceptions.cs" />
     <Compile Include="FileReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Types\Managers\IniSettingsManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="UniLogViewer.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\IniFile\IniFile.csproj">
+      <Project>{931AB029-5A5F-4328-9934-E4A8EEF437CE}</Project>
+      <Name>IniFile</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LogWriterLib\LogWriter.csproj">
       <Project>{F01B6F3D-C463-4BA4-AA6A-1B6FB1FC720A}</Project>
       <Name>LogWriter</Name>

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using UniversalLogViewer.Common;
+using UniversalLogViewer.Common.Types.Managers;
 using UniversalLogViewer.Types.Managers;
 using UniversalLogViewer.LogIniFiles;
 
@@ -80,6 +81,7 @@ namespace UniversalLogViewer.Types.Structures
             }
             catch (Common.Exceptions.UniLogViewerException e)
             {
+                string ShortFileName = FileName.Substring(FileName.LastIndexOf('\\'));
                 throw new Common.Exceptions.LogTypeLoadException("Cannot load log type from file " + FileName + "\n See description in the types load log file", e);
             }
 

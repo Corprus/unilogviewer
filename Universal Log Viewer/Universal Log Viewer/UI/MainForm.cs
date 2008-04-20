@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using UniversalLogViewer.Types.Values;
 using UniversalLogViewer.Types.Structures;
+using UniversalLogViewer.Common.Types.Managers;
 using UniversalLogViewer.Types.Managers;
 using UniversalLogViewer.Common;
 

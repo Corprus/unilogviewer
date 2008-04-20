@@ -4,7 +4,7 @@ using System.Text;
 using System.Windows.Forms;
 using UniversalLogViewer;
 using UniversalLogViewer.Types.Structures;
-using UniversalLogViewer.Types.Managers;
+using UniversalLogViewer.Common.Types.Managers;
 
 
 namespace UniversalLogViewer.Types.Values

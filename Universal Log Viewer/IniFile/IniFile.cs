@@ -10,6 +10,7 @@ namespace IniFiles
 
         protected string FilePath { get; private set; }
         public string FileName { get { return FilePath; } }
+        public string ShortFileName { get { return FileName.Substring(FileName.LastIndexOf('\\')); } }
 
 
 
@@ -25,14 +26,34 @@ namespace IniFiles
         }
         public virtual string ReadValue(string Section, string Key)
         {
+            return ReadValue(Section, Key, "");
+        }
+        public virtual string ReadValue(string Section, string Key, string Default)
+        {
             StringBuilder temp = new StringBuilder(255);
-            int i = NativeMethods.GetPrivateProfileString(Section, Key, "", temp,
+            int i = NativeMethods.GetPrivateProfileString(Section, Key, Default, temp,
                                             255, this.FilePath);
             if (i != 0)
             { }
-
-                
             return temp.ToString();
+
+        }
+        public virtual bool ReadBoolValue(string Section, string Key, bool Default)
+        {
+            string Val;
+            string UnVal;
+            if (Default == true)
+            {
+                Val = "0";
+                UnVal = "1";
+            }
+            else
+            {
+                Val = "1";
+                UnVal = "0";
+            }
+            bool CompareResult = (this.ReadValue(Section, Key, UnVal) == Val);
+            return (CompareResult != Default);
 
         }
 

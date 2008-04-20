@@ -6,7 +6,7 @@ using UniversalLogViewer.Common;
 using IniFiles;
 using System.Windows.Forms;
 
-namespace UniversalLogViewer.Types.Managers
+namespace UniversalLogViewer.Common.Types.Managers
 {
     public static class IniSettingsManager
     {
@@ -14,6 +14,9 @@ namespace UniversalLogViewer.Types.Managers
         const string SECTION_PATHS = "Paths";
         const string KEY_LOG_TYPES_SUBFOLDER = "LogTypesSubFolder";
         const string SECTION_LOG_TYPES = "Log Types";
+        const string KEY_SEPARATE_LOG = "SeparateLog";
+        const string KEY_CLEAR_OLD_CONTENTS = "ClearOldContents";
+        const string KEY_OPEN = "OpenIfGenerated";
         const string KEY_OPEN_COMMAND = "OpenCommand";
         const string SECTION_VISUAL = "Visual";
         const string KEY_SHOW_VALUE_MEMO = "ShowValueMemo";
@@ -39,15 +42,34 @@ namespace UniversalLogViewer.Types.Managers
                     return "";
             }
         }
+        public static bool UseSeparateInconsistenciesLog
+        {
+            get
+            {
+                return GetBoolIniValue(SECTION_LOG_TYPES, KEY_SEPARATE_LOG, true);
+            }
+        }
+        public static bool ClearOldInconsistenciesContents
+        {
+            get
+            {
+                return GetBoolIniValue(SECTION_LOG_TYPES, KEY_CLEAR_OLD_CONTENTS, false);
+            }
+        }
+        public static bool OpenInconsistenciesLogIfGenerated
+        {
+            get
+            {
+                return GetBoolIniValue(SECTION_LOG_TYPES, KEY_OPEN, true);
+            }
+        }
+
         public static bool UseExternalOpen { get { return (OpenLogTypeCommand.Length != 0); } }
         public static bool ShowValueMemo
         {
             get
             {
-                if (IniFile != null)
-                    return ((IniFile.ReadValue(SECTION_VISUAL, KEY_SHOW_VALUE_MEMO) == "1"));
-                else
-                    return false;
+                return GetBoolIniValue(SECTION_VISUAL, KEY_SHOW_VALUE_MEMO, false);
             }
         }
 
@@ -61,6 +83,16 @@ namespace UniversalLogViewer.Types.Managers
             {
                 throw new Common.Exceptions.LogSettingsIniException(e);
             }
+        }
+        private static bool GetBoolIniValue(string Section, string Key, bool DefaultValue)
+        {
+            if (IniFile != null)
+            {
+                return IniFile.ReadBoolValue(Section, Key, DefaultValue);
+            }
+            else
+                return DefaultValue;
+
         }
 
 

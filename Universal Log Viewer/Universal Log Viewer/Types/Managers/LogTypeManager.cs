@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using UniversalLogViewer.Types.Structures;
 using UniversalLogViewer.Common;
+using UniversalLogViewer.Common.Types.Managers;
 
 
 namespace UniversalLogViewer.Types.Managers
@@ -31,6 +32,7 @@ namespace UniversalLogViewer.Types.Managers
             TypesList = new List<LogType>();
             try
             {
+                _HadInconsistencies = false;
                 if (!(Directory.Exists(IniSettingsManager.LogTypesFolder)))
                    Directory.CreateDirectory(IniSettingsManager.LogTypesFolder);
                 string[] sLogTypes = Directory.GetFiles(IniSettingsManager.LogTypesFolder, "*." + Consts.LOG_TYPE_EXTENSION);
@@ -43,9 +45,20 @@ namespace UniversalLogViewer.Types.Managers
                     }
                     catch (Common.Exceptions.UniLogViewerException)
                     {
+                        _HadInconsistencies = true;
                         Common.Exceptions.ExceptionLogWriter.Instance.WriteLog(LogWriting.TypeLogMessage.LMT_ERROR, "Cannot load log type " + sLogType);
                     }
                 }
+                if ((_HadInconsistencies) && (IniSettingsManager.UseSeparateInconsistenciesLog) && (IniSettingsManager.OpenInconsistenciesLogIfGenerated))
+                {
+                    System.Diagnostics.Process batch = new System.Diagnostics.Process();
+                    batch.StartInfo.FileName = "notepad";
+                    batch.StartInfo.WorkingDirectory = Application.StartupPath;
+                    batch.StartInfo.Arguments = Common.Consts.INCONSISTENCIES_LOG_FILENAME;
+                    batch.Start();
+
+                }
+
             }
             catch (System.IO.IOException)
             {
@@ -70,6 +83,7 @@ namespace UniversalLogViewer.Types.Managers
                 TypesList = new List<LogType>();
             TypesList.Add(LogType);
         }
+        private bool _HadInconsistencies;
         public void AddLogType(string LogTypeFileName)
         {
             if (TypesList == null)
@@ -112,6 +126,7 @@ namespace UniversalLogViewer.Types.Managers
                 }
                 catch (Common.Exceptions.LogTypeLoadException e)
                 {
+                    _HadInconsistencies = true;
                     System.Windows.Forms.MessageBox.Show(e.Message, "Cannot load load type", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, Common.Consts.DEFAULT_MESSAGE_BOX_OPTIONS);
                 }
 
