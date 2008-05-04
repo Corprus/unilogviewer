@@ -38,7 +38,7 @@ namespace UniversalLogViewer.Types.Values
             else if ((this.StructureType.Condition.StartsWith.Length == 0) && (iEnd > -1))
                 PreParsedValue = Parsed.Substring(0, iEnd + this.StructureType.Condition.EndsWith.Length);
             else if ((this.StructureType.Condition.EndsWith.Length == 0) && (iStart > -1))
-                PreParsedValue = Parsed.Substring(iStart, Parsed.Length - iEnd);
+                PreParsedValue = Parsed.Substring(iStart, Parsed.Length - iStart);
             else if ((iStart > -1) && (iEnd > -1) && (iEnd - iStart > 0))
                 PreParsedValue = Parsed.Substring(iStart, (iEnd - iStart + 1));
             else
