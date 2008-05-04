@@ -3,7 +3,7 @@ namespace IniFiles
 {
     public class ValueContainer
     {
-        IniSection Section;
+        protected IniSection Section;
         bool AutoCreateValues;
         public ValueContainer(IniSection Section)
         {
@@ -21,12 +21,20 @@ namespace IniFiles
                 return this[false, ValueName];
             }
         }
-
         public virtual string this[bool Required, string ValueName]
         {
             get
             {
+                return this[Required, ValueName, ""];
+            }
+        }
+        public virtual string this[bool Required, string ValueName, string Default]
+        {
+            get
+            {
                 string Result = Section.IniFile.ReadValue(Section.SectionName, ValueName);
+                if ((Result.Length == 0))
+                    Result = Default;
                 if ((Result.Length == 0))
                 {
                     if (AutoCreateValues)
@@ -86,4 +94,34 @@ namespace IniFiles
             }
         }
     }
+    public class BoolValueContainer : ValueContainer
+    {
+        public BoolValueContainer(IniSection Section)
+            : base(Section)
+        {
+        }
+        public BoolValueContainer(IniSection Section, bool AutoCreateValues)
+            : base(Section, AutoCreateValues)
+        {
+        }
+
+        public bool this[string ValueName, bool Default]
+        {
+            get
+            {
+                bool Result = Section.IniFile.ReadBoolValue(Section.SectionName, ValueName, Default);
+                return Result;
+            }
+        }
+        new public bool this[string ValueName]
+        {
+            get
+            {
+
+                return this[ValueName, false];
+            }
+        }
+
+    }
+
 }
