@@ -35,14 +35,14 @@ namespace UniversalLogViewer.Types.Structures
             this.Section = Section;
             try
             {
-                Name = Section.Values[true, Consts.KEY_NAME];
+                Name = Section.Values[true, Consts.KEY_NAME, Section.SectionName];
                 Title = Section.Values[KEY_TITLE];
                 if (Title.Length == 0)
                     Title = Name;
                 if (ParentLogType != null) //То есть это и есть лог тайп
                     Style = ParentLogType.Styles[Section.Values[KEY_STYLE]];
                 if (Style == null)
-                    Style = new StyleType(false, System.Drawing.Color.Black, true, false);
+                    Style = new StyleType(false, false, false, false, System.Drawing.Color.Black, System.Drawing.Color.White, true, false);
                 try
                 {
                     TitleType = (Common.TitleType)Enum.Parse(typeof(Common.TitleType), Section.Values[KEY_TITLE_TYPE], false);
