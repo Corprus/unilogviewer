@@ -8,7 +8,8 @@ using System.IO;
 [assembly: CLSCompliant(true)]
 namespace LogWriting
 {
-    public enum LWErrorCode { EC_PATH_TOO_LONG = -2, EC_ERROR = -1, EC_SUCCESS = 0, EC_DIRECTORY_CREATED = 1 }
+    public enum LWErrorCode { EC_PATH_TOO_LONG = -2, EC_ERROR = -1, EC_SUCCESS = 0, EC_DIRECTORY_CREATED = 1 };
+    public enum LWErrorType { KERNEL_PANIC = 0 };
     public enum TypeLogMessage { LMT_ERROR = 0, LMT_FATAL = 1, LMT_WARN = 2, LMT_INFORM = 3 };
 
     public class LogWriter : IDisposable
