@@ -48,6 +48,8 @@
             this.tabLogs = new System.Windows.Forms.TabControl();
             this.memoValue = new System.Windows.Forms.RichTextBox();
             this.pnlButtons = new System.Windows.Forms.Panel();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.txtFind = new System.Windows.Forms.TextBox();
             this.cmbLogTypes = new System.Windows.Forms.ComboBox();
             this.btnLoadLog = new System.Windows.Forms.Button();
             this.btnLoadLogTypes = new System.Windows.Forms.Button();
@@ -118,7 +120,7 @@
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -135,21 +137,21 @@
             // mnuHelpFile
             // 
             this.mnuHelpFile.Name = "mnuHelpFile";
-            this.mnuHelpFile.Size = new System.Drawing.Size(126, 22);
+            this.mnuHelpFile.Size = new System.Drawing.Size(137, 22);
             this.mnuHelpFile.Text = "Help";
             this.mnuHelpFile.Click += new System.EventHandler(this.mnuHelpFile_Click);
             // 
             // mnuHelpIndex
             // 
             this.mnuHelpIndex.Name = "mnuHelpIndex";
-            this.mnuHelpIndex.Size = new System.Drawing.Size(126, 22);
+            this.mnuHelpIndex.Size = new System.Drawing.Size(137, 22);
             this.mnuHelpIndex.Text = "Help Index";
             this.mnuHelpIndex.Click += new System.EventHandler(this.mnuHelpIndex_Click);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
             this.aboutToolStripMenuItem.Text = "&About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -158,12 +160,12 @@
             this.cntTabPopup.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.closeTabToolStripMenuItem});
             this.cntTabPopup.Name = "cntTabPopup";
-            this.cntTabPopup.Size = new System.Drawing.Size(122, 26);
+            this.cntTabPopup.Size = new System.Drawing.Size(133, 26);
             // 
             // closeTabToolStripMenuItem
             // 
             this.closeTabToolStripMenuItem.Name = "closeTabToolStripMenuItem";
-            this.closeTabToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
+            this.closeTabToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.closeTabToolStripMenuItem.Text = "Close Tab";
             this.closeTabToolStripMenuItem.Click += new System.EventHandler(this.closeTabToolStripMenuItem_Click);
             // 
@@ -206,15 +208,17 @@
             this.memoValue.BackColor = System.Drawing.SystemColors.Control;
             this.memoValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.memoValue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.memoValue.Location = new System.Drawing.Point(0, 150);
+            this.memoValue.Location = new System.Drawing.Point(0, 195);
             this.memoValue.Name = "memoValue";
-            this.memoValue.Size = new System.Drawing.Size(198, 293);
+            this.memoValue.Size = new System.Drawing.Size(198, 248);
             this.memoValue.TabIndex = 6;
             this.memoValue.Text = "";
             this.memoValue.Visible = false;
             // 
             // pnlButtons
             // 
+            this.pnlButtons.Controls.Add(this.btnSearch);
+            this.pnlButtons.Controls.Add(this.txtFind);
             this.pnlButtons.Controls.Add(this.cmbLogTypes);
             this.pnlButtons.Controls.Add(this.btnLoadLog);
             this.pnlButtons.Controls.Add(this.btnLoadLogTypes);
@@ -222,8 +226,25 @@
             this.pnlButtons.Location = new System.Drawing.Point(0, 0);
             this.pnlButtons.MinimumSize = new System.Drawing.Size(200, 150);
             this.pnlButtons.Name = "pnlButtons";
-            this.pnlButtons.Size = new System.Drawing.Size(200, 150);
+            this.pnlButtons.Size = new System.Drawing.Size(200, 195);
             this.pnlButtons.TabIndex = 7;
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Location = new System.Drawing.Point(16, 158);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(166, 23);
+            this.btnSearch.TabIndex = 7;
+            this.btnSearch.Text = "Find";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
+            // txtFind
+            // 
+            this.txtFind.Location = new System.Drawing.Point(16, 129);
+            this.txtFind.Name = "txtFind";
+            this.txtFind.Size = new System.Drawing.Size(167, 20);
+            this.txtFind.TabIndex = 6;
             // 
             // cmbLogTypes
             // 
@@ -283,6 +304,7 @@
             this.splitMain.Panel2.ResumeLayout(false);
             this.splitMain.ResumeLayout(false);
             this.pnlButtons.ResumeLayout(false);
+            this.pnlButtons.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -313,6 +335,8 @@
         internal System.Windows.Forms.HelpProvider hlpUniLogViewer;
         private System.Windows.Forms.ToolStripMenuItem mnuHelpFile;
         private System.Windows.Forms.ToolStripMenuItem mnuHelpIndex;
+        private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.TextBox txtFind;
 
     }
 }

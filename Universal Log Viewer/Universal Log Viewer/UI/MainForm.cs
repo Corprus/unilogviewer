@@ -16,6 +16,13 @@ namespace UniversalLogViewer.UI
 {
     public partial class MainForm : Form
     {
+        public TreeView SelectedTreeView
+        {
+            get         
+            {
+                return GetSelectedTreeView();
+            }
+        }
         public MainForm()
         {
             InitializeComponent();
@@ -75,17 +82,20 @@ namespace UniversalLogViewer.UI
                         MessageBox.Show(Consts.SELECT_CORRECT_LOG_TYPE, Consts.SELECT_CORRECT_LOG_TYPE, MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, Consts.DEFAULT_MESSAGE_BOX_OPTIONS);
                     }
                 }
+                HideShowSearch();
             }
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
             LogTypeManager.oInstance.UpdateList(cmbLogTypes.Items);
+            HideShowSearch();
         }
 
         private void closeTabToolStripMenuItem_Click(object sender, EventArgs e)
         {
             tabLogs.TabPages.Remove(tabLogs.SelectedTab);
+            HideShowSearch();
         }
 
         private void TreeView_KeyPress(object sender, KeyPressEventArgs e)
@@ -123,7 +133,98 @@ namespace UniversalLogViewer.UI
         {
             Help.ShowHelpIndex(this, hlpUniLogViewer.HelpNamespace);
         }
+        private TreeView GetSelectedTreeView()
+        {
+            var SelTab = tabLogs.SelectedTab;
+            foreach (Control SelectedControl in SelTab.Controls)
+            {
+                TreeView SelectedTreeView = SelectedControl as TreeView;
+                if (SelectedTreeView != null)
+                    return SelectedTreeView;
+            }
+            return null;
+        }
+        private bool SearchWithinNodes(TreeView SearchTreeView, TreeNode StartingNode, string Text)
+        {
+            bool Result = StartingNode.Text.Contains(Text);
+            if (Result)
+                SearchTreeView.SelectedNode = StartingNode;
 
+            if (!Result)
+            {
+                foreach (TreeNode Node in StartingNode.Nodes)
+                {
+                    if (Node.Nodes.Count > 0)
+                        Result = SearchWithinNodes(SearchTreeView, Node, Text);
+                    else
+                    {
+                        Result = Node.Text.Contains(Text);
+                        if (Result)
+                            SearchTreeView.SelectedNode = Node;
+                    }
 
+                    if (Result)
+                        return Result;
+                }
+            }
+
+            if (!Result)
+            {
+                TreeNode NextNode = StartingNode.NextNode;
+                if (NextNode == null)
+                    if (StartingNode.Parent != null)
+                        NextNode = StartingNode.Parent.NextNode;
+
+                if (NextNode == null)
+                    return false;
+                else
+                    return SearchWithinNodes(SearchTreeView, NextNode, Text);
+            }
+            return Result;
+        }
+        private TreeNode GetNextNodeInList(TreeNode CurrentNode)
+        {
+            if (CurrentNode.Nodes.Count > 0)
+                return CurrentNode.Nodes[0];
+            if (CurrentNode.NextNode != null)
+                return CurrentNode.NextNode;
+            TreeNode ParentNode = CurrentNode.Parent;
+            TreeNode NextNode = null;
+            while (NextNode == null)
+                if (ParentNode != null)
+                {
+                    NextNode = ParentNode.NextNode;
+                    ParentNode = ParentNode.Parent;
+                }
+                else
+                    return null;
+            return null;
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            if (SelectedTreeView != null)
+            {
+                if (SelectedTreeView.SelectedNode == null)
+                    SelectedTreeView.SelectedNode = SelectedTreeView.Nodes[0];
+                else
+                {
+                    SelectedTreeView.SelectedNode = GetNextNodeInList(SelectedTreeView.SelectedNode);
+                }
+                    
+                bool SearchResult = SearchWithinNodes(SelectedTreeView, SelectedTreeView.SelectedNode, txtFind.Text);
+                if (SearchResult)
+                    SelectedTreeView.Focus();
+                else
+                    MessageBox.Show("Search string \" " + txtFind.Text + " \" was not found within tree after selected node", "Nothing found", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, Consts.DEFAULT_MESSAGE_BOX_OPTIONS);
+
+            }
+
+        }
+        private void HideShowSearch()
+        {
+            txtFind.Visible = (tabLogs.TabCount > 0);
+            btnSearch.Visible = (tabLogs.TabCount > 0);
+        }
     }
 }
