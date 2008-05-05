@@ -18,19 +18,28 @@ namespace UniversalLogViewer
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            IniSettingsManager.InitFile();
+            UniversalLogViewer.Common.Exceptions.ExceptionLogWriter.Instance.WriteLog(LogWriting.TypeLogMessage.LMT_INFORM, "Program Started");
+
             try
             {
-                Application.Run(new MainForm());
+                try
+                {
+                    IniSettingsManager.InitFile();
+                    Application.Run(new MainForm());
+                    UniversalLogViewer.Common.Exceptions.ExceptionLogWriter.Instance.WriteLog(LogWriting.TypeLogMessage.LMT_INFORM, "Program Successfully Finished");
+                }
+                catch (UniLogViewerException e)
+                {
+                    //если мы ошибку не прибили заранее, но она не фатальная (фатальный случай прерывает приложение сразу в конструкторе исключения)
+                    System.Windows.Forms.MessageBox.Show(e.Message, "Handled Critical Internal Error happened. \n Program will terminate now", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, UniversalLogViewer.Common.Consts.DEFAULT_MESSAGE_BOX_OPTIONS);
+                }
+                catch (Exception e)
+                {
+                    throw new Common.Exceptions.FatalUnhandledException(e);
+                }
             }
-            catch (UniLogViewerException e)
+            catch (Exception)
             {
-                //если мы ошибку не прибили заранее, но она не фатальная (фатальный случай прерывает приложение сразу в конструкторе исключения)
-                System.Windows.Forms.MessageBox.Show(e.Message, "Handled Critical Internal Error happened. \n Program will terminate now", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, UniversalLogViewer.Common.Consts.DEFAULT_MESSAGE_BOX_OPTIONS);
-            }
-            catch (Exception e)
-            {
-                throw new Common.Exceptions.FatalUnhandledException(e);          
             }
         }
     }

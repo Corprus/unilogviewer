@@ -16,7 +16,7 @@ namespace UniversalLogViewer.Common.Exceptions
             get
             {
                 if (_Instance == null)
-                    _Instance = new LogWriting.LogWriter(Consts.ERROR_LOG_FILENAME);
+                    _Instance = new LogWriting.LogWriter(Application.StartupPath + "\\" + Consts.ERROR_LOG_FILENAME);
                 return _Instance;
 
             }
