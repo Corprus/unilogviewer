@@ -54,6 +54,46 @@ namespace UniversalLogViewer.UI
             frmAbout.ShowDialog();
         }
 
+        public struct LoadLogParametersData
+        {
+            public LogType LoadedLogType;
+            public string LogFileName;
+
+        }
+        private void LoadLog(object o)
+        {
+
+            LoadLogParametersData Data = (LoadLogParametersData)o;
+            Log oLog = new Log(Data.LoadedLogType, Data.LogFileName);
+            TabPage LogTab = new TabPage();
+            LogTab.Text = Data.LogFileName + " (" + oLog.StructureType.LogName + ")";
+            TreeView LogTreeView = new TreeView();
+            LogTreeView.Dock = DockStyle.Fill;
+            LogTreeView.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TreeView_KeyPress);
+            LogTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.LogTreeViewSelectedItemChanged);
+
+            LogTab.Controls.Add(LogTreeView);
+            LogTab.ContextMenuStrip = cntTabPopup;
+            LogTreeView.Nodes.Add(oLog.TreeNode);
+            AddLogTabAndSelect(LogTab);
+        }
+        delegate void AddLogTabAndSelectCallback(TabPage LogTab);
+        private void AddLogTabAndSelect(TabPage LogTab)
+        {
+            if (this.tabLogs.InvokeRequired)
+            {
+                AddLogTabAndSelectCallback d = new AddLogTabAndSelectCallback(AddLogTabAndSelect);
+                this.Invoke(d, new object[] { LogTab });
+            }
+            else
+            {
+                tabLogs.TabPages.Add(LogTab);
+                tabLogs.SelectedIndex = tabLogs.TabPages.Count - 1;
+                HideShowSearch();
+
+            }
+        }
+
         private void btnLoadLog_Click(object sender, EventArgs e)
         {
             if (dlgOpenLog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
@@ -63,26 +103,17 @@ namespace UniversalLogViewer.UI
                 {
                     if ((cmbLogTypes.SelectedIndex != -1)&&(cmbLogTypes.Items[cmbLogTypes.SelectedIndex] is LogType))
                     {
-                        Log oLog = new Log((cmbLogTypes.Items[cmbLogTypes.SelectedIndex] as LogType), sLogFileName);
-                        TabPage LogTab = new TabPage();
-                        LogTab.Text = dlgOpenLog.FileName + " (" + oLog.StructureType.LogName + ")";
-                        TreeView LogTreeView = new TreeView();
-                        LogTreeView.Dock = DockStyle.Fill;
-                        LogTreeView.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TreeView_KeyPress);
-                        LogTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.LogTreeViewSelectedItemChanged);
-                             
-                        LogTab.Controls.Add(LogTreeView);
-                        LogTab.ContextMenuStrip = cntTabPopup;
-                        LogTreeView.Nodes.Add(oLog.TreeNode);
-                        tabLogs.TabPages.Add(LogTab);
-                        tabLogs.SelectedIndex = tabLogs.TabPages.Count - 1;
+                        LoadLogParametersData LoadLogData = new LoadLogParametersData();
+                        System.Threading.Thread LoadLogThread = new System.Threading.Thread(LoadLog);
+                        LoadLogData.LoadedLogType = (cmbLogTypes.Items[cmbLogTypes.SelectedIndex] as LogType);
+                        LoadLogData.LogFileName = sLogFileName;
+                        LoadLogThread.Start(LoadLogData);
                     }
                     else
                     {
                         MessageBox.Show(Consts.SELECT_CORRECT_LOG_TYPE, Consts.SELECT_CORRECT_LOG_TYPE, MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, Consts.DEFAULT_MESSAGE_BOX_OPTIONS);
                     }
                 }
-                HideShowSearch();
             }
         }
 
@@ -133,22 +164,61 @@ namespace UniversalLogViewer.UI
         {
             Help.ShowHelpIndex(this, hlpUniLogViewer.HelpNamespace);
         }
+        delegate TreeView GetSelectedTreeViewCallback();
         private TreeView GetSelectedTreeView()
         {
-            var SelTab = tabLogs.SelectedTab;
-            foreach (Control SelectedControl in SelTab.Controls)
+            if (tabLogs.InvokeRequired)
             {
-                TreeView SelectedTreeView = SelectedControl as TreeView;
-                if (SelectedTreeView != null)
-                    return SelectedTreeView;
+                GetSelectedTreeViewCallback d = new GetSelectedTreeViewCallback(GetSelectedTreeView);
+                return (TreeView) this.Invoke(d, new object[] {});
             }
-            return null;
+            else
+            {
+                var SelTab = tabLogs.SelectedTab;
+                foreach (Control SelectedControl in SelTab.Controls)
+                {
+                    TreeView SelectedTreeView = SelectedControl as TreeView;
+                    if (SelectedTreeView != null)
+                        return SelectedTreeView;
+                }
+                return null;
+            }
         }
+        delegate void SelectTreeNodeCallback(TreeView Tree, TreeNode Node);
+        private void SelectTreeNode(TreeView Tree, TreeNode Node)
+        {
+            if (Tree.InvokeRequired)
+            {
+                SelectTreeNodeCallback d = new SelectTreeNodeCallback(SelectTreeNode);
+                this.Invoke(d, new object[] { Tree, Node });
+            }
+            else
+            {
+                Tree.SelectedNode = Node;
+                tabLogs.SelectedIndex = tabLogs.TabPages.Count - 1;
+            }
+        }
+        delegate TreeNode GetSelectedTreeNodeCallback(TreeView CurrentTreeView);
+        private TreeNode GetSelectedTreeNode(TreeView CurrentTreeView)
+        {
+            if (CurrentTreeView.InvokeRequired)
+            {
+                GetSelectedTreeNodeCallback d = new GetSelectedTreeNodeCallback(GetSelectedTreeNode);
+                return (TreeNode)this.Invoke(d, new object[] { CurrentTreeView });
+            }
+            else
+            {
+                return CurrentTreeView.SelectedNode;
+            }
+
+        }
+
+        
         private bool SearchWithinNodes(TreeView SearchTreeView, TreeNode StartingNode, string Text)
         {
             bool Result = StartingNode.Text.Contains(Text);
             if (Result)
-                SearchTreeView.SelectedNode = StartingNode;
+                SelectTreeNode(SearchTreeView, StartingNode);
 
             if (!Result)
             {
@@ -160,7 +230,7 @@ namespace UniversalLogViewer.UI
                     {
                         Result = Node.Text.Contains(Text);
                         if (Result)
-                            SearchTreeView.SelectedNode = Node;
+                            SelectTreeNode(SearchTreeView, Node);
                     }
 
                     if (Result)
@@ -182,6 +252,17 @@ namespace UniversalLogViewer.UI
             }
             return Result;
         }
+        delegate void FocusControlCallback(Control c);
+        private void FocusControl(Control c)
+        {
+            if (tabLogs.InvokeRequired)
+            {
+                FocusControlCallback d = new FocusControlCallback(FocusControl);
+                this.Invoke(d, new object[] { c });
+            }
+            else
+                c.Focus();
+        }
         private TreeNode GetNextNodeInList(TreeNode CurrentNode)
         {
             if (CurrentNode.Nodes.Count > 0)
@@ -200,23 +281,24 @@ namespace UniversalLogViewer.UI
                     return null;
             return null;
         }
+        private void Search()
+        {
+            bool SearchResult = SearchWithinNodes(GetSelectedTreeView(), GetSelectedTreeNode(GetSelectedTreeView()), txtFind.Text);
+            if (SearchResult)
+                FocusControl(GetSelectedTreeView());
+            else
+                MessageBox.Show("Search string \" " + txtFind.Text + "\" was not found within tree after selected node", "Nothing found", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, Consts.DEFAULT_MESSAGE_BOX_OPTIONS);
 
+        }
         private void btnSearch_Click(object sender, EventArgs e)
         {
             if (SelectedTreeView != null)
             {
                 if (SelectedTreeView.SelectedNode == null)
                     SelectedTreeView.SelectedNode = SelectedTreeView.Nodes[0];
-                else
-                {
-                    SelectedTreeView.SelectedNode = GetNextNodeInList(SelectedTreeView.SelectedNode);
-                }
-                    
-                bool SearchResult = SearchWithinNodes(SelectedTreeView, SelectedTreeView.SelectedNode, txtFind.Text);
-                if (SearchResult)
-                    SelectedTreeView.Focus();
-                else
-                    MessageBox.Show("Search string \" " + txtFind.Text + " \" was not found within tree after selected node", "Nothing found", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, Consts.DEFAULT_MESSAGE_BOX_OPTIONS);
+                else                
+                    SelectedTreeView.SelectedNode = GetNextNodeInList(SelectedTreeView.SelectedNode);                
+                (new System.Threading.Thread(Search)).Start();
 
             }
 
