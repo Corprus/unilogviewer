@@ -308,5 +308,12 @@ namespace UniversalLogViewer.UI
             txtFind.Visible = (tabLogs.TabCount > 0);
             btnSearch.Visible = (tabLogs.TabCount > 0);
         }
+
+        private void txtFind_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Return)
+                btnSearch_Click(this, null);
+
+        }
     }
 }
