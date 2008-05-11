@@ -121,6 +121,7 @@ namespace UniversalLogViewer.UI
         private void MainForm_Load(object sender, EventArgs e)
         {
             LogTypeManager.oInstance.UpdateList(cmbLogTypes.Items);
+            this.Text = Application.ProductName + " " + Application.ProductVersion;
             HideShowSearch();
         }
 
@@ -226,6 +227,8 @@ namespace UniversalLogViewer.UI
             {
                 prbProcess.Maximum = max;
                 prbProcess.Minimum = min;
+                if (current > max)
+                    current = max;
                 prbProcess.Value = current;
                 if (!((current == min) || (current == 0)))
                     lblProgress.Text = ((int)((100 * current) / (max - min))).ToString() + "%";
@@ -288,8 +291,22 @@ namespace UniversalLogViewer.UI
             else
                 SetProgressLevel(prbProcess.Value + byvalue);
         }
+        delegate int GetProgressLevelCallback();
+        public int GetProgressLevel()
+        {
+            if (prbProcess.InvokeRequired)
+            {
+                GetProgressLevelCallback d = new GetProgressLevelCallback(GetProgressLevel);
+                return (int) this.Invoke(d, new object[] { });
+            }
+            else
+                return (int)(100 * prbProcess.Value  / (prbProcess.Maximum - prbProcess.Minimum));
+
+        }
         private bool SearchWithinNodes(TreeView SearchTreeView, TreeNode StartingNode, string Text)
         {
+            if (GetProgressLevel() == 100)
+                return false;
             bool Result = StartingNode.Text.Contains(Text);
             if (Result)
                 SelectTreeNode(SearchTreeView, StartingNode);
@@ -298,6 +315,7 @@ namespace UniversalLogViewer.UI
             {
                 foreach (TreeNode Node in StartingNode.Nodes)
                 {
+                    IncreaseProgressLevel(1);
                     if (Node.Nodes.Count > 0)
                         Result = SearchWithinNodes(SearchTreeView, Node, Text);
                     else
@@ -357,11 +375,15 @@ namespace UniversalLogViewer.UI
         }
         private void Search()
         {
-            bool SearchResult = SearchWithinNodes(GetSelectedTreeView(), GetSelectedTreeNode(GetSelectedTreeView()), txtFind.Text);
+            TreeView SelTreeView = GetSelectedTreeView();
+            FocusControl(SelTreeView);
+            InitProgressLevel(SelTreeView.GetNodeCount(true), 0, "Search progress...");
+            bool SearchResult = SearchWithinNodes(SelTreeView, GetSelectedTreeNode(GetSelectedTreeView()), txtFind.Text);
             if (SearchResult)
-                FocusControl(GetSelectedTreeView());
+                FocusControl(SelTreeView);
             else
                 MessageBox.Show("Search string \" " + txtFind.Text + "\" was not found within tree after selected node", "Nothing found", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, Consts.DEFAULT_MESSAGE_BOX_OPTIONS);
+            EndProgress();
 
         }
         private void btnSearch_Click(object sender, EventArgs e)

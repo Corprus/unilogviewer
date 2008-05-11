@@ -48,6 +48,8 @@
             this.tabLogs = new System.Windows.Forms.TabControl();
             this.memoValue = new System.Windows.Forms.RichTextBox();
             this.pnlButtons = new System.Windows.Forms.Panel();
+            this.lblProgress = new System.Windows.Forms.Label();
+            this.lblAction = new System.Windows.Forms.Label();
             this.prbProcess = new System.Windows.Forms.ProgressBar();
             this.btnSearch = new System.Windows.Forms.Button();
             this.txtFind = new System.Windows.Forms.TextBox();
@@ -55,8 +57,6 @@
             this.btnLoadLog = new System.Windows.Forms.Button();
             this.btnLoadLogTypes = new System.Windows.Forms.Button();
             this.hlpUniLogViewer = new System.Windows.Forms.HelpProvider();
-            this.lblAction = new System.Windows.Forms.Label();
-            this.lblProgress = new System.Windows.Forms.Label();
             this.mnuMain.SuspendLayout();
             this.cntTabPopup.SuspendLayout();
             this.splitMain.Panel1.SuspendLayout();
@@ -235,6 +235,26 @@
             this.pnlButtons.Size = new System.Drawing.Size(200, 223);
             this.pnlButtons.TabIndex = 7;
             // 
+            // lblProgress
+            // 
+            this.lblProgress.AutoSize = true;
+            this.lblProgress.Location = new System.Drawing.Point(157, 187);
+            this.lblProgress.Name = "lblProgress";
+            this.lblProgress.Size = new System.Drawing.Size(23, 13);
+            this.lblProgress.TabIndex = 10;
+            this.lblProgress.Text = "%%";
+            this.lblProgress.Visible = false;
+            // 
+            // lblAction
+            // 
+            this.lblAction.AutoSize = true;
+            this.lblAction.Location = new System.Drawing.Point(14, 165);
+            this.lblAction.Name = "lblAction";
+            this.lblAction.Size = new System.Drawing.Size(74, 13);
+            this.lblAction.TabIndex = 9;
+            this.lblAction.Text = "Current Action";
+            this.lblAction.Visible = false;
+            // 
             // prbProcess
             // 
             this.prbProcess.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
@@ -305,26 +325,6 @@
             // hlpUniLogViewer
             // 
             this.hlpUniLogViewer.HelpNamespace = "./Help/En/unilogviewer.chm";
-            // 
-            // lblAction
-            // 
-            this.lblAction.AutoSize = true;
-            this.lblAction.Location = new System.Drawing.Point(14, 165);
-            this.lblAction.Name = "lblAction";
-            this.lblAction.Size = new System.Drawing.Size(74, 13);
-            this.lblAction.TabIndex = 9;
-            this.lblAction.Text = "Current Action";
-            this.lblAction.Visible = false;
-            // 
-            // lblProgress
-            // 
-            this.lblProgress.AutoSize = true;
-            this.lblProgress.Location = new System.Drawing.Point(157, 187);
-            this.lblProgress.Name = "lblProgress";
-            this.lblProgress.Size = new System.Drawing.Size(23, 13);
-            this.lblProgress.TabIndex = 10;
-            this.lblProgress.Text = "%%";
-            this.lblProgress.Visible = false;
             // 
             // MainForm
             // 
