@@ -47,6 +47,7 @@ namespace UniversalLogViewer.Types.Values
                 foreach (Value ResultValue in ChildElements)
                     if ((!(IniSettingsManager.ShowValueMemo)) && (ResultValue.StructureType.Style.Visible))
                         Result.Nodes.Add(ResultValue.TreeNode);
+                UniversalLogViewer.Program.MainForm.IncreaseProgressLevel(1);
                 return Result;
             }
         }

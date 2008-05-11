@@ -13,8 +13,11 @@ namespace UniversalLogViewer
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
+        /// 
+        public static UniversalLogViewer.UI.MainForm MainForm;
+
         [STAThread]
-        static void Main()
+        internal static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -25,7 +28,8 @@ namespace UniversalLogViewer
                 try
                 {
                     IniSettingsManager.InitFile();
-                    Application.Run(new MainForm());
+                    MainForm = new MainForm();
+                    Application.Run(MainForm);
                     UniversalLogViewer.Common.Exceptions.ExceptionLogWriter.Instance.WriteLog(LogWriting.TypeLogMessage.LMT_INFORM, "Program Successfully Finished");
                 }
                 catch (UniLogViewerException e)

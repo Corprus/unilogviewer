@@ -74,6 +74,7 @@ namespace UniversalLogViewer.UI
 
             LogTab.Controls.Add(LogTreeView);
             LogTab.ContextMenuStrip = cntTabPopup;
+            
             LogTreeView.Nodes.Add(oLog.TreeNode);
             AddLogTabAndSelect(LogTab);
         }
@@ -213,7 +214,80 @@ namespace UniversalLogViewer.UI
 
         }
 
-        
+        delegate void SetFullProgressLevelCallback(int current, int max, int min);
+        private void SetFullProgressLevel(int current, int max, int min)
+        {
+            if (prbProcess.InvokeRequired)
+            {
+                SetFullProgressLevelCallback d = new SetFullProgressLevelCallback(SetFullProgressLevel);
+                this.Invoke(d, new object[] { current, max, min });
+            }
+            else
+            {
+                prbProcess.Maximum = max;
+                prbProcess.Minimum = min;
+                prbProcess.Value = current;
+                if (!((current == min) || (current == 0)))
+                    lblProgress.Text = ((int)((100 * current) / (max - min))).ToString() + "%";
+                else
+                    lblProgress.Text = "0%";
+            }                
+        }
+        delegate void InitProgressLevelCallback(int max, int min, string action);
+        public void InitProgressLevel(int max, int min, string action)
+        {
+            if (prbProcess.InvokeRequired)
+            {
+                InitProgressLevelCallback d = new InitProgressLevelCallback(InitProgressLevel);
+                this.Invoke(d, new object[] { max, min, action });
+            }
+            else
+            {
+                SetFullProgressLevel(min, max, min);
+                lblAction.Text = action;
+                lblAction.Visible = true;
+                prbProcess.Visible = true;
+                lblProgress.Visible = true;
+            }
+        }
+        delegate void EndProgressCallback();
+        public void EndProgress()
+        {
+            if (prbProcess.InvokeRequired)
+            {
+                EndProgressCallback d = new EndProgressCallback(EndProgress);
+                this.Invoke(d, new object[] { });
+            }
+            else
+            {
+                lblAction.Visible = false;
+                prbProcess.Visible = false;
+                lblProgress.Visible = false;
+            }
+        }
+
+        delegate void SetProgressLevelCallback(int current);
+        public void SetProgressLevel(int current)
+        {
+            if (prbProcess.InvokeRequired)
+            {
+                SetProgressLevelCallback d = new SetProgressLevelCallback(SetProgressLevel);
+                this.Invoke(d, new object[] { current });
+            }
+            else
+                SetFullProgressLevel(current, prbProcess.Maximum, prbProcess.Minimum);
+        }
+        delegate void IncreaseProgressLevelCallback(int byvalue);
+        public void IncreaseProgressLevel(int byvalue)
+        {
+            if (prbProcess.InvokeRequired)
+            {
+                IncreaseProgressLevelCallback d = new IncreaseProgressLevelCallback(IncreaseProgressLevel);
+                this.Invoke(d, new object[] { byvalue });
+            }
+            else
+                SetProgressLevel(prbProcess.Value + byvalue);
+        }
         private bool SearchWithinNodes(TreeView SearchTreeView, TreeNode StartingNode, string Text)
         {
             bool Result = StartingNode.Text.Contains(Text);

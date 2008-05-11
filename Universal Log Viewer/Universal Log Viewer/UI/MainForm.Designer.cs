@@ -48,12 +48,15 @@
             this.tabLogs = new System.Windows.Forms.TabControl();
             this.memoValue = new System.Windows.Forms.RichTextBox();
             this.pnlButtons = new System.Windows.Forms.Panel();
+            this.prbProcess = new System.Windows.Forms.ProgressBar();
             this.btnSearch = new System.Windows.Forms.Button();
             this.txtFind = new System.Windows.Forms.TextBox();
             this.cmbLogTypes = new System.Windows.Forms.ComboBox();
             this.btnLoadLog = new System.Windows.Forms.Button();
             this.btnLoadLogTypes = new System.Windows.Forms.Button();
             this.hlpUniLogViewer = new System.Windows.Forms.HelpProvider();
+            this.lblAction = new System.Windows.Forms.Label();
+            this.lblProgress = new System.Windows.Forms.Label();
             this.mnuMain.SuspendLayout();
             this.cntTabPopup.SuspendLayout();
             this.splitMain.Panel1.SuspendLayout();
@@ -208,15 +211,18 @@
             this.memoValue.BackColor = System.Drawing.SystemColors.Control;
             this.memoValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.memoValue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.memoValue.Location = new System.Drawing.Point(0, 195);
+            this.memoValue.Location = new System.Drawing.Point(0, 223);
             this.memoValue.Name = "memoValue";
-            this.memoValue.Size = new System.Drawing.Size(198, 248);
+            this.memoValue.Size = new System.Drawing.Size(198, 220);
             this.memoValue.TabIndex = 6;
             this.memoValue.Text = "";
             this.memoValue.Visible = false;
             // 
             // pnlButtons
             // 
+            this.pnlButtons.Controls.Add(this.lblProgress);
+            this.pnlButtons.Controls.Add(this.lblAction);
+            this.pnlButtons.Controls.Add(this.prbProcess);
             this.pnlButtons.Controls.Add(this.btnSearch);
             this.pnlButtons.Controls.Add(this.txtFind);
             this.pnlButtons.Controls.Add(this.cmbLogTypes);
@@ -226,14 +232,24 @@
             this.pnlButtons.Location = new System.Drawing.Point(0, 0);
             this.pnlButtons.MinimumSize = new System.Drawing.Size(200, 150);
             this.pnlButtons.Name = "pnlButtons";
-            this.pnlButtons.Size = new System.Drawing.Size(200, 195);
+            this.pnlButtons.Size = new System.Drawing.Size(200, 223);
             this.pnlButtons.TabIndex = 7;
+            // 
+            // prbProcess
+            // 
+            this.prbProcess.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.prbProcess.Location = new System.Drawing.Point(15, 186);
+            this.prbProcess.Name = "prbProcess";
+            this.prbProcess.Size = new System.Drawing.Size(134, 19);
+            this.prbProcess.TabIndex = 8;
+            this.prbProcess.Visible = false;
             // 
             // btnSearch
             // 
             this.btnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSearch.Location = new System.Drawing.Point(16, 158);
+            this.btnSearch.Location = new System.Drawing.Point(15, 130);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(166, 23);
             this.btnSearch.TabIndex = 7;
@@ -245,7 +261,7 @@
             // 
             this.txtFind.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtFind.Location = new System.Drawing.Point(16, 129);
+            this.txtFind.Location = new System.Drawing.Point(15, 101);
             this.txtFind.Name = "txtFind";
             this.txtFind.Size = new System.Drawing.Size(167, 20);
             this.txtFind.TabIndex = 6;
@@ -257,7 +273,7 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbLogTypes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbLogTypes.FormattingEnabled = true;
-            this.cmbLogTypes.Location = new System.Drawing.Point(16, 31);
+            this.cmbLogTypes.Location = new System.Drawing.Point(15, 3);
             this.cmbLogTypes.Name = "cmbLogTypes";
             this.cmbLogTypes.Size = new System.Drawing.Size(172, 21);
             this.cmbLogTypes.TabIndex = 5;
@@ -266,7 +282,7 @@
             // 
             this.btnLoadLog.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLoadLog.Location = new System.Drawing.Point(16, 89);
+            this.btnLoadLog.Location = new System.Drawing.Point(15, 61);
             this.btnLoadLog.Name = "btnLoadLog";
             this.btnLoadLog.Size = new System.Drawing.Size(172, 23);
             this.btnLoadLog.TabIndex = 4;
@@ -278,7 +294,7 @@
             // 
             this.btnLoadLogTypes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLoadLogTypes.Location = new System.Drawing.Point(16, 60);
+            this.btnLoadLogTypes.Location = new System.Drawing.Point(15, 32);
             this.btnLoadLogTypes.Name = "btnLoadLogTypes";
             this.btnLoadLogTypes.Size = new System.Drawing.Size(172, 23);
             this.btnLoadLogTypes.TabIndex = 3;
@@ -289,6 +305,26 @@
             // hlpUniLogViewer
             // 
             this.hlpUniLogViewer.HelpNamespace = "./Help/En/unilogviewer.chm";
+            // 
+            // lblAction
+            // 
+            this.lblAction.AutoSize = true;
+            this.lblAction.Location = new System.Drawing.Point(14, 165);
+            this.lblAction.Name = "lblAction";
+            this.lblAction.Size = new System.Drawing.Size(74, 13);
+            this.lblAction.TabIndex = 9;
+            this.lblAction.Text = "Current Action";
+            this.lblAction.Visible = false;
+            // 
+            // lblProgress
+            // 
+            this.lblProgress.AutoSize = true;
+            this.lblProgress.Location = new System.Drawing.Point(157, 187);
+            this.lblProgress.Name = "lblProgress";
+            this.lblProgress.Size = new System.Drawing.Size(23, 13);
+            this.lblProgress.TabIndex = 10;
+            this.lblProgress.Text = "%%";
+            this.lblProgress.Visible = false;
             // 
             // MainForm
             // 
@@ -342,6 +378,9 @@
         private System.Windows.Forms.ToolStripMenuItem mnuHelpIndex;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.TextBox txtFind;
+        private System.Windows.Forms.ProgressBar prbProcess;
+        private System.Windows.Forms.Label lblAction;
+        private System.Windows.Forms.Label lblProgress;
 
     }
 }

@@ -175,6 +175,7 @@ namespace UniversalLogViewer.Types.Values
                     {
                         NewString.StartIndex = AddProcessedBlock(0, 1);
                         ChildStrings.Add(NewString);
+                        UniversalLogViewer.Program.MainForm.IncreaseProgressLevel(1);
                         break;
                     }
                 }
