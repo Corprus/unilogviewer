@@ -36,6 +36,8 @@
             this.lblRevision = new System.Windows.Forms.Label();
             this.lblAuthor = new System.Windows.Forms.Label();
             this.lblAuthorLink = new System.Windows.Forms.LinkLabel();
+            this.picIcon = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.picIcon)).BeginInit();
             this.SuspendLayout();
             // 
             // lblProjectNameHeader
@@ -116,11 +118,23 @@
             this.lblAuthorLink.Text = "Konstantin Lebedev";
             this.lblAuthorLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblAuthorLink_LinkClicked);
             // 
+            // picIcon
+            // 
+            this.picIcon.Image = global::UniversalLogViewer.Properties.Resources.UniLogViewer1;
+            this.picIcon.InitialImage = global::UniversalLogViewer.Properties.Resources.UniLogViewer1;
+            this.picIcon.Location = new System.Drawing.Point(33, 129);
+            this.picIcon.Name = "picIcon";
+            this.picIcon.Size = new System.Drawing.Size(194, 184);
+            this.picIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picIcon.TabIndex = 9;
+            this.picIcon.TabStop = false;
+            // 
             // FormAbout
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(292, 273);
+            this.ClientSize = new System.Drawing.Size(303, 322);
+            this.Controls.Add(this.picIcon);
             this.Controls.Add(this.lblAuthorLink);
             this.Controls.Add(this.lblAuthor);
             this.Controls.Add(this.lblRevision);
@@ -133,6 +147,7 @@
             this.Name = "FormAbout";
             this.Text = "About Project";
             this.Load += new System.EventHandler(this.FormAbout_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.picIcon)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -148,5 +163,6 @@
         private System.Windows.Forms.Label lblRevision;
         private System.Windows.Forms.Label lblAuthor;
         private System.Windows.Forms.LinkLabel lblAuthorLink;
+        private System.Windows.Forms.PictureBox picIcon;
     }
 }

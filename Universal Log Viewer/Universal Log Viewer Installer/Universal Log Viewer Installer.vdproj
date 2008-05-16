@@ -21,6 +21,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_1A7DE297AC2DA989FE9379235B5F44D0"
+        "OwnerKey" = "8:_51CD82D27AF042DAA744A4015FE5484A"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_210C4BC26C324435830037038A4C2286"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -29,6 +35,18 @@
         {
         "MsmKey" = "8:_25F92AAEC35C4AC4B070F479EAEFDF99"
         "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_375CDC8FB021064739D80379371FD8F3"
+        "OwnerKey" = "8:_51CD82D27AF042DAA744A4015FE5484A"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_375CDC8FB021064739D80379371FD8F3"
+        "OwnerKey" = "8:_1A7DE297AC2DA989FE9379235B5F44D0"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -53,6 +71,12 @@
         {
         "MsmKey" = "8:_50553B74330B978EF3BBF70FF78AA919"
         "OwnerKey" = "8:_51CD82D27AF042DAA744A4015FE5484A"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_50553B74330B978EF3BBF70FF78AA919"
+        "OwnerKey" = "8:_1A7DE297AC2DA989FE9379235B5F44D0"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -131,6 +155,18 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_51CD82D27AF042DAA744A4015FE5484A"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_1A7DE297AC2DA989FE9379235B5F44D0"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_375CDC8FB021064739D80379371FD8F3"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -312,6 +348,37 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_1A7DE297AC2DA989FE9379235B5F44D0"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:UniLogViewer.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4ea56c5840b17303, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_1A7DE297AC2DA989FE9379235B5F44D0"
+                    {
+                    "Name" = "8:UniLogViewer.Common.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:UniLogViewer.Common.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_036B832087074A2892673AE84B9968D2"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_210C4BC26C324435830037038A4C2286"
             {
             "SourcePath" = "8:..\\ExampleLogs\\subblocktest.log"
@@ -330,6 +397,37 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_375CDC8FB021064739D80379371FD8F3"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:LogWriterLib, Version=1.1.0.0, Culture=neutral, PublicKeyToken=4ea56c5840b17303, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_375CDC8FB021064739D80379371FD8F3"
+                    {
+                    "Name" = "8:LogWriterLib.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:LogWriterLib.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_036B832087074A2892673AE84B9968D2"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_42D80AA1E35D479E8F5F98A8828D3403"
@@ -396,7 +494,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:IniFile, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:IniFile, Version=1.4.0.0, Culture=neutral, PublicKeyToken=4ea56c5840b17303, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_50553B74330B978EF3BBF70FF78AA919"
@@ -809,25 +907,25 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Universal Log Viewer"
-        "ProductCode" = "8:{213D38F1-F0CB-4F39-B033-F62822891DEA}"
-        "PackageCode" = "8:{1527AD21-3065-4ED2-923D-B5804B8CFEC2}"
+        "ProductCode" = "8:{EE0E335E-E49D-406C-963C-CB48C03533F1}"
+        "PackageCode" = "8:{174C8164-5C67-41A3-A18E-27288ED4549E}"
         "UpgradeCode" = "8:{000228C9-C61B-498C-AD72-5A38430F719A}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.3.0"
+        "ProductVersion" = "8:1.4.0"
         "Manufacturer" = "8:Konstantin Lebedev"
         "ARPHELPTELEPHONE" = "8:"
-        "ARPHELPLINK" = "8:"
+        "ARPHELPLINK" = "8:https://sourceforge.net/projects/unilogviewer"
         "Title" = "8:Universal Log Viewer Installer"
         "Subject" = "8:"
         "ARPCONTACT" = "8:Konstantin Lebedev"
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:UniversalLog Viewer"
-        "ARPURLINFOABOUT" = "8:"
-        "ARPPRODUCTICON" = "8:"
-        "ARPIconIndex" = "3:0"
+        "ARPURLINFOABOUT" = "8:https://sourceforge.net/projects/unilogviewer"
+        "ARPPRODUCTICON" = "8:_51CD82D27AF042DAA744A4015FE5484A"
+        "ARPIconIndex" = "3:32512"
         "SearchPath" = "8:"
         "UseSystemSearchPath" = "11:TRUE"
         "TargetPlatform" = "3:0"
@@ -935,12 +1033,12 @@
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
-            "IconIndex" = "3:0"
+            "IconIndex" = "3:32512"
             "Transitive" = "11:FALSE"
             "Target" = "8:_51CD82D27AF042DAA744A4015FE5484A"
             "Folder" = "8:_D1ECD8EDC5674444A0674C0ECDA31CD0"
             "WorkingFolder" = "8:_036B832087074A2892673AE84B9968D2"
-            "Icon" = "8:"
+            "Icon" = "8:_51CD82D27AF042DAA744A4015FE5484A"
             "Feature" = "8:"
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_C0976DDA4A574A2A9292882F072C5C1B"
@@ -963,12 +1061,12 @@
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
-            "IconIndex" = "3:0"
+            "IconIndex" = "3:32512"
             "Transitive" = "11:FALSE"
             "Target" = "8:_51CD82D27AF042DAA744A4015FE5484A"
             "Folder" = "8:_2B951240125845FC9E1E6CDD548D2B43"
             "WorkingFolder" = "8:_036B832087074A2892673AE84B9968D2"
-            "Icon" = "8:"
+            "Icon" = "8:_51CD82D27AF042DAA744A4015FE5484A"
             "Feature" = "8:"
             }
         }
@@ -1722,7 +1820,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_25F92AAEC35C4AC4B070F479EAEFDF99"
             {
-            "SourcePath" = "8:..\\InstallerClasses\\obj\\Debug\\InstallerClasses.dll"
+            "SourcePath" = "8:..\\InstallerClasses\\obj\\Release\\InstallerClasses.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_F555DB4535844D868BB12739B44F5C76"
@@ -1778,7 +1876,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_51CD82D27AF042DAA744A4015FE5484A"
             {
-            "SourcePath" = "8:..\\Universal Log Viewer\\obj\\Debug\\Universal Log Viewer.exe"
+            "SourcePath" = "8:..\\Universal Log Viewer\\obj\\Release\\Universal Log Viewer.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_036B832087074A2892673AE84B9968D2"

@@ -61,12 +61,33 @@ namespace UniversalLogViewer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 35M
+        ///   Looks up a localized string similar to 64M
         ///.
         /// </summary>
         internal static string svn_revision {
             get {
                 return ResourceManager.GetString("svn_revision", resourceCulture);
+            }
+        }
+        
+        internal static System.Drawing.Icon UniLogViewer {
+            get {
+                object obj = ResourceManager.GetObject("UniLogViewer", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Icon UniLogViewer_Large {
+            get {
+                object obj = ResourceManager.GetObject("UniLogViewer_Large", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap UniLogViewer1 {
+            get {
+                object obj = ResourceManager.GetObject("UniLogViewer1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

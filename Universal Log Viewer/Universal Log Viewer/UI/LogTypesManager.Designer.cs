@@ -30,6 +30,7 @@
         {
             System.Windows.Forms.Panel pnlLoadLogType;
             System.Windows.Forms.GroupBox gbxLogTypeDescription;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LogTypesManagerForm));
             this.memoLogDescription = new System.Windows.Forms.RichTextBox();
             this.pnlLogTypeToolBox = new System.Windows.Forms.Panel();
             this.btnImportLogType = new System.Windows.Forms.Button();
@@ -177,6 +178,7 @@
             this.Controls.Add(pnlLoadLogType);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.pnkToolbox);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "LogTypesManagerForm";
             this.Text = "Log Types Manager";
             pnlLoadLogType.ResumeLayout(false);

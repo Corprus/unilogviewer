@@ -36,6 +36,7 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>UniLogViewer.pfx</AssemblyOriginatorKeyFile>
+    <ApplicationIcon>Resources\UniLogViewer.Large.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -193,6 +194,13 @@
       <Project>{02042878-C16A-48D6-BD04-035C554D329F}</Project>
       <Name>UniLogViewerCommon</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\UniLogViewerIcon.ico" />
+    <None Include="Resources\UniLogViewer.Large.ico" />
+    <None Include="Resources\UniLogViewer.ico" />
+    <None Include="Resources\UniLogViewer.png" />
+    <Content Include="UniLogViewer.Large.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
