@@ -5,7 +5,7 @@ using System.Text;
 
 namespace LogWriting
 {
-    class ErrorLogWriter :LogWriter
+    public class ErrorLogWriter :LogWriter
     {
         private String[] aTypeErrors= { "Panic. Kernel Panic" };
         public ErrorLogWriter(String vsFileName, Boolean vbSaveOldContent)
@@ -19,5 +19,11 @@ namespace LogWriting
             vsMessage = aTypeErrors[(int)vsErrorType] + sLogSeparator + vsMessage;
             return base.WriteLog(ventType, vsMessage);
         }
+
+        protected override String sGetHeaders()
+        {
+            return aHeaders[0] + sLogSeparator + aHeaders[3] + sLogSeparator + aHeaders[1] + sLogSeparator + aHeaders[2];
+        }
+
     }
 }

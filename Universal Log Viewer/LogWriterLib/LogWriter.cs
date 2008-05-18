@@ -17,6 +17,7 @@ namespace LogWriting
         private TextWriter _oTextWriter;
         protected const String sLogSeparator = "\t";        
         private String[] aTypeMessages = { "ERROR", "FATAL", "WARN", "INFORM" };
+        protected String[] aHeaders = { "Time", "Type", "Message", "ErrorType" };
 
         public LWErrorCode ErrorResultCode {get ; private set;}
 
@@ -88,6 +89,31 @@ namespace LogWriting
                 return LWErrorCode.EC_ERROR;
             }
             return LWErrorCode.EC_SUCCESS;
+        }
+
+        protected virtual String sGetHeaders()
+        {
+            return aHeaders[0] + sLogSeparator + aHeaders[1] + sLogSeparator + aHeaders[2];
+        }
+
+        protected LWErrorCode WriteHeaders(String vsHeaders)
+        {
+
+            try
+            {
+                _oTextWriter.WriteLine((String)vsHeaders);
+                _oTextWriter.Flush();
+            }
+            catch (Exception)
+            {
+                return LWErrorCode.EC_ERROR;
+            }
+            return LWErrorCode.EC_SUCCESS;
+        }
+
+        public LWErrorCode WriteHeaders()
+        {
+            return WriteHeaders(sGetHeaders());
         }
 
     }
