@@ -1,5 +1,22 @@
 Universal Log Viewer What's New
 
+
+Beta 1 (version 0.3.0)
++Search qithin parsed tree
++Progressbars
++Mutithread log parsing
++exception handling
++log types rules checking
++support of unicode ini files
++Additional stylizers for tree
++possibility to change style of value show to memo instead of tree
++panel changed to split panel
++possibility to copy values
++project icon
+*some minor changes and bugfixes
+
+
+
 Alpha 2(version 0.2.0)
 +LTP file types editing can be set up in Log Types managers item double-click
 +Old log type (if present) is automaticly reched after closing log type manager
