@@ -78,6 +78,7 @@
             this.memoLogDescription.Dock = System.Windows.Forms.DockStyle.Fill;
             this.memoLogDescription.Location = new System.Drawing.Point(3, 16);
             this.memoLogDescription.Name = "memoLogDescription";
+            this.memoLogDescription.ReadOnly = true;
             this.memoLogDescription.Size = new System.Drawing.Size(219, 355);
             this.memoLogDescription.TabIndex = 5;
             this.memoLogDescription.Text = "";
