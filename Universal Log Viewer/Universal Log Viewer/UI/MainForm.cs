@@ -64,19 +64,17 @@ namespace UniversalLogViewer.UI
         {
 
             LoadLogParametersData Data = (LoadLogParametersData)o;
-            Log oLog = new Log(Data.LoadedLogType, Data.LogFileName);
             TabPage LogTab = new TabPage();
-            LogTab.Text = Data.LogFileName + " (" + oLog.StructureType.LogName + ")";
             TreeView LogTreeView = new TreeView();
+            LogTab.Controls.Add(LogTreeView);
+            LogTab.ContextMenuStrip = cntTabPopup;
             LogTreeView.Dock = DockStyle.Fill;
             LogTreeView.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TreeView_KeyPress);
             LogTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.LogTreeViewSelectedItemChanged);
-
-            LogTab.Controls.Add(LogTreeView);
-            LogTab.ContextMenuStrip = cntTabPopup;
-            
-            LogTreeView.Nodes.Add(oLog.TreeNode);
+            LogTab.Text = Data.LogFileName + " (" + Data.LoadedLogType.LogName + ")";            
             AddLogTabAndSelect(LogTab);
+            Log oLog = new Log(Data.LoadedLogType, Data.LogFileName);
+            AddNodes(LogTreeView, oLog.GetTreeNode());
         }
         delegate void AddLogTabAndSelectCallback(TabPage LogTab);
         private void AddLogTabAndSelect(TabPage LogTab)
@@ -92,6 +90,19 @@ namespace UniversalLogViewer.UI
                 tabLogs.SelectedIndex = tabLogs.TabPages.Count - 1;
                 HideShowSearch();
 
+            }
+        }
+        delegate void AddNodesCallback(TreeView treeView, TreeNode treeNode);
+        private void AddNodes(TreeView treeView, TreeNode treeNode)
+        {
+            if (treeView.InvokeRequired)
+            {
+                AddNodesCallback d = new AddNodesCallback(AddNodes);
+                this.Invoke(d, new object[] { treeView, treeNode });
+            }
+            else
+            {
+                treeView.Nodes.Add(treeNode);
             }
         }
 

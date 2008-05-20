@@ -53,8 +53,8 @@ namespace UniversalLogViewer.Types.Values
                 Result.ForeColor = this.StructureType.Style.Color;
                 Result.BackColor = this.StructureType.Style.Background;
                 if (Result.NodeFont == null)
-                    Result.NodeFont = new System.Drawing.Font(System.Drawing.FontFamily.GenericSansSerif, 8);
-                if (this.StructureType.Style.Bold)
+                    Result.NodeFont = Common.Consts.DFAULT_FONT;
+/*                if (this.StructureType.Style.Bold)
                     Result.NodeFont = new System.Drawing.Font(Result.NodeFont, System.Drawing.FontStyle.Bold);
                 if (this.StructureType.Style.Italic)
                     Result.NodeFont = new System.Drawing.Font(Result.NodeFont, System.Drawing.FontStyle.Italic);
@@ -62,6 +62,7 @@ namespace UniversalLogViewer.Types.Values
                     Result.NodeFont = new System.Drawing.Font(Result.NodeFont, System.Drawing.FontStyle.Underline);
                 if (this.StructureType.Style.Strike)
                     Result.NodeFont = new System.Drawing.Font(Result.NodeFont, System.Drawing.FontStyle.Strikeout);
+                */
                 Result.EndEdit(false);
 
             }

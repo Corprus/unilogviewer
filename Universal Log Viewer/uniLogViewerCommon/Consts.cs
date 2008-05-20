@@ -19,6 +19,7 @@ namespace UniversalLogViewer.Common
         public const string TEXT_DELETE_LOG_TYPE = "Do you really want to delete log type (file will be deleted permanently)?";
         public const string HEADER_DELETE_LOG_TYPE = "Do you really want to delete?";
         public const System.Windows.Forms.MessageBoxOptions DEFAULT_MESSAGE_BOX_OPTIONS = (System.Windows.Forms.MessageBoxOptions)0;
+        public static System.Drawing.Font DFAULT_FONT = new System.Drawing.Font(System.Drawing.FontFamily.GenericSansSerif, 8);
 
     }
 }

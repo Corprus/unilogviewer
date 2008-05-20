@@ -45,7 +45,6 @@ namespace UniversalLogViewer.Types.Values
                 ((TreeTag)Result.Tag).Obj = this;
             if (!(IniSettingsManager.ShowValueMemo))
                 Result.Nodes.AddRange(CachedChildTreeNodes.ToArray());
-            //                UniversalLogViewer.Program.MainForm.IncreaseProgressLevel(1);
             return Result;
         }
     
@@ -140,6 +139,7 @@ namespace UniversalLogViewer.Types.Values
             CachedChildTreeNodes.Clear();
             CachedChildTreeNodes.TrimExcess();
             base.Dispose(disposing);
+//            GC.Collect();
         }
     }
 }

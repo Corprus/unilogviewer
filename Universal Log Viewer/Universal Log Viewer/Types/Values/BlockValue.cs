@@ -209,6 +209,7 @@ namespace UniversalLogViewer.Types.Values
                 }
             }
             //Проверка строк
+            int LocalIndex = 0;
             for (int I = StartIndex; I < EndIndex; I++)
             {
                 foreach (StringType oStringType in this.StructureType.ChildStringTypes)
@@ -218,7 +219,32 @@ namespace UniversalLogViewer.Types.Values
                         if (NewString.ConditionCorrect)
                         {
                             NewString.StartIndex = AddProcessedBlock(0, 1);
-                            ChildTreeNodes.Add(NewString.GetTreeNode());
+                            TreeNode NewTreeNode = NewString.GetTreeNode();
+                            ChildTreeNodes.Add(NewTreeNode);
+                            LocalIndex++;
+                            if (LocalIndex >= 10000)
+                            {
+                                LocalIndex = 0;
+                                GC.Collect();
+                                
+                            }
+/*                            if (ChildTreeNodes.Count >= 10000)
+                            {
+                                var sFileName = Application.CommonAppDataPath + "\\" + this.GetHashCode() + "\\tree" + NewTreeNode.GetHashCode() + ".tmp";
+                                var fDirectory = System.IO.Directory.GetParent(sFileName);
+                                if (!fDirectory.Exists)
+                                {
+                                    fDirectory.Create();
+                                }
+                                Common.TreeViewSerializer.SerializeTreeNodeList(ChildTreeNodes, sFileName);
+                                foreach(TreeNode ChildNode in ChildTreeNodes)
+                                    ChildNode.Remove();
+                                ChildTreeNodes.Clear();
+                                ChildTreeNodes.TrimExcess();
+                                ChildTreeNodes = new List<TreeNode>();
+                                GC.Collect();
+                            }
+ */
                             //ChildStrings.Add(NewString);
                             UniversalLogViewer.Program.MainForm.IncreaseProgressLevel(1);
                             break;

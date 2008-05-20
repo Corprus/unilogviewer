@@ -13,10 +13,8 @@ namespace UniversalLogViewer.Types.Values
         FileReader LogFile { get; set; }
         public List<string> File { get; private set; }
         BlockValue RootBlock { get; set; }
-        public TreeNode TreeNode
+        public TreeNode GetTreeNode()
         {
-            get
-            {
                 UniversalLogViewer.Program.MainForm.InitProgressLevel(File.Count, 0, "Generating Tree...");
                 TreeNode Result = RootBlock.GetTreeNode();
                 Result.BeginEdit();
@@ -24,7 +22,6 @@ namespace UniversalLogViewer.Types.Values
                 Result.EndEdit(false);
                 UniversalLogViewer.Program.MainForm.EndProgress();
                 return Result;
-            }
         }
 
 
