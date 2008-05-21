@@ -52,19 +52,8 @@ namespace UniversalLogViewer.Types.Values
                 Result.Tag = new TreeTag(this);
                 Result.ForeColor = this.StructureType.Style.Color;
                 Result.BackColor = this.StructureType.Style.Background;
-                if (Result.NodeFont == null)
-                    Result.NodeFont = Common.Consts.DFAULT_FONT;
-/*                if (this.StructureType.Style.Bold)
-                    Result.NodeFont = new System.Drawing.Font(Result.NodeFont, System.Drawing.FontStyle.Bold);
-                if (this.StructureType.Style.Italic)
-                    Result.NodeFont = new System.Drawing.Font(Result.NodeFont, System.Drawing.FontStyle.Italic);
-                if (this.StructureType.Style.Underline)
-                    Result.NodeFont = new System.Drawing.Font(Result.NodeFont, System.Drawing.FontStyle.Underline);
-                if (this.StructureType.Style.Strike)
-                    Result.NodeFont = new System.Drawing.Font(Result.NodeFont, System.Drawing.FontStyle.Strikeout);
-                */
+                Result.NodeFont = Common.Consts.GetFontFromSettings(this.StructureType.Style.Bold, this.StructureType.Style.Italic, this.StructureType.Style.Underline, this.StructureType.Style.Strike);
                 Result.EndEdit(false);
-
             }
             return Result;
 

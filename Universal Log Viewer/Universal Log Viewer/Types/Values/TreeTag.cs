@@ -9,7 +9,7 @@ namespace UniversalLogViewer.Types.Values
     {
         public string TypeName { get; private set; }
         public BaseValue Obj { get; set; }
-        public int StartIndex { get; private set; }
+        public int StartIndex { get; set; }
         public TreeTag(BaseValue Obj)
         {
             TypeName = Obj.GetType().Name;

@@ -118,7 +118,10 @@ namespace UniversalLogViewer.Types.Values
                     if (this.StructureType.EndCondition != null)
                         bEndConditionDone = this.StructureType.EndCondition.IsCorrect(CurString);
                     if (bEndConditionDone)
+                    {
                         EndIndex = i;
+                        Length = EndIndex - StartIndex + 1;
+                    }
                 }
             }
             return Result.ToArray();
@@ -127,14 +130,24 @@ namespace UniversalLogViewer.Types.Values
         {
             ChildStrings = new List<StringValue>();
             Value = new string[0];
+            Length = 0;
             ParseStringList(Source);
-            if (EndIndex == 0)
-                Length = 0;
-            else
+            if ((Length == 0) && (EndIndex > 0))
                 Length = EndIndex - StartIndex + 1;
+
+
             ProcessStringList();
         }
         int CurrentStartingProcessedIndex;
+        bool StringIsProcessed(int Index)
+        {
+            if (Index < CurrentStartingProcessedIndex)
+                return true;
+            if (Index > CurrentStartingProcessedIndex + ProcessedStrings.Count)
+                return false;
+            return ProcessedStrings[Index - CurrentStartingProcessedIndex];
+
+        }
         int AddProcessedBlock(int StartIndex, int Length)
         {
             int Result = 0;
@@ -186,65 +199,71 @@ namespace UniversalLogViewer.Types.Values
                 ProcessedStrings.Add(false);
 
             ChildTreeNodes = new List<TreeNode>();
-            List<string> ProcessedList = Source;
-            //Проверка блоков и генерация дочерних блоков (и их процесинг)
-            foreach (BlockType oBlockType in this.StructureType.ChildBlockTypes)
+            List<string> ProcessedList = new List<string>(Source);
+            if (Length != 0)
             {
-                bool NoBlocksToProcess = false;
-                while (!(NoBlocksToProcess))
+                ProcessedList.RemoveRange(EndIndex + 1, ProcessedList.Count - EndIndex - 1);
+                ProcessedList.RemoveRange(0, StartIndex);
+            }
+                //Проверка блоков и генерация дочерних блоков (и их процесинг)
+                foreach (BlockType oBlockType in this.StructureType.ChildBlockTypes)
                 {
-
-                    NoBlocksToProcess = true;
-                    BlockValue NewBlock = new BlockValue(oBlockType, ProcessedList);
-                    if (!(NewBlock.IsEmpty))
+                    bool NoBlocksToProcess = false;
+                    while (!(NoBlocksToProcess))
                     {
-                        ProcessedList = NewBlock.CutSourceString;
-                        NewBlock.StartIndex = AddProcessedBlock(NewBlock.StartIndex, NewBlock.Length);
-                        TreeNode TempNode = NewBlock.GetTreeNode();
-                        if (TempNode != null)
-                            ChildTreeNodes.Add(TempNode);
-                        //                        ChildElements.Add(NewBlock);
-                        NoBlocksToProcess = false;
+
+                        NoBlocksToProcess = true;
+                        BlockValue NewBlock = new BlockValue(oBlockType, ProcessedList);
+                        if (!(NewBlock.IsEmpty))
+                        {
+                            ProcessedList = NewBlock.CutSourceString;
+                            NewBlock.StartIndex = AddProcessedBlock(NewBlock.StartIndex, NewBlock.Length);
+                            TreeNode TempNode = NewBlock.GetTreeNode();
+                            if (TempNode != null)
+                                ChildTreeNodes.Add(TempNode);
+                            //                        ChildElements.Add(NewBlock);
+                            NoBlocksToProcess = false;
+                        }
                     }
                 }
-            }
             //Проверка строк
             int LocalIndex = 0;
-            for (int I = StartIndex; I < EndIndex; I++)
+            foreach (string CurrentString in ProcessedList)
             {
                 foreach (StringType oStringType in this.StructureType.ChildStringTypes)
                 {
-                    using (StringValue NewString = new StringValue(oStringType, Source[I]))
+                    using (StringValue NewString = new StringValue(oStringType, CurrentString))
                     {
                         if (NewString.ConditionCorrect)
                         {
                             NewString.StartIndex = AddProcessedBlock(0, 1);
                             TreeNode NewTreeNode = NewString.GetTreeNode();
-                            ChildTreeNodes.Add(NewTreeNode);
+                            if (NewTreeNode != null)
+                                ChildTreeNodes.Add(NewTreeNode);
                             LocalIndex++;
                             if (LocalIndex >= 10000)
                             {
                                 LocalIndex = 0;
                                 GC.Collect();
-                                
+
                             }
-/*                            if (ChildTreeNodes.Count >= 10000)
-                            {
-                                var sFileName = Application.CommonAppDataPath + "\\" + this.GetHashCode() + "\\tree" + NewTreeNode.GetHashCode() + ".tmp";
-                                var fDirectory = System.IO.Directory.GetParent(sFileName);
-                                if (!fDirectory.Exists)
-                                {
-                                    fDirectory.Create();
-                                }
-                                Common.TreeViewSerializer.SerializeTreeNodeList(ChildTreeNodes, sFileName);
-                                foreach(TreeNode ChildNode in ChildTreeNodes)
-                                    ChildNode.Remove();
-                                ChildTreeNodes.Clear();
-                                ChildTreeNodes.TrimExcess();
-                                ChildTreeNodes = new List<TreeNode>();
-                                GC.Collect();
-                            }
- */
+                            /*                            if (ChildTreeNodes.Count >= 10000)
+                                                        {
+                                                            var sFileName = Application.CommonAppDataPath + "\\" + this.GetHashCode() + "\\tree" + NewTreeNode.GetHashCode() + ".tmp";
+                                                            var fDirectory = System.IO.Directory.GetParent(sFileName);
+                                                            if (!fDirectory.Exists)
+                                                            {
+                                                                fDirectory.Create();
+                                                            }
+                                                            Common.TreeViewSerializer.SerializeTreeNodeList(ChildTreeNodes, sFileName);
+                                                            foreach(TreeNode ChildNode in ChildTreeNodes)
+                                                                ChildNode.Remove();
+                                                            ChildTreeNodes.Clear();
+                                                            ChildTreeNodes.TrimExcess();
+                                                            ChildTreeNodes = new List<TreeNode>();
+                                                            GC.Collect();
+                                                        }
+                             */
                             //ChildStrings.Add(NewString);
                             UniversalLogViewer.Program.MainForm.IncreaseProgressLevel(1);
                             break;
