@@ -124,7 +124,7 @@
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -141,21 +141,21 @@
             // mnuHelpFile
             // 
             this.mnuHelpFile.Name = "mnuHelpFile";
-            this.mnuHelpFile.Size = new System.Drawing.Size(137, 22);
+            this.mnuHelpFile.Size = new System.Drawing.Size(126, 22);
             this.mnuHelpFile.Text = "Help";
             this.mnuHelpFile.Click += new System.EventHandler(this.mnuHelpFile_Click);
             // 
             // mnuHelpIndex
             // 
             this.mnuHelpIndex.Name = "mnuHelpIndex";
-            this.mnuHelpIndex.Size = new System.Drawing.Size(137, 22);
+            this.mnuHelpIndex.Size = new System.Drawing.Size(126, 22);
             this.mnuHelpIndex.Text = "Help Index";
             this.mnuHelpIndex.Click += new System.EventHandler(this.mnuHelpIndex_Click);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.aboutToolStripMenuItem.Text = "&About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -164,12 +164,12 @@
             this.cntTabPopup.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.closeTabToolStripMenuItem});
             this.cntTabPopup.Name = "cntTabPopup";
-            this.cntTabPopup.Size = new System.Drawing.Size(133, 26);
+            this.cntTabPopup.Size = new System.Drawing.Size(122, 26);
             // 
             // closeTabToolStripMenuItem
             // 
             this.closeTabToolStripMenuItem.Name = "closeTabToolStripMenuItem";
-            this.closeTabToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.closeTabToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
             this.closeTabToolStripMenuItem.Text = "Close Tab";
             this.closeTabToolStripMenuItem.Click += new System.EventHandler(this.closeTabToolStripMenuItem_Click);
             // 

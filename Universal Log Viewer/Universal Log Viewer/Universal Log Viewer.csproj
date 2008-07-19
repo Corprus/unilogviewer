@@ -91,7 +91,6 @@
     <Compile Include="Types\Structures\LogType.cs" />
     <Compile Include="Types\Managers\LogTypeCollection.cs" />
     <Compile Include="Types\Values\StringValue.cs" />
-    <Compile Include="Types\Values\TreeTag.cs" />
     <Compile Include="Types\Values\Value.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

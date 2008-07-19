@@ -13,7 +13,7 @@ namespace UniversalLogViewer.Common
         {
             FileName = Name;
         }
-        public List<string> ReadFile()
+        public string[] ReadFile()
         {
             StreamReader SR;
             List<string> S = new List<string>();
@@ -22,7 +22,7 @@ namespace UniversalLogViewer.Common
             while (!SR.EndOfStream)
                 S.Add(SR.ReadLine());
             SR.Close();
-            return S;
+            return S.ToArray();
         }
     }
 }

@@ -11,17 +11,19 @@ namespace UniversalLogViewer.Types.Values
     {
         public LogType StructureType { get; private set; }
         FileReader LogFile { get; set; }
-        public List<string> File { get; private set; }
         BlockValue RootBlock { get; set; }
-        public TreeNode GetTreeNode()
+        public TreeNode TreeNode
         {
-                UniversalLogViewer.Program.MainForm.InitProgressLevel(File.Count, 0, "Generating Tree...");
-                TreeNode Result = RootBlock.GetTreeNode();
+            get
+            {
+                UniversalLogViewer.Program.MainForm.InitProgressLevel(LogFile.ReadFile().Length, 0, "Generating Tree...");
+                TreeNode Result = RootBlock.TreeNode;
                 Result.BeginEdit();
                 Result.Text = this.StructureType.LogName + ":" + Result.Text;
                 Result.EndEdit(false);
                 UniversalLogViewer.Program.MainForm.EndProgress();
                 return Result;
+            }
         }
 
 
@@ -29,9 +31,9 @@ namespace UniversalLogViewer.Types.Values
         {
             this.StructureType = Type;
             LogFile = new FileReader(FileName);
-            File = LogFile.ReadFile();
-            UniversalLogViewer.Program.MainForm.InitProgressLevel(File.Count, 0, "Processing Log...");
-            RootBlock = new BlockValue(this.StructureType.RootBlockType, File);
+            string[] LogFileStrings = LogFile.ReadFile();
+            UniversalLogViewer.Program.MainForm.InitProgressLevel(LogFileStrings.Length, 0, "Processing Log...");
+            RootBlock = new BlockValue(this.StructureType.RootBlockType, LogFileStrings);
             UniversalLogViewer.Program.MainForm.EndProgress();
         }
     }

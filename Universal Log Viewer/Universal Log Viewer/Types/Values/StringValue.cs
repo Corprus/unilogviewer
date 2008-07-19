@@ -15,49 +15,53 @@ namespace UniversalLogViewer.Types.Values
         public new StringType StructureType { get { return (base.StructureType as StringType); } private set { base.StructureType = value; } }
         public bool ConditionCorrect { get { return this.StructureType.Condition.IsCorrect(Value); } }
         public int StartIndex { get; set; }
-        public override TreeNode GetTreeNode()
+        public override TreeNode TreeNode
         {
-            string NodeTitle;
-            switch (this.StructureType.TitleType)
+            get
             {
-                case Common.TitleType.Title: NodeTitle = this.StructureType.Title; break;
-                case Common.TitleType.Source: NodeTitle = this.Source; break;
-                case Common.TitleType.Value:
-                    {
-                        Value TitleElement = null;
-                        if (ChildElements.Count > this.StructureType.TitleValueIndex)
+
+                string NodeTitle;
+                switch (this.StructureType.TitleType)
+                {
+                    case Common.TitleType.Title: NodeTitle = this.StructureType.Title; break;
+                    case Common.TitleType.Source: NodeTitle = this.Source; break;
+                    case Common.TitleType.Value:
                         {
-                            TitleElement = ChildElements[this.StructureType.TitleValueIndex];
-                            if ((this.StructureType.TitleValueType.Length > 0) && (TitleElement.StructureType.Name != this.StructureType.TitleValueType))
-                                TitleElement = null;
+                            Value TitleElement = null;
+                            if (ChildElements.Count > this.StructureType.TitleValueIndex)
+                            {
+                                TitleElement = ChildElements[this.StructureType.TitleValueIndex];
+                                if ((this.StructureType.TitleValueType.Length > 0) && (TitleElement.StructureType.Name != this.StructureType.TitleValueType))
+                                    TitleElement = null;
+                            }
+                            if (TitleElement == null)
+                                NodeTitle = this.StructureType.Title;
+                            else
+                                NodeTitle = TitleElement.Value;
+                            break;
                         }
-                        if (TitleElement == null)
-                            NodeTitle = this.StructureType.Title;
-                        else
-                            NodeTitle = TitleElement.Value;
-                        break;
-                    }
-                default: NodeTitle = this.StructureType.Title; break;
+                    default: NodeTitle = this.StructureType.Title; break;
+                }
+                TreeNodeValueString = NodeTitle;
+                TreeNode Result = base.TreeNode;
+                foreach (Value ResultValue in ChildElements)
+                    if ((!(IniSettingsManager.ShowValueMemo)) && (ResultValue.StructureType.Style.Visible))
+                        Result.Nodes.Add(ResultValue.TreeNode);
+                UniversalLogViewer.Program.MainForm.IncreaseProgressLevel(1);
+                return Result;
             }
-            TreeNodeValueString = NodeTitle;
-            TreeNode Result = base.GetTreeNode();
-            if (IniSettingsManager.ShowValueMemo)
-                ((TreeTag)Result.Tag).Obj = this;
-            if (!(IniSettingsManager.ShowValueMemo))
-                Result.Nodes.AddRange(CachedChildTreeNodes.ToArray());
-            return Result;
         }
     
 
-        void ProcessString()
+        List<Value> ProcessString()
         {
             bool bStringProcessed = false;
             string sProcessedString = Source;
-
-            ChildElements = new List<Value>();
-            ChildElements.Clear();
-            ChildElements.TrimExcess();
-          
+            List<Value> Values = ChildElements;
+            if (Values == null)
+                Values = new List<Value>();
+            Values.Clear();
+            
             if (this.StructureType.UseSeparator)
             {
                 String[] SeparatedStrings = sProcessedString.Split(this.StructureType.Separator);
@@ -73,7 +77,7 @@ namespace UniversalLogViewer.Types.Values
                         UsedType = Types[i];
                     Value NewValue = new Value(UsedType, SeparatedStrings[i]);
                     if (NewValue.Value.Length != 0)
-                        ChildElements.Add(NewValue);
+                        Values.Add(NewValue);
                 }
             }
             else
@@ -88,12 +92,12 @@ namespace UniversalLogViewer.Types.Values
                         Value NewValue = new Value(VType, sProcessedString);
                         if (NewValue.Value.Length != 0)
                         {
-                            ChildElements.Add(NewValue);
+                            Values.Add(NewValue);
                             sProcessedString = NewValue.CutSource(sProcessedString);
                         }
                     }
                 }
-            FCache(ChildElements);
+            return Values;
         }
         public override void Parse()
         {
@@ -105,41 +109,13 @@ namespace UniversalLogViewer.Types.Values
             this.Value = Source;
             this.StructureType = StringType;
         }
-        private string[] CachedValues;
-        private void FCacheValues(List<Value> LocalChildren)
+        public string[] GetValues()
         {
             List<string> Result = new List<string>();
             Result.Add("Contents of " + this.StructureType.Title);
-            foreach (Value ChildValue in LocalChildren)
+            foreach (Value ChildValue in ChildElements)
                 Result.Add(ChildValue.StructureType.Name + ": " + ChildValue.Value);
-            CachedValues = Result.ToArray();
-        }
-        public string[] GetValues()
-        {
-            return CachedValues;
-        }
-        private void FCache(List<Value> LocalChildren)
-        {
-            if (IniSettingsManager.ShowValueMemo)
-                FCacheValues(LocalChildren);
-            else
-                FCacheTreeNodes(LocalChildren);                    
-        }
-        private List<TreeNode> CachedChildTreeNodes;
-        private void FCacheTreeNodes(List<Value> LocalChildren)
-        {
-            CachedChildTreeNodes = new List<TreeNode>();
-            foreach (Value ResultValue in LocalChildren)
-                if (ResultValue.StructureType.Style.Visible)
-                CachedChildTreeNodes.Add(ResultValue.GetTreeNode());                 
-
-        }
-        protected override void Dispose(bool disposing)
-        {
-            CachedChildTreeNodes.Clear();
-            CachedChildTreeNodes.TrimExcess();
-            base.Dispose(disposing);
-//            GC.Collect();
+            return Result.ToArray();
         }
     }
 }
