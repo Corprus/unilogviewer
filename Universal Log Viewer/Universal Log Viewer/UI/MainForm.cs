@@ -1,10 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using UniversalLogViewer.Types.Values;
 using UniversalLogViewer.Types.Structures;
@@ -23,10 +17,14 @@ namespace UniversalLogViewer.UI
                 return GetSelectedTreeView();
             }
         }
+        
         public MainForm()
         {
             InitializeComponent();
+            this.LogProgress = new LogLoadProgress(this.prbProcess, this.lblProgress);
         }
+
+        public Common.LogLoadProgress LogProgress { get; private set; }
 
         private void btnLoadLogTypes_Click(object sender, EventArgs e)
         {
@@ -186,20 +184,7 @@ namespace UniversalLogViewer.UI
                 return null;
             }
         }
-        delegate void SelectTreeNodeCallback(TreeView Tree, TreeNode Node);
-        private void SelectTreeNode(TreeView Tree, TreeNode Node)
-        {
-            if (Tree.InvokeRequired)
-            {
-                SelectTreeNodeCallback d = new SelectTreeNodeCallback(SelectTreeNode);
-                this.Invoke(d, new object[] { Tree, Node });
-            }
-            else
-            {
-                Tree.SelectedNode = Node;
-                tabLogs.SelectedIndex = tabLogs.TabPages.Count - 1;
-            }
-        }
+
         delegate TreeNode GetSelectedTreeNodeCallback(TreeView CurrentTreeView);
         private TreeNode GetSelectedTreeNode(TreeView CurrentTreeView)
         {
@@ -215,38 +200,18 @@ namespace UniversalLogViewer.UI
 
         }
 
-        delegate void SetFullProgressLevelCallback(int current, int max, int min);
-        private void SetFullProgressLevel(int current, int max, int min)
-        {
-            if (prbProcess.InvokeRequired)
-            {
-                SetFullProgressLevelCallback d = new SetFullProgressLevelCallback(SetFullProgressLevel);
-                this.Invoke(d, new object[] { current, max, min });
-            }
-            else
-            {
-                prbProcess.Maximum = max;
-                prbProcess.Minimum = min;
-                if (current > max)
-                    current = max;
-                prbProcess.Value = current;
-                if (!((current == min) || (current == 0)))
-                    lblProgress.Text = ((int)((100 * current) / (max - min))).ToString() + "%";
-                else
-                    lblProgress.Text = "0%";
-            }                
-        }
+
         delegate void InitProgressLevelCallback(int max, int min, string action);
         public void InitProgressLevel(int max, int min, string action)
         {
-            if (prbProcess.InvokeRequired)
+            if (InvokeRequired)
             {
                 InitProgressLevelCallback d = new InitProgressLevelCallback(InitProgressLevel);
                 this.Invoke(d, new object[] { max, min, action });
             }
             else
             {
-                SetFullProgressLevel(min, max, min);
+                LogProgress.InitProgressLevel(max, min);
                 lblAction.Text = action;
                 lblAction.Visible = true;
                 prbProcess.Visible = true;
@@ -256,7 +221,7 @@ namespace UniversalLogViewer.UI
         delegate void EndProgressCallback();
         public void EndProgress()
         {
-            if (prbProcess.InvokeRequired)
+            if (InvokeRequired)
             {
                 EndProgressCallback d = new EndProgressCallback(EndProgress);
                 this.Invoke(d, new object[] { });
@@ -269,85 +234,14 @@ namespace UniversalLogViewer.UI
             }
         }
 
-        delegate void SetProgressLevelCallback(int current);
-        public void SetProgressLevel(int current)
-        {
-            if (prbProcess.InvokeRequired)
-            {
-                SetProgressLevelCallback d = new SetProgressLevelCallback(SetProgressLevel);
-                this.Invoke(d, new object[] { current });
-            }
-            else
-                SetFullProgressLevel(current, prbProcess.Maximum, prbProcess.Minimum);
-        }
-        delegate void IncreaseProgressLevelCallback(int byvalue);
-        public void IncreaseProgressLevel(int byvalue)
-        {
-            if (prbProcess.InvokeRequired)
-            {
-                IncreaseProgressLevelCallback d = new IncreaseProgressLevelCallback(IncreaseProgressLevel);
-                this.Invoke(d, new object[] { byvalue });
-            }
-            else
-                SetProgressLevel(prbProcess.Value + byvalue);
-        }
-        delegate int GetProgressLevelCallback();
-        public int GetProgressLevel()
-        {
-            if (prbProcess.InvokeRequired)
-            {
-                GetProgressLevelCallback d = new GetProgressLevelCallback(GetProgressLevel);
-                return (int) this.Invoke(d, new object[] { });
-            }
-            else
-                return (int)(100 * prbProcess.Value  / (prbProcess.Maximum - prbProcess.Minimum));
 
-        }
-        private bool SearchWithinNodes(TreeView SearchTreeView, TreeNode StartingNode, string Text)
-        {
-            if (GetProgressLevel() == 100)
-                return false;
-            bool Result = StartingNode.Text.Contains(Text);
-            if (Result)
-                SelectTreeNode(SearchTreeView, StartingNode);
 
-            if (!Result)
-            {
-                foreach (TreeNode Node in StartingNode.Nodes)
-                {
-                    IncreaseProgressLevel(1);
-                    if (Node.Nodes.Count > 0)
-                        Result = SearchWithinNodes(SearchTreeView, Node, Text);
-                    else
-                    {
-                        Result = Node.Text.Contains(Text);
-                        if (Result)
-                            SelectTreeNode(SearchTreeView, Node);
-                    }
 
-                    if (Result)
-                        return Result;
-                }
-            }
 
-            if (!Result)
-            {
-                TreeNode NextNode = StartingNode.NextNode;
-                if (NextNode == null)
-                    if (StartingNode.Parent != null)
-                        NextNode = StartingNode.Parent.NextNode;
-
-                if (NextNode == null)
-                    return false;
-                else
-                    return SearchWithinNodes(SearchTreeView, NextNode, Text);
-            }
-            return Result;
-        }
         delegate void FocusControlCallback(Control c);
         private void FocusControl(Control c)
         {
-            if (tabLogs.InvokeRequired)
+            if (this.InvokeRequired)
             {
                 FocusControlCallback d = new FocusControlCallback(FocusControl);
                 this.Invoke(d, new object[] { c });
@@ -355,37 +249,20 @@ namespace UniversalLogViewer.UI
             else
                 c.Focus();
         }
-        private TreeNode GetNextNodeInList(TreeNode CurrentNode)
-        {
-            if (CurrentNode.Nodes.Count > 0)
-                return CurrentNode.Nodes[0];
-            if (CurrentNode.NextNode != null)
-                return CurrentNode.NextNode;
-            TreeNode ParentNode = CurrentNode.Parent;
-            TreeNode NextNode = null;
-            while (NextNode == null)
-                if (ParentNode != null)
-                {
-                    NextNode = ParentNode.NextNode;
-                    ParentNode = ParentNode.Parent;
-                }
-                else
-                    return null;
-            return null;
-        }
+
         private void Search()
         {
             TreeView SelTreeView = GetSelectedTreeView();
             FocusControl(SelTreeView);
             InitProgressLevel(SelTreeView.GetNodeCount(true), 0, "Search progress...");
-            bool SearchResult = SearchWithinNodes(SelTreeView, GetSelectedTreeNode(GetSelectedTreeView()), txtFind.Text);
+            bool SearchResult = UICommon.SearchWithinNodes(this.LogProgress, SelTreeView, GetSelectedTreeNode(GetSelectedTreeView()), txtFind.Text);
             if (SearchResult)
                 FocusControl(SelTreeView);
             else
                 MessageBox.Show("Search string \" " + txtFind.Text + "\" was not found within tree after selected node", "Nothing found", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, Consts.DEFAULT_MESSAGE_BOX_OPTIONS);
             EndProgress();
-
         }
+
         private void btnSearch_Click(object sender, EventArgs e)
         {
             if (SelectedTreeView != null)
@@ -393,7 +270,7 @@ namespace UniversalLogViewer.UI
                 if (SelectedTreeView.SelectedNode == null)
                     SelectedTreeView.SelectedNode = SelectedTreeView.Nodes[0];
                 else                
-                    SelectedTreeView.SelectedNode = GetNextNodeInList(SelectedTreeView.SelectedNode);                
+                    SelectedTreeView.SelectedNode = UICommon.GetNextNodeInList(SelectedTreeView.SelectedNode);                
                 (new System.Threading.Thread(Search)).Start();
 
             }
@@ -412,4 +289,5 @@ namespace UniversalLogViewer.UI
 
         }
     }
+
 }

@@ -110,7 +110,7 @@
             this.helpToolStripMenuItem});
             this.mnuMain.Location = new System.Drawing.Point(0, 0);
             this.mnuMain.Name = "mnuMain";
-            this.mnuMain.Size = new System.Drawing.Size(627, 24);
+            this.mnuMain.Size = new System.Drawing.Size(627, 25);
             this.mnuMain.TabIndex = 0;
             // 
             // fileToolStripMenuItem
@@ -118,13 +118,13 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(39, 21);
             this.fileToolStripMenuItem.Text = "&File";
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(96, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -135,27 +135,27 @@
             this.mnuHelpIndex,
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(47, 21);
             this.helpToolStripMenuItem.Text = "&Help";
             // 
             // mnuHelpFile
             // 
             this.mnuHelpFile.Name = "mnuHelpFile";
-            this.mnuHelpFile.Size = new System.Drawing.Size(126, 22);
+            this.mnuHelpFile.Size = new System.Drawing.Size(138, 22);
             this.mnuHelpFile.Text = "Help";
             this.mnuHelpFile.Click += new System.EventHandler(this.mnuHelpFile_Click);
             // 
             // mnuHelpIndex
             // 
             this.mnuHelpIndex.Name = "mnuHelpIndex";
-            this.mnuHelpIndex.Size = new System.Drawing.Size(126, 22);
+            this.mnuHelpIndex.Size = new System.Drawing.Size(138, 22);
             this.mnuHelpIndex.Text = "Help Index";
             this.mnuHelpIndex.Click += new System.EventHandler(this.mnuHelpIndex_Click);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
             this.aboutToolStripMenuItem.Text = "&About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -164,12 +164,12 @@
             this.cntTabPopup.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.closeTabToolStripMenuItem});
             this.cntTabPopup.Name = "cntTabPopup";
-            this.cntTabPopup.Size = new System.Drawing.Size(122, 26);
+            this.cntTabPopup.Size = new System.Drawing.Size(135, 26);
             // 
             // closeTabToolStripMenuItem
             // 
             this.closeTabToolStripMenuItem.Name = "closeTabToolStripMenuItem";
-            this.closeTabToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
+            this.closeTabToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.closeTabToolStripMenuItem.Text = "Close Tab";
             this.closeTabToolStripMenuItem.Click += new System.EventHandler(this.closeTabToolStripMenuItem_Click);
             // 
@@ -178,7 +178,7 @@
             this.splitMain.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.splitMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitMain.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
-            this.splitMain.Location = new System.Drawing.Point(0, 24);
+            this.splitMain.Location = new System.Drawing.Point(0, 25);
             this.splitMain.MinimumSize = new System.Drawing.Size(404, 200);
             this.splitMain.Name = "splitMain";
             // 
@@ -193,7 +193,7 @@
             this.splitMain.Panel2.Controls.Add(this.memoValue);
             this.splitMain.Panel2.Controls.Add(this.pnlButtons);
             this.splitMain.Panel2MinSize = 200;
-            this.splitMain.Size = new System.Drawing.Size(627, 445);
+            this.splitMain.Size = new System.Drawing.Size(627, 444);
             this.splitMain.SplitterDistance = 423;
             this.splitMain.TabIndex = 1;
             // 
@@ -204,7 +204,7 @@
             this.tabLogs.Location = new System.Drawing.Point(0, 0);
             this.tabLogs.Name = "tabLogs";
             this.tabLogs.SelectedIndex = 0;
-            this.tabLogs.Size = new System.Drawing.Size(421, 443);
+            this.tabLogs.Size = new System.Drawing.Size(421, 442);
             this.tabLogs.TabIndex = 6;
             // 
             // memoValue
@@ -214,7 +214,7 @@
             this.memoValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.memoValue.Location = new System.Drawing.Point(0, 223);
             this.memoValue.Name = "memoValue";
-            this.memoValue.Size = new System.Drawing.Size(198, 220);
+            this.memoValue.Size = new System.Drawing.Size(198, 219);
             this.memoValue.TabIndex = 6;
             this.memoValue.Text = "";
             this.memoValue.Visible = false;
@@ -241,7 +241,7 @@
             this.lblProgress.AutoSize = true;
             this.lblProgress.Location = new System.Drawing.Point(157, 187);
             this.lblProgress.Name = "lblProgress";
-            this.lblProgress.Size = new System.Drawing.Size(23, 13);
+            this.lblProgress.Size = new System.Drawing.Size(29, 15);
             this.lblProgress.TabIndex = 10;
             this.lblProgress.Text = "%%";
             this.lblProgress.Visible = false;
@@ -251,7 +251,7 @@
             this.lblAction.AutoSize = true;
             this.lblAction.Location = new System.Drawing.Point(14, 165);
             this.lblAction.Name = "lblAction";
-            this.lblAction.Size = new System.Drawing.Size(74, 13);
+            this.lblAction.Size = new System.Drawing.Size(83, 15);
             this.lblAction.TabIndex = 9;
             this.lblAction.Text = "Current Action";
             this.lblAction.Visible = false;

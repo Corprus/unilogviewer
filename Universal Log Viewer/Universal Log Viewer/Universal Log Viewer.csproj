@@ -23,7 +23,6 @@
     <ApplicationIcon>Resources\UniLogViewer.Large.ico</ApplicationIcon>
     <TargetZone>LocalIntranet</TargetZone>
     <GenerateManifests>false</GenerateManifests>
-    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
     <PublishUrl>http://localhost/Universal Log Viewer/</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Web</InstallFrom>

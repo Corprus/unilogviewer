@@ -54,6 +54,7 @@
     <Compile Include="FileReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Types\Managers\IniSettingsManager.cs" />
+    <Compile Include="UICommon.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IniFile\IniFile.csproj">

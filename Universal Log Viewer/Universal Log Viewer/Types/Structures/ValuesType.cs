@@ -16,10 +16,10 @@ namespace UniversalLogViewer.Types.Structures
         public bool IncludeConditions { get; private set; }
         public string ValueType { get; private set; }
 
-        void FInit(string ValueType, bool vIncludeConditions, ConditionType Condition)
+        private void FInit(string ValueType, bool IncludeConditions, ConditionType Condition)
         {
             this.ValueType = ValueType;
-            IncludeConditions = vIncludeConditions;
+            this.IncludeConditions = IncludeConditions;
             this.Condition = Condition;
         }
         public ValuesType(LogType LogType, LogIniSection Section)
