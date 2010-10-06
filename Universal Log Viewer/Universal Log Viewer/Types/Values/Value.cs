@@ -11,9 +11,10 @@ namespace UniversalLogViewer.Types.Values
     public class Value : BaseStringValueCollection<Value>
     {
         public new ValuesType StructureType { get { return (base.StructureType as ValuesType); } }
-        public Value(ValuesType Type, string Source)
-            :base(Type, Source)
-        {            
+        public Value(ValuesType Type,ref string Source)
+            :base(Type,ref Source)
+        {
+            
         }
         public override TreeNode TreeNode
         {

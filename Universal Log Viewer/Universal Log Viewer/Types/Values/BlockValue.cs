@@ -13,7 +13,7 @@ namespace UniversalLogViewer.Types.Values
         public new BlockType StructureType { get { return base.StructureType as BlockType; }}
         public bool IsEmpty { get { return (Value.Length == 0); } }
         public int StartIndex { get; private set; }
-        bool[] ProcessedStrings;
+        //bool[] ProcessedStrings;
         public List<StringValue> ChildStrings { get; private set; }
         public string[] CutSourceString { get; private set; }
         static bool IsBlock(Object Obj) { return (Obj is BlockValue); }
@@ -54,13 +54,17 @@ namespace UniversalLogViewer.Types.Values
                 foreach (BlockValue ChildBlock in ChildElements)
                     ChildList.Add(ChildBlock);
                 ChildList.Sort(CompareChilds);
-                foreach (Object Obj in ChildList)
+                for (int i= ChildList.Count -1; i>=0; i--)
+                //foreach (Object Obj in ChildList)
                 {
-                    var TypeObj = Obj as BaseValue;
+                    var TypeObj = ChildList[i] as BaseValue;
                     if ((TypeObj != null) && ((TypeObj is BlockValue) || (TypeObj is StringValue)))
                         if (TypeObj.StructureType.Style.Visible)
-                            Result.Nodes.Add(TypeObj.TreeNode);
+                            Result.Nodes.Insert(0, TypeObj.TreeNode);
+                    ChildList.RemoveAt(i);
                 }
+                ChildList.Clear();
+
                 return Result;
             }
         }
@@ -100,20 +104,18 @@ namespace UniversalLogViewer.Types.Values
         public override void Parse()
         {
             ChildStrings = new List<StringValue>();
-            ProcessedStrings = new bool[Source.Length];
-            for (int i = 0; i < ProcessedStrings.Length; i++)
-                ProcessedStrings[i] = false;
             Value = ParseStringList(Source);
             ProcessStringList();
         }
-        int AddProcessedBlock(int StartIndex, int Length)
+        int AddProcessedBlock(int StartIndex, int Length, ref List<int> ProcessedStrings)
         {
             int Result = 0;
             int ProcessedCounter = 0;            
             bool bStarted = false;
-            for (int i = 0; i < ProcessedStrings.Length; i++)
+            int stringsCount = ProcessedStrings.Count;
+            for (int i = 0; i < stringsCount; i++)
             {
-                if (!(ProcessedStrings[i]))
+                if (!(ProcessedStrings.Contains(i)))
                 {
                     if (!bStarted)
                         if (ProcessedCounter == StartIndex)
@@ -121,7 +123,7 @@ namespace UniversalLogViewer.Types.Values
                             Result = i;
                             bStarted = true;
                             ProcessedCounter = 0;
-                            ProcessedStrings[i] = true;
+                            ProcessedStrings.Remove(i);
                         }
                         else
                             ProcessedCounter++;
@@ -131,21 +133,31 @@ namespace UniversalLogViewer.Types.Values
                             return Result;
                         else
                         {
-                            ProcessedStrings[i] = true;
+                            ProcessedStrings.Remove(i);
                             ProcessedCounter++;
                         }
                     }
                 }
             }
-            return ProcessedStrings.Length;
+            return stringsCount;
         }
-        public BlockValue(BlockType Type, string[] Source)
-            : base(Type, Source)
+        public BlockValue(BlockType Type, ref string[] Source)
+            : base(Type, ref Source)
         {
             
         }
+        ~BlockValue()
+        {
+//            ProcessedStrings = null;
+        }
+            
         public void ProcessStringList()
         {
+            //bool[] ProcessedStrings = new bool[Source.Length];
+            List<int> ProcessedStrings = new List<int>(Source.Length);
+            for (int i = 0; i < ProcessedStrings.Count; i++)
+                ProcessedStrings[i] = i;
+
             string[] ProcessedList = Value;
             //Проверка блоков и генерация дочерних блоков (и их процесинг)
             foreach (BlockType oBlockType in this.StructureType.ChildBlockTypes)
@@ -155,14 +167,14 @@ namespace UniversalLogViewer.Types.Values
                 {
 
                     NoBlocksToProcess = true;
-                    BlockValue NewBlock = new BlockValue(oBlockType, ProcessedList);
+                    BlockValue NewBlock = new BlockValue(oBlockType,ref ProcessedList);
                     if (!(NewBlock.IsEmpty))
                     {
                         ProcessedList = NewBlock.CutSourceString;
-                        NewBlock.StartIndex = AddProcessedBlock(NewBlock.StartIndex, NewBlock.Value.Length);
+                        NewBlock.StartIndex = AddProcessedBlock(NewBlock.StartIndex, NewBlock.Value.Length,ref ProcessedStrings);
                         ChildElements.Add(NewBlock);
                         NoBlocksToProcess = false;
-                    }
+                    }                    
                 }
             }
             //Проверка строк
@@ -170,10 +182,10 @@ namespace UniversalLogViewer.Types.Values
             {
                 foreach (StringType oStringType in this.StructureType.ChildStringTypes)
                 {
-                    StringValue NewString = new StringValue(oStringType, ProcessedList[I]);
+                    StringValue NewString = new StringValue(oStringType,ref ProcessedList[I]);
                     if (NewString.ConditionCorrect)
                     {
-                        NewString.StartIndex = AddProcessedBlock(0, 1);
+                        NewString.StartIndex = AddProcessedBlock(0, 1, ref ProcessedStrings);
                         ChildStrings.Add(NewString);
                         UniversalLogViewer.Program.MainForm.LogProgress.IncreaseProgressLevel(1);
                         break;

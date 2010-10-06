@@ -110,7 +110,8 @@
             this.helpToolStripMenuItem});
             this.mnuMain.Location = new System.Drawing.Point(0, 0);
             this.mnuMain.Name = "mnuMain";
-            this.mnuMain.Size = new System.Drawing.Size(627, 25);
+            this.mnuMain.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
+            this.mnuMain.Size = new System.Drawing.Size(836, 28);
             this.mnuMain.TabIndex = 0;
             // 
             // fileToolStripMenuItem
@@ -118,13 +119,13 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(39, 21);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(44, 24);
             this.fileToolStripMenuItem.Text = "&File";
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(96, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(102, 24);
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -135,27 +136,27 @@
             this.mnuHelpIndex,
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(47, 21);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
             this.helpToolStripMenuItem.Text = "&Help";
             // 
             // mnuHelpFile
             // 
             this.mnuHelpFile.Name = "mnuHelpFile";
-            this.mnuHelpFile.Size = new System.Drawing.Size(138, 22);
+            this.mnuHelpFile.Size = new System.Drawing.Size(150, 24);
             this.mnuHelpFile.Text = "Help";
             this.mnuHelpFile.Click += new System.EventHandler(this.mnuHelpFile_Click);
             // 
             // mnuHelpIndex
             // 
             this.mnuHelpIndex.Name = "mnuHelpIndex";
-            this.mnuHelpIndex.Size = new System.Drawing.Size(138, 22);
+            this.mnuHelpIndex.Size = new System.Drawing.Size(150, 24);
             this.mnuHelpIndex.Text = "Help Index";
             this.mnuHelpIndex.Click += new System.EventHandler(this.mnuHelpIndex_Click);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(150, 24);
             this.aboutToolStripMenuItem.Text = "&About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -164,12 +165,12 @@
             this.cntTabPopup.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.closeTabToolStripMenuItem});
             this.cntTabPopup.Name = "cntTabPopup";
-            this.cntTabPopup.Size = new System.Drawing.Size(135, 26);
+            this.cntTabPopup.Size = new System.Drawing.Size(144, 28);
             // 
             // closeTabToolStripMenuItem
             // 
             this.closeTabToolStripMenuItem.Name = "closeTabToolStripMenuItem";
-            this.closeTabToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.closeTabToolStripMenuItem.Size = new System.Drawing.Size(143, 24);
             this.closeTabToolStripMenuItem.Text = "Close Tab";
             this.closeTabToolStripMenuItem.Click += new System.EventHandler(this.closeTabToolStripMenuItem_Click);
             // 
@@ -178,8 +179,9 @@
             this.splitMain.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.splitMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitMain.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
-            this.splitMain.Location = new System.Drawing.Point(0, 25);
-            this.splitMain.MinimumSize = new System.Drawing.Size(404, 200);
+            this.splitMain.Location = new System.Drawing.Point(0, 28);
+            this.splitMain.Margin = new System.Windows.Forms.Padding(4);
+            this.splitMain.MinimumSize = new System.Drawing.Size(539, 246);
             this.splitMain.Name = "splitMain";
             // 
             // splitMain.Panel1
@@ -193,8 +195,9 @@
             this.splitMain.Panel2.Controls.Add(this.memoValue);
             this.splitMain.Panel2.Controls.Add(this.pnlButtons);
             this.splitMain.Panel2MinSize = 200;
-            this.splitMain.Size = new System.Drawing.Size(627, 444);
-            this.splitMain.SplitterDistance = 423;
+            this.splitMain.Size = new System.Drawing.Size(836, 549);
+            this.splitMain.SplitterDistance = 630;
+            this.splitMain.SplitterWidth = 5;
             this.splitMain.TabIndex = 1;
             // 
             // tabLogs
@@ -202,9 +205,10 @@
             this.tabLogs.ContextMenuStrip = this.cntTabPopup;
             this.tabLogs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabLogs.Location = new System.Drawing.Point(0, 0);
+            this.tabLogs.Margin = new System.Windows.Forms.Padding(4);
             this.tabLogs.Name = "tabLogs";
             this.tabLogs.SelectedIndex = 0;
-            this.tabLogs.Size = new System.Drawing.Size(421, 442);
+            this.tabLogs.Size = new System.Drawing.Size(628, 547);
             this.tabLogs.TabIndex = 6;
             // 
             // memoValue
@@ -212,9 +216,10 @@
             this.memoValue.BackColor = System.Drawing.SystemColors.Control;
             this.memoValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.memoValue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.memoValue.Location = new System.Drawing.Point(0, 223);
+            this.memoValue.Location = new System.Drawing.Point(0, 274);
+            this.memoValue.Margin = new System.Windows.Forms.Padding(4);
             this.memoValue.Name = "memoValue";
-            this.memoValue.Size = new System.Drawing.Size(198, 219);
+            this.memoValue.Size = new System.Drawing.Size(199, 273);
             this.memoValue.TabIndex = 6;
             this.memoValue.Text = "";
             this.memoValue.Visible = false;
@@ -231,17 +236,19 @@
             this.pnlButtons.Controls.Add(this.btnLoadLogTypes);
             this.pnlButtons.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlButtons.Location = new System.Drawing.Point(0, 0);
-            this.pnlButtons.MinimumSize = new System.Drawing.Size(200, 150);
+            this.pnlButtons.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlButtons.MinimumSize = new System.Drawing.Size(200, 185);
             this.pnlButtons.Name = "pnlButtons";
-            this.pnlButtons.Size = new System.Drawing.Size(200, 223);
+            this.pnlButtons.Size = new System.Drawing.Size(200, 274);
             this.pnlButtons.TabIndex = 7;
             // 
             // lblProgress
             // 
             this.lblProgress.AutoSize = true;
-            this.lblProgress.Location = new System.Drawing.Point(157, 187);
+            this.lblProgress.Location = new System.Drawing.Point(209, 230);
+            this.lblProgress.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblProgress.Name = "lblProgress";
-            this.lblProgress.Size = new System.Drawing.Size(29, 15);
+            this.lblProgress.Size = new System.Drawing.Size(32, 17);
             this.lblProgress.TabIndex = 10;
             this.lblProgress.Text = "%%";
             this.lblProgress.Visible = false;
@@ -249,9 +256,10 @@
             // lblAction
             // 
             this.lblAction.AutoSize = true;
-            this.lblAction.Location = new System.Drawing.Point(14, 165);
+            this.lblAction.Location = new System.Drawing.Point(19, 203);
+            this.lblAction.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblAction.Name = "lblAction";
-            this.lblAction.Size = new System.Drawing.Size(83, 15);
+            this.lblAction.Size = new System.Drawing.Size(98, 17);
             this.lblAction.TabIndex = 9;
             this.lblAction.Text = "Current Action";
             this.lblAction.Visible = false;
@@ -260,9 +268,10 @@
             // 
             this.prbProcess.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.prbProcess.Location = new System.Drawing.Point(15, 186);
+            this.prbProcess.Location = new System.Drawing.Point(20, 229);
+            this.prbProcess.Margin = new System.Windows.Forms.Padding(4);
             this.prbProcess.Name = "prbProcess";
-            this.prbProcess.Size = new System.Drawing.Size(134, 19);
+            this.prbProcess.Size = new System.Drawing.Size(161, 23);
             this.prbProcess.TabIndex = 8;
             this.prbProcess.Visible = false;
             // 
@@ -270,9 +279,10 @@
             // 
             this.btnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSearch.Location = new System.Drawing.Point(15, 130);
+            this.btnSearch.Location = new System.Drawing.Point(20, 160);
+            this.btnSearch.Margin = new System.Windows.Forms.Padding(4);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(166, 23);
+            this.btnSearch.Size = new System.Drawing.Size(154, 28);
             this.btnSearch.TabIndex = 7;
             this.btnSearch.Text = "Find";
             this.btnSearch.UseVisualStyleBackColor = true;
@@ -282,9 +292,10 @@
             // 
             this.txtFind.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtFind.Location = new System.Drawing.Point(15, 101);
+            this.txtFind.Location = new System.Drawing.Point(20, 124);
+            this.txtFind.Margin = new System.Windows.Forms.Padding(4);
             this.txtFind.Name = "txtFind";
-            this.txtFind.Size = new System.Drawing.Size(167, 20);
+            this.txtFind.Size = new System.Drawing.Size(154, 22);
             this.txtFind.TabIndex = 6;
             this.txtFind.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtFind_KeyPress);
             // 
@@ -294,18 +305,20 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbLogTypes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbLogTypes.FormattingEnabled = true;
-            this.cmbLogTypes.Location = new System.Drawing.Point(15, 3);
+            this.cmbLogTypes.Location = new System.Drawing.Point(20, 4);
+            this.cmbLogTypes.Margin = new System.Windows.Forms.Padding(4);
             this.cmbLogTypes.Name = "cmbLogTypes";
-            this.cmbLogTypes.Size = new System.Drawing.Size(172, 21);
+            this.cmbLogTypes.Size = new System.Drawing.Size(161, 24);
             this.cmbLogTypes.TabIndex = 5;
             // 
             // btnLoadLog
             // 
             this.btnLoadLog.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLoadLog.Location = new System.Drawing.Point(15, 61);
+            this.btnLoadLog.Location = new System.Drawing.Point(20, 75);
+            this.btnLoadLog.Margin = new System.Windows.Forms.Padding(4);
             this.btnLoadLog.Name = "btnLoadLog";
-            this.btnLoadLog.Size = new System.Drawing.Size(172, 23);
+            this.btnLoadLog.Size = new System.Drawing.Size(162, 28);
             this.btnLoadLog.TabIndex = 4;
             this.btnLoadLog.Text = "Load Log";
             this.btnLoadLog.UseVisualStyleBackColor = true;
@@ -315,9 +328,10 @@
             // 
             this.btnLoadLogTypes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLoadLogTypes.Location = new System.Drawing.Point(15, 32);
+            this.btnLoadLogTypes.Location = new System.Drawing.Point(20, 39);
+            this.btnLoadLogTypes.Margin = new System.Windows.Forms.Padding(4);
             this.btnLoadLogTypes.Name = "btnLoadLogTypes";
-            this.btnLoadLogTypes.Size = new System.Drawing.Size(172, 23);
+            this.btnLoadLogTypes.Size = new System.Drawing.Size(162, 28);
             this.btnLoadLogTypes.TabIndex = 3;
             this.btnLoadLogTypes.Text = "Log Types Manager";
             this.btnLoadLogTypes.UseVisualStyleBackColor = true;
@@ -329,15 +343,16 @@
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(627, 469);
+            this.ClientSize = new System.Drawing.Size(836, 577);
             this.Controls.Add(this.splitMain);
             this.Controls.Add(this.mnuMain);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.mnuMain;
-            this.MinimumSize = new System.Drawing.Size(410, 250);
+            this.Margin = new System.Windows.Forms.Padding(4);
+            this.MinimumSize = new System.Drawing.Size(541, 297);
             this.Name = "MainForm";
             this.Text = "MainForm";
             this.Load += new System.EventHandler(this.MainForm_Load);

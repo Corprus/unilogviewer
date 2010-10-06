@@ -46,7 +46,7 @@ namespace UniversalLogViewer.Types.Values
         }
 
         public abstract void Parse();
-        protected BaseValue(BaseType Type)
+        protected BaseValue(ref BaseType Type)
         {
             this.StructureType = Type;
         }
@@ -57,8 +57,8 @@ namespace UniversalLogViewer.Types.Values
         public string Value { get; protected set; }
         protected string Source { get; private set; }
         protected List<T> ChildElements { get; private set; }
-        protected BaseStringValueCollection(BaseType Type, string Source)
-            : base(Type)
+        protected BaseStringValueCollection(BaseType Type,ref string Source)
+            : base(ref Type)
         {
             this.Source = Source;
             Value = "";
@@ -81,8 +81,8 @@ namespace UniversalLogViewer.Types.Values
         public string[] Value { get; protected set; }
         protected string[] Source { get; private set; }
         protected List<T> ChildElements { get; private set; }
-        protected BaseStringsValueCollection(BaseType Type, string[] Source)
-            :base(Type)
+        protected BaseStringsValueCollection(BaseType Type,ref string[] Source)
+            :base(ref Type)
         {
             this.Source = Source;
             ChildElements = new List<T>();

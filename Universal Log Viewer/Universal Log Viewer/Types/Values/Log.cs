@@ -33,7 +33,7 @@ namespace UniversalLogViewer.Types.Values
             LogFile = new FileReader(FileName);
             string[] LogFileStrings = LogFile.ReadFile();
             UniversalLogViewer.Program.MainForm.InitProgressLevel(LogFileStrings.Length, 0, "Processing Log...");
-            RootBlock = new BlockValue(this.StructureType.RootBlockType, LogFileStrings);
+            RootBlock = new BlockValue(this.StructureType.RootBlockType,ref LogFileStrings);
             UniversalLogViewer.Program.MainForm.EndProgress();
         }
     }

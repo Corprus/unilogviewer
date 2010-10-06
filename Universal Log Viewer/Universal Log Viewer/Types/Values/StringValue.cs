@@ -30,23 +30,31 @@ namespace UniversalLogViewer.Types.Values
                             Value TitleElement = null;
                             if (ChildElements.Count > this.StructureType.TitleValueIndex)
                             {
-                                TitleElement = ChildElements[this.StructureType.TitleValueIndex];
-                                if ((this.StructureType.TitleValueType.Length > 0) && (TitleElement.StructureType.Name != this.StructureType.TitleValueType))
-                                    TitleElement = null;
+                                Value childElementValue = ChildElements[this.StructureType.TitleValueIndex];
+                                if (!((this.StructureType.TitleValueType.Length > 0) && 
+                                   (childElementValue.StructureType.Name != this.StructureType.TitleValueType)))
+                                    TitleElement = childElementValue;
                             }
-                            if (TitleElement == null)
-                                NodeTitle = this.StructureType.Title;
-                            else
-                                NodeTitle = TitleElement.Value;
+                            NodeTitle = (TitleElement == null) ? this.StructureType.Title : TitleElement.Value;
                             break;
                         }
                     default: NodeTitle = this.StructureType.Title; break;
                 }
                 TreeNodeValueString = NodeTitle;
                 TreeNode Result = base.TreeNode;
-                foreach (Value ResultValue in ChildElements)
-                    if ((!(IniSettingsManager.ShowValueMemo)) && (ResultValue.StructureType.Style.Visible))
-                        Result.Nodes.Add(ResultValue.TreeNode);
+                if ((!IniSettingsManager.ShowValueMemo))
+                {
+                    for (int i = ChildElements.Count - 1; i >= 0; i--)
+                    {
+                        Value ResultValue = ChildElements[i];
+                        if (ResultValue.StructureType.Style.Visible)
+                        {
+                            Result.Nodes.Insert(0, ResultValue.TreeNode);
+                        }
+                        ChildElements.RemoveAt(i);
+                    }
+                }
+                ChildElements.Clear();
                 Program.MainForm.LogProgress.IncreaseProgressLevel(1);
                 return Result;
             }
@@ -75,7 +83,7 @@ namespace UniversalLogViewer.Types.Values
                         UsedType = Types[Types.Length - 1];
                     else
                         UsedType = Types[i];
-                    Value NewValue = new Value(UsedType, SeparatedStrings[i]);
+                    Value NewValue = new Value(UsedType,ref SeparatedStrings[i]);
                     if (NewValue.Value.Length != 0)
                         Values.Add(NewValue);
                 }
@@ -89,7 +97,7 @@ namespace UniversalLogViewer.Types.Values
                     bStringProcessed = true;
                     foreach (ValuesType VType in this.StructureType.ChildTypes)
                     {
-                        Value NewValue = new Value(VType, sProcessedString);
+                        Value NewValue = new Value(VType,ref sProcessedString);
                         if (NewValue.Value.Length != 0)
                         {
                             Values.Add(NewValue);
@@ -103,8 +111,8 @@ namespace UniversalLogViewer.Types.Values
         {
             ProcessString();
         }
-        public StringValue(StringType StringType, string Source)
-            : base(StringType, Source)
+        public StringValue(StringType StringType,ref string Source)
+            : base(StringType, ref Source)
         {
             this.Value = Source;
             this.StructureType = StringType;

@@ -100,17 +100,25 @@ namespace UniversalLogViewer.UI
                 string sLogFileName = dlgOpenLog.FileName;
                 if (LogTypeManager.oInstance.TypesList.Count > 0)
                 {
-                    if ((cmbLogTypes.SelectedIndex != -1)&&(cmbLogTypes.Items[cmbLogTypes.SelectedIndex] is LogType))
+                    if ((cmbLogTypes.SelectedIndex != -1)&&
+                        (cmbLogTypes.Items[cmbLogTypes.SelectedIndex] is LogType))
                     {
                         LoadLogParametersData LoadLogData = new LoadLogParametersData();
-                        System.Threading.Thread LoadLogThread = new System.Threading.Thread(LoadLog);
-                        LoadLogData.LoadedLogType = (cmbLogTypes.Items[cmbLogTypes.SelectedIndex] as LogType);
+                        System.Threading.Thread LoadLogThread = 
+                            new System.Threading.Thread(LoadLog);
+                        LoadLogData.LoadedLogType = 
+                            (cmbLogTypes.Items[cmbLogTypes.SelectedIndex] as LogType);
                         LoadLogData.LogFileName = sLogFileName;
                         LoadLogThread.Start(LoadLogData);
                     }
                     else
                     {
-                        MessageBox.Show(Consts.SELECT_CORRECT_LOG_TYPE, Consts.SELECT_CORRECT_LOG_TYPE, MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, Consts.DEFAULT_MESSAGE_BOX_OPTIONS);
+                        MessageBox.Show(Consts.SELECT_CORRECT_LOG_TYPE, 
+                                        Consts.SELECT_CORRECT_LOG_TYPE, 
+                                        MessageBoxButtons.OK, 
+                                        MessageBoxIcon.Error, 
+                                        MessageBoxDefaultButton.Button1, 
+                                        Consts.DEFAULT_MESSAGE_BOX_OPTIONS);
                     }
                 }
             }
