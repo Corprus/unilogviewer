@@ -117,8 +117,14 @@ namespace UniversalLogViewer.Common
             }
             else
             {
-                SetFullProgressLevelCallback d = new SetFullProgressLevelCallback(SetFullProgressLevel);
-                progressBar.Invoke(d, new object[] {progressBar, progressLabel, current, max, min});
+
+                if ((progressBar.IsDisposed || progressLabel.IsDisposed))
+                    return;
+                else
+                {
+                    SetFullProgressLevelCallback d = new SetFullProgressLevelCallback(SetFullProgressLevel);
+                    progressBar.Invoke(d, new object[] { progressBar, progressLabel, current, max, min });
+                }
             }
 
         }

@@ -8,7 +8,7 @@ using UniversalLogViewer.Types.Structures;
 
 namespace UniversalLogViewer.Types.Values
 {
-    public abstract class BaseValue
+    public abstract class BaseValue : IDisposable
     {
         protected string TreeNodeValueString { get; set; }
         public BaseType StructureType { get; protected set; }
@@ -50,7 +50,13 @@ namespace UniversalLogViewer.Types.Values
         {
             this.StructureType = Type;
         }
+
+        void IDisposable.Dispose()
+        {
+            
+        }
     }
+
     public abstract class BaseStringValueCollection<T> : BaseValue, IEnumerable<T>
         where T : BaseStringValueCollection<T>
     {

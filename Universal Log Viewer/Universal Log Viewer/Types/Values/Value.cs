@@ -20,7 +20,6 @@ namespace UniversalLogViewer.Types.Values
         {
             get
             {
-
                 TreeNodeValueString = this.StructureType.Name + ": " + Value;
                 return base.TreeNode;
             }
@@ -31,25 +30,31 @@ namespace UniversalLogViewer.Types.Values
         }
         public string GetValue(string Parsed)
         {
-            int iStart = Parsed.IndexOf(this.StructureType.Condition.StartsWith, StringComparison.Ordinal);
-            int iEnd = Parsed.IndexOf(this.StructureType.Condition.EndsWith, StringComparison.Ordinal);
+            ConditionType condition = this.StructureType.Condition;
+            int startLength = condition.StartsWith.Length;
+            int endLength = condition.EndsWith.Length;
+            bool emptyStartsWith = startLength == 0;
+            bool emptyEndsWith = endLength == 0;
+            int iStart = Parsed.IndexOf(condition.StartsWith, StringComparison.Ordinal);
+            int iEnd = Parsed.IndexOf(condition.EndsWith, StringComparison.Ordinal);
             string PreParsedValue = Consts.EMPTY_SYMBOL;
-            if ((this.StructureType.Condition.StartsWith.Length == 0) && (this.StructureType.Condition.EndsWith.Length == 0))
+            
+            if (emptyStartsWith && emptyEndsWith)
                 PreParsedValue = Parsed;
-            else if ((this.StructureType.Condition.StartsWith.Length == 0) && (iEnd > -1))
-                PreParsedValue = Parsed.Substring(0, iEnd + this.StructureType.Condition.EndsWith.Length);
-            else if ((this.StructureType.Condition.EndsWith.Length == 0) && (iStart > -1))
+            else if (emptyStartsWith && (iEnd >= 0))
+                PreParsedValue = Parsed.Substring(0, iEnd + endLength);
+            else if (emptyEndsWith && (iStart >= 0))
                 PreParsedValue = Parsed.Substring(iStart, Parsed.Length - iStart);
-            else if ((iStart > -1) && (iEnd > -1) && (iEnd - iStart > 0))
+            else if ((iStart >= 0) && (iEnd >= 0) && (iEnd > iStart))
                 PreParsedValue = Parsed.Substring(iStart, (iEnd - iStart + 1));
             else
                 return PreParsedValue;
-            if (this.StructureType.Condition.IsCorrect(PreParsedValue))
+            if (condition.IsCorrect(PreParsedValue))
             {
                 if (!(this.StructureType.IncludeConditions))
                 {
-                    PreParsedValue = PreParsedValue.Substring(0, (PreParsedValue.Length - this.StructureType.Condition.EndsWith.Length));
-                    PreParsedValue = PreParsedValue.Substring(this.StructureType.Condition.StartsWith.Length, PreParsedValue.Length - this.StructureType.Condition.StartsWith.Length);
+                    PreParsedValue =
+                        PreParsedValue.Substring(startLength, (PreParsedValue.Length - endLength - startLength));
                 }
                 return PreParsedValue;
             }

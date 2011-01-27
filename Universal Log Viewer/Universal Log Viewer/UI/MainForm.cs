@@ -23,6 +23,7 @@ namespace UniversalLogViewer.UI
             InitializeComponent();
             this.LogProgress = new LogLoadProgress(this.prbProcess, this.lblProgress);
         }
+        System.Threading.Thread LoadLogThread;
 
         public Common.LogLoadProgress LogProgress { get; private set; }
 
@@ -104,8 +105,7 @@ namespace UniversalLogViewer.UI
                         (cmbLogTypes.Items[cmbLogTypes.SelectedIndex] is LogType))
                     {
                         LoadLogParametersData LoadLogData = new LoadLogParametersData();
-                        System.Threading.Thread LoadLogThread = 
-                            new System.Threading.Thread(LoadLog);
+                        LoadLogThread = new System.Threading.Thread(LoadLog);
                         LoadLogData.LoadedLogType = 
                             (cmbLogTypes.Items[cmbLogTypes.SelectedIndex] as LogType);
                         LoadLogData.LogFileName = sLogFileName;
@@ -295,6 +295,12 @@ namespace UniversalLogViewer.UI
             if (e.KeyChar == (char)Keys.Return)
                 btnSearch_Click(this, null);
 
+        }
+
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (LoadLogThread.IsAlive)
+                LoadLogThread.Abort();
         }
     }
 

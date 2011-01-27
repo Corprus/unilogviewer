@@ -60,6 +60,7 @@
             this.hlpUniLogViewer = new System.Windows.Forms.HelpProvider();
             this.mnuMain.SuspendLayout();
             this.cntTabPopup.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitMain)).BeginInit();
             this.splitMain.Panel1.SuspendLayout();
             this.splitMain.Panel2.SuspendLayout();
             this.splitMain.SuspendLayout();
@@ -196,7 +197,7 @@
             this.splitMain.Panel2.Controls.Add(this.pnlButtons);
             this.splitMain.Panel2MinSize = 200;
             this.splitMain.Size = new System.Drawing.Size(836, 549);
-            this.splitMain.SplitterDistance = 630;
+            this.splitMain.SplitterDistance = 628;
             this.splitMain.SplitterWidth = 5;
             this.splitMain.TabIndex = 1;
             // 
@@ -208,7 +209,7 @@
             this.tabLogs.Margin = new System.Windows.Forms.Padding(4);
             this.tabLogs.Name = "tabLogs";
             this.tabLogs.SelectedIndex = 0;
-            this.tabLogs.Size = new System.Drawing.Size(628, 547);
+            this.tabLogs.Size = new System.Drawing.Size(626, 547);
             this.tabLogs.TabIndex = 6;
             // 
             // memoValue
@@ -219,7 +220,7 @@
             this.memoValue.Location = new System.Drawing.Point(0, 274);
             this.memoValue.Margin = new System.Windows.Forms.Padding(4);
             this.memoValue.Name = "memoValue";
-            this.memoValue.Size = new System.Drawing.Size(199, 273);
+            this.memoValue.Size = new System.Drawing.Size(201, 273);
             this.memoValue.TabIndex = 6;
             this.memoValue.Text = "";
             this.memoValue.Visible = false;
@@ -239,7 +240,7 @@
             this.pnlButtons.Margin = new System.Windows.Forms.Padding(4);
             this.pnlButtons.MinimumSize = new System.Drawing.Size(200, 185);
             this.pnlButtons.Name = "pnlButtons";
-            this.pnlButtons.Size = new System.Drawing.Size(200, 274);
+            this.pnlButtons.Size = new System.Drawing.Size(201, 274);
             this.pnlButtons.TabIndex = 7;
             // 
             // lblProgress
@@ -271,7 +272,7 @@
             this.prbProcess.Location = new System.Drawing.Point(20, 229);
             this.prbProcess.Margin = new System.Windows.Forms.Padding(4);
             this.prbProcess.Name = "prbProcess";
-            this.prbProcess.Size = new System.Drawing.Size(161, 23);
+            this.prbProcess.Size = new System.Drawing.Size(162, 23);
             this.prbProcess.TabIndex = 8;
             this.prbProcess.Visible = false;
             // 
@@ -282,7 +283,7 @@
             this.btnSearch.Location = new System.Drawing.Point(20, 160);
             this.btnSearch.Margin = new System.Windows.Forms.Padding(4);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(154, 28);
+            this.btnSearch.Size = new System.Drawing.Size(155, 28);
             this.btnSearch.TabIndex = 7;
             this.btnSearch.Text = "Find";
             this.btnSearch.UseVisualStyleBackColor = true;
@@ -295,7 +296,7 @@
             this.txtFind.Location = new System.Drawing.Point(20, 124);
             this.txtFind.Margin = new System.Windows.Forms.Padding(4);
             this.txtFind.Name = "txtFind";
-            this.txtFind.Size = new System.Drawing.Size(154, 22);
+            this.txtFind.Size = new System.Drawing.Size(155, 22);
             this.txtFind.TabIndex = 6;
             this.txtFind.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtFind_KeyPress);
             // 
@@ -308,7 +309,7 @@
             this.cmbLogTypes.Location = new System.Drawing.Point(20, 4);
             this.cmbLogTypes.Margin = new System.Windows.Forms.Padding(4);
             this.cmbLogTypes.Name = "cmbLogTypes";
-            this.cmbLogTypes.Size = new System.Drawing.Size(161, 24);
+            this.cmbLogTypes.Size = new System.Drawing.Size(162, 24);
             this.cmbLogTypes.TabIndex = 5;
             // 
             // btnLoadLog
@@ -318,7 +319,7 @@
             this.btnLoadLog.Location = new System.Drawing.Point(20, 75);
             this.btnLoadLog.Margin = new System.Windows.Forms.Padding(4);
             this.btnLoadLog.Name = "btnLoadLog";
-            this.btnLoadLog.Size = new System.Drawing.Size(162, 28);
+            this.btnLoadLog.Size = new System.Drawing.Size(163, 28);
             this.btnLoadLog.TabIndex = 4;
             this.btnLoadLog.Text = "Load Log";
             this.btnLoadLog.UseVisualStyleBackColor = true;
@@ -331,7 +332,7 @@
             this.btnLoadLogTypes.Location = new System.Drawing.Point(20, 39);
             this.btnLoadLogTypes.Margin = new System.Windows.Forms.Padding(4);
             this.btnLoadLogTypes.Name = "btnLoadLogTypes";
-            this.btnLoadLogTypes.Size = new System.Drawing.Size(162, 28);
+            this.btnLoadLogTypes.Size = new System.Drawing.Size(163, 28);
             this.btnLoadLogTypes.TabIndex = 3;
             this.btnLoadLogTypes.Text = "Log Types Manager";
             this.btnLoadLogTypes.UseVisualStyleBackColor = true;
@@ -355,12 +356,14 @@
             this.MinimumSize = new System.Drawing.Size(541, 297);
             this.Name = "MainForm";
             this.Text = "MainForm";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.mnuMain.ResumeLayout(false);
             this.mnuMain.PerformLayout();
             this.cntTabPopup.ResumeLayout(false);
             this.splitMain.Panel1.ResumeLayout(false);
             this.splitMain.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitMain)).EndInit();
             this.splitMain.ResumeLayout(false);
             this.pnlButtons.ResumeLayout(false);
             this.pnlButtons.PerformLayout();

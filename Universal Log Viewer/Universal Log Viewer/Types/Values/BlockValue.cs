@@ -74,15 +74,16 @@ namespace UniversalLogViewer.Types.Values
             bool bEndConditionDone = false;
             List<string> Result = new List<string>();
             List<string> CutSourceList = new List<string>();
+            ConditionType StartCondition = this.StructureType.StartCondition;
+            ConditionType EndCondition = this.StructureType.EndCondition;
+
             for(int i = 0; i < SourceList.Length; i++)
             {
                 string CurString = SourceList[i];
-                if (!(bStartConditionDone))
+                if (!bStartConditionDone)
                 {
-                    if (this.StructureType.StartCondition != null)
-                        bStartConditionDone = this.StructureType.StartCondition.IsCorrect(CurString);
-                    else
-                        bStartConditionDone = true;
+                    bStartConditionDone = (StartCondition != null)?
+                        StartCondition.IsCorrect(CurString):true;
 
                     if (bStartConditionDone)
                         StartIndex = i;
@@ -90,11 +91,10 @@ namespace UniversalLogViewer.Types.Values
 
                 if ((!bStartConditionDone) || (bEndConditionDone))
                     CutSourceList.Add(CurString);
-                if ((!(bEndConditionDone)) && (bStartConditionDone))
+                if ((!bEndConditionDone) && (bStartConditionDone))
                 {
                     Result.Add(CurString);
-                    if (this.StructureType.EndCondition != null)
-                        bEndConditionDone = this.StructureType.EndCondition.IsCorrect(CurString);
+                    bEndConditionDone=(EndCondition != null)?EndCondition.IsCorrect(CurString):false;
                 }
 
             }
@@ -182,13 +182,15 @@ namespace UniversalLogViewer.Types.Values
             {
                 foreach (StringType oStringType in this.StructureType.ChildStringTypes)
                 {
-                    StringValue NewString = new StringValue(oStringType,ref ProcessedList[I]);
-                    if (NewString.ConditionCorrect)
+                    using (StringValue NewString = new StringValue(oStringType, ref ProcessedList[I]))
                     {
-                        NewString.StartIndex = AddProcessedBlock(0, 1, ref ProcessedStrings);
-                        ChildStrings.Add(NewString);
-                        UniversalLogViewer.Program.MainForm.LogProgress.IncreaseProgressLevel(1);
-                        break;
+                        if (NewString.ConditionCorrect)
+                        {
+                            NewString.StartIndex = AddProcessedBlock(0, 1, ref ProcessedStrings);
+                            ChildStrings.Add(NewString);
+                            UniversalLogViewer.Program.MainForm.LogProgress.IncreaseProgressLevel(1);
+                            break;
+                        }
                     }
                 }
             }

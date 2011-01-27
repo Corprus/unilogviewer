@@ -59,7 +59,6 @@ namespace UniversalLogViewer.Types.Structures
                 Background = Color.FromName(Section.Values[KEY_BACKGROUND]);
                 if (Section.Values[KEY_BACKGROUND].Length == 0)
                     Background = Color.White;
-
             }
             catch (Exception)
             {
@@ -76,7 +75,6 @@ namespace UniversalLogViewer.Types.Structures
             this.Underline = Underline;
             this.Italic = Italic;
             this.Strike = Strike;
-
         }
     }
 }

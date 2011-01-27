@@ -28,11 +28,13 @@ namespace UniversalLogViewer.Types.Values
                     case Common.TitleType.Value:
                         {
                             Value TitleElement = null;
-                            if (ChildElements.Count > this.StructureType.TitleValueIndex)
+                            int titleValueIndex = this.StructureType.TitleValueIndex;
+                            string titleValueType = this.StructureType.TitleValueType;
+                            if (ChildElements.Count > titleValueIndex)
                             {
-                                Value childElementValue = ChildElements[this.StructureType.TitleValueIndex];
-                                if (!((this.StructureType.TitleValueType.Length > 0) && 
-                                   (childElementValue.StructureType.Name != this.StructureType.TitleValueType)))
+                                Value childElementValue = ChildElements[titleValueIndex];
+                                if (!((titleValueType.Length > 0) && 
+                                   (childElementValue.StructureType.Name != titleValueType)))
                                     TitleElement = childElementValue;
                             }
                             NodeTitle = (TitleElement == null) ? this.StructureType.Title : TitleElement.Value;
@@ -78,11 +80,9 @@ namespace UniversalLogViewer.Types.Values
                  * ну да и хрен с ними */
                 for (int i = 0; i < SeparatedStrings.Length; i++)
                 {
+                    int typesLength = Types.Length;
                     ValuesType UsedType;
-                    if (i >= Types.Length)
-                        UsedType = Types[Types.Length - 1];
-                    else
-                        UsedType = Types[i];
+                    UsedType = (i >= typesLength) ? Types[typesLength - 1] : Types[i];
                     Value NewValue = new Value(UsedType,ref SeparatedStrings[i]);
                     if (NewValue.Value.Length != 0)
                         Values.Add(NewValue);
