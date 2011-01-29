@@ -36,6 +36,27 @@ namespace UniversalLogViewer.Types.Structures
         public StyleType()
         {
         }
+        private Font _font;
+        private void ReInitFont()
+        {
+            if (_font != null)
+                _font.Dispose();
+            _font = new System.Drawing.Font(FontFamily.GenericSansSerif, 8);
+            if (this.Bold)
+                _font = new System.Drawing.Font(_font, FontStyle.Bold);
+            if (this.Italic)
+                _font = new System.Drawing.Font(_font, FontStyle.Italic);
+            if (this.Underline)
+                _font = new System.Drawing.Font(_font, FontStyle.Underline);
+            if (this.Strike)
+                _font = new System.Drawing.Font(_font, FontStyle.Strikeout);
+
+        }
+        public Font Font
+        {
+            get { return _font; }
+        }
+
         public override void ReInit(LogType LogType, LogIniSection Section)
         {
             base.ReInit(LogType, Section);
@@ -64,6 +85,7 @@ namespace UniversalLogViewer.Types.Structures
             {
                 Background = Color.White;
             }
+            ReInitFont();
         }
         public StyleType(bool Bold, bool Italic, bool Underline, bool Strike, Color Color, Color Background, bool Visible, bool Trim)
         {
@@ -75,6 +97,7 @@ namespace UniversalLogViewer.Types.Structures
             this.Underline = Underline;
             this.Italic = Italic;
             this.Strike = Strike;
+            ReInitFont();
         }
     }
 }

@@ -18,9 +18,7 @@ namespace UniversalLogViewer.Types.Values
             {
                 UniversalLogViewer.Program.MainForm.InitProgressLevel(LogFile.ReadFile().Length, 0, "Generating Tree...");
                 TreeNode Result = RootBlock.TreeNode;
-                Result.BeginEdit();
                 Result.Text = this.StructureType.LogName + ":" + Result.Text;
-                Result.EndEdit(false);
                 UniversalLogViewer.Program.MainForm.EndProgress();
                 return Result;
             }
