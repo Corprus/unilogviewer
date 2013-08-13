@@ -15,14 +15,13 @@ namespace UniversalLogViewer.Common
         }
         public string[] ReadFile()
         {
-            StreamReader SR;
-            List<string> S = new List<string>();
+            var s = new List<string>();
 
-            SR = File.OpenText(FileName);
-            while (!SR.EndOfStream)
-                S.Add(SR.ReadLine());
-            SR.Close();
-            return S.ToArray();
+            StreamReader reader = File.OpenText(FileName);
+            while (!reader.EndOfStream)
+                s.Add(reader.ReadLine());
+            reader.Close();
+            return s.ToArray();
         }
     }
 }

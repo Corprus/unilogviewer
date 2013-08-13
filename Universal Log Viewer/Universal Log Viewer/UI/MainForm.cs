@@ -113,12 +113,12 @@ namespace UniversalLogViewer.UI
                     }
                     else
                     {
-                        MessageBox.Show(Consts.SELECT_CORRECT_LOG_TYPE, 
-                                        Consts.SELECT_CORRECT_LOG_TYPE, 
+                        MessageBox.Show(Consts.SelectCorrectLogType, 
+                                        Consts.SelectCorrectLogType, 
                                         MessageBoxButtons.OK, 
                                         MessageBoxIcon.Error, 
                                         MessageBoxDefaultButton.Button1, 
-                                        Consts.DEFAULT_MESSAGE_BOX_OPTIONS);
+                                        Consts.DefaultMessageBoxOptions);
                     }
                 }
             }
@@ -267,7 +267,7 @@ namespace UniversalLogViewer.UI
             if (SearchResult)
                 FocusControl(SelTreeView);
             else
-                MessageBox.Show("Search string \" " + txtFind.Text + "\" was not found within tree after selected node", "Nothing found", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, Consts.DEFAULT_MESSAGE_BOX_OPTIONS);
+                MessageBox.Show("Search string \" " + txtFind.Text + "\" was not found within tree after selected node", "Nothing found", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, Consts.DefaultMessageBoxOptions);
             EndProgress();
         }
 

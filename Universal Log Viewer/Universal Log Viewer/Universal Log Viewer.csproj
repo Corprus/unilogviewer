@@ -215,6 +215,7 @@
   </Target>
   -->
   <PropertyGroup>
-    <PreBuildEvent>svnversion "$(SolutionDir)$(ProjectName)" &gt; "$(ProjectDir)Common\svn.version"</PreBuildEvent>
+    <PreBuildEvent>
+    </PreBuildEvent>
   </PropertyGroup>
 </Project>

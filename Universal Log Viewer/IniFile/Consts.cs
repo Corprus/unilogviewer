@@ -1,11 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace IniFiles.Common
+namespace IniFiles
 {
     public static class Consts
     {
-        public const char ARRAY_SEPARATOR = ',';
+        public const char ArraySeparator = ',';
     }
 }

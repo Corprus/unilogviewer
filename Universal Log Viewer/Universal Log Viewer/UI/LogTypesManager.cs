@@ -61,7 +61,7 @@ namespace UniversalLogViewer.UI
         {
             if (lbxLogTypes.SelectedItem is LogType)
             {
-                if (MessageBox.Show(Consts.TEXT_DELETE_LOG_TYPE, Consts.HEADER_DELETE_LOG_TYPE, MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2, Consts.DEFAULT_MESSAGE_BOX_OPTIONS) == DialogResult.Yes)
+                if (MessageBox.Show(Consts.TextDeleteLogType, Consts.HeaderDeleteLogType, MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2, Consts.DefaultMessageBoxOptions) == DialogResult.Yes)
                 {
                     LogType DeletedLogType = (lbxLogTypes.SelectedItem as LogType);
                     int DeletedIndexInManager = LogTypeManager.oInstance.TypesList.IndexOf(DeletedLogType);

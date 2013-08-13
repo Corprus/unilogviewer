@@ -1,124 +1,116 @@
 ﻿
+using System.Collections.Generic;
+using System.Linq;
+
 namespace IniFiles
 {
     public class ValueContainer
     {
-        protected IniSection Section;
-        bool AutoCreateValues;
-        public ValueContainer(IniSection Section)
+        protected readonly IniSection Section;
+        readonly bool _autoCreateValues;
+        public ValueContainer(IniSection section)
         {
-            this.Section = Section;
+            Section = section;
         }
-        public ValueContainer(IniSection Section, bool AutoCreateValues)
+
+        public ValueContainer(IniSection section, bool autoCreateValues)
         {
-            this.Section = Section;
-            this.AutoCreateValues = AutoCreateValues;
+            Section = section;
+            _autoCreateValues = autoCreateValues;
         }
-        public virtual string this[string ValueName]
+
+        public virtual string this[string valueName]
         {
             get
             {
-                return this[false, ValueName];
+                return this[false, valueName];
             }
         }
-        public virtual string this[bool Required, string ValueName]
+        public virtual string this[bool required, string valueName]
         {
             get
             {
-                return this[Required, ValueName, ""];
+                return this[required, valueName, ""];
             }
         }
-        public virtual string this[bool Required, string ValueName, string Default]
+        public virtual string this[bool required, string valueName, string Default]
         {
             get
             {
-                string Result = Section.IniFile.ReadValue(Section.SectionName, ValueName);
-                if ((Result.Length == 0))
-                    Result = Default;
-                if ((Result.Length == 0))
+                string result = Section.IniFile.ReadValue(Section.SectionName, valueName);
+                if ((result.Length == 0))
+                    result = Default;
+                if ((result.Length == 0))
                 {
-                    if (AutoCreateValues)
-                        Section.IniFile.WriteValue(Section.SectionName, ValueName, Result);
-                    if (Required)
-                        throw new Exceptions.IniFileRequiredFieldReadException("Cannot read required field \"" + ValueName + "\" from Section \""
-                            + Section.SectionName +"\" in " + Section.IniFile.FileName);
+                    if (_autoCreateValues)
+                        Section.IniFile.WriteValue(Section.SectionName, valueName, result);
+                    if (required)
+                        throw new Exceptions.IniFileRequiredFieldReadException(
+                            string.Format("Cannot read required field \"{0}\" from Section \"{1}\" in {2}", valueName,
+                                          Section.SectionName, Section.IniFile.FileName));
                 }
-                return Result;
+                return result;
             }
         }
     }
     public class ArrayValueContainer : ValueContainer
     {
-        public ArrayValueContainer(IniSection Section)
-            : base(Section)
+        public ArrayValueContainer(IniSection section)
+            : base(section)
         {
         }
-        public ArrayValueContainer(IniSection Section, bool AutoCreateValues)
-            : base(Section, AutoCreateValues)
+        public ArrayValueContainer(IniSection section, bool autoCreateValues)
+            : base(section, autoCreateValues)
         {
         }
 
-        new public string[] this[string ValueName]
+        new public string[] this[string valueName]
         {
             get
             {
-                string PlainResult = base[ValueName];
-                if (PlainResult.Length == 0)
+                var plainResult = base[valueName];
+                if (plainResult.Length == 0)
                     return new string[0];
-                else
-                {
-                    string[] Result = PlainResult.Split(IniFiles.Common.Consts.ARRAY_SEPARATOR);
-                    for (int i=0; i< Result.Length; i++)
-                        Result[i] = Result[i].Trim();
-                    return Result;
-
-                }
+                return plainResult.Split(Consts.ArraySeparator).AsParallel().AsOrdered().Select(s => s.Trim()).ToArray();
             }
         }
-        public string[] this[string ValueName, bool Trim]
+        public IEnumerable<string> this[string valueName, bool trim]
         {
             get
             {
-                string PlainResult = base[ValueName];
-                if (PlainResult.Length == 0)
+                string plainResult = base[valueName];
+                if (plainResult.Length == 0)
                     return new string[0];
-                else
-                {
-                    string[] Result = PlainResult.Split(Common.Consts.ARRAY_SEPARATOR);
-                    for (int i = 0; i < Result.Length; i++)
-                        if (Trim)//Случай сепаратора
-                            Result[i] = Result[i].Trim();
-                    return Result;
-
-                }
+                var result = plainResult.Split(Consts.ArraySeparator);
+                return trim ?  result.AsParallel().AsOrdered().Select(s => s.Trim()).ToArray() : result;
             }
         }
     }
     public class BoolValueContainer : ValueContainer
     {
-        public BoolValueContainer(IniSection Section)
-            : base(Section)
+        public BoolValueContainer(IniSection section)
+            : base(section)
         {
         }
-        public BoolValueContainer(IniSection Section, bool AutoCreateValues)
-            : base(Section, AutoCreateValues)
+        public BoolValueContainer(IniSection section, bool autoCreateValues)
+            : base(section, autoCreateValues)
         {
         }
 
-        public bool this[string ValueName, bool Default]
+        public bool this[string valueName, bool Default]
         {
             get
             {
-                bool Result = Section.IniFile.ReadBoolValue(Section.SectionName, ValueName, Default);
-                return Result;
+                var result = Section.IniFile.ReadBoolValue(Section.SectionName, valueName, Default);
+                return result;
             }
         }
-        new public bool this[string ValueName]
+        new public bool this[string valueName]
         {
             get
             {
 
-                return this[ValueName, false];
+                return this[valueName, false];
             }
         }
 

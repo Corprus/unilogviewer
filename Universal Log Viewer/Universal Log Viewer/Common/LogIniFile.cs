@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using IniFiles;
 using UniversalLogViewer.Common;
+using Consts = UniversalLogViewer.Common.Consts;
 
 
 namespace UniversalLogViewer.LogIniFiles
@@ -10,14 +11,14 @@ namespace UniversalLogViewer.LogIniFiles
     public class LogIniFile : IniFile
     {
         public SectionCollection<LogIniSection> Sections { get; private set; }
-        public LogIniFile(string INIPath)
-           : base(INIPath)
+        public LogIniFile(string iniPath)
+           : base(iniPath)
         {
             Sections = new SectionCollection<LogIniSection>();
             try
             {
-                foreach (string SectionName in SectionNames)
-                    Sections.AddSection(new LogIniSection(this, SectionName));
+                foreach (string sectionName in SectionNames)
+                    Sections.AddSection(new LogIniSection(this, sectionName));
             }
             catch (IniFiles.Exceptions.IniFileSectionsReadException e)
             {
@@ -28,14 +29,14 @@ namespace UniversalLogViewer.LogIniFiles
     }
     public class LogIniSection : IniSection
     {
-        const string TYPE_KEY_NAME = "Type";
+        const string TypeKeyName = "Type";
         public string Name { get; private set; }
-        public LogIniSection(LogIniFile LogTypeFile, string SectionName)
-            :base(LogTypeFile, SectionName)
+        public LogIniSection(LogIniFile logTypeFile, string sectionName)
+            :base(logTypeFile, sectionName)
         {
-            Name = Values[Consts.KEY_NAME];
+            Name = Values[Consts.KeyName];
         }
-        public string SectionType { get { return Values[TYPE_KEY_NAME]; } }
+        public string SectionType { get { return Values[TypeKeyName]; } }
 
     }
 }

@@ -35,7 +35,7 @@ namespace UniversalLogViewer.Types.Managers
                 _HadInconsistencies = false;
                 if (!(Directory.Exists(IniSettingsManager.LogTypesFolder)))
                    Directory.CreateDirectory(IniSettingsManager.LogTypesFolder);
-                string[] sLogTypes = Directory.GetFiles(IniSettingsManager.LogTypesFolder, "*." + Consts.LOG_TYPE_EXTENSION);
+                string[] sLogTypes = Directory.GetFiles(IniSettingsManager.LogTypesFolder, "*." + Consts.LogTypeExtension);
                 foreach (string sLogType in sLogTypes)
                 {
                     try
@@ -46,7 +46,7 @@ namespace UniversalLogViewer.Types.Managers
                     catch (Common.Exceptions.UniLogViewerException)
                     {
                         _HadInconsistencies = true;
-                        Common.Exceptions.ExceptionLogWriter.Instance.WriteLog(LogWriting.TypeLogMessage.LMT_ERROR, "Cannot load log type " + sLogType);
+                        Common.Exceptions.ExceptionLogWriter.Instance.WriteLog(LogWriting.TypeLogMessage.Error, "Cannot load log type " + sLogType);
                     }
                 }
                 if ((_HadInconsistencies) && (IniSettingsManager.UseSeparateInconsistenciesLog) && (IniSettingsManager.OpenInconsistenciesLogIfGenerated))
@@ -54,7 +54,7 @@ namespace UniversalLogViewer.Types.Managers
                     System.Diagnostics.Process batch = new System.Diagnostics.Process();
                     batch.StartInfo.FileName = "notepad";
                     batch.StartInfo.WorkingDirectory = Application.StartupPath;
-                    batch.StartInfo.Arguments = Common.Consts.INCONSISTENCIES_LOG_FILENAME;
+                    batch.StartInfo.Arguments = Common.Consts.InconsistenciesLogFilename;
                     batch.Start();
 
                 }
@@ -100,7 +100,7 @@ namespace UniversalLogViewer.Types.Managers
             bHasSameName = (bHasSameName || (System.IO.File.Exists(IniSettingsManager.LogTypesFolder + "\\" +  LogFileIniFileNameWithoutFolders)));
 
             if (bHasSameName)
-               bAddType = (MessageBox.Show(Consts.ASK_ADD_LOG_TYPE_WITH_SAME_NAME, Consts.HEADER_SAME_LOG_TYPE_PRESENT, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2, Consts.DEFAULT_MESSAGE_BOX_OPTIONS) == DialogResult.Yes);
+               bAddType = (MessageBox.Show(Consts.AskAddLogTypeWithSameName, Consts.HeaderSameLogTypePresent, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2, Consts.DefaultMessageBoxOptions) == DialogResult.Yes);
 
             if (bAddType)
             {                
@@ -112,7 +112,7 @@ namespace UniversalLogViewer.Types.Managers
                     int i = 0;
                     while (sLogTypes.Length > 0)
                     {
-                        sNewFileName = LogFileIniFileNameWithoutFolders.Substring(0, LogFileIniFileNameWithoutFolders.LastIndexOf(".", StringComparison.Ordinal)) + i.ToString(System.Globalization.CultureInfo.InvariantCulture) + "." + Consts.LOG_TYPE_EXTENSION;
+                        sNewFileName = LogFileIniFileNameWithoutFolders.Substring(0, LogFileIniFileNameWithoutFolders.LastIndexOf(".", StringComparison.Ordinal)) + i.ToString(System.Globalization.CultureInfo.InvariantCulture) + "." + Consts.LogTypeExtension;
                         sLogTypes = Directory.GetFiles(IniSettingsManager.LogTypesFolder, sNewFileName);
                         i++;
                     }
@@ -127,7 +127,7 @@ namespace UniversalLogViewer.Types.Managers
                 catch (Common.Exceptions.LogTypeLoadException e)
                 {
                     _HadInconsistencies = true;
-                    System.Windows.Forms.MessageBox.Show(e.Message, "Cannot load load type", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, Common.Consts.DEFAULT_MESSAGE_BOX_OPTIONS);
+                    System.Windows.Forms.MessageBox.Show(e.Message, "Cannot load load type", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, Common.Consts.DefaultMessageBoxOptions);
                 }
 
 

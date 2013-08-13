@@ -8,27 +8,26 @@ namespace UniversalLogViewer.Common.Exceptions
 {
     public class ExceptionLogWriter
     {
-        static LogWriting.LogWriter _Instance;
-        static LogWriting.LogWriter _InconsistenciesInstance;
+        static LogWriting.LogWriter _instance;
+        static LogWriting.LogWriter _inconsistenciesInstance;
 
         public static LogWriting.LogWriter Instance
         {
             get
             {
-                if (_Instance == null)
-                    _Instance = new LogWriting.LogWriter(Application.StartupPath + "\\" + Consts.ERROR_LOG_FILENAME);
-                return _Instance;
-
+                return _instance ??
+                       (_instance =
+                        new LogWriting.LogWriter(string.Format("{0}\\{1}", Application.StartupPath,
+                                                               Consts.ErrorLogFilename)));
             }
         }
         public static LogWriting.LogWriter InconsistenciesInstance
         {
-            get
-            {
-                if (_InconsistenciesInstance == null)
-                    _InconsistenciesInstance = new LogWriting.LogWriter(Consts.INCONSISTENCIES_LOG_FILENAME, !(IniSettingsManager.ClearOldInconsistenciesContents));
-                return _InconsistenciesInstance;
-
+            get {
+                return _inconsistenciesInstance ??
+                       (_inconsistenciesInstance =
+                        new LogWriting.LogWriter(Consts.InconsistenciesLogFilename,
+                                                 !(IniSettingsManager.ClearOldInconsistenciesContents)));
             }
         }
     }
@@ -40,32 +39,29 @@ namespace UniversalLogViewer.Common.Exceptions
         {
             get
             {
-                return LogWriting.TypeLogMessage.LMT_ERROR;
+                return LogWriting.TypeLogMessage.Error;
             }
 
         }
 
-        protected virtual void WriteMessage(string message)
+        private void WriteMessage(string message)
         {            
-            LogTypeLoadException ExceptionConversion = this as LogTypeLoadException;
-            if ((ExceptionConversion != null)&&(IniSettingsManager.UseSeparateInconsistenciesLog))
+            var exceptionConversion = this as LogTypeLoadException;
+            if ((exceptionConversion != null)&&(IniSettingsManager.UseSeparateInconsistenciesLog))
             {
-                ExceptionLogWriter.InconsistenciesInstance.WriteLog(ExceptionLevel, this.GetType().Name + message);
+                ExceptionLogWriter.InconsistenciesInstance.WriteLog(ExceptionLevel, GetType().Name + message);
             }
             else
-                ExceptionLogWriter.Instance.WriteLog(ExceptionLevel, this.GetType().Name + message);
+                ExceptionLogWriter.Instance.WriteLog(ExceptionLevel, GetType().Name + message);
         }
         
         public UniLogViewerException(string message)
             :base(message)
         {            
             WriteMessage(message);
-            if (ExceptionLevel == LogWriting.TypeLogMessage.LMT_FATAL)
-            {
-                System.Windows.Forms.MessageBox.Show(message, "FATAL Error happened. \n Program will terminate now", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, UniversalLogViewer.Common.Consts.DEFAULT_MESSAGE_BOX_OPTIONS);
-                System.Windows.Forms.Application.Exit();
-            }
-
+            if (ExceptionLevel != LogWriting.TypeLogMessage.Fatal) return;
+            MessageBox.Show(message, "FATAL Error happened. \n Program will terminate now", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, UniversalLogViewer.Common.Consts.DefaultMessageBoxOptions);
+            Application.Exit();
         }
         public UniLogViewerException(Exception e)
             :this(e.Message, e)
@@ -79,32 +75,35 @@ namespace UniversalLogViewer.Common.Exceptions
             if (message.Length == 0)
                 message = e.Message;
             WriteMessage("(" + e.GetType().Name + ") " + message);
-            if (ExceptionLevel == LogWriting.TypeLogMessage.LMT_FATAL)
-                System.Windows.Forms.Application.Exit();           
+            if (ExceptionLevel == LogWriting.TypeLogMessage.Fatal)
+                Application.Exit();           
 
         }
-        public UniLogViewerException(string message, Exception e, bool ThrowExternal)
+        public UniLogViewerException(string message, Exception e, bool throwExternal)
             : base(message, e)
         {
             if (message.Length == 0)
                 message = e.Message;
 
-            WriteMessage("(" + e.GetType().Name + ") " + message);
-            if (ThrowExternal)
+            WriteMessage(string.Format("({0}) {1}", e.GetType().Name, message));
+            if (throwExternal)
             {
-                if (ExceptionLevel == LogWriting.TypeLogMessage.LMT_FATAL)
+                if (ExceptionLevel == LogWriting.TypeLogMessage.Fatal)
                 {
-                    System.Windows.Forms.MessageBox.Show("FATAL Error: " + e.GetType().Name, "UNhandled FATAL Internal Error " + e.GetType().Name + "happened. \n Program will terminate now \n You can see aditional error information in eror log file", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, UniversalLogViewer.Common.Consts.DEFAULT_MESSAGE_BOX_OPTIONS);
-                    WriteMessage("Stack trace: \n" + e.StackTrace);
+                    MessageBox.Show(string.Format("FATAL Error: {0}", e.GetType().Name),
+                                    string.Format("Unhandled FATAL Internal Error {0} happened. \n Program will terminate now. \n You can see aditional error information in eror log file.", e.GetType().Name),
+                                    MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1,
+                                    Consts.DefaultMessageBoxOptions);
+                    WriteMessage(string.Format("Stack trace: \n{0}", e.StackTrace));
 
                 }
                 throw e;
             }
-            if (ExceptionLevel == LogWriting.TypeLogMessage.LMT_FATAL)
+            if (ExceptionLevel == LogWriting.TypeLogMessage.Fatal)
             {
                 WriteMessage("Stack trace: \n" + e.StackTrace);
-                System.Windows.Forms.MessageBox.Show(message, "Handled FATAL Internal Error happened. \n Program will terminate now", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, UniversalLogViewer.Common.Consts.DEFAULT_MESSAGE_BOX_OPTIONS);
-                System.Windows.Forms.Application.Exit();
+                MessageBox.Show(message, "Handled FATAL Internal Error happened. \n Program will terminate now", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, UniversalLogViewer.Common.Consts.DefaultMessageBoxOptions);
+                Application.Exit();
             }
         }
     }
@@ -114,7 +113,7 @@ namespace UniversalLogViewer.Common.Exceptions
         {
             get
             {
-                return LogWriting.TypeLogMessage.LMT_FATAL;
+                return LogWriting.TypeLogMessage.Fatal;
             }
         }
         public FatalUnhandledException(Exception e)
@@ -152,7 +151,7 @@ namespace UniversalLogViewer.Common.Exceptions
         {
             get
             {
-                return LogWriting.TypeLogMessage.LMT_FATAL;
+                return LogWriting.TypeLogMessage.Fatal;
             }
         }
         public LogSettingsIniException(string message)

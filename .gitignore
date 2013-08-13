@@ -1,0 +1,76 @@
+
+*.patch
+/Universal Log Viewer/IniFile/bin/Debug/IniFile.dll
+/Universal Log Viewer/IniFile/bin/Debug/IniFile.pdb
+/Universal Log Viewer/IniFile/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+/Universal Log Viewer/IniFile/obj/Debug/IniFile.csproj.FileListAbsolute.txt
+/Universal Log Viewer/IniFile/obj/Debug/IniFile.csprojResolveAssemblyReference.cache
+/Universal Log Viewer/IniFile/obj/Debug/IniFile.dll
+/Universal Log Viewer/IniFile/obj/Debug/IniFile.pdb
+/Universal Log Viewer/InstallerClasses/bin/Debug/InstallerClasses.dll
+/Universal Log Viewer/InstallerClasses/bin/Debug/InstallerClasses.pdb
+/Universal Log Viewer/InstallerClasses/obj/Debug/DesignTimeResolveAssemblyReferences.cache
+/Universal Log Viewer/InstallerClasses/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+/Universal Log Viewer/InstallerClasses/obj/Debug/GenerateResource.read.1.tlog
+/Universal Log Viewer/InstallerClasses/obj/Debug/GenerateResource.write.1.tlog
+/Universal Log Viewer/InstallerClasses/obj/Debug/InstallerClasses.WhatsNew.resources
+/Universal Log Viewer/InstallerClasses/obj/Debug/InstallerClasses.csproj.FileListAbsolute.txt
+/Universal Log Viewer/InstallerClasses/obj/Debug/InstallerClasses.csproj.GenerateResource.Cache
+/Universal Log Viewer/InstallerClasses/obj/Debug/InstallerClasses.csprojResolveAssemblyReference.cache
+/Universal Log Viewer/InstallerClasses/obj/Debug/InstallerClasses.dll
+/Universal Log Viewer/InstallerClasses/obj/Debug/InstallerClasses.pdb
+/Universal Log Viewer/LogWriterLib/bin/Debug/LogWriterLib.dll
+/Universal Log Viewer/LogWriterLib/bin/Debug/LogWriterLib.pdb
+/Universal Log Viewer/LogWriterLib/obj/Debug/.gitignore
+/Universal Log Viewer/LogWriterLib/obj/Debug/LogWriter.csproj.FileListAbsolute.txt
+/Universal Log Viewer/LogWriterLib/obj/Debug/LogWriterLib.dll
+/Universal Log Viewer/Universal Log Viewer.sln.DotSettings.user
+/Universal Log Viewer/Universal Log Viewer.suo
+/Universal Log Viewer/Universal Log Viewer.v11.suo
+/Universal Log Viewer/Universal Log Viewer/Common/svn.version
+/Universal Log Viewer/Universal Log Viewer/bin/Debug/Help/En/unilogviewer.chm
+/Universal Log Viewer/Universal Log Viewer/bin/Debug/IniFile.dll
+/Universal Log Viewer/Universal Log Viewer/bin/Debug/IniFile.pdb
+/Universal Log Viewer/Universal Log Viewer/bin/Debug/Log Types/Apache_access.ltp
+/Universal Log Viewer/Universal Log Viewer/bin/Debug/Log Types/Apache_error.ltp
+/Universal Log Viewer/Universal Log Viewer/bin/Debug/Log Types/qpr.ltp
+/Universal Log Viewer/Universal Log Viewer/bin/Debug/LogWriterLib.dll
+/Universal Log Viewer/Universal Log Viewer/bin/Debug/LogWriterLib.pdb
+/Universal Log Viewer/Universal Log Viewer/bin/Debug/UniLogViewer.Common.dll
+/Universal Log Viewer/Universal Log Viewer/bin/Debug/UniLogViewer.Common.pdb
+/Universal Log Viewer/Universal Log Viewer/bin/Debug/Universal Log Viewer.exe
+/Universal Log Viewer/Universal Log Viewer/bin/Debug/Universal Log Viewer.exe.config
+/Universal Log Viewer/Universal Log Viewer/bin/Debug/Universal Log Viewer.pdb
+/Universal Log Viewer/Universal Log Viewer/bin/Debug/Universal Log Viewer.vshost.exe
+/Universal Log Viewer/Universal Log Viewer/bin/Debug/Universal Log Viewer.vshost.exe.config
+/Universal Log Viewer/Universal Log Viewer/bin/Debug/Universal Log Viewer.vshost.exe.manifest
+/Universal Log Viewer/Universal Log Viewer/bin/Debug/logviewer.ini
+/Universal Log Viewer/Universal Log Viewer/bin/Debug/unilogviewer.log
+/Universal Log Viewer/Universal Log Viewer/obj/Debug/DesignTimeResolveAssemblyReferences.cache
+/Universal Log Viewer/Universal Log Viewer/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+/Universal Log Viewer/Universal Log Viewer/obj/Debug/GenerateResource.read.1.tlog
+/Universal Log Viewer/Universal Log Viewer/obj/Debug/GenerateResource.write.1.tlog
+/Universal Log Viewer/Universal Log Viewer/obj/Debug/ResolveAssemblyReference.cache
+/Universal Log Viewer/Universal Log Viewer/obj/Debug/TempPE/Properties.Resources.Designer.cs.dll
+/Universal Log Viewer/Universal Log Viewer/obj/Debug/Universal Log Viewer.csproj.FileListAbsolute.txt
+/Universal Log Viewer/Universal Log Viewer/obj/Debug/Universal Log Viewer.csproj.GenerateResource.Cache
+/Universal Log Viewer/Universal Log Viewer/obj/Debug/Universal Log Viewer.csprojResolveAssemblyReference.cache
+/Universal Log Viewer/Universal Log Viewer/obj/Debug/Universal Log Viewer.exe
+/Universal Log Viewer/Universal Log Viewer/obj/Debug/Universal Log Viewer.pdb
+/Universal Log Viewer/Universal Log Viewer/obj/Debug/UniversalLogViewer.Properties.Resources.resources
+/Universal Log Viewer/Universal Log Viewer/obj/Debug/UniversalLogViewer.UI.FormAbout.resources
+/Universal Log Viewer/Universal Log Viewer/obj/Debug/UniversalLogViewer.UI.LogTypesManagerForm.resources
+/Universal Log Viewer/Universal Log Viewer/obj/Debug/UniversalLogViewer.UI.MainForm.resources
+/Universal Log Viewer/UpgradeLog2.XML
+/Universal Log Viewer/uniLogViewerCommon/bin/Debug/IniFile.dll
+/Universal Log Viewer/uniLogViewerCommon/bin/Debug/IniFile.pdb
+/Universal Log Viewer/uniLogViewerCommon/bin/Debug/LogWriterLib.dll
+/Universal Log Viewer/uniLogViewerCommon/bin/Debug/LogWriterLib.pdb
+/Universal Log Viewer/uniLogViewerCommon/bin/Debug/UniLogViewer.Common.dll
+/Universal Log Viewer/uniLogViewerCommon/bin/Debug/UniLogViewer.Common.pdb
+/Universal Log Viewer/uniLogViewerCommon/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+/Universal Log Viewer/uniLogViewerCommon/obj/Debug/ResolveAssemblyReference.cache
+/Universal Log Viewer/uniLogViewerCommon/obj/Debug/UniLogViewer.Common.dll
+/Universal Log Viewer/uniLogViewerCommon/obj/Debug/UniLogViewer.Common.pdb
+/Universal Log Viewer/uniLogViewerCommon/obj/Debug/UniLogViewerCommon.csproj.FileListAbsolute.txt
+/Universal Log Viewer/uniLogViewerCommon/obj/Debug/UniLogViewerCommon.csprojResolveAssemblyReference.cache

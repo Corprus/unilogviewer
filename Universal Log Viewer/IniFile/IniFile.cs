@@ -24,14 +24,14 @@ namespace IniFiles
             int Result = NativeMethods.WritePrivateProfileString(Section, Key, Value, this.FilePath);
             return Result;
         }
-        public virtual string ReadValue(string Section, string Key)
+        public virtual string ReadValue(string section, string key)
         {
-            return ReadValue(Section, Key, "");
+            return ReadValue(section, key, "");
         }
-        public virtual string ReadValue(string Section, string Key, string Default)
+        public virtual string ReadValue(string section, string key, string Default)
         {
             StringBuilder temp = new StringBuilder(255);
-            int i = NativeMethods.GetPrivateProfileString(Section, Key, Default, temp,
+            int i = NativeMethods.GetPrivateProfileString(section, key, Default, temp,
                                             255, this.FilePath);
             if (i != 0)
             { }

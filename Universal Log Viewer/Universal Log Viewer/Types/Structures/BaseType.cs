@@ -35,7 +35,7 @@ namespace UniversalLogViewer.Types.Structures
             this.Section = Section;
             try
             {
-                Name = Section.Values[true, Consts.KEY_NAME, Section.SectionName];
+                Name = Section.Values[true, Consts.KeyName, Section.SectionName];
                 Title = Section.Values[KEY_TITLE];
                 if (Title.Length == 0)
                     Title = Name;

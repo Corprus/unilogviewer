@@ -37,7 +37,7 @@ namespace UniversalLogViewer.Types.Values
             bool emptyEndsWith = endLength == 0;
             int iStart = Parsed.IndexOf(condition.StartsWith, StringComparison.Ordinal);
             int iEnd = Parsed.IndexOf(condition.EndsWith, StringComparison.Ordinal);
-            string PreParsedValue = Consts.EMPTY_SYMBOL;
+            string PreParsedValue = Consts.EmptySymbol;
             
             if (emptyStartsWith && emptyEndsWith)
                 PreParsedValue = Parsed;
@@ -59,7 +59,7 @@ namespace UniversalLogViewer.Types.Values
                 return PreParsedValue;
             }
             else
-                return Consts.EMPTY_SYMBOL;
+                return Consts.EmptySymbol;
         }
         //¬џ–≈«ј“№(!!!) »з большой строки то что мы отпарсили
         public string CutSource(string Source)
@@ -76,7 +76,7 @@ namespace UniversalLogViewer.Types.Values
                 return (Source.Substring(0, iStart) + Source.Substring(iEnd, Source.Length - iEnd));
             }
             else
-                return Consts.EMPTY_SYMBOL;
+                return Consts.EmptySymbol;
         }
     }
 }

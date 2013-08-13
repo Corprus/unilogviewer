@@ -1,119 +1,107 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System;
 using System.IO;
 
 [assembly: CLSCompliant(true)]
 namespace LogWriting
 {
-    public enum LWErrorCode { EC_PATH_TOO_LONG = -2, EC_ERROR = -1, EC_SUCCESS = 0, EC_DIRECTORY_CREATED = 1 };
-    public enum LWErrorType { KERNEL_PANIC = 0 };
-    public enum TypeLogMessage { LMT_ERROR = 0, LMT_FATAL = 1, LMT_WARN = 2, LMT_INFORM = 3 };
+    public enum ErrorCode { PathTooLong = -2, Error = -1, Success = 0, DirectoryCreated = 1 };
+    public enum ErrorType { KernelPanic = 0 };
+    public enum TypeLogMessage { Error = 0, Fatal = 1, Warning = 2, Information = 3 };
 
     public class LogWriter : IDisposable
     {
-        private TextWriter _oTextWriter;
-        protected const String sLogSeparator = "\t";        
-        private String[] aTypeMessages = { "ERROR", "FATAL", "WARN", "INFORM" };
-        protected String[] aHeaders = { "Time", "Type", "Message", "ErrorType" };
+        private readonly TextWriter _textWriter;
+        protected const String LogSeparator = "\t";        
+        private readonly String[] _typeMessages = { "ERROR", "FATAL", "WARN", "INFORM" };
+        protected readonly String[] Headers = { "Time", "Type", "Message", "ErrorType" };
 
-        public LWErrorCode ErrorResultCode {get ; private set;}
+        public ErrorCode ErrorResultCode { get; private set; }
 
-        public LogWriter(String vsFileName, Boolean vbSaveOldContent)
+        public LogWriter(String vsFileName, Boolean vbSaveOldContent = true)
         {
-            ErrorResultCode = LWErrorCode.EC_SUCCESS;
+            ErrorResultCode = ErrorCode.Success;
             var s = Directory.GetParent(vsFileName);
             if (!s.Exists)
             {
                 try
                 {
                     s.Create();
-                    ErrorResultCode = LWErrorCode.EC_DIRECTORY_CREATED;
+                    ErrorResultCode = ErrorCode.DirectoryCreated;
                 }
                 catch (Exception)
                 {
-                    ErrorResultCode = LWErrorCode.EC_ERROR;
+                    ErrorResultCode = ErrorCode.Error;
                     return;
                 }
             }
 
             try
             {
-                _oTextWriter = new StreamWriter(vsFileName, vbSaveOldContent);
+                _textWriter = new StreamWriter(vsFileName, vbSaveOldContent);
             }
-            catch (System.IO.PathTooLongException)
+            catch (PathTooLongException)
             {
-                ErrorResultCode = LWErrorCode.EC_PATH_TOO_LONG;
-                return;
+                ErrorResultCode = ErrorCode.PathTooLong;
             }
             catch (Exception)
             {
-                ErrorResultCode = LWErrorCode.EC_ERROR;
-                return;
+                ErrorResultCode = ErrorCode.Error;
             }           
-        }
-
-        public LogWriter(String vsFileName)
-            :this(vsFileName, true)
-        {
-
         }
 
         public void Dispose()
         {
-            this.Dispose(false);
+            Dispose(false);
             GC.SuppressFinalize(this);
         }
-        protected virtual void Dispose(bool DisposeUnmanaged)
+        protected virtual void Dispose(bool disposeUnmanaged)
         {
-            if (_oTextWriter != null)
+            if (_textWriter != null)
             {
-                _oTextWriter.Close();
-                _oTextWriter.Dispose();
+                _textWriter.Close();
+                _textWriter.Dispose();
             }
         }
 
-        public LWErrorCode WriteLog(TypeLogMessage ventType, String vsMessage)
+        public ErrorCode WriteLog(TypeLogMessage ventType, String vsMessage)
         {
-            string sMessage = "[" + Convert.ToString(DateTime.Now, System.Globalization.CultureInfo.CurrentCulture) + "]" + sLogSeparator;
-            sMessage += "[" + aTypeMessages[(int)ventType] + "]" + sLogSeparator + vsMessage;
+            string sMessage = string.Format("[{0}]{1}[{2}]{1}{3}", DateTime.Now, LogSeparator,
+                                            _typeMessages[(int) ventType], vsMessage);
             try
             {
-                _oTextWriter.WriteLine((string)sMessage);
-                _oTextWriter.Flush();
+                _textWriter.WriteLine(sMessage);
+                _textWriter.Flush();
             }
             catch (Exception)
             {
-                return LWErrorCode.EC_ERROR;
+                return ErrorCode.Error;
             }
-            return LWErrorCode.EC_SUCCESS;
+            return ErrorCode.Success;
         }
 
-        protected virtual String sGetHeaders()
+        protected virtual String GetHeaders()
         {
-            return aHeaders[0] + sLogSeparator + aHeaders[1] + sLogSeparator + aHeaders[2];
+            return string.Format("{0}{1}{2}{1}{3}", Headers[0], LogSeparator, Headers[1], Headers[2]);
         }
 
-        protected LWErrorCode WriteHeaders(String vsHeaders)
+        protected ErrorCode WriteHeaders(String vsHeaders)
         {
 
             try
             {
-                _oTextWriter.WriteLine((String)vsHeaders);
-                _oTextWriter.Flush();
+                _textWriter.WriteLine(vsHeaders);
+                _textWriter.Flush();
             }
             catch (Exception)
             {
-                return LWErrorCode.EC_ERROR;
+                return ErrorCode.Error;
             }
-            return LWErrorCode.EC_SUCCESS;
+            return ErrorCode.Success;
         }
 
-        public LWErrorCode WriteHeaders()
+        public ErrorCode WriteHeaders()
         {
-            return WriteHeaders(sGetHeaders());
+            return WriteHeaders(GetHeaders());
         }
 
     }

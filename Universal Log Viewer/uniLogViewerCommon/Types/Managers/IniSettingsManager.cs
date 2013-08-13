@@ -77,7 +77,7 @@ namespace UniversalLogViewer.Common.Types.Managers
         {
             try
             {
-                IniFile = new AutoSavedIniFile(Application.StartupPath + "\\" + Consts.SETTINGS_INI_FILE_NAME);
+                IniFile = new AutoSavedIniFile(Application.StartupPath + "\\" + Consts.SettingsIniFileName);
             }
             catch (System.IO.IOException e)
             {

@@ -21,7 +21,7 @@ namespace UniversalLogViewer
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            UniversalLogViewer.Common.Exceptions.ExceptionLogWriter.Instance.WriteLog(LogWriting.TypeLogMessage.LMT_INFORM, "Program Started");
+            UniversalLogViewer.Common.Exceptions.ExceptionLogWriter.Instance.WriteLog(LogWriting.TypeLogMessage.Information, "Program Started");
 
             try
             {
@@ -30,12 +30,12 @@ namespace UniversalLogViewer
                     IniSettingsManager.InitFile();
                     MainForm = new MainForm();
                     Application.Run(MainForm);
-                    UniversalLogViewer.Common.Exceptions.ExceptionLogWriter.Instance.WriteLog(LogWriting.TypeLogMessage.LMT_INFORM, "Program Successfully Finished");
+                    UniversalLogViewer.Common.Exceptions.ExceptionLogWriter.Instance.WriteLog(LogWriting.TypeLogMessage.Information, "Program Successfully Finished");
                 }
                 catch (UniLogViewerException e)
                 {
                     //если мы ошибку не прибили заранее, но она не фатальная (фатальный случай прерывает приложение сразу в конструкторе исключения)
-                    System.Windows.Forms.MessageBox.Show(e.Message, "Handled Critical Internal Error happened. \n Program will terminate now", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, UniversalLogViewer.Common.Consts.DEFAULT_MESSAGE_BOX_OPTIONS);
+                    System.Windows.Forms.MessageBox.Show(e.Message, "Handled Critical Internal Error happened. \n Program will terminate now", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, UniversalLogViewer.Common.Consts.DefaultMessageBoxOptions);
                 }
                 catch (Exception e)
                 {
