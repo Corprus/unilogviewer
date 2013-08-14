@@ -83,6 +83,7 @@
   <ItemGroup>
     <Compile Include="Common\Types.cs" />
     <Compile Include="Common\Utilities.cs" />
+    <Compile Include="LogIniFiles\LogIniFile.cs" />
     <Compile Include="Types\Managers\LogTypeManager.cs" />
     <Compile Include="Types\Structures\BaseType.cs">
     </Compile>
@@ -91,7 +92,6 @@
     <Compile Include="Types\Values\BlockValue.cs" />
     <Compile Include="Types\Structures\ConditionType.cs" />
     <Compile Include="Types\Values\Log.cs" />
-    <Compile Include="Common\LogIniFile.cs" />
     <Compile Include="Types\Structures\LogType.cs" />
     <Compile Include="Types\Managers\LogTypeCollection.cs" />
     <Compile Include="Types\Values\StringValue.cs" />

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using UniversalLogViewer.Types.Structures;
 using UniversalLogViewer.Common;
 
@@ -16,23 +13,23 @@ namespace UniversalLogViewer.Types.Values
         {
             get
             {
-                UniversalLogViewer.Program.MainForm.InitProgressLevel(LogFile.ReadFile().Length, 0, "Generating Tree...");
-                TreeNode Result = RootBlock.TreeNode;
-                Result.Text = this.StructureType.LogName + ":" + Result.Text;
-                UniversalLogViewer.Program.MainForm.EndProgress();
-                return Result;
+                Program.MainForm.InitProgressLevel(LogFile.ReadFile().Length, 0, "Generating Tree...");
+                TreeNode result = RootBlock.TreeNode;
+                result.Text = string.Format("{0}:{1}", StructureType.LogName, result.Text);
+                Program.MainForm.EndProgress();
+                return result;
             }
         }
 
 
-        public Log(LogType Type, string FileName)
+        public Log(LogType type, string fileName)
         {
-            this.StructureType = Type;
-            LogFile = new FileReader(FileName);
-            string[] LogFileStrings = LogFile.ReadFile();
-            UniversalLogViewer.Program.MainForm.InitProgressLevel(LogFileStrings.Length, 0, "Processing Log...");
-            RootBlock = new BlockValue(this.StructureType.RootBlockType,ref LogFileStrings);
-            UniversalLogViewer.Program.MainForm.EndProgress();
+            StructureType = type;
+            LogFile = new FileReader(fileName);
+            string[] logFileStrings = LogFile.ReadFile();
+            Program.MainForm.InitProgressLevel(logFileStrings.Length, 0, "Processing Log...");
+            RootBlock = new BlockValue(StructureType.RootBlockType,ref logFileStrings);
+            Program.MainForm.EndProgress();
         }
     }
 }

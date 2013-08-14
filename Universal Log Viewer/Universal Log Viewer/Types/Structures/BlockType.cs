@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using UniversalLogViewer.LogIniFiles;
 
 
@@ -8,33 +6,25 @@ namespace UniversalLogViewer.Types.Structures
 {
     public class BlockType : BaseType
     {
-        public const string INI_TYPE_NAME = "Block";
-        const string INI_KEY_START_CONDITION = "StartCondition";
-        const string INI_KEY_END_CONDITION = "EndCondition";
-        const string INI_KEY_CHILD_BLOCK_TYPES = "ChildBlockTypes";
-        const string INI_KEY_CHILD_STRING_TYPES = "ChildStringTypes";        
+        public const string IniTypeName = "Block";
+        const string IniKeyStartCondition = "StartCondition";
+        const string IniKeyEndCondition = "EndCondition";
+        const string IniKeyChildBlockTypes = "ChildBlockTypes";
+        const string IniKeyChildStringTypes = "ChildStringTypes";        
         public ConditionType StartCondition { get; private set; }
         public ConditionType EndCondition { get; private set; }
         public List<BlockType> ChildBlockTypes { get; private set; }
         public List<StringType> ChildStringTypes { get; private set; }
-        public BlockType(LogType LogType, LogIniSection Section)
-            : base(LogType, Section)
-        {
-        }
 
-        public override void ReInit(LogType LogType, LogIniSection Section)
+        public override void ReInit(LogType logType, LogIniSection section)
         {
-            base.ReInit(LogType, Section);
-            StartCondition = ParentLogType.Conditions[Section.Values[INI_KEY_START_CONDITION]];
-            EndCondition = ParentLogType.Conditions[Section.Values[INI_KEY_END_CONDITION]];
-            ChildBlockTypes = (ParentLogType.BlockTypes.GetList(Section.ArrayValues[INI_KEY_CHILD_BLOCK_TYPES]));
-            ChildStringTypes = (ParentLogType.StringTypes.GetList(Section.ArrayValues[INI_KEY_CHILD_STRING_TYPES]));
+            base.ReInit(logType, section);
+            StartCondition = ParentLogType.Conditions[section.Values[IniKeyStartCondition]];
+            EndCondition = ParentLogType.Conditions[section.Values[IniKeyEndCondition]];
+            ChildBlockTypes = (ParentLogType.BlockTypes.GetList(section.ArrayValues[IniKeyChildBlockTypes]));
+            ChildStringTypes = (ParentLogType.StringTypes.GetList(section.ArrayValues[IniKeyChildStringTypes]));
             if ((ChildBlockTypes.Count == 0) && (ChildStringTypes.Count == 0))
                 throw new Common.Exceptions.LogTypeLoadException("Both ChildBLockTypes and ChildStringTypes are empty");
-        }
-        public BlockType()
-            : base()
-        {
         }
     }
 }

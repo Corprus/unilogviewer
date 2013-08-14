@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
 namespace UniversalLogViewer.Common
 {
@@ -9,9 +7,9 @@ namespace UniversalLogViewer.Common
     {
 
         public string FileName { get; private set; }            
-        public FileReader(string Name)
+        public FileReader(string name)
         {
-            FileName = Name;
+            FileName = name;
         }
         public string[] ReadFile()
         {

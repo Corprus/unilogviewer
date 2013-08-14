@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Collections;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
+using UniversalLogViewer.Properties;
 using UniversalLogViewer.Types.Structures;
 using UniversalLogViewer.Common;
 using UniversalLogViewer.Common.Types.Managers;
@@ -16,15 +16,15 @@ namespace UniversalLogViewer.Types.Managers
     {
         public static void ReInit()
         {
-            _oInstance = new LogTypeManager();
+            _instance = new LogTypeManager();
         }
 
-        static LogTypeManager _oInstance;
-        public void UpdateList(IList Items)
+        static LogTypeManager _instance;
+        public void UpdateList(IList items)
         {
-            Items.Clear();
-            foreach (LogType LogType in TypesList)
-                Items.Add(LogType);
+            items.Clear();
+            foreach (var logType in TypesList)
+                items.Add(logType);
         }
 
         LogTypeManager()
@@ -32,105 +32,95 @@ namespace UniversalLogViewer.Types.Managers
             TypesList = new List<LogType>();
             try
             {
-                _HadInconsistencies = false;
+                _hadInconsistencies = false;
                 if (!(Directory.Exists(IniSettingsManager.LogTypesFolder)))
                    Directory.CreateDirectory(IniSettingsManager.LogTypesFolder);
-                string[] sLogTypes = Directory.GetFiles(IniSettingsManager.LogTypesFolder, "*." + Consts.LogTypeExtension);
-                foreach (string sLogType in sLogTypes)
-                {
-                    try
-                    {
-                        var NewLogType = new LogType(sLogType);
-                        TypesList.Add(NewLogType);
-                    }
-                    catch (Common.Exceptions.UniLogViewerException)
-                    {
-                        _HadInconsistencies = true;
-                        Common.Exceptions.ExceptionLogWriter.Instance.WriteLog(LogWriting.TypeLogMessage.Error, "Cannot load log type " + sLogType);
-                    }
-                }
-                if ((_HadInconsistencies) && (IniSettingsManager.UseSeparateInconsistenciesLog) && (IniSettingsManager.OpenInconsistenciesLogIfGenerated))
-                {
-                    System.Diagnostics.Process batch = new System.Diagnostics.Process();
-                    batch.StartInfo.FileName = "notepad";
-                    batch.StartInfo.WorkingDirectory = Application.StartupPath;
-                    batch.StartInfo.Arguments = Common.Consts.InconsistenciesLogFilename;
-                    batch.Start();
-
-                }
-
-            }
-            catch (System.IO.IOException)
-            {
-                throw new Common.Exceptions.UniLogViewerException("Cannot get access to Lot Types folder (" + IniSettingsManager.LogTypesFolder + ") or get it's file list");
-            }
-
-        }
-        public static LogTypeManager oInstance
-        {
-            get
-            {
-                if (_oInstance == null)
-                    _oInstance = new LogTypeManager();
-                return _oInstance;
-
-            }
-        }
-        public List<LogType> TypesList { get; private set; }
-        public void AddLogType(LogType LogType)
-        {
-            if (TypesList == null)
-                TypesList = new List<LogType>();
-            TypesList.Add(LogType);
-        }
-        private bool _HadInconsistencies;
-        public void AddLogType(string LogTypeFileName)
-        {
-            if (TypesList == null)
-                TypesList = new List<LogType>();
-            bool bHasSameName = false;
-            
-            foreach (LogType oType in TypesList)
-            {
-                if (oType.LogName == LogTypeFileName)
-                    bHasSameName = true;
-            }
-            bool bAddType = true;
-            string LogFileIniFileNameWithoutFolders = LogTypeFileName.Substring(LogTypeFileName.LastIndexOf("\\", StringComparison.Ordinal) + 1, LogTypeFileName.Length - LogTypeFileName.LastIndexOf("\\", StringComparison.Ordinal) - 1);
-            bHasSameName = (bHasSameName || (System.IO.File.Exists(IniSettingsManager.LogTypesFolder + "\\" +  LogFileIniFileNameWithoutFolders)));
-
-            if (bHasSameName)
-               bAddType = (MessageBox.Show(Consts.AskAddLogTypeWithSameName, Consts.HeaderSameLogTypePresent, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2, Consts.DefaultMessageBoxOptions) == DialogResult.Yes);
-
-            if (bAddType)
-            {                
-                string sNewFileName = LogFileIniFileNameWithoutFolders;
-
-                if (bHasSameName)
-                {
-                    string[] sLogTypes = Directory.GetFiles(IniSettingsManager.LogTypesFolder, sNewFileName);
-                    int i = 0;
-                    while (sLogTypes.Length > 0)
-                    {
-                        sNewFileName = LogFileIniFileNameWithoutFolders.Substring(0, LogFileIniFileNameWithoutFolders.LastIndexOf(".", StringComparison.Ordinal)) + i.ToString(System.Globalization.CultureInfo.InvariantCulture) + "." + Consts.LogTypeExtension;
-                        sLogTypes = Directory.GetFiles(IniSettingsManager.LogTypesFolder, sNewFileName);
-                        i++;
-                    }
-                }
-                sNewFileName = IniSettingsManager.LogTypesFolder + "\\" +  sNewFileName;
-                File.Copy(LogTypeFileName, sNewFileName);
+                string[] sLogTypes = Directory.GetFiles(IniSettingsManager.LogTypesFolder, string.Format("*.{0}", Consts.LogTypeExtension));
                 try
                 {
-                    LogType oNewType = new LogType(sNewFileName);
-                    AddLogType(oNewType);
+                    TypesList.AddRange(sLogTypes.Select(type => new LogType(type)));
                 }
-                catch (Common.Exceptions.LogTypeLoadException e)
+                catch (Common.Exceptions.UniLogViewerException)
                 {
-                    _HadInconsistencies = true;
-                    System.Windows.Forms.MessageBox.Show(e.Message, "Cannot load load type", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, Common.Consts.DefaultMessageBoxOptions);
+                    _hadInconsistencies = true;
+                    Common.Exceptions.ExceptionLogWriter.Instance.WriteLog(LogWriting.TypeLogMessage.Error,
+                                                                           string.Format("Cannot load log types"));
                 }
 
+                if ((!_hadInconsistencies) || (!IniSettingsManager.UseSeparateInconsistenciesLog) ||
+                    (!IniSettingsManager.OpenInconsistenciesLogIfGenerated)) return;
+                var batch = new System.Diagnostics.Process
+                    {
+                        StartInfo =
+                            {
+                                FileName = "notepad",
+                                WorkingDirectory = Application.StartupPath,
+                                Arguments = Consts.InconsistenciesLogFilename
+                            }
+                    };
+                batch.Start();
+            }
+            catch (IOException)
+            {
+                throw new Common.Exceptions.UniLogViewerException(
+                    string.Format("Cannot get access to Lot Types folder ({0}) or get it's file list", IniSettingsManager.LogTypesFolder));
+            }
 
+        }
+
+        public static LogTypeManager Instance
+        {
+            get { return _instance ?? (_instance = new LogTypeManager()); }
+        }
+        public List<LogType> TypesList { get; private set; }
+
+        private void AddLogType(LogType logType)
+        {
+            if (TypesList == null)
+                TypesList = new List<LogType>();
+            TypesList.Add(logType);
+        }
+        private bool _hadInconsistencies;
+        public void AddLogType(string logTypeFileName)
+        {
+            if (TypesList == null)
+                TypesList = new List<LogType>();
+            bool bHasSameName = (TypesList.Any(type => type.LogName == logTypeFileName));
+
+            bool addTypeAccepted = true;
+            string logFileIniFileNameWithoutFolders = logTypeFileName.Substring(logTypeFileName.LastIndexOf("\\", StringComparison.Ordinal) + 1, logTypeFileName.Length - logTypeFileName.LastIndexOf("\\", StringComparison.Ordinal) - 1);
+            bHasSameName = (bHasSameName || (File.Exists(string.Format("{0}\\{1}", IniSettingsManager.LogTypesFolder, logFileIniFileNameWithoutFolders))));
+
+            if (bHasSameName)
+               addTypeAccepted = (MessageBox.Show(Consts.AskAddLogTypeWithSameName, Consts.HeaderSameLogTypePresent, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2, Consts.DefaultMessageBoxOptions) == DialogResult.Yes);
+
+            if (!addTypeAccepted) return;
+
+            var newFileName = logFileIniFileNameWithoutFolders;
+
+            if (bHasSameName)
+            {
+                string[] sLogTypes = Directory.GetFiles(IniSettingsManager.LogTypesFolder, newFileName);
+                int i = 0;
+                while (sLogTypes.Length > 0)
+                {
+                    newFileName = logFileIniFileNameWithoutFolders.Substring(0, logFileIniFileNameWithoutFolders.LastIndexOf(".", StringComparison.Ordinal)) + i.ToString(System.Globalization.CultureInfo.InvariantCulture) + "." + Consts.LogTypeExtension;
+                    sLogTypes = Directory.GetFiles(IniSettingsManager.LogTypesFolder, newFileName);
+                    i++;
+                }
+            }
+            newFileName = string.Format("{0}\\{1}", IniSettingsManager.LogTypesFolder, newFileName);
+            File.Copy(logTypeFileName, newFileName);
+            try
+            {
+                var newType = new LogType(newFileName);
+                AddLogType(newType);
+            }
+            catch (Common.Exceptions.LogTypeLoadException e)
+            {
+                _hadInconsistencies = true;
+                MessageBox.Show(e.Message, Resources.CannotLoadLogTypeMessage, MessageBoxButtons.OK,
+                                MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, Consts.DefaultMessageBoxOptions);
             }
         }
 

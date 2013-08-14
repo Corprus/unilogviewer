@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 [assembly: CLSCompliant(true)]
 
@@ -33,22 +30,22 @@ namespace UniversalLogViewer.Common
         {
             if (logProgress.GetProgressLevel() == 100)
                 return false;
-            bool result = startingNode.Text.Contains(text);
+            var result = startingNode.Text.Contains(text);
             if (result)
                 SelectTreeNode(searchTreeView, startingNode);
 
             if (!result)
             {
-                foreach (TreeNode Node in startingNode.Nodes)
+                foreach (TreeNode node in startingNode.Nodes)
                 {
                     logProgress.IncreaseProgressLevel(1);
-                    if (Node.Nodes.Count > 0)
-                        result = SearchWithinNodes(logProgress, searchTreeView, Node, text);
+                    if (node.Nodes.Count > 0)
+                        result = SearchWithinNodes(logProgress, searchTreeView, node, text);
                     else
                     {
-                        result = Node.Text.Contains(text);
+                        result = node.Text.Contains(text);
                         if (result)
-                            SelectTreeNode(searchTreeView, Node);
+                            SelectTreeNode(searchTreeView, node);
                     }
 
                     if (result)
@@ -59,15 +56,14 @@ namespace UniversalLogViewer.Common
             if (!result)
             {
                 var nextNode = startingNode.NextNode;
-                if (nextNode == null)
-                    if (startingNode.Parent != null)
-                        nextNode = startingNode.Parent.NextNode;
+                if (nextNode == null && startingNode.Parent != null) nextNode = startingNode.Parent.NextNode;
 
                 return nextNode != null && SearchWithinNodes(logProgress, searchTreeView, nextNode, text);
             }
             return true;
         }
         delegate void SelectTreeNodeCallback(TreeView tree, TreeNode node);
+
         public static void SelectTreeNode(TreeView tree, TreeNode node)
         {
             if (tree.InvokeRequired)
@@ -106,21 +102,16 @@ namespace UniversalLogViewer.Common
             if (current > max)
                 current = max;
             progressBar.Value = current;
-            if (!((current == min) || (current == 0)))
-                progressLabel.Text = ((int)((100 * current) / (max - min))).ToString() + "%";
-            else
-                progressLabel.Text = "0%";
+                progressLabel.Text = !((current == min) || (current == 0))
+                                         ? string.Format("{0:%}", (current)/(max - min))
+                                         : "0%";
             }
             else
             {
-
                 if ((progressBar.IsDisposed || progressLabel.IsDisposed))
                     return;
-                else
-                {
-                    SetFullProgressLevelCallback d = new SetFullProgressLevelCallback(SetFullProgressLevel);
-                    progressBar.Invoke(d, new object[] { progressBar, progressLabel, current, max, min });
-                }
+                var d = new SetFullProgressLevelCallback(SetFullProgressLevel);
+                progressBar.Invoke(d, new object[] { progressBar, progressLabel, current, max, min });
             }
 
         }
@@ -130,7 +121,7 @@ namespace UniversalLogViewer.Common
         {
             SetFullProgressLevel(current, _prbProgress.Maximum, _prbProgress.Minimum);
         }
-        delegate void IncreaseProgressLevelCallback(int byvalue);
+
         public void IncreaseProgressLevel(int byvalue)
         {
             SetProgressLevel(_prbProgress.Value + byvalue);
@@ -140,13 +131,10 @@ namespace UniversalLogViewer.Common
         {
             if (!_prbProgress.InvokeRequired)
             {
-                return (int)(100 * _prbProgress.Value / (_prbProgress.Maximum - _prbProgress.Minimum));
+                return 100 * _prbProgress.Value / (_prbProgress.Maximum - _prbProgress.Minimum);
             }
-            else
-            {
-                GetProgressLevelCallback d = new GetProgressLevelCallback(GetProgressLevel);
-                return (int)_prbProgress.Invoke(d, new object[] { });
-            }              
+            var d = new GetProgressLevelCallback(GetProgressLevel);
+            return (int)_prbProgress.Invoke(d, new object[] { });
         }
         public void InitProgressLevel(int max, int min)
         {

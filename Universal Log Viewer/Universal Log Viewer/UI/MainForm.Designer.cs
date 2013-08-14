@@ -145,14 +145,14 @@
             this.mnuHelpFile.Name = "mnuHelpFile";
             this.mnuHelpFile.Size = new System.Drawing.Size(150, 24);
             this.mnuHelpFile.Text = "Help";
-            this.mnuHelpFile.Click += new System.EventHandler(this.mnuHelpFile_Click);
+            this.mnuHelpFile.Click += new System.EventHandler(this.MnuHelpFileClick);
             // 
             // mnuHelpIndex
             // 
             this.mnuHelpIndex.Name = "mnuHelpIndex";
             this.mnuHelpIndex.Size = new System.Drawing.Size(150, 24);
             this.mnuHelpIndex.Text = "Help Index";
-            this.mnuHelpIndex.Click += new System.EventHandler(this.mnuHelpIndex_Click);
+            this.mnuHelpIndex.Click += new System.EventHandler(this.MnuHelpIndexClick);
             // 
             // aboutToolStripMenuItem
             // 
@@ -173,7 +173,7 @@
             this.closeTabToolStripMenuItem.Name = "closeTabToolStripMenuItem";
             this.closeTabToolStripMenuItem.Size = new System.Drawing.Size(143, 24);
             this.closeTabToolStripMenuItem.Text = "Close Tab";
-            this.closeTabToolStripMenuItem.Click += new System.EventHandler(this.closeTabToolStripMenuItem_Click);
+            this.closeTabToolStripMenuItem.Click += new System.EventHandler(this.CloseTabToolStripMenuItemClick);
             // 
             // splitMain
             // 
@@ -323,7 +323,7 @@
             this.btnLoadLog.TabIndex = 4;
             this.btnLoadLog.Text = "Load Log";
             this.btnLoadLog.UseVisualStyleBackColor = true;
-            this.btnLoadLog.Click += new System.EventHandler(this.btnLoadLog_Click);
+            this.btnLoadLog.Click += new System.EventHandler(this.BtnLoadLogClick);
             // 
             // btnLoadLogTypes
             // 

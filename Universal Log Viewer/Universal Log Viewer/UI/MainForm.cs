@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Forms;
+using UniversalLogViewer.Properties;
 using UniversalLogViewer.Types.Values;
 using UniversalLogViewer.Types.Structures;
 using UniversalLogViewer.Common.Types.Managers;
@@ -10,7 +12,7 @@ namespace UniversalLogViewer.UI
 {
     public partial class MainForm : Form
     {
-        public TreeView SelectedTreeView
+        private TreeView SelectedTreeView
         {
             get         
             {
@@ -21,24 +23,22 @@ namespace UniversalLogViewer.UI
         public MainForm()
         {
             InitializeComponent();
-            this.LogProgress = new LogLoadProgress(this.prbProcess, this.lblProgress);
+            LogProgress = new LogLoadProgress(prbProcess, lblProgress);
         }
-        System.Threading.Thread LoadLogThread;
+        System.Threading.Thread _loadLogThread;
 
-        public Common.LogLoadProgress LogProgress { get; private set; }
+        public LogLoadProgress LogProgress { get; private set; }
 
         private void btnLoadLogTypes_Click(object sender, EventArgs e)
         {
-            LogTypesManagerForm fmLoadLogType = new LogTypesManagerForm();
+            var fmLoadLogType = new LogTypesManagerForm();
             fmLoadLogType.ShowDialog(this);
-            var CurrentLogType = cmbLogTypes.SelectedItem as LogType;
-            LogTypeManager.oInstance.UpdateList(cmbLogTypes.Items);
-            if (CurrentLogType != null)
-                foreach (var CurrentItem in cmbLogTypes.Items)
+            var currentLogType = cmbLogTypes.SelectedItem as LogType;
+            LogTypeManager.Instance.UpdateList(cmbLogTypes.Items);
+            if (currentLogType != null)
+                foreach (var newLogType in cmbLogTypes.Items.Cast<object>().OfType<LogType>().Where(newLogType => newLogType.LogName == currentLogType.LogName))
                 {
-                    var NewLogType = CurrentItem as LogType;
-                    if ((NewLogType != null) && (NewLogType.LogName == CurrentLogType.LogName))
-                        cmbLogTypes.SelectedItem = NewLogType;
+                    cmbLogTypes.SelectedItem = newLogType;
                 }
         }
 
@@ -49,11 +49,11 @@ namespace UniversalLogViewer.UI
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormAbout frmAbout = new FormAbout();
+            var frmAbout = new FormAbout();
             frmAbout.ShowDialog();
         }
 
-        public struct LoadLogParametersData
+        private struct LoadLogParametersData
         {
             public LogType LoadedLogType;
             public string LogFileName;
@@ -62,54 +62,52 @@ namespace UniversalLogViewer.UI
         private void LoadLog(object o)
         {
 
-            LoadLogParametersData Data = (LoadLogParametersData)o;
-            Log oLog = new Log(Data.LoadedLogType, Data.LogFileName);
-            TabPage LogTab = new TabPage();
-            LogTab.Text = Data.LogFileName + " (" + oLog.StructureType.LogName + ")";
-            TreeView LogTreeView = new TreeView();
-            LogTreeView.Dock = DockStyle.Fill;
-            LogTreeView.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TreeView_KeyPress);
-            LogTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.LogTreeViewSelectedItemChanged);
+            var data = (LoadLogParametersData)o;
+            var oLog = new Log(data.LoadedLogType, data.LogFileName);
+            var logTab = new TabPage {Text = string.Format("{0} ({1})", data.LogFileName, oLog.StructureType.LogName)};
+            var logTreeView = new TreeView {Dock = DockStyle.Fill};
+            logTreeView.KeyPress += TreeView_KeyPress;
+            logTreeView.AfterSelect += LogTreeViewSelectedItemChanged;
 
-            LogTab.Controls.Add(LogTreeView);
-            LogTab.ContextMenuStrip = cntTabPopup;
+            logTab.Controls.Add(logTreeView);
+            logTab.ContextMenuStrip = cntTabPopup;
             
-            LogTreeView.Nodes.Add(oLog.TreeNode);
-            AddLogTabAndSelect(LogTab);
+            logTreeView.Nodes.Add(oLog.TreeNode);
+            AddLogTabAndSelect(logTab);
         }
-        delegate void AddLogTabAndSelectCallback(TabPage LogTab);
-        private void AddLogTabAndSelect(TabPage LogTab)
+
+        delegate void AddLogTabAndSelectCallback(TabPage logTab);
+        private void AddLogTabAndSelect(TabPage logTab)
         {
-            if (this.tabLogs.InvokeRequired)
+            if (tabLogs.InvokeRequired)
             {
-                AddLogTabAndSelectCallback d = new AddLogTabAndSelectCallback(AddLogTabAndSelect);
-                this.Invoke(d, new object[] { LogTab });
+                var d = new AddLogTabAndSelectCallback(AddLogTabAndSelect);
+                Invoke(d, new object[] { logTab });
             }
             else
             {
-                tabLogs.TabPages.Add(LogTab);
+                tabLogs.TabPages.Add(logTab);
                 tabLogs.SelectedIndex = tabLogs.TabPages.Count - 1;
                 HideShowSearch();
-
             }
         }
 
-        private void btnLoadLog_Click(object sender, EventArgs e)
+        private void BtnLoadLogClick(object sender, EventArgs e)
         {
-            if (dlgOpenLog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (dlgOpenLog.ShowDialog() == DialogResult.OK)
             {
                 string sLogFileName = dlgOpenLog.FileName;
-                if (LogTypeManager.oInstance.TypesList.Count > 0)
+                if (LogTypeManager.Instance.TypesList.Count > 0)
                 {
                     if ((cmbLogTypes.SelectedIndex != -1)&&
                         (cmbLogTypes.Items[cmbLogTypes.SelectedIndex] is LogType))
                     {
-                        LoadLogParametersData LoadLogData = new LoadLogParametersData();
-                        LoadLogThread = new System.Threading.Thread(LoadLog);
-                        LoadLogData.LoadedLogType = 
+                        var loadLogData = new LoadLogParametersData();
+                        _loadLogThread = new System.Threading.Thread(LoadLog);
+                        loadLogData.LoadedLogType = 
                             (cmbLogTypes.Items[cmbLogTypes.SelectedIndex] as LogType);
-                        LoadLogData.LogFileName = sLogFileName;
-                        LoadLogThread.Start(LoadLogData);
+                        loadLogData.LogFileName = sLogFileName;
+                        _loadLogThread.Start(loadLogData);
                     }
                     else
                     {
@@ -126,12 +124,12 @@ namespace UniversalLogViewer.UI
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            LogTypeManager.oInstance.UpdateList(cmbLogTypes.Items);
-            this.Text = Application.ProductName + " " + Application.ProductVersion;
+            LogTypeManager.Instance.UpdateList(cmbLogTypes.Items);
+            Text = string.Format("{0} {1}", Application.ProductName, Application.ProductVersion);
             HideShowSearch();
         }
 
-        private void closeTabToolStripMenuItem_Click(object sender, EventArgs e)
+        private void CloseTabToolStripMenuItemClick(object sender, EventArgs e)
         {
             tabLogs.TabPages.Remove(tabLogs.SelectedTab);
             HideShowSearch();
@@ -139,36 +137,32 @@ namespace UniversalLogViewer.UI
 
         private void TreeView_KeyPress(object sender, KeyPressEventArgs e)
         {
-            var Tree = sender as TreeView;
-            if (sender == null)
+            var tree = sender as TreeView;
+            if (sender == null || tree == null)
                 return;
 
-            if (tabLogs.SelectedIndex > -1)
-                if (e.KeyChar == 3)
-                    Clipboard.SetText(Tree.SelectedNode.Text);         
+            if (tabLogs.SelectedIndex > -1 && e.KeyChar == 3) Clipboard.SetText(tree.SelectedNode.Text);
         }
         private void LogTreeViewSelectedItemChanged(object sender, EventArgs e)
         {
-            TreeView Tree = (sender as TreeView);
-            if ((IniSettingsManager.ShowValueMemo) && (Tree != null))
+            var tree = (sender as TreeView);
+            if ((!IniSettingsManager.ShowValueMemo) || (tree == null)) return;
+            var stringTag = tree.SelectedNode.Tag as StringValue;
+            if (stringTag != null)
             {
-                var StringTag = Tree.SelectedNode.Tag as StringValue;
-                if (StringTag != null)
-                {
-                    memoValue.Visible = true;
-                    memoValue.Lines = StringTag.GetValues();
-                }
-                else
-                    memoValue.Visible = false;
+                memoValue.Visible = true;
+                memoValue.Lines = stringTag.GetValues();
             }
+            else
+                memoValue.Visible = false;
         }
 
-        private void mnuHelpFile_Click(object sender, EventArgs e)
+        private void MnuHelpFileClick(object sender, EventArgs e)
         {
             Help.ShowHelp(this, hlpUniLogViewer.HelpNamespace);
         }
 
-        private void mnuHelpIndex_Click(object sender, EventArgs e)
+        private void MnuHelpIndexClick(object sender, EventArgs e)
         {
             Help.ShowHelpIndex(this, hlpUniLogViewer.HelpNamespace);
         }
@@ -177,35 +171,22 @@ namespace UniversalLogViewer.UI
         {
             if (tabLogs.InvokeRequired)
             {
-                GetSelectedTreeViewCallback d = new GetSelectedTreeViewCallback(GetSelectedTreeView);
-                return (TreeView) this.Invoke(d, new object[] {});
+                var d = new GetSelectedTreeViewCallback(GetSelectedTreeView);
+                return (TreeView) Invoke(d, new object[] {});
             }
-            else
-            {
-                var SelTab = tabLogs.SelectedTab;
-                foreach (Control SelectedControl in SelTab.Controls)
-                {
-                    TreeView SelectedTreeView = SelectedControl as TreeView;
-                    if (SelectedTreeView != null)
-                        return SelectedTreeView;
-                }
-                return null;
-            }
+            var selTab = tabLogs.SelectedTab;
+            return selTab.Controls.OfType<TreeView>().FirstOrDefault();
         }
 
-        delegate TreeNode GetSelectedTreeNodeCallback(TreeView CurrentTreeView);
-        private TreeNode GetSelectedTreeNode(TreeView CurrentTreeView)
+        delegate TreeNode GetSelectedTreeNodeCallback(TreeView currentTreeView);
+        private TreeNode GetSelectedTreeNode(TreeView currentTreeView)
         {
-            if (CurrentTreeView.InvokeRequired)
+            if (currentTreeView.InvokeRequired)
             {
-                GetSelectedTreeNodeCallback d = new GetSelectedTreeNodeCallback(GetSelectedTreeNode);
-                return (TreeNode)this.Invoke(d, new object[] { CurrentTreeView });
+                var d = new GetSelectedTreeNodeCallback(GetSelectedTreeNode);
+                return (TreeNode)Invoke(d, new object[] { currentTreeView });
             }
-            else
-            {
-                return CurrentTreeView.SelectedNode;
-            }
-
+            return currentTreeView.SelectedNode;
         }
 
 
@@ -214,8 +195,8 @@ namespace UniversalLogViewer.UI
         {
             if (InvokeRequired)
             {
-                InitProgressLevelCallback d = new InitProgressLevelCallback(InitProgressLevel);
-                this.Invoke(d, new object[] { max, min, action });
+                var d = new InitProgressLevelCallback(InitProgressLevel);
+                Invoke(d, new object[] { max, min, action });
             }
             else
             {
@@ -231,8 +212,8 @@ namespace UniversalLogViewer.UI
         {
             if (InvokeRequired)
             {
-                EndProgressCallback d = new EndProgressCallback(EndProgress);
-                this.Invoke(d, new object[] { });
+                var d = new EndProgressCallback(EndProgress);
+                Invoke(d, new object[] { });
             }
             else
             {
@@ -243,16 +224,13 @@ namespace UniversalLogViewer.UI
         }
 
 
-
-
-
         delegate void FocusControlCallback(Control c);
         private void FocusControl(Control c)
         {
-            if (this.InvokeRequired)
+            if (InvokeRequired)
             {
-                FocusControlCallback d = new FocusControlCallback(FocusControl);
-                this.Invoke(d, new object[] { c });
+                var d = new FocusControlCallback(FocusControl);
+                Invoke(d, new object[] { c });
             }
             else
                 c.Focus();
@@ -260,29 +238,27 @@ namespace UniversalLogViewer.UI
 
         private void Search()
         {
-            TreeView SelTreeView = GetSelectedTreeView();
-            FocusControl(SelTreeView);
-            InitProgressLevel(SelTreeView.GetNodeCount(true), 0, "Search progress...");
-            bool SearchResult = UICommon.SearchWithinNodes(this.LogProgress, SelTreeView, GetSelectedTreeNode(GetSelectedTreeView()), txtFind.Text);
-            if (SearchResult)
-                FocusControl(SelTreeView);
+            TreeView selTreeView = GetSelectedTreeView();
+            FocusControl(selTreeView);
+            InitProgressLevel(selTreeView.GetNodeCount(true), 0, "Search progress...");
+            var searchResult = UICommon.SearchWithinNodes(LogProgress, selTreeView, GetSelectedTreeNode(GetSelectedTreeView()), txtFind.Text);
+            if (searchResult)
+                FocusControl(selTreeView);
             else
-                MessageBox.Show("Search string \" " + txtFind.Text + "\" was not found within tree after selected node", "Nothing found", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, Consts.DefaultMessageBoxOptions);
+                MessageBox.Show(
+                    string.Format("Search string \" {0}\" was not found within tree after selected node", txtFind.Text),
+                    Resources.NothingFoundMessage, MessageBoxButtons.OK, MessageBoxIcon.Information,
+                    MessageBoxDefaultButton.Button1, Consts.DefaultMessageBoxOptions);
             EndProgress();
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            if (SelectedTreeView != null)
-            {
-                if (SelectedTreeView.SelectedNode == null)
-                    SelectedTreeView.SelectedNode = SelectedTreeView.Nodes[0];
-                else                
-                    SelectedTreeView.SelectedNode = UICommon.GetNextNodeInList(SelectedTreeView.SelectedNode);                
-                (new System.Threading.Thread(Search)).Start();
-
-            }
-
+            if (SelectedTreeView == null) return;
+            SelectedTreeView.SelectedNode = SelectedTreeView.SelectedNode == null
+                                                ? SelectedTreeView.Nodes[0]
+                                                : UICommon.GetNextNodeInList(SelectedTreeView.SelectedNode);
+            (new System.Threading.Thread(Search)).Start();
         }
         private void HideShowSearch()
         {
@@ -299,8 +275,8 @@ namespace UniversalLogViewer.UI
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if (LoadLogThread.IsAlive)
-                LoadLogThread.Abort();
+            if (_loadLogThread.IsAlive)
+                _loadLogThread.Abort();
         }
     }
 

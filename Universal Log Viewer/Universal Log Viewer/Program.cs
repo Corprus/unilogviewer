@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using UniversalLogViewer.Common.Exceptions;
 using UniversalLogViewer.UI;
 using UniversalLogViewer.Types.Managers;
-using UniversalLogViewer.Common.Exceptions;
 using UniversalLogViewer.Common.Types.Managers;
 [assembly:CLSCompliant(true)]
 namespace UniversalLogViewer

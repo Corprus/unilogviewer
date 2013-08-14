@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using UniversalLogViewer.Common;
-using IniFiles;
+﻿using IniFiles;
 using System.Windows.Forms;
 
 namespace UniversalLogViewer.Common.Types.Managers
@@ -11,56 +6,50 @@ namespace UniversalLogViewer.Common.Types.Managers
     public static class IniSettingsManager
     {
 
-        const string SECTION_PATHS = "Paths";
-        const string KEY_LOG_TYPES_SUBFOLDER = "LogTypesSubFolder";
-        const string SECTION_LOG_TYPES = "Log Types";
-        const string KEY_SEPARATE_LOG = "SeparateLog";
-        const string KEY_CLEAR_OLD_CONTENTS = "ClearOldContents";
-        const string KEY_OPEN = "OpenIfGenerated";
-        const string KEY_OPEN_COMMAND = "OpenCommand";
-        const string SECTION_VISUAL = "Visual";
-        const string KEY_SHOW_VALUE_MEMO = "ShowValueMemo";
+        const string SectionPaths = "Paths";
+        const string KeyLogTypesSubfolder = "LogTypesSubFolder";
+        const string SectionLogTypes = "Log Types";
+        const string KeySeparateLog = "SeparateLog";
+        const string KeyClearOldContents = "ClearOldContents";
+        const string KeyOpen = "OpenIfGenerated";
+        const string KeyOpenCommand = "OpenCommand";
+        const string SectionVisual = "Visual";
+        const string KeyShowValueMemo = "ShowValueMemo";
 
-        static AutoSavedIniFile IniFile;
+        static AutoSavedIniFile _iniFile;
         public static string LogTypesFolder
         {
-            get
-            {
-                if (IniFile != null)
-                    return Application.StartupPath + "\\" + IniFile.ReadValue(SECTION_PATHS, KEY_LOG_TYPES_SUBFOLDER);
-                else
-                    return Application.StartupPath;
+            get {
+                return _iniFile != null
+                           ? Application.StartupPath + "\\" + _iniFile.ReadValue(SectionPaths, KeyLogTypesSubfolder)
+                           : Application.StartupPath;
             }
         }
+
         public static string OpenLogTypeCommand
         {
-            get
-            {
-                if (IniFile != null)
-                    return IniFile.ReadValue(SECTION_LOG_TYPES, KEY_OPEN_COMMAND);
-                else
-                    return "";
-            }
+            get { return _iniFile != null ? _iniFile.ReadValue(SectionLogTypes, KeyOpenCommand) : ""; }
         }
+
         public static bool UseSeparateInconsistenciesLog
         {
             get
             {
-                return GetBoolIniValue(SECTION_LOG_TYPES, KEY_SEPARATE_LOG, true);
+                return GetBoolIniValue(SectionLogTypes, KeySeparateLog, true);
             }
         }
         public static bool ClearOldInconsistenciesContents
         {
             get
             {
-                return GetBoolIniValue(SECTION_LOG_TYPES, KEY_CLEAR_OLD_CONTENTS, false);
+                return GetBoolIniValue(SectionLogTypes, KeyClearOldContents, false);
             }
         }
         public static bool OpenInconsistenciesLogIfGenerated
         {
             get
             {
-                return GetBoolIniValue(SECTION_LOG_TYPES, KEY_OPEN, true);
+                return GetBoolIniValue(SectionLogTypes, KeyOpen, true);
             }
         }
 
@@ -69,7 +58,7 @@ namespace UniversalLogViewer.Common.Types.Managers
         {
             get
             {
-                return GetBoolIniValue(SECTION_VISUAL, KEY_SHOW_VALUE_MEMO, false);
+                return GetBoolIniValue(SectionVisual, KeyShowValueMemo, false);
             }
         }
 
@@ -77,24 +66,16 @@ namespace UniversalLogViewer.Common.Types.Managers
         {
             try
             {
-                IniFile = new AutoSavedIniFile(Application.StartupPath + "\\" + Consts.SettingsIniFileName);
+                _iniFile = new AutoSavedIniFile(Application.StartupPath + "\\" + Consts.SettingsIniFileName);
             }
             catch (System.IO.IOException e)
             {
-                throw new Common.Exceptions.LogSettingsIniException(e);
+                throw new Exceptions.LogSettingsIniException(e);
             }
         }
-        private static bool GetBoolIniValue(string Section, string Key, bool DefaultValue)
+        private static bool GetBoolIniValue(string section, string key, bool defaultValue)
         {
-            if (IniFile != null)
-            {
-                return IniFile.ReadBoolValue(Section, Key, DefaultValue);
-            }
-            else
-                return DefaultValue;
-
+            return _iniFile != null ? _iniFile.ReadBoolValue(section, key, defaultValue) : defaultValue;
         }
-
-
     }
 }

@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows.Forms;
 using UniversalLogViewer.Types.Structures;
 using UniversalLogViewer.Common;
@@ -11,16 +9,18 @@ namespace UniversalLogViewer.Types.Values
     public class Value : BaseStringValueCollection<Value>
     {
         public new ValuesType StructureType { get { return (base.StructureType as ValuesType); } }
-        public Value(ValuesType Type,ref string Source)
-            :base(Type,ref Source)
+
+        public Value(ValuesType type, ref string source)
+            : base(type, ref source)
         {
-            
+
         }
+
         public override TreeNode TreeNode
         {
             get
             {
-                TreeNodeValueString = this.StructureType.Name + ": " + Value;
+                TreeNodeValueString = string.Format("{0}: {1}", StructureType.Name, Value);
                 return base.TreeNode;
             }
         }
@@ -28,55 +28,53 @@ namespace UniversalLogViewer.Types.Values
         {            
             Value = GetValue(Source);
         }
-        public string GetValue(string Parsed)
+        
+        public string GetValue(string parsed)
         {
-            ConditionType condition = this.StructureType.Condition;
+            ConditionType condition = StructureType.Condition;
             int startLength = condition.StartsWith.Length;
             int endLength = condition.EndsWith.Length;
             bool emptyStartsWith = startLength == 0;
             bool emptyEndsWith = endLength == 0;
-            int iStart = Parsed.IndexOf(condition.StartsWith, StringComparison.Ordinal);
-            int iEnd = Parsed.IndexOf(condition.EndsWith, StringComparison.Ordinal);
-            string PreParsedValue = Consts.EmptySymbol;
+            int iStart = parsed.IndexOf(condition.StartsWith, StringComparison.Ordinal);
+            int iEnd = parsed.IndexOf(condition.EndsWith, StringComparison.Ordinal);
+            string preParsedValue = Consts.EmptySymbol;
             
             if (emptyStartsWith && emptyEndsWith)
-                PreParsedValue = Parsed;
+                preParsedValue = parsed;
             else if (emptyStartsWith && (iEnd >= 0))
-                PreParsedValue = Parsed.Substring(0, iEnd + endLength);
+                preParsedValue = parsed.Substring(0, iEnd + endLength);
             else if (emptyEndsWith && (iStart >= 0))
-                PreParsedValue = Parsed.Substring(iStart, Parsed.Length - iStart);
+                preParsedValue = parsed.Substring(iStart, parsed.Length - iStart);
             else if ((iStart >= 0) && (iEnd >= 0) && (iEnd > iStart))
-                PreParsedValue = Parsed.Substring(iStart, (iEnd - iStart + 1));
+                preParsedValue = parsed.Substring(iStart, (iEnd - iStart + 1));
             else
-                return PreParsedValue;
-            if (condition.IsCorrect(PreParsedValue))
+                return preParsedValue;
+            if (condition.IsCorrect(preParsedValue))
             {
-                if (!(this.StructureType.IncludeConditions))
+                if (!(StructureType.IncludeConditions))
                 {
-                    PreParsedValue =
-                        PreParsedValue.Substring(startLength, (PreParsedValue.Length - endLength - startLength));
+                    preParsedValue =
+                        preParsedValue.Substring(startLength, (preParsedValue.Length - endLength - startLength));
                 }
-                return PreParsedValue;
+                return preParsedValue;
             }
-            else
-                return Consts.EmptySymbol;
+            return Consts.EmptySymbol;
         }
         //¬џ–≈«ј“№(!!!) »з большой строки то что мы отпарсили
-        public string CutSource(string Source)
+        public string CutSource(string source)
         {
-            if ((Value.Length != 0) && (Source.Contains(Value)))
-            {
-                int iStart = Source.IndexOf(Value, StringComparison.Ordinal);
-                int iEnd = iStart + Value.Length;
-                if (!(this.StructureType.IncludeConditions)) //≈сли не включаем граничные услови€ в значение - то еще не факт что мы не должны их вырезјть
-                {
-                    iStart -= this.StructureType.Condition.StartsWith.Length;
-                    iEnd += this.StructureType.Condition.EndsWith.Length;
-                }
-                return (Source.Substring(0, iStart) + Source.Substring(iEnd, Source.Length - iEnd));
-            }
-            else
+            if ((Value.Length == 0) || (!source.Contains(Value)))
                 return Consts.EmptySymbol;
+            var start = source.IndexOf(Value, StringComparison.Ordinal);
+            var end = start + Value.Length;
+            if (!(StructureType.IncludeConditions))
+                //≈сли не включаем граничные услови€ в значение - то еще не факт что мы не должны их вырезјть
+            {
+                start -= StructureType.Condition.StartsWith.Length;
+                end += StructureType.Condition.EndsWith.Length;
+            }
+            return (source.Substring(0, start) + source.Substring(end, source.Length - end));
         }
     }
 }

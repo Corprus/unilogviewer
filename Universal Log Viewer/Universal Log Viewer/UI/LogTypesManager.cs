@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 using UniversalLogViewer.Types.Structures;
 using UniversalLogViewer.Types.Managers;
@@ -18,10 +13,10 @@ namespace UniversalLogViewer.UI
             InitializeComponent();
             InitElements(true);
         }
-        void InitElements(bool UpdateList)
+        void InitElements(bool updateList)
         {
-            if (UpdateList)
-                LogTypeManager.oInstance.UpdateList(lbxLogTypes.Items);
+            if (updateList)
+                LogTypeManager.Instance.UpdateList(lbxLogTypes.Items);
             btnReInit.Enabled = (lbxLogTypes.SelectedItem is LogType);
             btnDelete.Enabled = (lbxLogTypes.SelectedItem is LogType);
             if (lbxLogTypes.SelectedItem is LogType)
@@ -36,13 +31,10 @@ namespace UniversalLogViewer.UI
 
         private void btnImportLogType_Click(object sender, EventArgs e)
         {
-            if (dlgOpenLogType.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                string sLogFileName = dlgOpenLogType.FileName;
-                LogTypeManager.oInstance.AddLogType(sLogFileName);
-                InitElements(true);
-            }
-
+            if (dlgOpenLogType.ShowDialog() != DialogResult.OK) return;
+            var sLogFileName = dlgOpenLogType.FileName;
+            LogTypeManager.Instance.AddLogType(sLogFileName);
+            InitElements(true);
         }
 
 
@@ -63,11 +55,11 @@ namespace UniversalLogViewer.UI
             {
                 if (MessageBox.Show(Consts.TextDeleteLogType, Consts.HeaderDeleteLogType, MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2, Consts.DefaultMessageBoxOptions) == DialogResult.Yes)
                 {
-                    LogType DeletedLogType = (lbxLogTypes.SelectedItem as LogType);
-                    int DeletedIndexInManager = LogTypeManager.oInstance.TypesList.IndexOf(DeletedLogType);
-                    string DeletedFileName = DeletedLogType.LogTypeFile.FileName;
-                    System.IO.File.Delete(DeletedFileName);
-                    LogTypeManager.oInstance.TypesList.RemoveAt(DeletedIndexInManager);
+                    var deletedLogType = (lbxLogTypes.SelectedItem as LogType);
+                    var deletedIndexInManager = LogTypeManager.Instance.TypesList.IndexOf(deletedLogType);
+                    var deletedFileName = deletedLogType.LogTypeFile.FileName;
+                    System.IO.File.Delete(deletedFileName);
+                    LogTypeManager.Instance.TypesList.RemoveAt(deletedIndexInManager);
                     InitElements(true);
                 }
             }

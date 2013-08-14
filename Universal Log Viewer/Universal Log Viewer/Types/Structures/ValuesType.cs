@@ -1,42 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using UniversalLogViewer.LogIniFiles;
+﻿using UniversalLogViewer.LogIniFiles;
 
 namespace UniversalLogViewer.Types.Structures
 {
     public class ValuesType : BaseType
     {
-        public const string INI_TYPE_NAME = "Value";
-        const string KEY_NAME = "Name";
-        const string KEY_INCLUDE_CONDITIONS = "IncludeConditions";
-        const string KEY_VALUE_TYPE = "ValueType";
-        const string KEY_CONDITION = "Condition";
+        public const string IniTypeName = "Value";
+        const string KeyIncludeConditions = "IncludeConditions";
+        const string KeyValueType = "ValueType";
+        const string KeyCondition = "Condition";
         public ConditionType Condition { get; private set; }
         public bool IncludeConditions { get; private set; }
         public string ValueType { get; private set; }
 
-        private void FInit(string ValueType, bool IncludeConditions, ConditionType Condition)
+        private void FInit(string valueType, bool includeConditions, ConditionType condition)
         {
-            this.ValueType = ValueType;
-            this.IncludeConditions = IncludeConditions;
-            this.Condition = Condition;
-        }
-        public ValuesType(LogType LogType, LogIniSection Section)
-            : base(LogType, Section)
-        {
+            ValueType = valueType;
+            IncludeConditions = includeConditions;
+            Condition = condition;
         }
 
-        public override void ReInit(LogType LogType, LogIniSection Section)
+        public override void ReInit(LogType logType, LogIniSection section)
         {
-            base.ReInit(LogType, Section);
-            FInit(Section.Values[KEY_VALUE_TYPE],
-                (Section.Values[KEY_INCLUDE_CONDITIONS] == "1"),
-                (ParentLogType.Conditions[ParentLogType.LogTypeFile.Sections[Section.Values[KEY_CONDITION]].SectionName]));
-        }
-        public ValuesType()
-            : base()
-        {
+            base.ReInit(logType, section);
+            FInit(section.Values[KeyValueType],
+                (section.Values[KeyIncludeConditions] == "1"),
+                (ParentLogType.Conditions[ParentLogType.LogTypeFile.Sections[section.Values[KeyCondition]].SectionName]));
         }
     }
 }

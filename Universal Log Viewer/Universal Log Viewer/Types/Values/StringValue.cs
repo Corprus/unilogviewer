@@ -1,8 +1,6 @@
-using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 using System.Windows.Forms;
-using UniversalLogViewer;
 using UniversalLogViewer.Types.Structures;
 using UniversalLogViewer.Common.Types.Managers;
 
@@ -12,80 +10,82 @@ namespace UniversalLogViewer.Types.Values
     
     public class StringValue : BaseStringValueCollection<Value>
     {
-        public new StringType StructureType { get { return (base.StructureType as StringType); } private set { base.StructureType = value; } }
-        public bool ConditionCorrect { get { return this.StructureType.Condition.IsCorrect(Value); } }
+        private new StringType StructureType
+        {
+            get { return (base.StructureType as StringType); }
+            set { base.StructureType = value; }
+        }
+
+        public bool ConditionCorrect { get { return StructureType.Condition.IsCorrect(Value); } }
         public int StartIndex { get; set; }
         public override TreeNode TreeNode
         {
             get
             {
 
-                string NodeTitle;
-                switch (this.StructureType.TitleType)
+                string nodeTitle;
+                switch (StructureType.TitleType)
                 {
-                    case Common.TitleType.Title: NodeTitle = this.StructureType.Title; break;
-                    case Common.TitleType.Source: NodeTitle = this.Source; break;
+                    case Common.TitleType.Title: nodeTitle = StructureType.Title; break;
+                    case Common.TitleType.Source: nodeTitle = Source; break;
                     case Common.TitleType.Value:
                         {
-                            Value TitleElement = null;
-                            int titleValueIndex = this.StructureType.TitleValueIndex;
-                            string titleValueType = this.StructureType.TitleValueType;
+                            Value titleElement = null;
+                            var titleValueIndex = StructureType.TitleValueIndex;
+                            var titleValueType = StructureType.TitleValueType;
                             if (ChildElements.Count > titleValueIndex)
                             {
-                                Value childElementValue = ChildElements[titleValueIndex];
+                                var childElementValue = ChildElements[titleValueIndex];
                                 if (!((titleValueType.Length > 0) && 
                                    (childElementValue.StructureType.Name != titleValueType)))
-                                    TitleElement = childElementValue;
+                                    titleElement = childElementValue;
                             }
-                            NodeTitle = (TitleElement == null) ? this.StructureType.Title : TitleElement.Value;
+                            nodeTitle = (titleElement == null) ? StructureType.Title : titleElement.Value;
                             break;
                         }
-                    default: NodeTitle = this.StructureType.Title; break;
+                    default: nodeTitle = StructureType.Title; break;
                 }
-                TreeNodeValueString = NodeTitle;
-                TreeNode Result = base.TreeNode;
+                TreeNodeValueString = nodeTitle;
+                var result = base.TreeNode;
                 if ((!IniSettingsManager.ShowValueMemo))
                 {
-                    for (int i = ChildElements.Count - 1; i >= 0; i--)
+                    for (var i = ChildElements.Count - 1; i >= 0; i--)
                     {
-                        Value ResultValue = ChildElements[i];
-                        if (ResultValue.StructureType.Style.Visible)
+                        var resultValue = ChildElements[i];
+                        if (resultValue.StructureType.Style.Visible)
                         {
-                            Result.Nodes.Insert(0, ResultValue.TreeNode);
+                            result.Nodes.Insert(0, resultValue.TreeNode);
                         }
                         ChildElements.RemoveAt(i);
                     }
                 }
                 ChildElements.Clear();
                 Program.MainForm.LogProgress.IncreaseProgressLevel(1);
-                return Result;
+                return result;
             }
         }
     
 
-        List<Value> ProcessString()
+        void ProcessString()
         {
-            bool bStringProcessed = false;
-            string sProcessedString = Source;
-            List<Value> Values = ChildElements;
-            if (Values == null)
-                Values = new List<Value>();
-            Values.Clear();
+            var bStringProcessed = false;
+            string[] processedString = {Source};
+            var values = ChildElements ?? new List<Value>();
+            values.Clear();
             
-            if (this.StructureType.UseSeparator)
+            if (StructureType.UseSeparator)
             {
-                String[] SeparatedStrings = sProcessedString.Split(this.StructureType.Separator);
-                ValuesType[] Types = this.StructureType.ChildTypes.ToArray();
+                var separatedStrings = processedString[0].Split(StructureType.Separator);
+                var types = StructureType.ChildTypes.ToArray();
                 /* Тут не до конца понятно как минимум брать и что делать с отсеянными полями,
                  * ну да и хрен с ними */
-                for (int i = 0; i < SeparatedStrings.Length; i++)
+                for (var i = 0; i < separatedStrings.Length; i++)
                 {
-                    int typesLength = Types.Length;
-                    ValuesType UsedType;
-                    UsedType = (i >= typesLength) ? Types[typesLength - 1] : Types[i];
-                    Value NewValue = new Value(UsedType,ref SeparatedStrings[i]);
-                    if (NewValue.Value.Length != 0)
-                        Values.Add(NewValue);
+                    var typesLength = types.Length;
+                    ValuesType usedType = (i >= typesLength) ? types[typesLength - 1] : types[i];
+                    var newValue = new Value(usedType,ref separatedStrings[i]);
+                    if (newValue.Value.Length != 0)
+                        values.Add(newValue);
                 }
             }
             else
@@ -95,35 +95,35 @@ namespace UniversalLogViewer.Types.Values
                 while (!(bStringProcessed))
                 {
                     bStringProcessed = true;
-                    foreach (ValuesType VType in this.StructureType.ChildTypes)
+                    foreach (
+                        var newValue in
+                            StructureType.ChildTypes.Select(type => new Value(type, ref processedString[0]))
+                                         .Where(newValue => newValue.Value.Length != 0))
                     {
-                        Value NewValue = new Value(VType,ref sProcessedString);
-                        if (NewValue.Value.Length != 0)
-                        {
-                            Values.Add(NewValue);
-                            sProcessedString = NewValue.CutSource(sProcessedString);
-                        }
+                        values.Add(newValue);
+                        processedString[0] = newValue.CutSource(processedString[0]);
                     }
                 }
-            return Values;
         }
         public override void Parse()
         {
             ProcessString();
         }
-        public StringValue(StringType StringType,ref string Source)
-            : base(StringType, ref Source)
+
+        public StringValue(StringType stringType, ref string source)
+            : base(stringType, ref source)
         {
-            this.Value = Source;
-            this.StructureType = StringType;
+            Value = source;
+            StructureType = stringType;
         }
+
         public string[] GetValues()
         {
-            List<string> Result = new List<string>();
-            Result.Add("Contents of " + this.StructureType.Title);
-            foreach (Value ChildValue in ChildElements)
-                Result.Add(ChildValue.StructureType.Name + ": " + ChildValue.Value);
-            return Result.ToArray();
+            var result = new List<string> {string.Format("Contents of {0}", StructureType.Title)};
+            result.AddRange(
+                ChildElements.Select(
+                    childValue => string.Format("{0}: {1}", childValue.StructureType.Name, childValue.Value)));
+            return result.ToArray();
         }
     }
 }

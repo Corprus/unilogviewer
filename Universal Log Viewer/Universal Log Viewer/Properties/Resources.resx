@@ -131,4 +131,10 @@
   <data name="UniLogViewer_Large" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\UniLogViewer.Large.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="CannotLoadLogTypeMessage" xml:space="preserve">
+    <value>Cannot load load type</value>
+  </data>
+  <data name="NothingFoundMessage" xml:space="preserve">
+    <value>Nothing found</value>
+  </data>
 </root>

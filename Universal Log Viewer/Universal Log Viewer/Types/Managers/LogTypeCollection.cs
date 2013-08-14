@@ -1,78 +1,73 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using UniversalLogViewer.Types.Structures;
+using System.Linq;
 using UniversalLogViewer.LogIniFiles;
+using UniversalLogViewer.Types.Structures;
 
-
-namespace UniversalLogViewer.Common
+namespace UniversalLogViewer.Types.Managers
 {
     public class LogTypeCollection<T> : IEnumerable<T>
         where T : BaseType, new()
 
     {
-        List<T> _TypeList;
+        readonly List<T> _typeList;
 
-        LogType LogType;
-        public LogTypeCollection(LogType LogType)
+        readonly LogType _logType;
+
+        public LogTypeCollection(LogType logType)
         {
-            _TypeList = new List<T>();
-            this.LogType = LogType;
+            _typeList = new List<T>();
+            _logType = logType;
         }
-        public T this[string Name]
+        public T this[string name]
         {
             get
             {
-                foreach (T ClassDef in _TypeList)
-                    if (ClassDef.SectionName == Name)
-                        return ClassDef;
+                var classDef = _typeList.FirstOrDefault(arg => arg.SectionName == name);
+                if (classDef != null)
+                    return classDef;
+
                     //Если в списке не найден элемент - пытаемся прочитать...                               
-                    if (LogType.LogTypeFile.Sections[Name] != null)
+                    if (_logType.LogTypeFile.Sections[name] != null)
                     {
-                        T NewElement = new T();
-                        NewElement.ReInit(LogType, LogType.LogTypeFile.Sections[Name]);
-                        _TypeList.Add(NewElement);
-                        return NewElement;                     
+                        var newElement = new T();
+                        newElement.ReInit(_logType, _logType.LogTypeFile.Sections[name]);
+                        _typeList.Add(newElement);
+                        return newElement;                     
                     }
                 return null;
             }
         }
         public IEnumerator<T> GetEnumerator()
         {
-            foreach (T ClassDef in _TypeList)
-                yield return ClassDef;
-        }
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return this.GetEnumerator();
+            return ((IEnumerable<T>) _typeList).GetEnumerator();
         }
 
-        public bool AddType(string SectionName)
+        IEnumerator IEnumerable.GetEnumerator()
         {
-            T Type = this[SectionName];
-            return (Type != null);
+            return GetEnumerator();
         }
-        public bool AddType(LogIniSection Section)
+
+        public bool AddType(string sectionName)
         {
-            T Type = this[Section.SectionName];
-            return (Type != null);
+            T type = this[sectionName];
+            return (type != null);
         }
-        public bool AddType(T TypeDef)
+        public bool AddType(LogIniSection section)
         {
-            if (this[TypeDef.Name] == null)
-                _TypeList.Add(TypeDef);
-            return (this[TypeDef.Name] != null);
+            T type = this[section.SectionName];
+            return (type != null);
         }
-        public List<T> GetList(string[] Names)
+        public bool AddType(T typeDef)
         {
-            List<T> Result = new List<T>();
-            foreach (string Name in Names)
-            {
-                Result.Add(this[Name]);
-            }
-            return Result;
+            if (this[typeDef.Name] == null)
+                _typeList.Add(typeDef);
+            return (this[typeDef.Name] != null);
         }
-        
+        public List<T> GetList(IEnumerable<string> names)
+        {
+            return names.Select(name => this[name]).ToList();
+        }
     }
 
 }

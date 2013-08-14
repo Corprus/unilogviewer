@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 using System.Windows.Forms;
 using UniversalLogViewer.Types.Structures;
 
@@ -10,96 +10,77 @@ namespace UniversalLogViewer.Types.Values
 
     public class BlockValue : BaseStringsValueCollection<BlockValue>
     {
-        public new BlockType StructureType { get { return base.StructureType as BlockType; }}
-        public bool IsEmpty { get { return (Value.Length == 0); } }
-        public int StartIndex { get; private set; }
+        private new BlockType StructureType { get { return base.StructureType as BlockType; }}
+        private bool IsEmpty { get { return (Value.Length == 0); } }
+        private int StartIndex { get; set; }
         //bool[] ProcessedStrings;
-        public List<StringValue> ChildStrings { get; private set; }
-        public string[] CutSourceString { get; private set; }
-        static bool IsBlock(Object Obj) { return (Obj is BlockValue); }
-        static bool IsString(Object Obj) { return (Obj is StringValue); }
-        static bool IsStringOrBlock(Object Obj) { return ((IsString(Obj)) || (IsBlock(Obj))); }
+        private List<StringValue> ChildStrings { get; set; }
+        private string[] CutSourceString { get; set; }
+        static bool IsBlock(Object obj) { return (obj is BlockValue); }
+        static bool IsString(Object obj) { return (obj is StringValue); }
+        static bool IsStringOrBlock(Object obj) { return ((IsString(obj)) || (IsBlock(obj))); }
 
         private static int CompareChilds(Object a, Object b)
         {
-            int StartIndexA;
-            int StartIndexB;
             if ((!IsStringOrBlock(a)) || (!IsStringOrBlock(b)))
                 return 0;
-            else
-            {
-                if (IsString(a))
-                    StartIndexA = (a as StringValue).StartIndex;
-                else //Block
-                    StartIndexA = (a as BlockValue).StartIndex;
-                if (IsString(b))
-                    StartIndexB = (b as StringValue).StartIndex;
-                else //Block
-                    StartIndexB = (b as BlockValue).StartIndex;
-                return (StartIndexA - StartIndexB);
-            }
-
-            
-            
+            int startIndexA = IsString(a) ? ((StringValue) a).StartIndex : ((BlockValue) a).StartIndex;
+            int startIndexB = IsString(b) ? ((StringValue) b).StartIndex : ((BlockValue) b).StartIndex;
+            return (startIndexA - startIndexB);
         }
         public override TreeNode TreeNode
         {
             get
             {
-                TreeNodeValueString = this.StructureType.Title;
-                TreeNode Result = base.TreeNode;
-                List<Object> ChildList = new List<Object>();
-                foreach (StringValue ChildString in ChildStrings)
-                    ChildList.Add(ChildString);
-                foreach (BlockValue ChildBlock in ChildElements)
-                    ChildList.Add(ChildBlock);
-                ChildList.Sort(CompareChilds);
-                for (int i= ChildList.Count -1; i>=0; i--)
-                //foreach (Object Obj in ChildList)
+                TreeNodeValueString = StructureType.Title;
+                TreeNode result = base.TreeNode;
+                var childList = ChildStrings.Cast<object>().ToList();
+                childList.AddRange(ChildElements);
+                childList.Sort(CompareChilds);
+                for (var i = childList.Count - 1; i >= 0; i--)
+                    //foreach (Object Obj in ChildList)
                 {
-                    var TypeObj = ChildList[i] as BaseValue;
-                    if ((TypeObj != null) && ((TypeObj is BlockValue) || (TypeObj is StringValue)))
-                        if (TypeObj.StructureType.Style.Visible)
-                            Result.Nodes.Insert(0, TypeObj.TreeNode);
-                    ChildList.RemoveAt(i);
+                    var typeObj = childList[i] as BaseValue;
+                    if ((typeObj != null) && ((typeObj is BlockValue) || (typeObj is StringValue)) &&
+                        typeObj.StructureType.Style.Visible) result.Nodes.Insert(0, typeObj.TreeNode);
+                    childList.RemoveAt(i);
                 }
-                ChildList.Clear();
+                childList.Clear();
 
-                return Result;
+                return result;
             }
         }
-        string[] ParseStringList(string[] SourceList)
+        string[] ParseStringList(string[] sourceList)
         {
-            bool bStartConditionDone = false;
-            bool bEndConditionDone = false;
-            List<string> Result = new List<string>();
-            List<string> CutSourceList = new List<string>();
-            ConditionType StartCondition = this.StructureType.StartCondition;
-            ConditionType EndCondition = this.StructureType.EndCondition;
+            var bStartConditionDone = false;
+            var bEndConditionDone = false;
+            var result = new List<string>();
+            var cutSourceList = new List<string>();
+            ConditionType startCondition = StructureType.StartCondition;
+            ConditionType endCondition = StructureType.EndCondition;
 
-            for(int i = 0; i < SourceList.Length; i++)
+            for(int i = 0; i < sourceList.Length; i++)
             {
-                string CurString = SourceList[i];
+                string curString = sourceList[i];
                 if (!bStartConditionDone)
                 {
-                    bStartConditionDone = (StartCondition != null)?
-                        StartCondition.IsCorrect(CurString):true;
+                    bStartConditionDone = (startCondition == null) || startCondition.IsCorrect(curString);
 
                     if (bStartConditionDone)
                         StartIndex = i;
                 }
 
                 if ((!bStartConditionDone) || (bEndConditionDone))
-                    CutSourceList.Add(CurString);
+                    cutSourceList.Add(curString);
                 if ((!bEndConditionDone) && (bStartConditionDone))
                 {
-                    Result.Add(CurString);
-                    bEndConditionDone=(EndCondition != null)?EndCondition.IsCorrect(CurString):false;
+                    result.Add(curString);
+                    bEndConditionDone = (endCondition != null) && endCondition.IsCorrect(curString);
                 }
 
             }
-            CutSourceString = CutSourceList.ToArray();
-            return Result.ToArray();
+            CutSourceString = cutSourceList.ToArray();
+            return result.ToArray();
         }
         public override void Parse()
         {
@@ -107,90 +88,77 @@ namespace UniversalLogViewer.Types.Values
             Value = ParseStringList(Source);
             ProcessStringList();
         }
-        int AddProcessedBlock(int StartIndex, int Length, ref List<int> ProcessedStrings)
+        int AddProcessedBlock(int startIndex, int length, ref List<int> processedStrings)
         {
-            int Result = 0;
-            int ProcessedCounter = 0;            
+            int result = 0;
+            int processedCounter = 0;            
             bool bStarted = false;
-            int stringsCount = ProcessedStrings.Count;
+            int stringsCount = processedStrings.Count;
             for (int i = 0; i < stringsCount; i++)
             {
-                if (!(ProcessedStrings.Contains(i)))
-                {
-                    if (!bStarted)
-                        if (ProcessedCounter == StartIndex)
-                        {
-                            Result = i;
-                            bStarted = true;
-                            ProcessedCounter = 0;
-                            ProcessedStrings.Remove(i);
-                        }
-                        else
-                            ProcessedCounter++;
-                    else
+                if (processedStrings.Contains(i)) continue;
+                if (!bStarted)
+                    if (processedCounter == startIndex)
                     {
-                        if (ProcessedCounter == (Length - 1))
-                            return Result;
-                        else
-                        {
-                            ProcessedStrings.Remove(i);
-                            ProcessedCounter++;
-                        }
+                        result = i;
+                        bStarted = true;
+                        processedCounter = 0;
+                        processedStrings.Remove(i);
                     }
+                    else
+                        processedCounter++;
+                else
+                {
+                    if (processedCounter == (length - 1))
+                        return result;
+                    processedStrings.Remove(i);
+                    processedCounter++;
                 }
             }
             return stringsCount;
         }
-        public BlockValue(BlockType Type, ref string[] Source)
-            : base(Type, ref Source)
+        public BlockValue(BlockType type, ref string[] source)
+            : base(type, ref source)
         {
             
         }
-        ~BlockValue()
-        {
-//            ProcessedStrings = null;
-        }
-            
+
         public void ProcessStringList()
         {
             //bool[] ProcessedStrings = new bool[Source.Length];
-            List<int> ProcessedStrings = new List<int>(Source.Length);
-            for (int i = 0; i < ProcessedStrings.Count; i++)
-                ProcessedStrings[i] = i;
+            var processedStrings = new List<int>(Source.Length);
+            for (int i = 0; i < processedStrings.Count; i++)
+                processedStrings[i] = i;
 
-            string[] ProcessedList = Value;
+            string[] processedList = Value;
             //Проверка блоков и генерация дочерних блоков (и их процесинг)
-            foreach (BlockType oBlockType in this.StructureType.ChildBlockTypes)
+            foreach (BlockType blockType in StructureType.ChildBlockTypes)
             {
-                bool NoBlocksToProcess = false;
-                while (!(NoBlocksToProcess))
+                var noBlocksToProcess = false;
+                while (!(noBlocksToProcess))
                 {
 
-                    NoBlocksToProcess = true;
-                    BlockValue NewBlock = new BlockValue(oBlockType,ref ProcessedList);
-                    if (!(NewBlock.IsEmpty))
-                    {
-                        ProcessedList = NewBlock.CutSourceString;
-                        NewBlock.StartIndex = AddProcessedBlock(NewBlock.StartIndex, NewBlock.Value.Length,ref ProcessedStrings);
-                        ChildElements.Add(NewBlock);
-                        NoBlocksToProcess = false;
-                    }                    
+                    noBlocksToProcess = true;
+                    var newBlock = new BlockValue(blockType,ref processedList);
+                    if (newBlock.IsEmpty) continue;
+                    processedList = newBlock.CutSourceString;
+                    newBlock.StartIndex = AddProcessedBlock(newBlock.StartIndex, newBlock.Value.Length,ref processedStrings);
+                    ChildElements.Add(newBlock);
+                    noBlocksToProcess = false;
                 }
             }
             //Проверка строк
-            for (int I = 0; I < ProcessedList.Length; I++)
+            for (int I = 0; I < processedList.Length; I++)
             {
-                foreach (StringType oStringType in this.StructureType.ChildStringTypes)
+                foreach (var oStringType in StructureType.ChildStringTypes)
                 {
-                    using (StringValue NewString = new StringValue(oStringType, ref ProcessedList[I]))
+                    using (var newString = new StringValue(oStringType, ref processedList[I]))
                     {
-                        if (NewString.ConditionCorrect)
-                        {
-                            NewString.StartIndex = AddProcessedBlock(0, 1, ref ProcessedStrings);
-                            ChildStrings.Add(NewString);
-                            UniversalLogViewer.Program.MainForm.LogProgress.IncreaseProgressLevel(1);
-                            break;
-                        }
+                        if (!newString.ConditionCorrect) continue;
+                        newString.StartIndex = AddProcessedBlock(0, 1, ref processedStrings);
+                        ChildStrings.Add(newString);
+                        Program.MainForm.LogProgress.IncreaseProgressLevel(1);
+                        break;
                     }
                 }
             }
